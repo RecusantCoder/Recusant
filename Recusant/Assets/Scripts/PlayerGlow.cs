@@ -33,13 +33,13 @@ public class PlayerGlow : MonoBehaviour
     {
         myLight = gameObject.GetComponent<Light>();
         startTime = Time.time;
-        gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
+        
 
         if (changeRange)
         {

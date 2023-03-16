@@ -8,13 +8,21 @@ public class FlickerFlame : MonoBehaviour
 {
     private Light2D myLight;
     
+    //Intensity variables
+    //public bool changeIntensity = false;
+    public float intensitySpeed = 1.0f;
+    public float maxIntensity = 10.0f;
+    //public bool repeatIntensity = false;
+    
     void Start()
     {
         myLight = GetComponent<Light2D>();
-        Component[] components = gameObject.GetComponents(typeof(Component));
+        
+        //Use to see components of gameObject the code is attached to
+        /*Component[] components = gameObject.GetComponents(typeof(Component));
         foreach(Component component in components) {
             Debug.Log(component.ToString());
-        }
+        }*/
         
     }
 
@@ -22,8 +30,8 @@ public class FlickerFlame : MonoBehaviour
     private void Update()
     {
         
-        myLight.color = Color.blue;
-        Debug.Log(myLight.name);
+        myLight.intensity = Mathf.PingPong(Time.time * intensitySpeed, maxIntensity);
+        
         
         
     }
