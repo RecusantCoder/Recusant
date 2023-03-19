@@ -6,6 +6,8 @@ public class TurboBehaviour : MonoBehaviour
 {
     //public GameObject inventoryManagerScript;
     public InventoryManager m_someOtherScriptOnAnotherGameObject;
+    private float elapsed = 0f;
+    private float timePassed = 0f;
     
     // Start is called before the first frame update
     void Start()
@@ -17,7 +19,19 @@ public class TurboBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //was using for action every second
+        elapsed += Time.deltaTime;
+        if (elapsed >= 1f)
+        {
+            
+            elapsed = elapsed % 1f;
+            timePassed++;
+            if (timePassed >= 3)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
     
     //if player touched this

@@ -10,13 +10,18 @@ public class DustDevilBehaviour : MonoBehaviour
     private float elapsed = 0f;
     public float sizeStep = 1f;
     public float maxSize = 10f;
+    private float randomCreationTime;
+    public GameObject turbo;
+    private Vector2 imHere;
+    private float timePassed = 0f;
     
     
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        randomCreationTime = Random.Range(6.0f, 60.0f);
+       
     }
 
     // Update is called once per frame
@@ -24,10 +29,22 @@ public class DustDevilBehaviour : MonoBehaviour
     {
         //was using for action every second
         elapsed += Time.deltaTime;
-        //if (elapsed >= 1f) {
-            //elapsed = elapsed % 1f;
-            
-            //size
+        if (elapsed >= 1f)
+        {
+            elapsed = elapsed % 1f;
+            timePassed++;
+            if (timePassed >= randomCreationTime)
+            {
+                Debug.Log("Made a Turbo!");
+                imHere = transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
+                
+                Instantiate(turbo, imHere, Quaternion.identity);
+                timePassed = 0f;
+                randomCreationTime = Random.Range(6.0f, 60.0f);
+            }
+        }
+
+        //size
             if (sizeX <= maxSize && !isFat)
             {
                 sizeX += sizeStep;
