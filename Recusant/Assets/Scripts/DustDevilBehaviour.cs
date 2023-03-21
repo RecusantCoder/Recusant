@@ -15,6 +15,11 @@ public class DustDevilBehaviour : MonoBehaviour
     private Vector2 imHere;
     private float timePassed = 0f;
     
+    //for events
+    public delegate void TouchedByPlayer();
+
+    public static event TouchedByPlayer OnTouched;
+    
     
 
     // Start is called before the first frame update
@@ -90,6 +95,11 @@ public class DustDevilBehaviour : MonoBehaviour
             rb.AddForce(direction.normalized * 5000, ForceMode2D.Force);
             Debug.Log("REEEEE!!!!!");
             
+            //Creates event
+            if (OnTouched != null)
+            {
+                OnTouched();
+            }
         }
     }
 }
