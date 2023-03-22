@@ -14,4 +14,9 @@ public class Item : ScriptableObject
         //Use the item, something may happen
         Debug.Log("Using " + itemName);
     }
+
+    public void RemoveFromInventory()
+    {
+        Inventory.instance.Remove(this);
+    }
 }
