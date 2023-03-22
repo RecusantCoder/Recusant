@@ -43,7 +43,8 @@ public class DustDevilBehaviour : MonoBehaviour
                 Debug.Log("Made a Turbo!");
                 imHere = transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
                 
-                Instantiate(turbo, imHere, Quaternion.identity);
+                //Instantiate(turbo, imHere, Quaternion.identity);
+                GameObject instance = Instantiate(Resources.Load("Prefabs/Turbo_Artifact", typeof(GameObject)), imHere, Quaternion.identity) as GameObject;   
                 timePassed = 0f;
                 randomCreationTime = Random.Range(6.0f, 60.0f);
             }

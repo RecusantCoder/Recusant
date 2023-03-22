@@ -17,6 +17,8 @@ public class Interactable : MonoBehaviour
     {
         //This method is meant to be overwritten
     }
+    
+    
 
     private void Update()
     {

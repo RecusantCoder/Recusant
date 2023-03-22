@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentManager : MonoBehaviour
 {
@@ -28,6 +29,13 @@ public class EquipmentManager : MonoBehaviour
     private Equipment[] currentEquipment;
     private Inventory _inventory;
 
+    public GameObject equipmentParent;
+
+    GameObject targetEquipmentSlot;
+    GameObject targetEquipmentSlotButton;
+    GameObject targetEquipmentSlotIcon;
+    Image targetEquipmentSlotIconImage;
+
     private void Start()
     {
         _inventory = Inventory.instance;
@@ -40,12 +48,17 @@ public class EquipmentManager : MonoBehaviour
         int slotIndex = (int)newItem.equipmentSlot;
 
         Equipment oldItem = null;
+        
+        
+        
 
         if (currentEquipment[slotIndex] != null)
         {
             oldItem = currentEquipment[slotIndex];
             _inventory.Add(oldItem);
             currentEquipment[slotIndex] = newItem;
+            
+            UpdateEquipmentSlot(slotIndex, true);
         }
 
         if (onEquipmentChanged != null)
@@ -54,6 +67,8 @@ public class EquipmentManager : MonoBehaviour
         }
         
         currentEquipment[slotIndex] = newItem;
+        
+        UpdateEquipmentSlot(slotIndex, true);
         
         
         
@@ -68,10 +83,32 @@ public class EquipmentManager : MonoBehaviour
 
             currentEquipment[slotIndex] = null;
             
+            UpdateEquipmentSlot(slotIndex, false);
+            
             if (onEquipmentChanged != null)
             {
                 onEquipmentChanged.Invoke(null, oldItem);
             }
         }
+    }
+    
+    void UpdateEquipmentSlot(int slotIndex, bool equip)
+    {
+        targetEquipmentSlot = equipmentParent.transform.GetChild(slotIndex).gameObject;
+        targetEquipmentSlotButton = targetEquipmentSlot.transform.GetChild(0).gameObject;
+        targetEquipmentSlotIcon = targetEquipmentSlotButton.transform.GetChild(0).gameObject;
+        targetEquipmentSlotIconImage = targetEquipmentSlotIcon.GetComponent<Image>();
+        targetEquipmentSlotIconImage.enabled = equip;
+        
+        if (equip)
+        {
+            targetEquipmentSlotIconImage.sprite = currentEquipment[slotIndex].icon;
+        }
+        else
+        {
+            targetEquipmentSlotIconImage.sprite = null;
+        }
+        
+      
     }
 }
