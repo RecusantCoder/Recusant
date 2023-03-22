@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public Transform itemsParent;
+    public GameObject inventoryUI;
     private InventorySlot[] slots;
     
     private Inventory _inventory;
@@ -36,5 +37,10 @@ public class InventoryUI : MonoBehaviour
                 slots[i].ClearSlot();
             }
         }
+    }
+
+    public void ShowInventory()
+    {
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
     }
 }
