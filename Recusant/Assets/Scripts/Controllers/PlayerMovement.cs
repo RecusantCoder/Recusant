@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     
     //For interaction system
     public Interactable focus;
+    public Transform pickupPoint;
+    public float pickupRadius = 0.5f;
+    public LayerMask itemLayers;
 
     // Update is called once per frame
     void Update()
@@ -25,8 +28,18 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        
-        
+
+        Collider2D[] nearItems = Physics2D.OverlapCircleAll(pickupPoint.position, pickupRadius, itemLayers);
+        foreach (Collider2D nearItem in nearItems)
+        {
+            Interactable interactable = nearItem.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                SetFocus(interactable);
+            }
+        }
+
+
     }
 
     private void FixedUpdate()
@@ -34,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
     
+    /*
     //if player touches another collider
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -43,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             SetFocus(interactable);
         }
-    }
+    }*/
     
     // Set our focus to a new focus
     void SetFocus (Interactable newFocus)
@@ -70,5 +84,12 @@ public class PlayerMovement : MonoBehaviour
 
         focus = null;
         //motor.StopFollowingTarget();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (pickupPoint == null)
+            return;
+        Gizmos.DrawWireSphere(pickupPoint.position, pickupRadius);
     }
 }
