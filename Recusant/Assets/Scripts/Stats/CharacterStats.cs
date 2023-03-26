@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -11,6 +12,8 @@ public class CharacterStats : MonoBehaviour
     public Stat damage;
     public Stat armor;
 
+
+    
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -22,6 +25,8 @@ public class CharacterStats : MonoBehaviour
         {
             TakeDamage(10);
         }
+        
+        
     }
 
     public void TakeDamage(int damage)
@@ -30,7 +35,10 @@ public class CharacterStats : MonoBehaviour
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + "damage.");
+        Debug.Log(transform.name + " takes " + damage + " damage.");
+        Debug.Log(transform.name + " health is at " + currentHealth);
+        
+        
 
         if (currentHealth <= 0)
         {

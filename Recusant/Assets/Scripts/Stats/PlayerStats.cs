@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
+    private TextMeshProUGUI healthBarUI;
+
     // Start is called before the first frame update
     void Start()
     {
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        healthBarUI = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
     }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
@@ -23,5 +27,22 @@ public class PlayerStats : CharacterStats
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
         }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        //Kill the player
+        PlayerManager.instance.KillPlayer();
+    }
+    
+    private void Update()
+    {
+        UpdatePlayerHealth(currentHealth);
+    }
+    
+    void UpdatePlayerHealth(float healthChange)
+    {
+        healthBarUI.text = healthChange.ToString() + "%";
     }
 }

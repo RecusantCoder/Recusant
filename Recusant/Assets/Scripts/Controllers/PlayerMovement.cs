@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform pickupPoint;
     public float pickupRadius = 0.5f;
     public LayerMask itemLayers;
+    
+    public float spawnRadius = 10f;
 
     // Update is called once per frame
     void Update()
@@ -91,5 +93,6 @@ public class PlayerMovement : MonoBehaviour
         if (pickupPoint == null)
             return;
         Gizmos.DrawWireSphere(pickupPoint.position, pickupRadius);
+        Gizmos.DrawWireSphere(gameObject.transform.position, spawnRadius);
     }
 }

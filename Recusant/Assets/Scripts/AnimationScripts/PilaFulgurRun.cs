@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,8 @@ public class PilaFulgurRun : StateMachineBehaviour
     
     public float lookRadius = 5f;
     public float attackRadius = 3f;
+
+    private Transform thisThing;
     
     
     
@@ -19,12 +21,14 @@ public class PilaFulgurRun : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         
-        
+        thisThing = GameObject.FindGameObjectWithTag("111").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //animator.GetComponent<EnemyController>().FaceTarget();
+        
         float distance = Vector2.Distance(rb.position, player.position);
         //Debug.Log(rb.position.x + " " + rb.position.y);
         Debug.Log(distance);
@@ -32,6 +36,10 @@ public class PilaFulgurRun : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, player.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
+        
+        Vector3 direction = (player.position - thisThing.position);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
         
         
         if (distance <= attackRadius)
@@ -50,12 +58,6 @@ public class PilaFulgurRun : StateMachineBehaviour
         animator.ResetTrigger("Attack");
     }
     
-    // Rotate to face the target
-    /*void FaceTarget ()
-    {
-        Vector3 direction = (player.position - rb.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }*/
+    
     
 }
