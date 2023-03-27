@@ -10,6 +10,12 @@ public class Shooting : MonoBehaviour
 
     public float bulletForce = 20f;
     
+    //Adding aiming
+    public Joystick joystick;
+    public Rigidbody2D rb;
+    private Vector2 movement;
+    public GameObject player;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +31,19 @@ public class Shooting : MonoBehaviour
             Debug.Log("Fired Bullet!");
             Shoot();
         }
+        
+        movement.x = joystick.Horizontal;
+        movement.y = joystick.Vertical;
+        
+    }
+    
+    private void FixedUpdate()
+    {
+        firePoint.transform.position = player.transform.position;
+        
+        //rotation
+        float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
+        rb.rotation = angle;
     }
 
     void Shoot()
