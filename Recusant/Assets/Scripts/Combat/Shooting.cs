@@ -16,6 +16,11 @@ public class Shooting : MonoBehaviour
     private Vector2 movement;
     public GameObject player;
     
+    //Timing
+    private float elapsed = 0f;
+    public float creationTime = 1f;
+    private float timePassed = 0f;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +31,23 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //was using for action every second
+        elapsed += Time.deltaTime;
+        if (elapsed >= 1f)
+        {
+            elapsed = elapsed % 1f;
+            timePassed++;
+            if (timePassed >= creationTime)
+            {
+                Debug.Log("Fired Bullet!");
+                    Shoot();
+                
+                timePassed = 0f;
+            }
+        }
+        
+        
+        
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Fired Bullet!");
@@ -43,7 +65,12 @@ public class Shooting : MonoBehaviour
         
         //rotation
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
-        rb.rotation = angle;
+        if (angle != -90f)
+        {
+            rb.rotation = angle;
+        }
+        
+        Debug.Log("The Angle is " + angle);
     }
 
     void Shoot()

@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     private float elapsed = 0f;
-    private float randomCreationTime;
+    public float creationTime;
     private float timePassed = 0f;
     public float spawnRadius = 5f;
     
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         player = PlayerManager.instance.player.transform;
 
         //randomCreationTime = Random.Range(6.0f, 60.0f);
-        randomCreationTime = 10f;
+        creationTime = 10f;
 
     }
 
@@ -47,16 +47,16 @@ public class GameManager : MonoBehaviour
         {
             elapsed = elapsed % 1f;
             timePassed++;
-            if (timePassed >= randomCreationTime)
+            if (timePassed >= creationTime)
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    SpawnEnemy("Prefabs/Wendigo");
+                    SpawnEnemy("Prefabs/TestingWobble");
                 }
                 
                 
                 timePassed = 0f;
-                randomCreationTime = 10f;
+                creationTime = 10f;
             }
         }
     }

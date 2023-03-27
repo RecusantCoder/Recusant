@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6311159632176717021}
   - component: {fileID: 6311159632176717018}
   - component: {fileID: 6311159632176717019}
-  - component: {fileID: 6311159632385834605}
+  - component: {fileID: 3033147305135584644}
   m_Layer: 0
   m_Name: Wendigo
   m_TagString: Enemy
@@ -53,6 +53,7 @@ MonoBehaviour:
   player: {fileID: 0}
   moveSpeed: 1
   damageRadius: 1
+  isFlipped: 0
 --- !u!50 &8695008762211724302
 Rigidbody2D:
   serializedVersion: 4
@@ -73,7 +74,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6311159632176717021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupRadius: 4
   interactionTransform: {fileID: 8695008762211724300}
---- !u!58 &6311159632385834605
-CircleCollider2D:
+--- !u!61 &3033147305135584644
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,8 +133,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Size: {x: 0.52, y: 0.82}
+  m_EdgeRadius: 0
 --- !u!1 &8695008762240303826
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,8 +221,8 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -251491568, guid: 5a5977361b4d04d98bae98d546d07efd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 1
+  m_FlipX: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
