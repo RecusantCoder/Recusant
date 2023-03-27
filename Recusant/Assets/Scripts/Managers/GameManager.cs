@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     {
         player = PlayerManager.instance.player.transform;
         SpawnSphereOnEdgeRandomly2D();
+        SpawnSphereOnEdgeRandomly2D();
+        SpawnSphereOnEdgeRandomly2D();
+        SpawnSphereOnEdgeRandomly2D();
+        
     }
 
     // Update is called once per frame

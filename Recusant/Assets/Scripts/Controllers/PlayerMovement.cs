@@ -47,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     { //Movement
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+        
+        //rotation
+        float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
+        rb.rotation = angle;
     }
     
     /*
