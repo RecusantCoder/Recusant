@@ -70,7 +70,7 @@ public class Shooting : MonoBehaviour
             rb.rotation = angle;
         }
         
-        Debug.Log("The Angle is " + angle);
+        //Debug.Log("The Angle is " + angle);
     }
 
     void Shoot()

@@ -13,6 +13,7 @@ public class EnemyStats : CharacterStats
         // add loot spawn
     }
     
+    
     private void Update()
     {
         //Debug.Log(gameObject.name + " health is " + currentHealth);

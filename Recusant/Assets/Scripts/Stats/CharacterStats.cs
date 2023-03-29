@@ -13,7 +13,7 @@ public class CharacterStats : MonoBehaviour
     public Stat armor;
 
 
-    
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -35,7 +35,12 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(transform.name + " takes " + damage + " damage.");
         Debug.Log(transform.name + " health is at " + currentHealth);
         
+        //Show Damage Numbers
+        GameObject damageNum = Instantiate(Resources.Load("PreFabs/DamageNumbers", typeof(GameObject))) as GameObject;
+        damageNum.transform.position = transform.position;
+        damageNum.GetComponent<DNController>().ShowDamage(damage);
         
+
 
         if (currentHealth <= 0)
         {

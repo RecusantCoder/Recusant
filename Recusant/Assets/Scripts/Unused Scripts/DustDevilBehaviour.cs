@@ -6,7 +6,7 @@ public class DustDevilBehaviour : MonoBehaviour
 {
     private float sizeX = 1f;
     private bool isFat = false;
-    private float sizeY = 1f;
+    //private float sizeY = 1f;
     private float elapsed = 0f;
     public float sizeStep = 1f;
     public float maxSize = 10f;

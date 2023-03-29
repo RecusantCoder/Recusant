@@ -7,6 +7,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private int bulletDamage = 100;
+    
+    
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class Bullet : MonoBehaviour
         if (other.transform.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(bulletDamage);
+
         }
 
         Destroy(gameObject);
