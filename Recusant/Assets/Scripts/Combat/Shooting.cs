@@ -39,7 +39,7 @@ public class Shooting : MonoBehaviour
             timePassed++;
             if (timePassed >= creationTime)
             {
-                Debug.Log("Fired Bullet!");
+                //Debug.Log("Fired Bullet!");
                     Shoot();
                 
                 timePassed = 0f;

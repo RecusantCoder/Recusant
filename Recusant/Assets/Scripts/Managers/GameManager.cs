@@ -7,6 +7,23 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    
+    #region Singleton
+    
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of GameManager found!");
+            return;
+        }
+        instance = this;
+    }
+    
+    #endregion
+    
     private float elapsed = 0f;
     public float creationTime;
     private float timePassed = 0f;

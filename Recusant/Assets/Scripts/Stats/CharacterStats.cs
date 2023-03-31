@@ -11,6 +11,7 @@ public class CharacterStats : MonoBehaviour
 
     public Stat damage;
     public Stat armor;
+    
 
 
 
@@ -32,8 +33,8 @@ public class CharacterStats : MonoBehaviour
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage.");
-        Debug.Log(transform.name + " health is at " + currentHealth);
+        //Debug.Log(transform.name + " takes " + damage + " damage.");
+        //Debug.Log(transform.name + " health is at " + currentHealth);
         
         //Show Damage Numbers
         GameObject damageNum = Instantiate(Resources.Load("PreFabs/DamageNumbers", typeof(GameObject))) as GameObject;
@@ -51,7 +52,7 @@ public class CharacterStats : MonoBehaviour
     public virtual void Die()
     {
         // Die in some way, meant to be overwritten
-        Debug.Log(transform.name + " died.");
+        //Debug.Log(transform.name + " died.");
     }
 
 }

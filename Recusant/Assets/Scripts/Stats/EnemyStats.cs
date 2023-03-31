@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
+    public float xpDrop;
+    
     public override void Die()
     {
         base.Die();
+        
+        KillCounter.instance.EnemyKilled();
+        LevelBar.instance.AddExperience(xpDrop);
 
         Destroy(gameObject);
         

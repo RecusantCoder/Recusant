@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    private TextMeshProUGUI healthBarUI;
+    //private TextMeshProUGUI healthBarUI;
+    public HealthBar healthbar;
 
     // Start is called before the first frame update
     void Start()
     {
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
-        healthBarUI = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
+        //healthBarUI = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
+        healthbar.SetMaxHealth(currentHealth);
     }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
@@ -43,6 +45,7 @@ public class PlayerStats : CharacterStats
     
     void UpdatePlayerHealth(float healthChange)
     {
-        healthBarUI.text = healthChange.ToString() + "%";
+        //healthBarUI.text = healthChange.ToString() + "%";
+        healthbar.SetHealth((int)healthChange);
     }
 }
