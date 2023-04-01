@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    public float xpDrop;
+    public GameObject orbPrefab;
     
+
     public override void Die()
     {
         base.Die();
         
         KillCounter.instance.EnemyKilled();
-        LevelBar.instance.AddExperience(xpDrop);
 
+        GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
+        
         Destroy(gameObject);
         
         // add loot spawn

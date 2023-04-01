@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,8 @@ public class LevelBar : MonoBehaviour
     #endregion
     
     public Slider slider;
+    [SerializeField]
+    public TMP_Text myTextElement;
 
     private int playerLevel;
     private float playerExperience;
@@ -31,6 +34,8 @@ public class LevelBar : MonoBehaviour
 
     private void Start()
     {
+        myTextElement.text = "LVL 0";
+        
         setupLevels();
         playerLevel = 0;
         playerExperience = 0;
@@ -39,14 +44,7 @@ public class LevelBar : MonoBehaviour
         SetMaxExperience();
         SetMinExperience();
 
-        //Counting Levels and XP
-        /*int count = 1;
-        foreach (var level in levels)
-        {
-            
-            Debug.Log("Level " + count + " = " + level);
-            count++;
-        }*/
+        
     }
 
     private void Update()
@@ -57,7 +55,7 @@ public class LevelBar : MonoBehaviour
             SetMaxExperience();
             SetMinExperience();
             
-            
+            myTextElement.text = "LVL " + playerLevel;
             
             Debug.Log("Level up! Now Level " + playerLevel + " TotalXP: " + playerExperience);
         }
@@ -94,11 +92,11 @@ public class LevelBar : MonoBehaviour
         Debug.Log("Added " + xp + " TotalXP: " + playerExperience);
     }
     
-    
-
     public void setupLevels()
     {
         levels = new List<float>();
+       
+        
         levels.Add(83);
         levels.Add(174);
         levels.Add(276);
