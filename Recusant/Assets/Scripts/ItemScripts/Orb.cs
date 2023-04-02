@@ -15,8 +15,8 @@ public class Orb : Interactable
 
     void PickUp()
     {
-        Debug.Log("Picking Up " + thisName);
         LevelBar.instance.AddExperience(xpDrop);
+        FindObjectOfType<AudioManager>().Play("pickup");
         Destroy(gameObject);
 
     }
