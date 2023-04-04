@@ -22,11 +22,19 @@ public class Shooting : MonoBehaviour
     public float creationTime = 1f;
     private float timePassed = 0f;
     
+    //Lightning Timing
+    private bool hasFulmen = false;
+    private float elapsedFulmen = 0f;
+    public float creationTimeFulmen = 3f;
+    private float timePassedFulmen = 0f;
+
+    private Inventory _inventory;
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        _inventory = Inventory.instance;
     }
 
     // Update is called once per frame
@@ -46,9 +54,36 @@ public class Shooting : MonoBehaviour
                 timePassed = 0f;
             }
         }
+
+        foreach (var item in _inventory.items)
+        {
+            if (item.itemName == "Fulmen")
+            {
+                hasFulmen = true;
+            }
+        }
         
-        
-        
+
+        if (hasFulmen)
+        {
+            //was using for action every second
+            elapsedFulmen += Time.deltaTime;
+            if (elapsedFulmen >= 1f)
+            {
+                elapsedFulmen = elapsedFulmen % 1f;
+                timePassedFulmen++;
+                if (timePassedFulmen >= creationTimeFulmen)
+                {
+                    Debug.Log("Lightning Strike");
+                    LightningStrike();
+
+                    timePassedFulmen = 0f;
+                }
+            }
+        }
+
+
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Lightning Strike");

@@ -36,7 +36,7 @@ using UnityEngine.UI;
     {
         
         Vector2 imHere = player.transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);;
-        GameObject instance = Instantiate(Resources.Load("Prefabs/" + item.itemName, typeof(GameObject)), imHere, Quaternion.identity) as GameObject;
+        GameObject instance = Instantiate(Resources.Load("Prefabs/Pickups/" + item.itemName, typeof(GameObject)), imHere, Quaternion.identity) as GameObject;
         
         Debug.Log(item.itemName + " dropped.");
         
