@@ -7,6 +7,7 @@ public class Shooting : MonoBehaviour
 
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public GameObject lightningPrefab;
 
     public float bulletForce = 20f;
     
@@ -50,8 +51,8 @@ public class Shooting : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Debug.Log("Fired Bullet!");
-            Shoot();
+            Debug.Log("Lightning Strike");
+            LightningStrike();
         }
         
         movement.x = joystick.Horizontal;
@@ -78,5 +79,16 @@ public class Shooting : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        
+        //gunshot audio
+        FindObjectOfType<AudioManager>().Play("gunshot");
+    }
+
+    void LightningStrike()
+    {
+        GameObject lightning = Instantiate(lightningPrefab, firePoint.position, Quaternion.identity);
+
+        //lightning audio
+        FindObjectOfType<AudioManager>().Play("lightning");
     }
 }
