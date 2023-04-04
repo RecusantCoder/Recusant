@@ -27,7 +27,7 @@ public class CharacterStats : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
@@ -40,6 +40,8 @@ public class CharacterStats : MonoBehaviour
         GameObject damageNum = Instantiate(Resources.Load("PreFabs/DamageNumbers", typeof(GameObject))) as GameObject;
         damageNum.transform.position = transform.position;
         damageNum.GetComponent<DNController>().ShowDamage(damage);
+        
+        
         
 
 

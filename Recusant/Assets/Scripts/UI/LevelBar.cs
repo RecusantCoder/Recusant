@@ -51,6 +51,7 @@ public class LevelBar : MonoBehaviour
     {
         if (playerExperience >= levels[playerLevel])
         {
+            FindObjectOfType<AudioManager>().Play("levelup");
             playerLevel++;
             SetMaxExperience();
             SetMinExperience();

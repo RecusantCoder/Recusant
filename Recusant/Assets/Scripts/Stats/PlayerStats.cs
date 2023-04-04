@@ -15,6 +15,19 @@ public class PlayerStats : CharacterStats
         //healthBarUI = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
         healthbar.SetMaxHealth(currentHealth);
     }
+    
+    private void Update()
+    {
+        UpdatePlayerHealth(currentHealth);
+    }
+
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        
+        FindObjectOfType<AudioManager>().Play("lowsound");
+    }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
     {
@@ -37,12 +50,7 @@ public class PlayerStats : CharacterStats
         //Kill the player
         PlayerManager.instance.KillPlayer();
     }
-    
-    private void Update()
-    {
-        UpdatePlayerHealth(currentHealth);
-    }
-    
+
     void UpdatePlayerHealth(float healthChange)
     {
         //healthBarUI.text = healthChange.ToString() + "%";
