@@ -24,10 +24,16 @@ public class GameManager : MonoBehaviour
     
     #endregion
     
-    private float elapsed = 0f;
-    public float creationTime;
-    private float timePassed = 0f;
     public float spawnRadius = 5f;
+    public int amountToSpawn = 1;
+    
+    //For timer
+    private float timer = 0.0f;
+    [SerializeField]
+    public TMP_Text myTextElement;
+    private int lastSecond = 0;
+
+    private int creations = 0;
     
     /*For finding components
      *
@@ -49,36 +55,49 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = PlayerManager.instance.player.transform;
-
-        //randomCreationTime = Random.Range(6.0f, 60.0f);
-        creationTime = 10f;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //was using for action every second
-        elapsed += Time.deltaTime;
-        if (elapsed >= 1f)
+        //Timer
+        timer += Time.deltaTime;
+        // Check if a second has passed
+        int currentSecond = Mathf.FloorToInt(timer);
+        if (currentSecond != lastSecond)
         {
-            elapsed = elapsed % 1f;
-            timePassed++;
-            if (timePassed >= creationTime)
-            {
-                for (int i = 0; i < 50; i++)
-                {
-                    SpawnEnemy("Prefabs/TestingWobble");
-                }
-                
-                
-                timePassed = 0f;
-                creationTime = 10f;
-            }
+            lastSecond = currentSecond;
+            enemySpawnInfo();
         }
+        
+        
+        myTextElement.text = timeConvert(timer);
+        /*if (Mathf.FloorToInt(timer) % 1 == 0)
+        {
+            enemySpawnInfo();
+        }*/
     }
 
-    
+    private string timeConvert(float time)
+    {
+        int minutes = Mathf.FloorToInt(timer / 60F);
+        int seconds = Mathf.FloorToInt(timer - minutes * 60);
+        string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+        return niceTime;
+    }
+
+    private void enemySpawnInfo()
+    {
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 30)
+        {
+            for (int i = 0; i < amountToSpawn; i++)
+                {
+                    SpawnEnemy("Prefabs/TestingWobble");
+                    creations++;
+                    Debug.Log(creations);
+                }
+        }
+    }
     
     private void SpawnEnemy(String enemyFilePath)
     {
