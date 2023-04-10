@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+        
+        // Ensure there is only one instance of this script in the scene
+        if (FindObjectsOfType<GameManager>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Make this object persistent across scenes
+        DontDestroyOnLoad(gameObject);
     }
     
     #endregion
@@ -49,17 +60,23 @@ public class GameManager : MonoBehaviour
      */
 
     public Transform player;
-
+    
+    //for game end
+    public bool gameEnded = false;
+    public GameObject gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = PlayerManager.instance.player.transform;
+        //player = PlayerManager.instance.player.transform;
+        HideGameOverScreen();
+        Debug.Log("New Start");
     }
 
     // Update is called once per frame
     void Update()
     {
+        player = GameObject.FindWithTag("Player").transform;
         //Timer
         timer += Time.deltaTime;
         // Check if a second has passed
@@ -121,6 +138,42 @@ public class GameManager : MonoBehaviour
 
         go.transform.position = randomPos;
     }
+    
+    //Managing UI
+    public void EndGame()
+    {
+        if (gameEnded == false)
+        {
+            gameEnded = true;
+            Debug.Log("GAME OVER");
+            gameOverScreen.SetActive(true);
+        }
+    }
 
+    public void HideGameOverScreen()
+    {
+        gameEnded = false;
+        gameOverScreen.SetActive(false);
+        Debug.Log("Called HideGameOverScreen");
+    }
+    
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        HideGameOverScreen();
+    }
+
+    public void QuitGame()
+    {
+        
+        Application.Quit();
+        Debug.Log("QUIT!");
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("GameManager is being destroyed");
+        // Perform any necessary cleanup here
+    }
     
 }

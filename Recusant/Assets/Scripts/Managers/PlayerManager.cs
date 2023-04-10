@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,15 +18,28 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         instance = this;
+        
+        player = GameObject.FindWithTag("Player");
     }
     
     #endregion
 
     public GameObject player;
 
+    private void Update()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+
     public void KillPlayer()
     {
         Debug.Log("Player Died");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.instance.EndGame();
+    }
+    
+    private void OnDestroy()
+    {
+        Debug.Log("PlayerManager is being destroyed");
+        // Perform any necessary cleanup here
     }
 }
