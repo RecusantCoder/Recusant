@@ -63,14 +63,17 @@ public class GameManager : MonoBehaviour
     
     //for game end
     public bool gameEnded = false;
-    public GameObject gameOverScreen;
+    private GameObject gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
     {
         //player = PlayerManager.instance.player.transform;
-        HideGameOverScreen();
+        //HideGameOverScreen();
         Debug.Log("New Start");
+        
+        //Finding GameOverScreen
+        FindGameOverScreen();
     }
 
     // Update is called once per frame
@@ -146,6 +149,7 @@ public class GameManager : MonoBehaviour
         {
             gameEnded = true;
             Debug.Log("GAME OVER");
+            FindGameOverScreen();
             gameOverScreen.SetActive(true);
         }
     }
@@ -174,6 +178,25 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager is being destroyed");
         // Perform any necessary cleanup here
+    }
+    
+    private void ObjectDestroyed()
+    {
+        //This doesnt work as its a child object of canvas
+        //gameOverScreen = GameObject.FindWithTag("GameOverScreen");
+        FindGameOverScreen();
+    }
+
+    private void FindGameOverScreen()
+    {
+        //Finding GameOverScreen
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Debug.Log("Made it");
+        Transform gameOverScreenTransform = canvas.transform.Find("GameOverScreen");
+        gameOverScreen = gameOverScreenTransform.gameObject;
+        gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
+        gameOverScreen.SetActive(false);
+        Debug.Log("Dross stix");
     }
     
 }
