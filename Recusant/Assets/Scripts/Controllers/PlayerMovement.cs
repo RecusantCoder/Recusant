@@ -97,6 +97,6 @@ public class PlayerMovement : MonoBehaviour
         if (pickupPoint == null)
             return;
         Gizmos.DrawWireSphere(pickupPoint.position, pickupRadius);
-        Gizmos.DrawWireSphere(gameObject.transform.position, spawnRadius);
+        //Gizmos.DrawWireSphere(gameObject.transform.position, spawnRadius);
     }
 }

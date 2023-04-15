@@ -30,6 +30,8 @@ public class EnemyController : MonoBehaviour
         
         FaceTarget();
         FaceTarget2D();
+        
+        //Debug.Log("Distance: " + distance + " and Radius: " + damageRadius);
 
         if (distance <= damageRadius)
         {
