@@ -5,61 +5,134 @@ using UnityEngine.Tilemaps;
 
 public class TileManager : MonoBehaviour
 {
-    public Tilemap tilemap;
-    public TileBase[] tilePrefabs;
+    private Transform playerTransform;
+    public Tilemap walkableTilemap;
+    public Tilemap collisionTilemap;
+    public TileBase[] walkableTilePrefabs;
+    public TileBase[] collisionTilePrefabs;
     public GameObject player;
     public int tilesPerSide = 10;
     public float tileLength = 1f;
+    
+    private Vector3 lastPlayerPos;
 
-    private List<Vector3Int> spawnedTilePositions = new List<Vector3Int>();
+    private List<Vector3Int> spawnedWalkableTilePositions = new List<Vector3Int>();
+    private List<Vector3Int> spawnedCollisionTilePositions = new List<Vector3Int>();
 
     private void Start()
     {
-        SpawnTilesAroundPlayer();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        CreateTilesAroundPlayer();
     }
 
     private void Update()
     {
-        Vector3 playerPosition = player.transform.position;
-        Vector3Int playerTilePosition = tilemap.WorldToCell(playerPosition);
-        if (!spawnedTilePositions.Contains(playerTilePosition))
+        if (IsPlayerOnEdgeOfTile())
         {
-            SpawnTilesAroundPlayer();
+            CreateTilesAheadOfPlayer();
         }
     }
 
-    private void SpawnTilesAroundPlayer()
+    private bool IsPlayerOnEdgeOfTile()
     {
-        Vector3 playerPosition = player.transform.position;
-        Vector3Int playerTilePosition = tilemap.WorldToCell(playerPosition);
-
-        int tilesPerHalfSide = tilesPerSide / 2;
-        Vector3Int minTilePosition = playerTilePosition - new Vector3Int(tilesPerHalfSide, tilesPerHalfSide, 0);
-        Vector3Int maxTilePosition = playerTilePosition + new Vector3Int(tilesPerHalfSide, tilesPerHalfSide, 0);
-
-        for (int x = minTilePosition.x; x <= maxTilePosition.x; x++)
+        Vector3 playerPos = playerTransform.position;
+        Vector3Int currentTileCoords = walkableTilemap.WorldToCell(playerPos);
+        BoundsInt bounds = new BoundsInt(currentTileCoords.x - 1, currentTileCoords.y - 1, 0, 3, 3, 1);
+        foreach (Vector3Int tileCoords in bounds.allPositionsWithin)
         {
-            for (int y = minTilePosition.y; y <= maxTilePosition.y; y++)
+            if (!spawnedWalkableTilePositions.Contains(tileCoords))
             {
-                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                return true;
+            }
+        }
+        return false;
+    }
 
-                if (!spawnedTilePositions.Contains(tilePosition))
+    private void CreateTilesAroundPlayer()
+    {
+        Vector3 playerPos = playerTransform.position;
+        int currentX = Mathf.RoundToInt(playerPos.x / tileLength);
+        int currentY = Mathf.RoundToInt(playerPos.y / tileLength);
+        int tilesPerSideHalf = tilesPerSide / 2;
+
+        for (int x = currentX - tilesPerSideHalf; x <= currentX + tilesPerSideHalf; x++)
+        {
+            for (int y = currentY - tilesPerSideHalf; y <= currentY + tilesPerSideHalf; y++)
+            {
+                Vector3Int tileCoords = new Vector3Int(x, y, 0);
+
+                if (!spawnedWalkableTilePositions.Contains(tileCoords))
                 {
-                    TileBase tile = tilePrefabs[RandomPrefabIndex()];
-                    tilemap.SetTile(tilePosition, tile);
-                    spawnedTilePositions.Add(tilePosition);
+                    TileBase tilePrefab = walkableTilePrefabs[Random.Range(0, walkableTilePrefabs.Length)];
+                    walkableTilemap.SetTile(tileCoords, tilePrefab);
+                    spawnedWalkableTilePositions.Add(tileCoords);
+                }
+
+                if (!spawnedCollisionTilePositions.Contains(tileCoords))
+                {
+                    TileBase collisionTilePrefab = collisionTilePrefabs[Random.Range(0, collisionTilePrefabs.Length)];
+                    //collisionTilemap.SetTile(tileCoords, collisionTilePrefab);
+                    spawnedCollisionTilePositions.Add(tileCoords);
                 }
             }
         }
     }
+    
+    private void CreateTilesAheadOfPlayer()
+{
+    Vector3 playerPos = playerTransform.position;
+    int currentX = Mathf.RoundToInt(playerPos.x / tileLength);
+    int currentY = Mathf.RoundToInt(playerPos.y / tileLength);
 
-    private int RandomPrefabIndex()
+    // Determine the direction the player is moving
+    Vector3 movementDir = playerPos - lastPlayerPos;
+    int nextX = movementDir.x > 0 ? currentX + tilesPerSide / 2 + 1 : currentX - tilesPerSide / 2 - 1;
+    int nextY = movementDir.y > 0 ? currentY + tilesPerSide / 2 + 1 : currentY - tilesPerSide / 2 - 1;
+
+    // Create the new tiles
+    for (int x = nextX - tilesPerSide / 2; x <= nextX + tilesPerSide / 2; x++)
     {
-        if (tilePrefabs == null || tilePrefabs.Length == 0)
+        for (int y = nextY - tilesPerSide / 2; y <= nextY + tilesPerSide / 2; y++)
         {
-            return 0;
-        }
+            Vector3Int tileCoords = new Vector3Int(x, y, 0);
 
-        return Random.Range(0, tilePrefabs.Length);
+            // Only create the tile if it doesn't exist yet
+            if (!spawnedWalkableTilePositions.Contains(tileCoords))
+            {
+                TileBase tilePrefab = walkableTilePrefabs[Random.Range(0, walkableTilePrefabs.Length)];
+                walkableTilemap.SetTile(tileCoords, tilePrefab);
+                spawnedWalkableTilePositions.Add(tileCoords);
+            }
+
+            if (!spawnedCollisionTilePositions.Contains(tileCoords))
+            {
+                TileBase collisionTilePrefab = collisionTilePrefabs[Random.Range(0, collisionTilePrefabs.Length)];
+                //collisionTilemap.SetTile(tileCoords, collisionTilePrefab);
+                spawnedCollisionTilePositions.Add(tileCoords);
+            }
+        }
     }
+
+    // Remove tiles that are no longer visible
+    List<Vector3Int> tilesToRemove = new List<Vector3Int>();
+    foreach (Vector3Int tileCoords in spawnedWalkableTilePositions)
+    {
+        if (Mathf.Abs(tileCoords.x - currentX) > tilesPerSide / 2 + 1 || Mathf.Abs(tileCoords.y - currentY) > tilesPerSide / 2 + 1)
+        {
+            tilesToRemove.Add(tileCoords);
+        }
+    }
+    foreach (Vector3Int tileCoords in tilesToRemove)
+    {
+        walkableTilemap.SetTile(tileCoords, null);
+        spawnedWalkableTilePositions.Remove(tileCoords);
+    }
+
+    lastPlayerPos = playerPos;
 }
+
+
+
+}
+
+
