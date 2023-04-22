@@ -979,7 +979,7 @@ Transform:
   m_GameObject: {fileID: 1471726363006081071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.12, y: -0.99, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1471726361820250815}
@@ -1074,13 +1074,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe9828cd50b84e10b185b3281933ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   rb: {fileID: 1471726363006081059}
   joystick: {fileID: 0}
   animator: {fileID: 1471726363006081058}
   focus: {fileID: 0}
   pickupPoint: {fileID: 1471726362421774675}
-  pickupRadius: 1
+  pickupRadius: 0.5
   itemLayers:
     serializedVersion: 2
     m_Bits: 64

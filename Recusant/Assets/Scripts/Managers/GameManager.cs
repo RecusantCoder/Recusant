@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     
     public float spawnRadius = 5f;
     public int amountToSpawn = 1;
+    private bool isPaused = false;
+    
     
     //For timer
     private float timer = 0.0f;
@@ -151,6 +153,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("GAME OVER");
             FindGameOverScreen();
             gameOverScreen.SetActive(true);
+            PauseGame();
         }
     }
 
@@ -165,6 +168,23 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         HideGameOverScreen();
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+    }
+    
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+    }
+    
+    public bool IsGamePaused()
+    {
+        return isPaused;
     }
 
     public void QuitGame()
@@ -191,12 +211,10 @@ public class GameManager : MonoBehaviour
     {
         //Finding GameOverScreen
         GameObject canvas = GameObject.FindWithTag("Canvas");
-        Debug.Log("Made it");
         Transform gameOverScreenTransform = canvas.transform.Find("GameOverScreen");
         gameOverScreen = gameOverScreenTransform.gameObject;
         gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
         gameOverScreen.SetActive(false);
-        Debug.Log("Dross stix");
     }
     
 }

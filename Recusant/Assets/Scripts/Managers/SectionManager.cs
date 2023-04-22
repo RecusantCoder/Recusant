@@ -70,8 +70,8 @@ public class SectionManager : MonoBehaviour
             SpawnSection(SectionDirection.Bottom);
             SpawnSection(SectionDirection.BottomRight);
         }
-        Debug.Log("X: " + playerTransform.position.x + "  Y: " + playerTransform.position.y);
-        Debug.Log("SpawnX: " + spawn.x + "  SpawnY: " + spawn.y);
+        //Debug.Log("X: " + playerTransform.position.x + "  Y: " + playerTransform.position.y);
+        //Debug.Log("SpawnX: " + spawn.x + "  SpawnY: " + spawn.y);
     }
 
     private void SpawnSection(SectionDirection sd)
