@@ -7,6 +7,11 @@ public class PlayerStats : CharacterStats
 {
     //private TextMeshProUGUI healthBarUI;
     public HealthBar healthbar;
+    
+    //Timing
+    private float elapsed = 0f;
+    public float creationTime = 1f;
+    private float timePassed = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,29 @@ public class PlayerStats : CharacterStats
     private void Update()
     {
         UpdatePlayerHealth(currentHealth);
+        
+        
+        elapsed += Time.deltaTime;
+        if (elapsed >= 1f)
+        {
+            elapsed = elapsed % 1f;
+            timePassed++;
+            if (timePassed >= creationTime)
+            {
+                Debug.Log("Regenerated Health!");
+                RegenHealth();
+                
+                timePassed = 0f;
+            }
+        }
+        
+        
+        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("Healing");
+            RegenHealth();
+        }
     }
 
 
@@ -35,12 +63,14 @@ public class PlayerStats : CharacterStats
         {
             armor.AddModifier(newItem.armorModifier);
             damage.AddModifier(newItem.damageModifier);
+            healthRegen.AddModifier(newItem.healthRegenModifier);
         }
         
         if (oldItem != null)
         {
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
+            healthRegen.RemoveModifier(oldItem.healthRegenModifier);
         }
     }
 
@@ -56,4 +86,5 @@ public class PlayerStats : CharacterStats
         //healthBarUI.text = healthChange.ToString() + "%";
         healthbar.SetHealth((int)healthChange);
     }
+    
 }

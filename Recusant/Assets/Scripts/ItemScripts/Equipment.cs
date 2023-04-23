@@ -9,13 +9,14 @@ public class Equipment : Item
 
     public int armorModifier;
     public int damageModifier;
+    public int healthRegenModifier;
 
     public override void Use()
     {
         base.Use();
         RemoveFromInventory();
         EquipmentManager.instance.Equip(this);
-        Debug.Log("Used + " + this.itemName);
+        Debug.Log("Used " + this.itemName);
         
     }
 }

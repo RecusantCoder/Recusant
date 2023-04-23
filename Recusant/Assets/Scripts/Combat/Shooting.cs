@@ -84,11 +84,11 @@ public class Shooting : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Lightning Strike");
             LightningStrike();
-        }
+        }*/
         
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;

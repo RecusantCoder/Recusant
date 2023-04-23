@@ -11,8 +11,7 @@ public class CharacterStats : MonoBehaviour
 
     public Stat damage;
     public Stat armor;
-    
-
+    public Stat healthRegen;
 
 
     private void Awake()
@@ -22,9 +21,8 @@ public class CharacterStats : MonoBehaviour
 
     private void Update()
     {
-        
-        
-        
+       
+
     }
 
     public virtual void TakeDamage(int damage)
@@ -55,6 +53,21 @@ public class CharacterStats : MonoBehaviour
     {
         // Die in some way, meant to be overwritten
         //Debug.Log(transform.name + " died.");
+    }
+    
+    public void RegenHealth()
+    {
+        if (currentHealth < maxHealth)
+        {
+            if (currentHealth + healthRegen.GetValue() <= maxHealth)
+            {
+                currentHealth += healthRegen.GetValue();
+            }
+            else
+            {
+                currentHealth = maxHealth;
+            }
+        }
     }
 
 }
