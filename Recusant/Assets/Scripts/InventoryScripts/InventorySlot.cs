@@ -46,6 +46,7 @@ using UnityEngine.UI;
 
     public void UseItem()
     {
+        Debug.Log("Pressed!");
         if (item != null)
         {
             item.Use();
