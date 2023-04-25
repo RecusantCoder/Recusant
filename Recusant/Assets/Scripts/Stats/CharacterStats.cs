@@ -12,6 +12,7 @@ public class CharacterStats : MonoBehaviour
     public Stat damage;
     public Stat armor;
     public Stat healthRegen;
+    public Stat speed;
 
 
     private void Awake()

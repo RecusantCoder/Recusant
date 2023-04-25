@@ -10,6 +10,7 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
     public int healthRegenModifier;
+    public int speedModifier;
 
     public override void Use()
     {

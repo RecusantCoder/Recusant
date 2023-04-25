@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed;
     public Rigidbody2D rb;
     public Joystick joystick;
     private Vector2 movement;
@@ -19,6 +19,14 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask itemLayers;
     
     public float spawnRadius = 10f;
+
+    private PlayerStats playerStats;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
                 SetFocus(interactable);
             }
         }
+        
+        updateMoveSpeedWithSpeedModifier();
+        
 
 
     }
@@ -98,5 +109,15 @@ public class PlayerMovement : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(pickupPoint.position, pickupRadius);
         //Gizmos.DrawWireSphere(gameObject.transform.position, spawnRadius);
+    }
+
+    private void updateMoveSpeedWithSpeedModifier()
+    {
+        playerStats = GetComponent<PlayerStats>();
+        float speed = playerStats.speed.GetValue();
+        if (moveSpeed != speed)
+        {
+            moveSpeed = speed;
+        }
     }
 }

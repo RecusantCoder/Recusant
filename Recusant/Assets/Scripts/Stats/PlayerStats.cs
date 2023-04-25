@@ -64,6 +64,7 @@ public class PlayerStats : CharacterStats
             armor.AddModifier(newItem.armorModifier);
             damage.AddModifier(newItem.damageModifier);
             healthRegen.AddModifier(newItem.healthRegenModifier);
+            speed.AddModifier(newItem.speedModifier);
         }
         
         if (oldItem != null)
@@ -71,6 +72,7 @@ public class PlayerStats : CharacterStats
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
             healthRegen.RemoveModifier(oldItem.healthRegenModifier);
+            speed.AddModifier(oldItem.speedModifier);
         }
     }
 
