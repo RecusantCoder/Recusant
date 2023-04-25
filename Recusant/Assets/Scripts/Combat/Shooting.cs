@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public GameObject lightningPrefab;
+    public GameObject pelletPrefab;
 
     public float bulletForce = 20f;
     
@@ -27,6 +28,13 @@ public class Shooting : MonoBehaviour
     private float elapsedFulmen = 0f;
     public float creationTimeFulmen = 3f;
     private float timePassedFulmen = 0f;
+    
+    //Mossberg Timing
+    private bool hasMossberg = false;
+    public int pellets = 10;
+    private float elapsedMoss = 0f;
+    public float creationTimeMoss = 1.5f;
+    private float timePassedMoss = 0f;
 
     private Inventory _inventory;
     
@@ -49,7 +57,7 @@ public class Shooting : MonoBehaviour
             if (timePassed >= creationTime)
             {
                 //Debug.Log("Fired Bullet!");
-                    Shoot();
+                    //Shoot();
                 
                 timePassed = 0f;
             }
@@ -57,12 +65,10 @@ public class Shooting : MonoBehaviour
 
         foreach (var item in _inventory.items)
         {
-            if (item.itemName == "Fulmen")
-            {
-                hasFulmen = true;
-            }
+            hasFulmen = item.itemName == "Fulmen";
+            hasMossberg = item.itemName == "Mossberg";
         }
-        
+
 
         if (hasFulmen)
         {
@@ -81,7 +87,9 @@ public class Shooting : MonoBehaviour
                 }
             }
         }
-
+        
+        
+        ShootMossberg();
 
 
         /*if (Input.GetKeyDown(KeyCode.T))
@@ -125,5 +133,38 @@ public class Shooting : MonoBehaviour
 
         //lightning audio
         FindObjectOfType<AudioManager>().Play("lightning");
+    }
+
+    void ShootMossberg()
+    {
+        if (hasMossberg)
+        {
+            //was using for action every second
+            elapsedMoss += Time.deltaTime;
+            if (elapsedMoss >= 1f)
+            {
+                elapsedMoss = elapsedMoss % 1f;
+                timePassedMoss++;
+                if (timePassedMoss >= creationTimeMoss)
+                {
+                    Debug.Log("Fired Mossberg!");
+
+                    for (int i = 0; i < pellets; i++)
+                    {
+                        Debug.Log("Pellet " + i);
+                        Quaternion rotationA = Quaternion.Euler(0f, 0f, Random.Range(-20f, 20f));
+                        GameObject pellet = Instantiate(pelletPrefab, firePoint.position, firePoint.rotation * rotationA);
+                        Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
+                        rb.AddForce(pellet.transform.up * bulletForce, ForceMode2D.Impulse);
+                        
+                    }
+
+                    //gunshot audio
+                    FindObjectOfType<AudioManager>().Play("gunshot");
+                
+                    timePassedMoss = 0f;
+                }
+            }
+        }
     }
 }
