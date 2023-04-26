@@ -45,6 +45,9 @@ public class Shooting : MonoBehaviour
     void Start()
     {
         _inventory = Inventory.instance;
+        
+        // Subscribe to the OnItemRemoved event
+        _inventory.OnItemRemoved += HandleItemRemoved;
     }
 
     // Update is called once per frame
@@ -53,16 +56,15 @@ public class Shooting : MonoBehaviour
         Debug.Log(hasMossberg + " <-M  G-> " + hasGlock);
         foreach (var item in _inventory.items)
         {
-            //hasFulmen = item.itemName == "Fulmen";
-            //hasMossberg = item.itemName == "Mossberg";
-            //hasGlock = item.itemName == "Glock";
-
-            if (item.name == "Mossberg")
+            if (item.itemName == "Fulmen")
+            {
+                hasFulmen = true;
+            }
+            else if (item.itemName == "Mossberg")
             {
                 hasMossberg = true;
             }
-
-            if (item.itemName == "Glock")
+            else if (item.itemName == "Glock")
             {
                 hasGlock = true;
             }
@@ -107,6 +109,22 @@ public class Shooting : MonoBehaviour
         }
         
         //Debug.Log("The Angle is " + angle);
+    }
+    
+    private void HandleItemRemoved(Item item)
+    {
+        if (item.itemName == "Fulmen")
+        {
+            hasFulmen = false;
+        }
+        else if (item.itemName == "Mossberg")
+        {
+            hasMossberg = false;
+        }
+        else if (item.itemName == "Glock")
+        {
+            hasGlock = false;
+        }
     }
 
     void Shoot()

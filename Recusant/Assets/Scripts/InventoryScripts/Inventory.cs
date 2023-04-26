@@ -26,6 +26,9 @@ public class Inventory : MonoBehaviour
     
     public List<Item> items = new List<Item>();
     public int space = 20;
+    
+    //sending item removal
+    public event Action<Item> OnItemRemoved;
 
     public bool Add(Item item)
     {
@@ -50,6 +53,8 @@ public class Inventory : MonoBehaviour
     public void Remove(Item item)
     {
         items.Remove(item);
+        
+        OnItemRemoved?.Invoke(item);
         
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();

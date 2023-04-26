@@ -1,14 +1,18 @@
+ using System;
  using System.Collections;
 using System.Collections.Generic;
  using System.Runtime.CompilerServices;
  using UnityEngine;
 using UnityEngine.UI;
+ using Random = UnityEngine.Random;
+
  public class InventorySlot : MonoBehaviour
 {
     private Item item;
     public Image icon;
     public Button removeButton;
     public GameObject player;
+    
     
 
     public void AddItem(Item newItem)
@@ -39,7 +43,7 @@ using UnityEngine.UI;
         GameObject instance = Instantiate(Resources.Load("Prefabs/Pickups/" + item.itemName, typeof(GameObject)), imHere, Quaternion.identity) as GameObject;
         
         Debug.Log(item.itemName + " dropped.");
-        
+
         Inventory.instance.Remove(item);
         
     }
