@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
@@ -18,10 +19,11 @@ public class Shooting : MonoBehaviour
     private Vector2 movement;
     public GameObject player;
     
-    //Timing
-    private float elapsed = 0f;
-    public float creationTime = 1f;
-    private float timePassed = 0f;
+    //Glock Timing
+    private bool hasGlock = false;
+    private float elapsedGlock = 0f;
+    public float creationTimeGlock = 1f;
+    private float timePassedGlock = 0f;
     
     //Lightning Timing
     private bool hasFulmen = false;
@@ -48,27 +50,23 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //was using for action every second
-        elapsed += Time.deltaTime;
-        if (elapsed >= 1f)
-        {
-            elapsed = elapsed % 1f;
-            timePassed++;
-            if (timePassed >= creationTime)
-            {
-                //Debug.Log("Fired Bullet!");
-                    //Shoot();
-                
-                timePassed = 0f;
-            }
-        }
-
+        Debug.Log(hasMossberg + " <-M  G-> " + hasGlock);
         foreach (var item in _inventory.items)
         {
-            hasFulmen = item.itemName == "Fulmen";
-            hasMossberg = item.itemName == "Mossberg";
-        }
+            //hasFulmen = item.itemName == "Fulmen";
+            //hasMossberg = item.itemName == "Mossberg";
+            //hasGlock = item.itemName == "Glock";
 
+            if (item.name == "Mossberg")
+            {
+                hasMossberg = true;
+            }
+
+            if (item.itemName == "Glock")
+            {
+                hasGlock = true;
+            }
+        }
 
         if (hasFulmen)
         {
@@ -88,16 +86,10 @@ public class Shooting : MonoBehaviour
             }
         }
         
-        
+        ShootGlock();
+
         ShootMossberg();
 
-
-        /*if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("Lightning Strike");
-            LightningStrike();
-        }*/
-        
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;
         
@@ -126,6 +118,33 @@ public class Shooting : MonoBehaviour
         //gunshot audio
         FindObjectOfType<AudioManager>().Play("gunshot");
     }
+    
+    void ShootGlock()
+    {
+        if (hasGlock)
+        {
+            //was using for action every second
+            elapsedGlock += Time.deltaTime;
+            if (elapsedGlock >= 1f)
+            {
+                elapsedGlock = elapsedGlock % 1f;
+                timePassedGlock++;
+                if (timePassedGlock >= creationTimeGlock)
+                {
+                    Debug.Log("Fired Glock!");
+
+                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+                    //gunshot audio
+                    FindObjectOfType<AudioManager>().Play("pistolGunshot");
+                
+                    timePassedGlock = 0f;
+                }
+            }
+        }
+    }
 
     void LightningStrike()
     {
@@ -151,7 +170,6 @@ public class Shooting : MonoBehaviour
 
                     for (int i = 0; i < pellets; i++)
                     {
-                        Debug.Log("Pellet " + i);
                         Quaternion rotationA = Quaternion.Euler(0f, 0f, Random.Range(-20f, 20f));
                         GameObject pellet = Instantiate(pelletPrefab, firePoint.position, firePoint.rotation * rotationA);
                         Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
@@ -160,7 +178,7 @@ public class Shooting : MonoBehaviour
                     }
 
                     //gunshot audio
-                    FindObjectOfType<AudioManager>().Play("gunshot");
+                    FindObjectOfType<AudioManager>().Play("shotgunGunshot");
                 
                     timePassedMoss = 0f;
                 }

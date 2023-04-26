@@ -33,20 +33,12 @@ public class PlayerStats : CharacterStats
             timePassed++;
             if (timePassed >= creationTime)
             {
-                Debug.Log("Regenerated Health!");
                 RegenHealth();
                 
                 timePassed = 0f;
             }
         }
         
-        
-        
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("Healing");
-            RegenHealth();
-        }
     }
 
 
