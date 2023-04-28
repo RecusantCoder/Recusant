@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
@@ -66,6 +67,13 @@ public class GameManager : MonoBehaviour
     //for game end
     public bool gameEnded = false;
     private GameObject gameOverScreen;
+    
+    //for LevelUp Screen
+    [SerializeField]
+    public List<Item> weaponsList;
+    public Dictionary<string, int> weaponLevelCount;
+    private GameObject levelUpScreen;
+    public LevelBar levelBar; //event from LevelBar
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +84,12 @@ public class GameManager : MonoBehaviour
         
         //Finding GameOverScreen
         FindGameOverScreen();
+        
+        //Setting up LevelUp Screen
+        weaponLevelCount = new Dictionary<string, int>();
+        FindLevelUpScreen();
+        LevelBar.OnLevelUp += LevelUpHandler;
+
     }
 
     // Update is called once per frame
@@ -216,5 +230,118 @@ public class GameManager : MonoBehaviour
         gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
         gameOverScreen.SetActive(false);
     }
+
+    public List<Item> ThreeRandomItems()
+    {
+        List<Item> chosenItems = new List<Item>();
+
+        while (chosenItems.Count < 3)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, weaponsList.Count);
+            Item chosenItem = weaponsList[randomIndex];
+            if (!chosenItems.Contains(chosenItem))
+            {
+                chosenItems.Add(chosenItem);
+                
+                //increments the count/level of the weapon
+                if (weaponLevelCount.ContainsKey(chosenItem.itemName))
+                {
+                    weaponLevelCount[chosenItem.itemName]++;
+                }
+                else
+                {
+                    weaponLevelCount.Add(chosenItem.itemName, 0);
+                }
+            }
+        }
+
+        return chosenItems;
+    }
+    
+    private void FindLevelUpScreen()
+    {
+        //Finding LevelUpScreen
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform levelUpScreenTransform = canvas.transform.Find("LevelUpScreen");
+        levelUpScreen = levelUpScreenTransform.gameObject;
+        //gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
+        levelUpScreen.SetActive(false);
+    }
+    
+    public void LevelUp()
+    {
+        Debug.Log("LevelUp method");
+        FindLevelUpScreen();
+        levelUpScreen.SetActive(true);
+
+        // Find the child object by tag
+        Transform levelSlotParent = levelUpScreen.transform.Find("LevelSlotParent");
+
+        // Instantiate the LevelSlot prefab as a child of the LevelSlotParent
+        GameObject levelSlotPrefab = Resources.Load<GameObject>("Prefabs/LevelSlot");
+
+        List<Item> threeItems = ThreeRandomItems();
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject levelSlot = Instantiate(levelSlotPrefab, levelSlotParent);
+            LevelSlot levelSlotScript = levelSlot.GetComponent<LevelSlot>();
+            levelSlotScript.item = threeItems[i];
+            
+            // Assuming you have a reference to the parent LevelSlot
+            Transform tallyImages = levelSlot.transform.Find("LevelButton/WeaponImage/TallyImages");
+            Transform weaponLevelImage1 = tallyImages.transform.Find("WeaponLevelImage1");
+            Transform weaponLevelImage2 = tallyImages.transform.Find("WeaponLevelImage2");
+            
+            Image weaponLevelImage1Image = weaponLevelImage1.GetComponent<Image>();
+            Image weaponLevelImage2Image = weaponLevelImage2.GetComponent<Image>();
+            
+            
+
+            if (weaponLevelCount.ContainsKey(threeItems[i].itemName))
+            {
+                int weaponLevel = weaponLevelCount[threeItems[i].itemName];
+                if (weaponLevel == 0)
+                {
+                    weaponLevelImage1Image.sprite = Resources.Load<Sprite>("Sprites/confusedItem");
+                }
+                else
+                {
+                    String tallySpritePath = "Sprites/tally" + weaponLevel;
+                    weaponLevelImage1Image.sprite = Resources.Load<Sprite>(tallySpritePath);
+                }
+            }
+            
+
+        }
+        PauseGame();
+    }
+
+    public void HideLevelUpScreen()
+    {
+        //Finding LevelUpScreen
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform levelUpScreenTransform = canvas.transform.Find("LevelUpScreen");
+        levelUpScreen = levelUpScreenTransform.gameObject;
+        // Find the child object by tag
+        Transform levelSlotParent = levelUpScreen.transform.Find("LevelSlotParent");
+        for (int i = 0; i < levelSlotParent.childCount; i++)
+        {
+            Destroy(levelSlotParent.GetChild(i).gameObject);
+        }
+        
+        FindLevelUpScreen();
+        Debug.Log("Hiding LevelUpScreen");
+        ResumeGame();
+    }
+    
+    void LevelUpHandler(int newLevel)
+    {
+        Debug.Log("LISTENED! Player leveled up to level " + newLevel);
+        // Do whatever else you need to do when the player levels up
+        
+        LevelUp();
+    }
+
+    
     
 }

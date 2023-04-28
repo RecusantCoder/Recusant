@@ -31,6 +31,11 @@ public class LevelBar : MonoBehaviour
     private float playerExperience;
 
     private List<float> levels;
+    
+    //To GameManager to show LevelUpScreen
+    public delegate void LevelUpEventHandler(int newLevel);
+    public static event LevelUpEventHandler OnLevelUp;
+
 
     private void Start()
     {
@@ -51,6 +56,7 @@ public class LevelBar : MonoBehaviour
     {
         if (playerExperience >= levels[playerLevel])
         {
+
             FindObjectOfType<AudioManager>().Play("levelup");
             playerLevel++;
             SetMaxExperience();
@@ -59,6 +65,12 @@ public class LevelBar : MonoBehaviour
             myTextElement.text = "LVL " + playerLevel;
             
             Debug.Log("Level up! Now Level " + playerLevel + " TotalXP: " + playerExperience);
+            
+            // Invoke the event
+            if (OnLevelUp != null)
+            {
+                OnLevelUp(playerLevel);
+            }
         }
     }
 
