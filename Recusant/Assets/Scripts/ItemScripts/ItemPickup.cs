@@ -33,6 +33,9 @@ public class ItemPickup : Interactable
         } else if (item.name == "Glock")
         {
             FindObjectOfType<AudioManager>().Play("pistolPickup");
+        } else if (item.name == "LazerGun")
+        {
+            FindObjectOfType<AudioManager>().Play("lazerGunPickup");
         }
         
     }

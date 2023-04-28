@@ -10,6 +10,7 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject lightningPrefab;
     public GameObject pelletPrefab;
+    public GameObject lazerBeamPrefab;
 
     public float bulletForce = 20f;
     
@@ -38,6 +39,12 @@ public class Shooting : MonoBehaviour
     public float creationTimeMoss = 1.5f;
     private float timePassedMoss = 0f;
 
+    //LazerGun Timing
+    private bool hasLazerGun = false;
+    private float elapsedLazerGun = 0f;
+    public float creationTimeLazerGun = 1f;
+    private float timePassedLazerGun = 0f;
+
     private Inventory _inventory;
     
     
@@ -53,7 +60,6 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hasMossberg + " <-M  G-> " + hasGlock);
         foreach (var item in _inventory.items)
         {
             if (item.itemName == "Fulmen")
@@ -67,6 +73,10 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "Glock")
             {
                 hasGlock = true;
+            } 
+            else if (item.itemName == "LazerGun")
+            {
+                hasLazerGun = true;
             }
         }
 
@@ -91,6 +101,8 @@ public class Shooting : MonoBehaviour
         ShootGlock();
 
         ShootMossberg();
+        
+        ShootLazerGun();
 
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;
@@ -124,6 +136,9 @@ public class Shooting : MonoBehaviour
         else if (item.itemName == "Glock")
         {
             hasGlock = false;
+        } else if (item.itemName == "LazerGun")
+        {
+            hasLazerGun = false;
         }
     }
 
@@ -199,6 +214,34 @@ public class Shooting : MonoBehaviour
                     FindObjectOfType<AudioManager>().Play("shotgunGunshot");
                 
                     timePassedMoss = 0f;
+                }
+            }
+        }
+    }
+    
+    void ShootLazerGun()
+    {
+        if (hasLazerGun)
+        {
+            //was using for action every second
+            elapsedLazerGun += Time.deltaTime;
+            if (elapsedLazerGun >= 1f)
+            {
+                elapsedLazerGun = elapsedLazerGun % 1f;
+                timePassedLazerGun++;
+                if (timePassedLazerGun >= creationTimeLazerGun)
+                {
+                    Debug.Log("Fired LazerGun!");
+                    Quaternion rotationA = Quaternion.Euler(0f, 0f, 90f);
+                    //Vector3 offsetA = new Vector3(1f, 0f, 0f);
+                    GameObject lazerBeam = Instantiate(lazerBeamPrefab, firePoint.position, firePoint.rotation * rotationA);
+                    Rigidbody2D rb = lazerBeam.GetComponent<Rigidbody2D>();
+                    //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+                    //gunshot audio
+                    FindObjectOfType<AudioManager>().Play("lazerGunGunshot");
+                
+                    timePassedLazerGun = 0f;
                 }
             }
         }

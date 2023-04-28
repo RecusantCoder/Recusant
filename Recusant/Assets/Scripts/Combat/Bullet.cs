@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private int bulletDamage = 100;
+    public int bulletDamage = 100;
     
     private Collider2D bulletCollider;
     
