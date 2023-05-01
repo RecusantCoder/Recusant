@@ -13,7 +13,7 @@ public class Mossberg : Weapon
     {
         if (Time.time - lastShotTime > 1.0f)
         {
-            Debug.Log("Fired New Mossberg!");
+            //Debug.Log("Fired New Mossberg!");
 
             for (int i = 0; i < pellets; i++)
             {

@@ -242,16 +242,6 @@ public class GameManager : MonoBehaviour
             if (!chosenItems.Contains(chosenItem))
             {
                 chosenItems.Add(chosenItem);
-                
-                //increments the count/level of the weapon
-                if (weaponLevelCount.ContainsKey(chosenItem.itemName))
-                {
-                    weaponLevelCount[chosenItem.itemName]++;
-                }
-                else
-                {
-                    weaponLevelCount.Add(chosenItem.itemName, 0);
-                }
             }
         }
 
@@ -295,7 +285,12 @@ public class GameManager : MonoBehaviour
             Image weaponLevelImage1Image = weaponLevelImage1.GetComponent<Image>();
             Image weaponLevelImage2Image = weaponLevelImage2.GetComponent<Image>();
             
-            
+            //adds a weapon to weaponLevelCount if not picked before
+            if (!weaponLevelCount.ContainsKey(threeItems[i].itemName))
+            {
+                weaponLevelCount.Add(threeItems[i].itemName, 0);
+            }
+
             //sets weapon level tally image in levelslot    
             if (weaponLevelCount.ContainsKey(threeItems[i].itemName))
             {
@@ -340,6 +335,12 @@ public class GameManager : MonoBehaviour
         // Do whatever else you need to do when the player levels up
         
         LevelUp();
+    }
+    
+
+    public void LevelSelectedWeapon(string weaponName)
+    {
+        weaponLevelCount[weaponName]++;
     }
 
     

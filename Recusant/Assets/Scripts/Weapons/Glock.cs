@@ -12,7 +12,7 @@ public class Glock : Weapon
     {
         if (Time.time - lastShotTime > 0.5f)
         {
-            Debug.Log("Fired New Glock!");
+            //Debug.Log("Fired New Glock!");
             GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet2"), firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);

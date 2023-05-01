@@ -11,11 +11,13 @@ public class LevelSlot : MonoBehaviour
     public Item item;
     public Image icon;
     public Button pickButton;
+
     // Start is called before the first frame update
     void Start()
     {
         icon.sprite = item.icon;
         icon.enabled = true;
+        
     }
 
     // Update is called once per frame
@@ -24,12 +26,14 @@ public class LevelSlot : MonoBehaviour
         
     }
 
-    //plays pickup soun
+    //plays pickup sound, and sends selected item to GameManager, and Adds to Inventory
     public void PressedPickButton()
     {
         Debug.Log("Picked: " + item.name);
 
         PlayPickupSound();
+
+        GameManager.instance.LevelSelectedWeapon(item.name);
 
         //adds item to inventory if not already there
         if (!Inventory.instance.items.Contains(item))
@@ -54,4 +58,5 @@ public class LevelSlot : MonoBehaviour
         }
         
     }
+    
 }
