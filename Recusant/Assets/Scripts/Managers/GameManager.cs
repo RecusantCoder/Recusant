@@ -296,7 +296,7 @@ public class GameManager : MonoBehaviour
             Image weaponLevelImage2Image = weaponLevelImage2.GetComponent<Image>();
             
             
-
+            //sets weapon level tally image in levelslot    
             if (weaponLevelCount.ContainsKey(threeItems[i].itemName))
             {
                 int weaponLevel = weaponLevelCount[threeItems[i].itemName];

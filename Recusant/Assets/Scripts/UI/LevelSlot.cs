@@ -24,13 +24,19 @@ public class LevelSlot : MonoBehaviour
         
     }
 
+    //plays pickup soun
     public void PressedPickButton()
     {
         Debug.Log("Picked: " + item.name);
 
         PlayPickupSound();
+
+        //adds item to inventory if not already there
+        if (!Inventory.instance.items.Contains(item))
+        {
+            Inventory.instance.Add(item);
+        }
         
-        Inventory.instance.Add(item);
     }
     
     void PlayPickupSound()
