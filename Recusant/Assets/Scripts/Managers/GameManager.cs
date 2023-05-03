@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 30)
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
                 {
@@ -132,6 +132,16 @@ public class GameManager : MonoBehaviour
                     creations++;
                     Debug.Log(creations);
                 }
+        }
+        
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        {
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                SpawnEnemy("Prefabs/Sasqets");
+                creations++;
+                Debug.Log(creations);
+            }
         }
     }
     
