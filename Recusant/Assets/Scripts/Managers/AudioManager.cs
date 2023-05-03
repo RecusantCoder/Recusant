@@ -51,7 +51,8 @@ public class AudioManager : MonoBehaviour
     
     public void SetMusicVolume(float volume)
     {
-        foreach (var s in sounds)
+        
+        foreach (var s in AudioManager.instance.sounds)
         {
             if (s.isMusic)
             {
@@ -62,12 +63,26 @@ public class AudioManager : MonoBehaviour
 
     public void SetSoundVolume(float volume)
     {
-        foreach (var s in sounds)
+        foreach (var s in AudioManager.instance.sounds)
         {
+            if (s == null)
+            {
+               Debug.Log("The sound is null"); 
+            }
             if (s.isMusic == false)
             {
+                if (s.source == null)
+                {
+                    Debug.Log("The s.source is null"); 
+                }
                 s.source.volume = volume;
             }
         }
+    }
+    
+    private void OnDestroy()
+    {
+        // Run code here when the object is destroyed
+        Debug.Log("AudioManager has been destroyed!");
     }
 }
