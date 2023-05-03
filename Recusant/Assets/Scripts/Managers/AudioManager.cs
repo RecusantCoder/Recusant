@@ -48,4 +48,26 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+    
+    public void SetMusicVolume(float volume)
+    {
+        foreach (var s in sounds)
+        {
+            if (s.isMusic)
+            {
+                s.source.volume = volume;
+            }
+        }
+    }
+
+    public void SetSoundVolume(float volume)
+    {
+        foreach (var s in sounds)
+        {
+            if (s.isMusic == false)
+            {
+                s.source.volume = volume;
+            }
+        }
+    }
 }
