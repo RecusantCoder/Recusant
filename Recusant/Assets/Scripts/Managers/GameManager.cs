@@ -74,6 +74,8 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, int> weaponLevelCount;
     private GameObject levelUpScreen;
     public LevelBar levelBar; //event from LevelBar
+    
+    public GameObject pauseScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +91,8 @@ public class GameManager : MonoBehaviour
         weaponLevelCount = new Dictionary<string, int>();
         FindLevelUpScreen();
         LevelBar.OnLevelUp += LevelUpHandler;
+        
+        FindGamePauseScreen();
 
     }
 
@@ -356,6 +360,35 @@ public class GameManager : MonoBehaviour
     public void LevelSelectedWeapon(string weaponName)
     {
         weaponLevelCount[weaponName]++;
+    }
+    
+    private void FindGamePauseScreen()
+    {
+        //Finding PauseScreen
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform pauseScreenTransform = canvas.transform.Find("OptionsMenu");
+        pauseScreen = pauseScreenTransform.gameObject;
+        pauseScreen.SetActive(false);
+        Debug.Log("Disabled Pause Screen!!!");
+    }
+    
+    public void ShowPauseScreen()
+    {
+        FindGamePauseScreen();
+        
+        if (isPaused)
+        {
+            pauseScreen.SetActive(false);
+            ResumeGame();
+        }
+        else
+        {
+            // Set the pause screen to active
+            pauseScreen.SetActive(true);
+
+            // Pause the game
+            PauseGame();
+        }
     }
 
 }
