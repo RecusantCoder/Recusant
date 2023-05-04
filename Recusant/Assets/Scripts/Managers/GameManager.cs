@@ -213,9 +213,14 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        
+        PlayerPrefs.Save();
         Application.Quit();
         Debug.Log("QUIT!");
+    }
+    
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
     }
 
     private void OnDestroy()
@@ -353,6 +358,4 @@ public class GameManager : MonoBehaviour
         weaponLevelCount[weaponName]++;
     }
 
-    
-    
 }

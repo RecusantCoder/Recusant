@@ -57,6 +57,7 @@ public class AudioManager : MonoBehaviour
             if (s.isMusic)
             {
                 s.source.volume = volume;
+                PlayerPrefs.SetFloat("volumeMusic", volume);
             }
         }
     }
@@ -76,6 +77,7 @@ public class AudioManager : MonoBehaviour
                     Debug.Log("The s.source is null"); 
                 }
                 s.source.volume = volume;
+                PlayerPrefs.SetFloat("volumeSound", volume);
             }
         }
     }
