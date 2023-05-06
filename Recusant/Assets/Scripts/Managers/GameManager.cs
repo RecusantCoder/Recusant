@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, int> weaponLevelCount;
     private GameObject levelUpScreen;
     public LevelBar levelBar; //event from LevelBar
+    public static event Action PlayerActionTakenEvent;
     
     public GameObject pauseScreen;
 
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
                 {
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour
                 creations++;
                 Debug.Log(creations);
             }
-        }
+        }*/
     }
     
     private void SpawnEnemy(String enemyFilePath)
@@ -276,7 +277,7 @@ public class GameManager : MonoBehaviour
         //gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
         levelUpScreen.SetActive(false);
     }
-    
+
     public void LevelUp()
     {
         Debug.Log("LevelUp method");
@@ -295,15 +296,15 @@ public class GameManager : MonoBehaviour
             GameObject levelSlot = Instantiate(levelSlotPrefab, levelSlotParent);
             LevelSlot levelSlotScript = levelSlot.GetComponent<LevelSlot>();
             levelSlotScript.item = threeItems[i];
-            
+
             // Assuming you have a reference to the parent LevelSlot
             Transform tallyImages = levelSlot.transform.Find("LevelButton/WeaponImage/TallyImages");
             Transform weaponLevelImage1 = tallyImages.transform.Find("WeaponLevelImage1");
             Transform weaponLevelImage2 = tallyImages.transform.Find("WeaponLevelImage2");
-            
+
             Image weaponLevelImage1Image = weaponLevelImage1.GetComponent<Image>();
             Image weaponLevelImage2Image = weaponLevelImage2.GetComponent<Image>();
-            
+
             //adds a weapon to weaponLevelCount if not picked before
             if (!weaponLevelCount.ContainsKey(threeItems[i].itemName))
             {
@@ -317,17 +318,39 @@ public class GameManager : MonoBehaviour
                 if (weaponLevel == 0)
                 {
                     weaponLevelImage1Image.sprite = Resources.Load<Sprite>("Sprites/confusedItem");
+                    Color c = weaponLevelImage2Image.color;
+                    c.a = 0.0f;
+                    weaponLevelImage2Image.color = c;
                 }
-                else
+                
+                if (weaponLevel >= 1 && weaponLevel <= 5)
                 {
                     String tallySpritePath = "Sprites/tally" + weaponLevel;
                     weaponLevelImage1Image.sprite = Resources.Load<Sprite>(tallySpritePath);
+                    Color c = weaponLevelImage2Image.color;
+                    c.a = 0.0f;
+                    weaponLevelImage2Image.color = c;
+                        
                 }
-            }
-            
+                
+                if (weaponLevel >= 6 && weaponLevel <= 10)
+                {
+                    weaponLevelImage1Image.sprite = Resources.Load<Sprite>("Sprites/tally5");
+                        
+                    Color c = weaponLevelImage2Image.color;
+                    c.a = 1.0f;
+                    weaponLevelImage2Image.color = c;
+                    int weaponLevelMinus5 = weaponLevel - 5;
+                    Debug.Log("WeaponLevel = " + weaponLevel + " wminus5 = " + weaponLevelMinus5);
+                    String tallySpritePath = "Sprites/tally" + weaponLevelMinus5;
+                    weaponLevelImage2Image.sprite = Resources.Load<Sprite>(tallySpritePath);
+                }
 
+
+            }
+
+            PauseGame();
         }
-        PauseGame();
     }
 
     public void HideLevelUpScreen()
@@ -346,6 +369,10 @@ public class GameManager : MonoBehaviour
         FindLevelUpScreen();
         Debug.Log("Hiding LevelUpScreen");
         ResumeGame();
+        if (PlayerActionTakenEvent != null)
+        {
+            PlayerActionTakenEvent.Invoke();
+        }
     }
     
     void LevelUpHandler(int newLevel)

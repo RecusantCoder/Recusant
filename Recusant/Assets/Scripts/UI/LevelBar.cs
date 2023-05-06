@@ -36,6 +36,8 @@ public class LevelBar : MonoBehaviour
     public delegate void LevelUpEventHandler(int newLevel);
     public static event LevelUpEventHandler OnLevelUp;
 
+    public bool playerActionTaken = false;
+
 
     private void Start()
     {
@@ -49,29 +51,48 @@ public class LevelBar : MonoBehaviour
         SetMaxExperience();
         SetMinExperience();
 
-        
+        playerActionTaken = true;
     }
 
     private void Update()
     {
-        if (playerExperience >= levels[playerLevel])
+        if (playerExperience >= levels[playerLevel] && playerActionTaken)
         {
-
+            playerActionTaken = false;
             FindObjectOfType<AudioManager>().Play("levelup");
             playerLevel++;
             SetMaxExperience();
             SetMinExperience();
-            
+
             myTextElement.text = "LVL " + playerLevel;
-            
+
             Debug.Log("Level up! Now Level " + playerLevel + " TotalXP: " + playerExperience);
-            
+            Debug.Log("Xp for next Level = " + levels[playerLevel]);
+
             // Invoke the event
             if (OnLevelUp != null)
             {
                 OnLevelUp(playerLevel);
             }
         }
+    }
+    
+
+    private void OnEnable()
+    {
+        // Subscribe to the event when this object is enabled
+        GameManager.PlayerActionTakenEvent += OnPlayerActionTaken;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from the event when this object is disabled
+        GameManager.PlayerActionTakenEvent -= OnPlayerActionTaken;
+    }
+
+    private void OnPlayerActionTaken()
+    {
+        playerActionTaken = true;
     }
 
     public void SetExperience(float playerXp)
