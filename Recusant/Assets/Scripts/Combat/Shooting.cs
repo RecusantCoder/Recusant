@@ -17,6 +17,8 @@ public class Shooting : MonoBehaviour
     private Dictionary<string, Weapon> weapons;
 
     private Inventory _inventory;
+
+    public Dictionary<string, int> weaponLevelCountLocal;
     
     
     // Start is called before the first frame update
@@ -35,23 +37,25 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        weaponLevelCountLocal = GameManager.instance.weaponLevelCount;
+        
         foreach (var item in _inventory.items)
         {
             if (item.itemName == "Fulmen")
             {
-                weapons["Fulmen"].Shoot(firePoint);
+                weapons["Fulmen"].Shoot(firePoint, weaponLevelCountLocal["Fulmen"]);
             }
             else if (item.itemName == "Mossberg")
             {
-                weapons["Mossberg"].Shoot(firePoint);
+                weapons["Mossberg"].Shoot(firePoint, weaponLevelCountLocal["Mossberg"]);
             }
             else if (item.itemName == "Glock")
             {
-                weapons["Glock"].Shoot(firePoint);
+                weapons["Glock"].Shoot(firePoint, weaponLevelCountLocal["Glock"]);
             } 
             else if (item.itemName == "LazerGun")
             {
-                weapons["LazerGun"].Shoot(firePoint);
+                weapons["LazerGun"].Shoot(firePoint, weaponLevelCountLocal["LazerGun"]);
             }
         }
         
