@@ -7,6 +7,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int bulletDamage = 100;
+    public int penetrations = 0;
     
     private Collider2D bulletCollider;
     
@@ -18,6 +19,8 @@ public class Bullet : MonoBehaviour
         
         bulletCollider = GetComponent<Collider2D>();
         IgnoreBulletCollisions();
+        
+        Destroy(gameObject, 2f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -26,10 +29,16 @@ public class Bullet : MonoBehaviour
         if (other.transform.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(bulletDamage);
-
         }
 
-        Destroy(gameObject);
+        if (penetrations == 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            penetrations--;
+        }
     }
     
     void IgnoreBulletCollisions()

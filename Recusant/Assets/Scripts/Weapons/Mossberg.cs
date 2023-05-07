@@ -27,45 +27,45 @@ public class Mossberg : Weapon
             lastShotTime = Time.time;
             AudioManager.instance.Play("shotgunGunshot");
         }
-        
-        void mossbergLevels(int weaponLevel)
+    }
+    
+    void mossbergLevels(int weaponLevel)
+    {
+        switch (weaponLevel)
         {
-            switch (weaponLevel)
-            {
-                case 1:
-                    print ("Lvl 1 mossberg");
-                    break;
-                case 2:
-                    print ("Lvl 2 mossberg");
-                    break;
-                case 3:
-                    print ("Lvl 3 mossberg");
-                    break;
-                case 4:
-                    print ("Lvl 4 mossberg");
-                    break;
-                case 5:
-                    print ("Lvl 5 mossberg");
-                    break;
-                case 6:
-                    print ("Lvl 6 mossberg");
-                    break;
-                case 7:
-                    print ("Lvl 7 mossberg");
-                    break;
-                case 8:
-                    print ("Lvl 8 mossberg");
-                    break;
-                case 9:
-                    print ("Lvl 9 mossberg");
-                    break;
-                case 10:
-                    print ("Lvl 10 mossberg");
-                    break;
-                default:
-                    print ("Default mossberg.");
-                    break;
-            }
+            case 1:
+                print ("Lvl 1 mossberg");
+                break;
+            case 2:
+                print ("Lvl 2 mossberg");
+                break;
+            case 3:
+                print ("Lvl 3 mossberg");
+                break;
+            case 4:
+                print ("Lvl 4 mossberg");
+                break;
+            case 5:
+                print ("Lvl 5 mossberg");
+                break;
+            case 6:
+                print ("Lvl 6 mossberg");
+                break;
+            case 7:
+                print ("Lvl 7 mossberg");
+                break;
+            case 8:
+                print ("Lvl 8 mossberg");
+                break;
+            case 9:
+                print ("Lvl 9 mossberg");
+                break;
+            case 10:
+                print ("Lvl 10 mossberg");
+                break;
+            default:
+                print ("Default mossberg.");
+                break;
         }
     }
 }

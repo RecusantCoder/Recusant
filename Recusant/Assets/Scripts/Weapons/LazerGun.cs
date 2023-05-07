@@ -21,45 +21,45 @@ public class LazerGun : Weapon
             lastShotTime = Time.time;
             AudioManager.instance.Play("lazerGunGunshot");
         }
-        
-        void lazerGunLevels(int weaponLevel)
+    }
+    
+    void lazerGunLevels(int weaponLevel)
+    {
+        switch (weaponLevel)
         {
-            switch (weaponLevel)
-            {
-                case 1:
-                    print ("Lvl 1 lazerGun");
-                    break;
-                case 2:
-                    print ("Lvl 2 lazerGun");
-                    break;
-                case 3:
-                    print ("Lvl 3 lazerGun");
-                    break;
-                case 4:
-                    print ("Lvl 4 lazerGun");
-                    break;
-                case 5:
-                    print ("Lvl 5 lazerGun");
-                    break;
-                case 6:
-                    print ("Lvl 6 lazerGun");
-                    break;
-                case 7:
-                    print ("Lvl 7 lazerGun");
-                    break;
-                case 8:
-                    print ("Lvl 8 lazerGun");
-                    break;
-                case 9:
-                    print ("Lvl 9 lazerGun");
-                    break;
-                case 10:
-                    print ("Lvl 10 lazerGun");
-                    break;
-                default:
-                    print ("Default lazerGun.");
-                    break;
-            }
+            case 1:
+                print ("Lvl 1 lazerGun");
+                break;
+            case 2:
+                print ("Lvl 2 lazerGun");
+                break;
+            case 3:
+                print ("Lvl 3 lazerGun");
+                break;
+            case 4:
+                print ("Lvl 4 lazerGun");
+                break;
+            case 5:
+                print ("Lvl 5 lazerGun");
+                break;
+            case 6:
+                print ("Lvl 6 lazerGun");
+                break;
+            case 7:
+                print ("Lvl 7 lazerGun");
+                break;
+            case 8:
+                print ("Lvl 8 lazerGun");
+                break;
+            case 9:
+                print ("Lvl 9 lazerGun");
+                break;
+            case 10:
+                print ("Lvl 10 lazerGun");
+                break;
+            default:
+                print ("Default lazerGun.");
+                break;
         }
     }
 }

@@ -135,7 +135,6 @@ public class GameManager : MonoBehaviour
                 {
                     SpawnEnemy("Prefabs/TestingWobble");
                     creations++;
-                    Debug.Log(creations);
                 }
         }
         
@@ -145,7 +144,6 @@ public class GameManager : MonoBehaviour
             {
                 SpawnEnemy("Prefabs/Sasqets");
                 creations++;
-                Debug.Log(creations);
             }
         }
     }
