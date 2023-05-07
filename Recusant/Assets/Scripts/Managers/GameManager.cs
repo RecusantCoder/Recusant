@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
                 {
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
                 creations++;
                 Debug.Log(creations);
             }
-        }*/
+        }
     }
     
     private void SpawnEnemy(String enemyFilePath)
