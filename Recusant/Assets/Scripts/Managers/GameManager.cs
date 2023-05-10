@@ -263,6 +263,29 @@ public class GameManager : MonoBehaviour
                 chosenItems.Add(chosenItem);
             }
         }
+        
+        //Remove Level 10 Weapons from threeItems
+        List<string> itemsToRemove = new List<string>();
+        
+        foreach (var item in chosenItems)
+        {
+            foreach (var weapon in weaponLevelCount)
+            {
+                if (weapon.Value == 10)
+                {
+                    if (item.name == weapon.Key)
+                    {
+                        itemsToRemove.Add(item.name);
+                        
+                    }
+                }
+            }
+        }
+        foreach (var s in itemsToRemove)
+        {
+            chosenItems.RemoveAll(item => item.name == s);
+            Debug.Log("Removed " + s);
+        }
 
         return chosenItems;
     }
@@ -279,7 +302,6 @@ public class GameManager : MonoBehaviour
 
     public void LevelUp()
     {
-        Debug.Log("LevelUp method");
         FindLevelUpScreen();
         levelUpScreen.SetActive(true);
 
@@ -290,7 +312,8 @@ public class GameManager : MonoBehaviour
         GameObject levelSlotPrefab = Resources.Load<GameObject>("Prefabs/LevelSlot");
 
         List<Item> threeItems = ThreeRandomItems();
-        for (int i = 0; i < 3; i++)
+
+        for (int i = 0; i < threeItems.Count; i++)
         {
             GameObject levelSlot = Instantiate(levelSlotPrefab, levelSlotParent);
             LevelSlot levelSlotScript = levelSlot.GetComponent<LevelSlot>();

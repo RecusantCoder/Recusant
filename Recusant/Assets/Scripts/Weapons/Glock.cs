@@ -8,14 +8,12 @@ public class Glock : Weapon
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
     private float lastShotTime1;
-    private float shotFrequency1 = 1.0f;
     private int numOfShots = 1;
     private int bulletDamage = 10;
     private int penetrations = 0;
 
     private float lastShotTime2;
-    private float shotFrequency2 = 1.1f;
-    private int fired2 = 0;
+    
 
     private List<float> times = new List<float>();
     private List<float> firedList = new List<float>();

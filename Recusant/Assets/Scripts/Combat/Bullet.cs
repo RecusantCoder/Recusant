@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         bulletCollider = GetComponent<Collider2D>();
         IgnoreBulletCollisions();
         
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
