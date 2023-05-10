@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LazerBeam : MonoBehaviour
 {
-    private int lazerDamage = 1000;
+    public int lazerDamage = 1000;
     
     //Timing
     private float elapsed = 0f;

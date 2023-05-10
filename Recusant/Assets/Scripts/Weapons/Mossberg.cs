@@ -8,13 +8,16 @@ public class Mossberg : Weapon
     public int pellets = 5;
     public float bulletSpeed = 20f;
     private float pelletSpread = 20f;
-    private int numOfShots = 1;
     private int bulletDamage = 10;
     private int penetrations = 0;
     
-    private List<float> times = new List<float>();
-    private List<float> firedList = new List<float>();
-
+    protected new int localWeaponlevel;
+    protected new int numOfShots = 1;
+    protected new float shotFrequency = 2.0f;
+    protected new List<float> times = new List<float>();
+    protected new List<float> firedList = new List<float>();
+    
+    
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
         WeaponLevels(weaponLevel);
@@ -29,29 +32,28 @@ public class Mossberg : Weapon
                     firedList.Add(0);
                 }
             }
-            float shotFrequency3 = 1.0f + (0.1f * i);
+            float shotFrequency3 = 1.5f + (0.1f * i);
             
             if (firedList[i] > 1)
             {
-                shotFrequency3 = 1.0f;
+                shotFrequency3 = 1.5f;
             }
 
             if (Time.time - times[i] > shotFrequency3)
             {
                 firedList[i]++;
 
-                Debug.Log("firing mossberg " + i);
-            
                 FireShot(firePoint, weaponLevel);
             
                 times[i] = Time.time;
             }
         }
     }
+    
 
-    void FireShot(Transform firePoint, int weaponLevel)
+    protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        //WeaponLevels(weaponLevel);
+        Debug.Log("firing mossberg with sf " + shotFrequency);
 
         for (int i = 0; i < pellets; i++)
         {
@@ -82,8 +84,9 @@ public class Mossberg : Weapon
             }
         }
     }
+    
 
-    private void UpdateWeaponBehavior(int level)
+    protected override void UpdateWeaponBehavior(int level)
     {
         switch (level)
         {

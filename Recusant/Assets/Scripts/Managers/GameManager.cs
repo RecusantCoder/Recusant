@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -252,42 +253,27 @@ public class GameManager : MonoBehaviour
 
     public List<Item> ThreeRandomItems()
     {
-        List<Item> chosenItems = new List<Item>();
+        List<Item> randomWeapons = new List<Item>();
+        int count = 0;
+        
+        // Shuffle the weaponsList
+        List<Item> shuffledWeapons = weaponsList.OrderBy(item => Random.value).ToList();
 
-        while (chosenItems.Count < 3)
+        foreach (Item weapon in shuffledWeapons)
         {
-            int randomIndex = UnityEngine.Random.Range(0, weaponsList.Count);
-            Item chosenItem = weaponsList[randomIndex];
-            if (!chosenItems.Contains(chosenItem))
+            // Check if the weapon's itemName is not in weaponLevelCount or its value is not 10
+            if (!weaponLevelCount.ContainsKey(weapon.itemName) || weaponLevelCount[weapon.itemName] != 10)
             {
-                chosenItems.Add(chosenItem);
-            }
-        }
-        
-        //Remove Level 10 Weapons from threeItems
-        List<string> itemsToRemove = new List<string>();
-        
-        foreach (var item in chosenItems)
-        {
-            foreach (var weapon in weaponLevelCount)
-            {
-                if (weapon.Value == 10)
+                randomWeapons.Add(weapon);
+                count++;
+
+                if (count >= 3)
                 {
-                    if (item.name == weapon.Key)
-                    {
-                        itemsToRemove.Add(item.name);
-                        
-                    }
+                    break;
                 }
             }
         }
-        foreach (var s in itemsToRemove)
-        {
-            chosenItems.RemoveAll(item => item.name == s);
-            Debug.Log("Removed " + s);
-        }
-
-        return chosenItems;
+        return randomWeapons;
     }
     
     private void FindLevelUpScreen()
@@ -312,9 +298,12 @@ public class GameManager : MonoBehaviour
         GameObject levelSlotPrefab = Resources.Load<GameObject>("Prefabs/LevelSlot");
 
         List<Item> threeItems = ThreeRandomItems();
+        
+        Debug.Log(threeItems.Count + " is threeItems count");
 
         for (int i = 0; i < threeItems.Count; i++)
         {
+            
             GameObject levelSlot = Instantiate(levelSlotPrefab, levelSlotParent);
             LevelSlot levelSlotScript = levelSlot.GetComponent<LevelSlot>();
             levelSlotScript.item = threeItems[i];

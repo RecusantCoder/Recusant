@@ -8,16 +8,18 @@ public class Glock : Weapon
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
     private float lastShotTime1;
-    private int numOfShots = 1;
     private int bulletDamage = 10;
     private int penetrations = 0;
 
     private float lastShotTime2;
     
-
-    private List<float> times = new List<float>();
-    private List<float> firedList = new List<float>();
-
+    protected new int localWeaponlevel;
+    protected new int numOfShots = 1;
+    protected new float shotFrequency = 1.0f;
+    protected new List<float> times = new List<float>();
+    protected new List<float> firedList = new List<float>();
+    
+    
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
         WeaponLevels(weaponLevel);
@@ -26,7 +28,6 @@ public class Glock : Weapon
         {
             if (times.Capacity < numOfShots)
             {
-                Debug.Log("cap is 0");
                 for (int j = 0; j < 100; j++)
                 {
                     times.Add(0);
@@ -44,8 +45,6 @@ public class Glock : Weapon
             {
                 firedList[i]++;
 
-                Debug.Log("firing " + i);
-            
                 FireShot(firePoint, weaponLevel);
             
                 times[i] = Time.time;
@@ -53,9 +52,9 @@ public class Glock : Weapon
         }
     }
 
-    void FireShot(Transform firePoint, int weaponLevel)
+    protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        //WeaponLevels(weaponLevel);
+        Debug.Log("firing glock with sf " + shotFrequency);
         
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet2"), firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -67,7 +66,7 @@ public class Glock : Weapon
         bulletScript.bulletDamage += bulletDamage; // Change the damage amount
         bulletScript.penetrations += penetrations;
     }
-
+    
     protected override void WeaponLevels(int weaponLevel)
     {
         if (localWeaponlevel != weaponLevel && weaponLevel <= 10)
@@ -81,9 +80,9 @@ public class Glock : Weapon
             }
         }
     }
-    
-    
-    private void UpdateWeaponBehavior(int level)
+
+
+    protected override void UpdateWeaponBehavior(int level)
     {
         switch (level)
         {

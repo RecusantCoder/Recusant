@@ -8,7 +8,7 @@ public class SectionManager : MonoBehaviour
     private Transform playerTransform;
     private Vector2 spawn = new Vector2(0f, 0f);
     private float sectionLength = 10.24f;
-    private int numOfSectionsOnScreen = 3;
+    //private int numOfSectionsOnScreen = 3;
     private bool startPoint = false;
     
     enum SectionDirection {Right, TopRight, Top, TopLeft, Left, BottomLeft, Bottom, BottomRight, Centre}

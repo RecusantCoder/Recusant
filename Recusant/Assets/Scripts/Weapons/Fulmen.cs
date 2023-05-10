@@ -5,6 +5,12 @@ using UnityEngine;
 public class Fulmen : Weapon
 {
     private float lastShotTime;
+    
+    protected new int localWeaponlevel;
+    protected new int numOfShots = 1;
+    protected new float shotFrequency = 3.0f;
+    protected new List<float> times = new List<float>();
+    protected new List<float> firedList = new List<float>();
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
