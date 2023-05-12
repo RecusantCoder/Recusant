@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    
     #region Singleton
     
     public static PlayerManager instance;
@@ -23,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     }
     
     #endregion
+    
 
     public GameObject player;
 

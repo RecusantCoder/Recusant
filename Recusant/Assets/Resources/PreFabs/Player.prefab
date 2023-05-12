@@ -1139,7 +1139,12 @@ MonoBehaviour:
     baseValue: 0
   armor:
     baseValue: 0
+  healthRegen:
+    baseValue: 0
+  speed:
+    baseValue: 1
   healthbar: {fileID: 0}
+  creationTime: 1
 --- !u!114 &1471726363006081063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,11 +1171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 924848424}
-  bulletPrefab: {fileID: 610881718062015365, guid: 8cf7e7133be554e568a596c862bdbec7, type: 3}
-  lightningPrefab: {fileID: 7782322434166678073, guid: 9e7859e6651ba485980d6ea82df1dbd7, type: 3}
-  bulletForce: 20
   joystick: {fileID: 0}
   rb: {fileID: 924848427}
   player: {fileID: 1471726363006081071}
-  creationTime: 1
-  creationTimeFulmen: 3

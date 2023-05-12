@@ -18,25 +18,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
-            Debug.LogWarning("More than one instance of GameManager found!");
-            return;
-        }
-        instance = this;
-        
-        // Ensure there is only one instance of this script in the scene
-        if (FindObjectsOfType<GameManager>().Length > 1)
-        {
+            // Another instance of GameManager exists, destroy this one
             Destroy(gameObject);
             return;
         }
 
-        // Make this object persistent across scenes
+        // Set this instance as the singleton instance
+        instance = this;
+
+        // Ensure the GameManager persists across scenes
         DontDestroyOnLoad(gameObject);
     }
     
     #endregion
+    
     
     public float spawnRadius = 5f;
     public int amountToSpawn = 1;
@@ -46,7 +43,7 @@ public class GameManager : MonoBehaviour
     //For timer
     private float timer = 0.0f;
     [SerializeField]
-    public TMP_Text myTextElement;
+    public TMP_Text timerText;
     private int lastSecond = 0;
 
     private int creations = 0;
@@ -83,26 +80,31 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //player = PlayerManager.instance.player.transform;
-        //HideGameOverScreen();
-        Debug.Log("New Start");
+        Restart();
+
+    }
+
+    public void Restart()
+    {
+        ResumeGame();
         
-        //Finding GameOverScreen
-        FindGameOverScreen();
+        Debug.Log("Restart");
         
+        player = GameObject.FindWithTag("Player").transform;
+
         //Setting up LevelUp Screen
         weaponLevelCount = new Dictionary<string, int>();
         FindLevelUpScreen();
         LevelBar.OnLevelUp += LevelUpHandler;
         
+        FindGameOverScreen();
         FindGamePauseScreen();
-
+        FindTimerText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindWithTag("Player").transform;
         //Timer
         timer += Time.deltaTime;
         // Check if a second has passed
@@ -114,7 +116,7 @@ public class GameManager : MonoBehaviour
         }
         
         
-        myTextElement.text = timeConvert(timer);
+        timerText.text = timeConvert(timer);
         /*if (Mathf.FloorToInt(timer) % 1 == 0)
         {
             enemySpawnInfo();
@@ -193,9 +195,19 @@ public class GameManager : MonoBehaviour
         Debug.Log("Called HideGameOverScreen");
     }
     
+    private void FindGameOverScreen()
+    {
+        //Finding GameOverScreen
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform gameOverScreenTransform = canvas.transform.Find("GameOverScreen");
+        gameOverScreen = gameOverScreenTransform.gameObject;
+        gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
+        gameOverScreen.SetActive(false);
+    }
+    
     public void MainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Scenes/MainMenu");
         HideGameOverScreen();
     }
 
@@ -239,16 +251,6 @@ public class GameManager : MonoBehaviour
         //This doesnt work as its a child object of canvas
         //gameOverScreen = GameObject.FindWithTag("GameOverScreen");
         FindGameOverScreen();
-    }
-
-    private void FindGameOverScreen()
-    {
-        //Finding GameOverScreen
-        GameObject canvas = GameObject.FindWithTag("Canvas");
-        Transform gameOverScreenTransform = canvas.transform.Find("GameOverScreen");
-        gameOverScreen = gameOverScreenTransform.gameObject;
-        gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
-        gameOverScreen.SetActive(false);
     }
 
     public List<Item> ThreeRandomItems()
@@ -428,5 +430,40 @@ public class GameManager : MonoBehaviour
             PauseGame();
         }
     }
+    
+    private void OnEnable()
+    {
+        // Subscribe to the sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from the sceneLoaded event
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // This method is called whenever a new scene is loaded
+        // Perform your scene-specific initialization here
+        Debug.Log("Scene loaded: " + scene.name);
+        
+        if (scene.name == "Level1")
+        {
+            // Perform actions specific to "YourSceneName"
+            Debug.Log("running OnSceneLoaded for Level1");
+            Restart();
+        }
+    }
+    
+    private void FindTimerText()
+    {
+        //Finding TimerText
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform timerTransform = canvas.transform.Find("Timer");
+        timerText = timerTransform.GetComponentInChildren<TMP_Text>();
+    }
+    
 
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class EquipmentManager : MonoBehaviour
 {
+    
     #region Singleton
     
     public static EquipmentManager instance;
@@ -21,6 +22,7 @@ public class EquipmentManager : MonoBehaviour
     }
     
     #endregion
+    
 
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
     public OnEquipmentChanged onEquipmentChanged;

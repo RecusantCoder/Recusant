@@ -50,8 +50,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
         updateMoveSpeedWithSpeedModifier();
-        
-
 
     }
 
@@ -62,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         //rotation
         //float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
         //rb.rotation = angle;
+        Debug.Log("FixedUpdate");
     }
     
     /*
