@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,9 +13,19 @@ public class GameManagerReference : MonoBehaviour
     {
         gameManager = GameManager.instance;
         
+        try
+        {
         button = GetComponent<Button>();
         
         button.onClick.AddListener(gameManager.MainMenu);
+
+        
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
     private void Start()
     {

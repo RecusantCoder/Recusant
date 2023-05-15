@@ -148,7 +148,6 @@ public class LazerGun : Weapon
                 lazerLength += 0.1f;
                 lazerWidth += 0.1f;
                 numOfShots++;
-                Debug.Log("Level10 i l t d");
                 break;
             default:
                 print ("Default lazerGun.");

@@ -52,6 +52,8 @@ public class LevelBar : MonoBehaviour
         SetMinExperience();
 
         playerActionTaken = true;
+
+
     }
 
     private void Update()
@@ -73,21 +75,34 @@ public class LevelBar : MonoBehaviour
             if (OnLevelUp != null)
             {
                 OnLevelUp(playerLevel);
+                Debug.Log("Called OnLevelUp");
             }
         }
     }
-    
+
 
     private void OnEnable()
     {
-        // Subscribe to the event when this object is enabled
-        GameManager.PlayerActionTakenEvent += OnPlayerActionTaken;
+        // Subscribe to the event only if not already subscribed
+        if (!IsSubscribed(OnLevelUp))
+        {
+            // Subscribe to the event when this object is enabled
+            GameManager.PlayerActionTakenEvent += OnPlayerActionTaken;
+            // Subscribe to the level up event
+            OnLevelUp += OnLevelUp;
+        }
     }
 
     private void OnDisable()
     {
-        // Unsubscribe from the event when this object is disabled
-        GameManager.PlayerActionTakenEvent -= OnPlayerActionTaken;
+        // Unsubscribe from the event only if subscribed
+        if (IsSubscribed(OnLevelUp))
+        {
+            // Unsubscribe from the event when this object is disabled
+            GameManager.PlayerActionTakenEvent -= OnPlayerActionTaken;
+            // Unsubscribe from the level up event
+            OnLevelUp -= OnLevelUp;
+        }
     }
 
     private void OnPlayerActionTaken()
@@ -126,6 +141,26 @@ public class LevelBar : MonoBehaviour
         Debug.Log("Added " + xp + " TotalXP: " + playerExperience);
     }
     
+    private bool IsSubscribed(LevelUpEventHandler handler)
+    {
+        if (OnLevelUp != null)
+        {
+            // Get the invocation list of the event
+            Delegate[] subscribers = OnLevelUp.GetInvocationList();
+
+            // Iterate over the invocation list and check if the given handler is already subscribed
+            foreach (Delegate subscriber in subscribers)
+            {
+                if (subscriber.Equals(handler))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void setupLevels()
     {
         levels = new List<float>();

@@ -14,6 +14,11 @@ using UnityEngine.UI;
     public GameObject player;
     
     
+    
+    private void Awake()
+    {
+        FindIconImageSprite();
+    }
 
     public void AddItem(Item newItem)
     {
@@ -56,4 +61,13 @@ using UnityEngine.UI;
             item.Use();
         }
     }
+
+    private void FindIconImageSprite()
+    {
+        Transform itemButtonChild = transform.Find("ItemButton");
+        Transform iconGrandChild = itemButtonChild.Find("Icon");
+        Image iconImage = iconGrandChild.GetComponent<Image>();
+        icon = iconImage;
+    }
+    
 }

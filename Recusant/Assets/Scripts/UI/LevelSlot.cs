@@ -30,6 +30,7 @@ public class LevelSlot : MonoBehaviour
     public void PressedPickButton()
     {
         Debug.Log("Picked: " + item.name);
+        Debug.Log(item.icon + " item's icon");
 
         PlayPickupSound();
 

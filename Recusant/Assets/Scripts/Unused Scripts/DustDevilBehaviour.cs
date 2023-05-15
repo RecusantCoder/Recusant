@@ -94,8 +94,7 @@ public class DustDevilBehaviour : MonoBehaviour
             Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
             var direction = col.transform.position - transform.position;
             rb.AddForce(direction.normalized * 5000, ForceMode2D.Force);
-            Debug.Log("REEEEE!!!!!");
-            
+
             //Creates event
             if (OnTouched != null)
             {

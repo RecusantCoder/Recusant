@@ -23,14 +23,14 @@ public class ForceBoomBehaviour : MonoBehaviour
     {
         /*if (circleCol.isTrigger && !triggered)
         {
-            Debug.Log("OOHOHOHOHOHOHOHOHOHOHOHOHO");
+            
             triggered = true;
         }*/
 
         if (_dustDevilColor.color == Color.white && !_triggered)
         {
             _forceBoom.radius += 0.1f;
-            Debug.Log("OOHOHOHOHOHOHOHOHOHOHOHOHO");
+            
             _triggered = true;
         }
     }

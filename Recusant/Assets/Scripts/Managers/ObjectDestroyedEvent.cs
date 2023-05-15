@@ -10,13 +10,12 @@ public class ObjectDestroyedEvent : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("REEEEE!!!");
         OnDestroyed.Invoke();
     }
 
     private void OnDestroy()
     {
-        Debug.Log("Ded");
+        Debug.Log("ObjectDestroyedEvent says " + gameObject.name + " was destroyed.");
         //OnDestroyed.Invoke();
     }
 }

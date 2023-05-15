@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class InventoryUI : MonoBehaviour
         _inventory.onItemChangedCallback += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateUI()
     {
+        Debug.Log(slots.Length + " slots count");
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < _inventory.items.Count)      
@@ -42,5 +45,10 @@ public class InventoryUI : MonoBehaviour
     public void ShowInventory()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
+    }
+
+    private void OnDestroy()
+    {
+        _inventory.onItemChangedCallback -= UpdateUI;
     }
 }

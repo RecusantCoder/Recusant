@@ -408,7 +408,6 @@ public class GameManager : MonoBehaviour
         Transform pauseScreenTransform = canvas.transform.Find("OptionsMenu");
         pauseScreen = pauseScreenTransform.gameObject;
         pauseScreen.SetActive(false);
-        Debug.Log("Disabled Pause Screen!!!");
     }
     
     public void ShowPauseScreen()
@@ -453,6 +452,11 @@ public class GameManager : MonoBehaviour
             // Perform actions specific to "YourSceneName"
             Debug.Log("running OnSceneLoaded for Level1");
             Restart();
+        }else if (scene.name == "MainMenu")
+        {
+            // Perform actions specific to "YourSceneName"
+            Debug.Log("running OnSceneLoaded for MainMenu");
+            ClearInventory();
         }
     }
     
@@ -462,6 +466,11 @@ public class GameManager : MonoBehaviour
         GameObject canvas = GameObject.FindWithTag("Canvas");
         Transform timerTransform = canvas.transform.Find("Timer");
         timerText = timerTransform.GetComponentInChildren<TMP_Text>();
+    }
+
+    private void ClearInventory()
+    {
+        Inventory.instance.items = new List<Item>();
     }
     
 
