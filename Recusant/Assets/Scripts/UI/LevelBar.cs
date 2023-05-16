@@ -65,6 +65,7 @@ public class LevelBar : MonoBehaviour
             playerLevel++;
             SetMaxExperience();
             SetMinExperience();
+            SetExperience(playerExperience);
 
             myTextElement.text = "LVL " + playerLevel;
 
@@ -128,7 +129,8 @@ public class LevelBar : MonoBehaviour
         }
         else
         {
-            slider.minValue = levels[playerLevel] - levels[playerLevel - 1];
+            //slider.minValue = levels[playerLevel] - levels[playerLevel - 1];
+            slider.minValue = levels[playerLevel - 1];
         }
 
         
@@ -139,6 +141,12 @@ public class LevelBar : MonoBehaviour
         playerExperience += xp;
         slider.value = playerExperience;
         Debug.Log("Added " + xp + " TotalXP: " + playerExperience);
+        Debug.Log("Min XP: " + slider.minValue + " Max XP: " + slider.maxValue);
+        if (playerLevel >= 2)
+        {
+            Debug.Log("MinXPValue: " + levels[playerLevel-1]  + " MaxXPValue: " + levels[playerLevel]);
+        }
+        
     }
     
     private bool IsSubscribed(LevelUpEventHandler handler)
