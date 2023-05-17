@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         ResumeGame();
+
+        timer = 0.0f;
         
         Debug.Log("Restart");
         
