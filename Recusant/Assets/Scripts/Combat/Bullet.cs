@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 {
     public int bulletDamage = 100;
     public int penetrations = 0;
+    private float knockBack = 0.1f;
     
     private Collider2D bulletCollider;
     
@@ -29,6 +30,14 @@ public class Bullet : MonoBehaviour
         if (other.transform.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(bulletDamage);
+            
+            // Calculate the hit direction based on the bullet's position and enemy's position
+            Vector2 hitDirection = other.transform.position - transform.position;
+            hitDirection.Normalize();
+
+            // Apply knockback to the enemy
+            other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack);
+
         }
 
         if (penetrations == 0)
@@ -52,4 +61,6 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+    
+
 }

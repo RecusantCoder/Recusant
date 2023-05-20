@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public float damageRadius = 1f;
     
     public bool isFlipped = false;
+    private bool isKnockbackActive = false;
 
     private void Start()
     {
@@ -48,7 +49,8 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveCharacter(movement);
+        if (!isKnockbackActive)
+            moveCharacter(movement);
     }
 
 
@@ -91,5 +93,24 @@ public class EnemyController : MonoBehaviour
         
         
         Gizmos.DrawWireSphere(gameObject.transform.position, damageRadius);
+    }
+    
+    public void ApplyKnockback(Vector2 hitDirection, float knockbackForce)
+    {
+        // Disable movement during knockback
+        isKnockbackActive = true;
+        
+        // Apply the knockback force to the enemy's rigidbody
+        rb.AddForce(hitDirection * knockbackForce, ForceMode2D.Impulse);
+        Debug.Log("Knockback! " + knockbackForce);
+        
+        // Enable movement after knockback is complete
+        StartCoroutine(EnableMovementAfterKnockback());
+    }
+    
+    private IEnumerator EnableMovementAfterKnockback()
+    {
+        yield return new WaitForSeconds(0.1f); // Adjust this delay based on your preference
+        isKnockbackActive = false;
     }
 }

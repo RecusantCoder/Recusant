@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         if (currentSecond != lastSecond)
         {
             lastSecond = currentSecond;
-            enemySpawnInfo();
+            //enemySpawnInfo();
         }
         
         
@@ -148,6 +148,15 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < amountToSpawn; i++)
             {
                 SpawnEnemy("Prefabs/Sasqets");
+                creations++;
+            }
+        }
+        
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        {
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                SpawnEnemy("Prefabs/IceSnake");
                 creations++;
             }
         }
