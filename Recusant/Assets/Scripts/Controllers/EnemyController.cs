@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public Transform player;
     private Vector2 movement;
     public float moveSpeed = 5f;
+    private Animator animator;
     
     CharacterCombat combat;
     public float damageRadius = 1f;
@@ -102,8 +103,9 @@ public class EnemyController : MonoBehaviour
         
         // Apply the knockback force to the enemy's rigidbody
         rb.AddForce(hitDirection * knockbackForce, ForceMode2D.Impulse);
-        Debug.Log("Knockback! " + knockbackForce);
         
+        HitFlash(true);
+
         // Enable movement after knockback is complete
         StartCoroutine(EnableMovementAfterKnockback());
     }
@@ -112,5 +114,16 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); // Adjust this delay based on your preference
         isKnockbackActive = false;
+        HitFlash(false);
+    }
+
+    private void HitFlash(bool wasHit)
+    {
+        Transform visualsChild = gameObject.transform.Find("Wobble/Visuals");
+        if (visualsChild != null)
+        {
+            animator = visualsChild.GetComponent<Animator>();
+            animator.SetBool("wasHit", wasHit);
+        }
     }
 }
