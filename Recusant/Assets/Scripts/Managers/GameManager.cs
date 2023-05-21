@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         if (currentSecond != lastSecond)
         {
             lastSecond = currentSecond;
-            //enemySpawnInfo();
+            enemySpawnInfo();
         }
         
         

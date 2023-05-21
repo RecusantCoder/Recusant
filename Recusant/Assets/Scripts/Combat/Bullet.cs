@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int bulletDamage = 100;
+    public int bulletDamage = 1;
     public int penetrations = 0;
     private float knockBack = 0.1f;
     
