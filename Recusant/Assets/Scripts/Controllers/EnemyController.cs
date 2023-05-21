@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     public bool isFlipped = false;
     private bool isKnockbackActive = false;
 
+    private float despawnRadius = 5f;
+
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -44,6 +46,13 @@ public class EnemyController : MonoBehaviour
                 combat.Attack(targetStats);
                 
             }
+        }
+        
+        //If this leaves the Screen bounds, return to Pool
+        if (IsOutOfPlayerRadius())
+        {
+            ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+            Debug.Log("return to pool");
         }
         
     }
@@ -126,4 +135,18 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("wasHit", wasHit);
         }
     }
+    
+    private bool IsOutOfPlayerRadius()
+    {
+        float distance = Vector3.Distance(player.position, transform.position);
+        // Debug the distance between the player and the enemy
+        Debug.Log("Distance: " + distance);
+        // Check if the distance exceeds the radius
+        return distance > despawnRadius;
+    }
+
+    
+    
+    
+
 }

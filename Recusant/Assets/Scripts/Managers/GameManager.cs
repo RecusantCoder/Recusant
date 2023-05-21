@@ -47,19 +47,6 @@ public class GameManager : MonoBehaviour
     private int lastSecond = 0;
 
     private int creations = 0;
-    
-    /*For finding components
-     *
-     * Debug.Log("List of components");
-        GAMEOBJECTNAME = GameObject.Find("PlayerHealth");
-        
-        Component[] components = GAMEOBJECTNAME.GetComponents(typeof(Component));
-        foreach(Component component in components) 
-        { 
-            Debug.Log(component.ToString());
-        }
-        Debug.Log("Finished list of components");
-     */
 
     public Transform player;
     
@@ -76,11 +63,15 @@ public class GameManager : MonoBehaviour
     public static event Action PlayerActionTakenEvent;
     
     public GameObject pauseScreen;
+    
+    //Object Pooling
+    public GameObject sasquets;
+    
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     public void Restart()
@@ -134,35 +125,35 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
-                {
-                    SpawnEnemy("Prefabs/TestingWobble");
-                    creations++;
-                }
-        }
+            {
+                SpawnEnemy("Prefabs/TestingWobble");
+                creations++;
+            }
+        }*/
         
         if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy("Prefabs/Sasqets");
+                SpawnEnemy(sasquets);
                 creations++;
             }
         }
         
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
                 SpawnEnemy("Prefabs/IceSnake");
                 creations++;
             }
-        }
+        }*/
     }
     
-    private void SpawnEnemy(String enemyFilePath)
+    private void SpawnEnemy(GameObject prefab)
     {
         //float radius = 5f;
         Vector3 randomPos = Random.insideUnitSphere * spawnRadius;
@@ -180,9 +171,19 @@ public class GameManager : MonoBehaviour
         randomPos.z = player.transform.position.z;
     
         //GameObject go = Instantiate(_spherePrefab, randomPos, Quaternion.identity);
-        GameObject go = Instantiate(Resources.Load(enemyFilePath, typeof(GameObject)), randomPos, Quaternion.identity) as GameObject; 
+        //GameObject go = Instantiate(Resources.Load(enemyFilePath, typeof(GameObject)), randomPos, Quaternion.identity) as GameObject;
 
-        go.transform.position = randomPos;
+        //go.transform.position = randomPos;
+        
+        
+        
+        GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
+        if (spawnedObject != null)
+        {
+            spawnedObject.transform.position = randomPos;
+            //spawnedObject.transform.rotation = player.rotation;
+            spawnedObject.SetActive(true);
+        }
     }
     
     //Managing UI
