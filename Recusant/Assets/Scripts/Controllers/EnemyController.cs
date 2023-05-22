@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
         if (IsOutOfPlayerRadius())
         {
             ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
-            Debug.Log("return to pool");
+            //Debug.Log("return to pool");
         }
         
     }
@@ -121,7 +121,7 @@ public class EnemyController : MonoBehaviour
     
     private IEnumerator EnableMovementAfterKnockback()
     {
-        yield return new WaitForSeconds(0.1f); // Adjust this delay based on your preference
+        yield return new WaitForSeconds(0.25f); // Adjust this delay based on your preference
         isKnockbackActive = false;
         HitFlash(false);
     }

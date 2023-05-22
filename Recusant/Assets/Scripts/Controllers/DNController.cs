@@ -52,7 +52,7 @@ public class DNController : MonoBehaviour
             Color customColor = new Color(normalizedRed, normalizedGreen, normalizedBlue);
             
             myTextElement.color = customColor;
-            Debug.Log(amount + " <- damage amount " + normalizedBlue + " <- normalizedBlue " + blue + " <- blue");
+            //Debug.Log(amount + " <- damage amount " + normalizedBlue + " <- normalizedBlue " + blue + " <- blue");
         }
         else
         {

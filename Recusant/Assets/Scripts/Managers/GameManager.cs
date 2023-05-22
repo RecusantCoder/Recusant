@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
     
     //Object Pooling
     public GameObject sasquets;
+    public GameObject testingWobble;
+    public GameObject iceSnake;
     
     
 
@@ -127,14 +129,14 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy("Prefabs/TestingWobble");
+                SpawnEnemy(testingWobble);
                 creations++;
             }
-        }*/
+        }
         
         if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
@@ -145,14 +147,14 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy("Prefabs/IceSnake");
+                SpawnEnemy(iceSnake);
                 creations++;
             }
-        }*/
+        }
     }
     
     private void SpawnEnemy(GameObject prefab)

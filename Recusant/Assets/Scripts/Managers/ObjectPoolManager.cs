@@ -6,7 +6,7 @@ public class ObjectPoolManager : MonoBehaviour
     public static ObjectPoolManager Instance;
 
     public List<GameObject> prefabs;
-    public int poolSize = 10;
+    public int poolSize = 100;
 
     private Dictionary<GameObject, List<GameObject>> objectPools;
 
