@@ -139,9 +139,6 @@ public class EnemyController : MonoBehaviour
     private bool IsOutOfPlayerRadius()
     {
         float distance = Vector3.Distance(player.position, transform.position);
-        // Debug the distance between the player and the enemy
-        Debug.Log("Distance: " + distance);
-        // Check if the distance exceeds the radius
         return distance > despawnRadius;
     }
 

@@ -32,8 +32,8 @@ public class CharacterStats : MonoBehaviour
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         
         currentHealth -= damage;
-        //Debug.Log(transform.name + " takes " + damage + " damage.");
-        //Debug.Log(transform.name + " health is at " + currentHealth);
+        Debug.Log(transform.name + " takes " + damage + " damage.");
+        Debug.Log(transform.name + " health is at " + currentHealth);
         
         //Show Damage Numbers
         GameObject damageNum = Instantiate(Resources.Load("PreFabs/DamageNumbers", typeof(GameObject))) as GameObject;

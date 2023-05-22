@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     public static event Action PlayerActionTakenEvent;
     
     public GameObject pauseScreen;
+    private GameObject pauseButton;
     
     //Object Pooling
     public GameObject sasquets;
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
         FindGameOverScreen();
         FindGamePauseScreen();
         FindTimerText();
+        AssignPauseButton();
     }
 
     // Update is called once per frame
@@ -303,6 +305,9 @@ public class GameManager : MonoBehaviour
     {
         FindLevelUpScreen();
         levelUpScreen.SetActive(true);
+        
+        //Disable pause button until level up is over
+        pauseButton.gameObject.SetActive(false);
 
         // Find the child object by tag
         Transform levelSlotParent = levelUpScreen.transform.Find("LevelSlotParent");
@@ -391,6 +396,11 @@ public class GameManager : MonoBehaviour
         }
         
         FindLevelUpScreen();
+        
+        //Enable Pause Button
+        AssignPauseButton();
+        pauseButton.gameObject.SetActive(true);
+        
         Debug.Log("Hiding LevelUpScreen");
         ResumeGame();
         if (PlayerActionTakenEvent != null)
@@ -439,6 +449,18 @@ public class GameManager : MonoBehaviour
             // Pause the game
             PauseGame();
         }
+    }
+
+    public void AssignPauseButton()
+    {
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform pauseButtonTransform = canvas.transform.Find("PauseButton");
+        if (pauseButtonTransform == null)
+        {
+            // Child object not found, try finding an inactive child
+            pauseButtonTransform = canvas.transform.Find("/PauseButton");
+        }
+        pauseButton = pauseButtonTransform.gameObject;
     }
     
     private void OnEnable()
