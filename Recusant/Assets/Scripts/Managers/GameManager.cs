@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
     #endregion
     
     
-    public float spawnRadius = 5f;
+    private float spawnRadiusMin = 7f;
+    private float spawnRadiusMax = 14f;
     public int amountToSpawn = 1;
     private bool isPaused = false;
     
@@ -157,7 +158,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private void SpawnEnemy(GameObject prefab)
+    /*private void SpawnEnemy(GameObject prefab)
     {
         //float radius = 5f;
         Vector3 randomPos = Random.insideUnitSphere * spawnRadius;
@@ -189,7 +190,40 @@ public class GameManager : MonoBehaviour
             spawnedObject.transform.position = randomPos;
             spawnedObject.SetActive(true);
         }
+    }*/
+    
+    private void SpawnEnemy(GameObject prefab)
+    {
+        float minDistance = spawnRadiusMin; // Minimum distance from the player
+        float maxDistance = spawnRadiusMax; // Maximum distance from the player
+
+        float angle = Random.Range(0f, 360f);
+        float distance = Random.Range(minDistance, maxDistance);
+
+        Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
+        Vector3 spawnOffset = rotation * Vector3.right * distance;
+
+        // Add a random Y-axis offset
+        spawnOffset += Vector3.up * Random.Range(-maxDistance, maxDistance);
+
+        Vector3 spawnPosition = player.transform.position + spawnOffset;
+
+        // Set the Z position to be the same as the player's
+        spawnPosition.z = player.transform.position.z;
+
+        GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
+        if (spawnedObject != null)
+        {
+            EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
+            enemyStats.ReMade();
+            spawnedObject.transform.position = spawnPosition;
+            spawnedObject.SetActive(true);
+        }
     }
+
+
+
+
     
     //Managing UI
     public void EndGame()

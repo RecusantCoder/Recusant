@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     public bool isFlipped = false;
     private bool isKnockbackActive = false;
 
-    private float despawnRadius = 5f;
+    private float despawnRadius = 25f;
 
     private void Start()
     {
