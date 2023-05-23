@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 4 == 0)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        if (Mathf.FloorToInt(timer) > 60 && Mathf.FloorToInt(timer) <= 120)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60)
+        if (Mathf.FloorToInt(timer) > 120 && Mathf.FloorToInt(timer) <= 180)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
@@ -184,8 +184,9 @@ public class GameManager : MonoBehaviour
         GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
         if (spawnedObject != null)
         {
+            EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
+            enemyStats.ReMade();
             spawnedObject.transform.position = randomPos;
-            //spawnedObject.transform.rotation = player.rotation;
             spawnedObject.SetActive(true);
         }
     }
