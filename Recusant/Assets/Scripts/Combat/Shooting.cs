@@ -20,6 +20,9 @@ public class Shooting : MonoBehaviour
 
     public Dictionary<string, int> weaponLevelCountLocal;
     
+    //Autokilling enemies
+    private float searchRadius = 5f; // Radius to search for enemies
+    public Transform autoFirePoint; 
     
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,8 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject nearestEnemy = FindNearestEnemy();
+        
         weaponLevelCountLocal = GameManager.instance.weaponLevelCount;
         
         foreach (var item in _inventory.items)
@@ -51,7 +56,16 @@ public class Shooting : MonoBehaviour
             }
             else if (item.itemName == "Glock")
             {
-                weapons["Glock"].Shoot(firePoint, weaponLevelCountLocal["Glock"]);
+                // If an enemy is found, point towards it and shoot
+                if (nearestEnemy != null)
+                {
+                    Vector2 direction = nearestEnemy.transform.position - autoFirePoint.position;
+                    autoFirePoint.right = direction.normalized;
+
+                    weapons["Glock"].Shoot(autoFirePoint, weaponLevelCountLocal["Glock"]);
+                    
+                    //weapons["Glock"].Shoot(transform, weaponLevelCountLocal["Glock"]);
+                }
             } 
             else if (item.itemName == "LazerGun")
             {
@@ -68,6 +82,7 @@ public class Shooting : MonoBehaviour
     private void FixedUpdate()
     {
         firePoint.transform.position = player.transform.position;
+        autoFirePoint.transform.position = player.transform.position;
         
         //rotation
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
@@ -75,6 +90,26 @@ public class Shooting : MonoBehaviour
         {
             rb.rotation = angle;
         }
+    }
+    
+    
+    private GameObject FindNearestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance <= searchRadius && distance < nearestDistance)
+            {
+                nearestEnemy = enemy;
+                nearestDistance = distance;
+            }
+        }
+
+        return nearestEnemy;
     }
     
 }

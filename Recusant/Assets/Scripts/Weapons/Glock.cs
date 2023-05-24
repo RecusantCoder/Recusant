@@ -58,7 +58,10 @@ public class Glock : Weapon
         
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet2"), firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+        
+        //rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+        rb.velocity = firePoint.right * bulletSpeed;
+        
         AudioManager.instance.Play("pistolGunshot");
 
         // Get the bullet script component and change its damage amount

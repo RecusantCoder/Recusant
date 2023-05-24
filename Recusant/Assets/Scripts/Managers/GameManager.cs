@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 4 == 0)
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
