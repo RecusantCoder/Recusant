@@ -13,20 +13,25 @@ public class Glock : Weapon
 
     private float lastShotTime2;
     
-    protected new int localWeaponlevel;
-    protected new int numOfShots = 1;
-    protected new float shotFrequency = 1.0f;
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    private int localWeaponlevel;
+    private int numOfShots = 1;
+    private float shotFrequency = 1.0f;
+    //private List<float> times = new List<float>();
+    //private List<float> firedList = new List<float>();
     
-    
-    public override void Shoot(Transform firePoint, int weaponLevel)
+    public float groupDelay = 1.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
+
+    /*public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
 
         for (int i = 0; i < numOfShots; i++)
         {
-            if (times.Capacity < numOfShots)
+            if (times.Count < numOfShots)
             {
                 for (int j = 0; j < 100; j++)
                 {
@@ -34,27 +39,68 @@ public class Glock : Weapon
                     firedList.Add(0);
                 }
             }
-            float shotFrequency3 = 1.0f + (0.1f * i);
             
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.0f;
-            }
+                shotFrequency = 1.0f + (0.1f * i);
 
-            if (Time.time - times[i] > shotFrequency3)
+                if (Time.time - times[i] > shotFrequency)
             {
-                firedList[i]++;
-
+                WeaponLevels(weaponLevel);
+                
                 FireShot(firePoint, weaponLevel);
+                
+                firedList[i]++;
             
                 times[i] = Time.time;
             }
+        }
+    }*/
+
+    public override void Shoot(Transform firePoint, int weaponLevel)
+    {
+
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        
+        StartFiring();
+    }
+    
+    public void StartFiring()
+    {
+        if (!isFiring)
+        {
+            firingCoroutine = StartCoroutine(FireGroups());
+        }
+    }
+
+    public void StopFiring()
+    {
+        if (isFiring)
+        {
+            StopCoroutine(firingCoroutine);
+            isFiring = false;
+        }
+    }
+
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
+
+        while (isFiring)
+        {
+            for (int i = 0; i < numOfShots; i++)
+            {
+                WeaponLevels(weaponLevelPassed);
+                FireShot(firePointPassed, weaponLevelPassed);
+                yield return new WaitForSeconds(shotDelay);
+            }
+
+            yield return new WaitForSeconds(groupDelay);
         }
     }
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        Debug.Log("firing glock with sf " + shotFrequency);
+        Debug.Log("firing glock with sf " + shotFrequency + " and numOfShots " + numOfShots + " and level " + localWeaponlevel);
         
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet2"), firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

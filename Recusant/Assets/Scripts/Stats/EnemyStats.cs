@@ -73,7 +73,6 @@ public class EnemyStats : CharacterStats
         CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
         if (circleCollider != null)
         {
-            Debug.Log("collider ON!");
             circleCollider.enabled = true;
         }
     }

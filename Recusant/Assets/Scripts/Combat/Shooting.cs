@@ -14,7 +14,6 @@ public class Shooting : MonoBehaviour
     public GameObject player;
     
     private Weapon currentWeapon;
-    private Dictionary<string, Weapon> weapons;
 
     private Inventory _inventory;
 
@@ -22,7 +21,12 @@ public class Shooting : MonoBehaviour
     
     //Autokilling enemies
     private float searchRadius = 5f; // Radius to search for enemies
-    public Transform autoFirePoint; 
+    public Transform autoFirePoint;
+
+    private Glock glockComponent;
+    private LazerGun lazerGunComponent;
+    private Fulmen fulmenComponent;
+    private Mossberg mossbergComponent;
     
     // Start is called before the first frame update
     void Start()
@@ -30,11 +34,10 @@ public class Shooting : MonoBehaviour
         _inventory = Inventory.instance;
 
         // Create instances of each weapon
-        weapons = new Dictionary<string, Weapon>();
-        weapons.Add("Glock", new Glock());
-        weapons.Add("Fulmen", new Fulmen());
-        weapons.Add("Mossberg", new Mossberg());
-        weapons.Add("LazerGun", new LazerGun());
+        glockComponent = autoFirePoint.gameObject.AddComponent<Glock>();
+        lazerGunComponent = firePoint.gameObject.AddComponent<LazerGun>();
+        fulmenComponent = firePoint.gameObject.AddComponent<Fulmen>();
+        mossbergComponent = firePoint.gameObject.AddComponent<Mossberg>();
     }
 
     // Update is called once per frame
@@ -48,11 +51,11 @@ public class Shooting : MonoBehaviour
         {
             if (item.itemName == "Fulmen")
             {
-                weapons["Fulmen"].Shoot(firePoint, weaponLevelCountLocal["Fulmen"]);
+                fulmenComponent.Shoot(firePoint, weaponLevelCountLocal["Fulmen"]);
             }
             else if (item.itemName == "Mossberg")
             {
-                weapons["Mossberg"].Shoot(firePoint, weaponLevelCountLocal["Mossberg"]);
+                mossbergComponent.Shoot(firePoint, weaponLevelCountLocal["Mossberg"]);
             }
             else if (item.itemName == "Glock")
             {
@@ -62,12 +65,12 @@ public class Shooting : MonoBehaviour
                     Vector2 direction = nearestEnemy.transform.position - autoFirePoint.position;
                     autoFirePoint.right = direction.normalized;
 
-                    weapons["Glock"].Shoot(autoFirePoint, weaponLevelCountLocal["Glock"]);
+                    glockComponent.Shoot(autoFirePoint, weaponLevelCountLocal["Glock"]);
                 }
             } 
             else if (item.itemName == "LazerGun")
             {
-                weapons["LazerGun"].Shoot(firePoint, weaponLevelCountLocal["LazerGun"]);
+                lazerGunComponent.Shoot(firePoint, weaponLevelCountLocal["LazerGun"]);
             }
         }
         

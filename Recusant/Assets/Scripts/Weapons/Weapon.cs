@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    protected int localWeaponlevel;
-    protected int numOfShots = 1;
-    protected float shotFrequency = 3.0f;
-    protected List<float> times = new List<float>();
-    protected List<float> firedList = new List<float>();
 
     public virtual void Shoot(Transform firePoint, int weaponLevel)
     {
