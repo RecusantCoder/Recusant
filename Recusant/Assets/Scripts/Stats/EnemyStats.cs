@@ -8,25 +8,35 @@ public class EnemyStats : CharacterStats
     public float fadeDuration = 1.0f; // Duration of the fade in seconds
     private SpriteRenderer spriteRenderer;
     private int startingHealth;
+    public bool alreadyDied;
 
     private void Start()
     {
 
         startingHealth = currentHealth;
-
+        alreadyDied = false;
     }
     
     public override void Die()
     {
-        base.Die();
+        if (alreadyDied == false)
+        {
+            alreadyDied = true;
+            
+            base.Die();
         
-        KillCounter.instance.EnemyKilled();
+            KillCounter.instance.EnemyKilled();
 
-        GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
+            GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
+            
+            CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+            if (circleCollider != null)
+            {
+                circleCollider.enabled = false;
+            }
         
-        StartCoroutine(FadeOut());
-        
-        
+            StartCoroutine(FadeOut());
+        }
     }
 
     private IEnumerator FadeOut()
@@ -59,6 +69,13 @@ public class EnemyStats : CharacterStats
         }
 
         currentHealth = startingHealth;
+        alreadyDied = false;
+        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+        if (circleCollider != null)
+        {
+            Debug.Log("collider ON!");
+            circleCollider.enabled = true;
+        }
     }
 
 

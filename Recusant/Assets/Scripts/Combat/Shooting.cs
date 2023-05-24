@@ -63,8 +63,6 @@ public class Shooting : MonoBehaviour
                     autoFirePoint.right = direction.normalized;
 
                     weapons["Glock"].Shoot(autoFirePoint, weaponLevelCountLocal["Glock"]);
-                    
-                    //weapons["Glock"].Shoot(transform, weaponLevelCountLocal["Glock"]);
                 }
             } 
             else if (item.itemName == "LazerGun")
@@ -104,8 +102,15 @@ public class Shooting : MonoBehaviour
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance <= searchRadius && distance < nearestDistance)
             {
-                nearestEnemy = enemy;
-                nearestDistance = distance;
+                CircleCollider2D enemyCollider = enemy.GetComponent<CircleCollider2D>();
+                if (enemyCollider != null)
+                {
+                    if (enemyCollider.isActiveAndEnabled)
+                    {
+                        nearestEnemy = enemy;
+                        nearestDistance = distance;
+                    }
+                }
             }
         }
 

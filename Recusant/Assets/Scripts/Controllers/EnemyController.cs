@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     private bool isKnockbackActive = false;
 
     private float despawnRadius = 25f;
+    private CircleCollider2D CC2D;
 
     private void Start()
     {
@@ -25,6 +26,8 @@ public class EnemyController : MonoBehaviour
         player = PlayerManager.instance.player.transform;
         
         combat = GetComponent<CharacterCombat>();
+
+        CC2D = gameObject.GetComponent<CircleCollider2D>();
 
     }
 
@@ -43,8 +46,10 @@ public class EnemyController : MonoBehaviour
             CharacterStats targetStats = player.GetComponent<CharacterStats>();
             if (targetStats != null)
             {
-                combat.Attack(targetStats);
-                
+                if (CC2D != null && CC2D.isActiveAndEnabled)
+                {
+                    combat.Attack(targetStats);
+                }
             }
         }
         
