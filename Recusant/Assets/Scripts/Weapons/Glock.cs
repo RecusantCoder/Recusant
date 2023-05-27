@@ -55,13 +55,21 @@ public class Glock : Weapon
         }
     }*/
 
-    public override void Shoot(Transform firePoint, int weaponLevel)
+    public void Shoot(Transform firePoint, int weaponLevel, bool enemyNear)
     {
 
         firePointPassed = firePoint;
         weaponLevelPassed = weaponLevel;
-        
-        StartFiring();
+
+        if (enemyNear)
+        {
+            StartFiring();
+            isFiring = true;
+        }
+        else
+        {
+            StopFiring();
+        }
     }
     
     public void StartFiring()

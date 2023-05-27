@@ -422,6 +422,15 @@ public class GameManager : MonoBehaviour
                     Color c = weaponLevelImage2Image.color;
                     c.a = 0.0f;
                     weaponLevelImage2Image.color = c;
+                    
+                    if (threeItems[i].levelDescriptions.Count > 0)
+                    {
+                        descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
+                    }
+                    else
+                    {
+                        descriptionText.text = " ";
+                    }
                         
                 }
                 
@@ -436,6 +445,15 @@ public class GameManager : MonoBehaviour
                     Debug.Log("WeaponLevel = " + weaponLevel + " wminus5 = " + weaponLevelMinus5);
                     String tallySpritePath = "Sprites/tally" + weaponLevelMinus5;
                     weaponLevelImage2Image.sprite = Resources.Load<Sprite>(tallySpritePath);
+                    
+                    if (threeItems[i].levelDescriptions.Count > 0)
+                    {
+                        descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
+                    }
+                    else
+                    {
+                        descriptionText.text = " ";
+                    }
                 }
 
 

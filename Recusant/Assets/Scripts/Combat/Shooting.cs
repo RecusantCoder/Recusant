@@ -44,7 +44,7 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         GameObject nearestEnemy = FindNearestEnemy();
-        
+
         weaponLevelCountLocal = GameManager.instance.weaponLevelCount;
         
         foreach (var item in _inventory.items)
@@ -65,7 +65,11 @@ public class Shooting : MonoBehaviour
                     Vector2 direction = nearestEnemy.transform.position - autoFirePoint.position;
                     autoFirePoint.right = direction.normalized;
 
-                    glockComponent.Shoot(autoFirePoint, weaponLevelCountLocal["Glock"]);
+                    glockComponent.Shoot(autoFirePoint, weaponLevelCountLocal["Glock"], true);
+                }
+                else
+                {
+                    glockComponent.Shoot(autoFirePoint, weaponLevelCountLocal["Glock"], false);
                 }
             } 
             else if (item.itemName == "LazerGun")
