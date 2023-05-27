@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Mathf.FloorToInt(timer) > 60 && Mathf.FloorToInt(timer) <= 120)
+        if (Mathf.FloorToInt(timer) > 60 && Mathf.FloorToInt(timer) <= 120 && Mathf.FloorToInt(timer) % 2 == 0)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Mathf.FloorToInt(timer) > 120 && Mathf.FloorToInt(timer) <= 180)
+        if (Mathf.FloorToInt(timer) > 120 && Mathf.FloorToInt(timer) <= 180 && Mathf.FloorToInt(timer) % 2 == 0)
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
@@ -197,19 +197,28 @@ public class GameManager : MonoBehaviour
         float minDistance = spawnRadiusMin; // Minimum distance from the player
         float maxDistance = spawnRadiusMax; // Maximum distance from the player
 
-        float angle = Random.Range(0f, 360f);
-        float distance = Random.Range(minDistance, maxDistance);
+        Vector3 spawnPosition;
 
-        Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
-        Vector3 spawnOffset = rotation * Vector3.right * distance;
+        do
+        {
+            float angle = Random.Range(0f, 360f);
+            float distance = Random.Range(minDistance, maxDistance);
 
-        // Add a random Y-axis offset
-        spawnOffset += Vector3.up * Random.Range(-maxDistance, maxDistance);
+            Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
+            Vector3 spawnOffset = rotation * Vector3.right * distance;
 
-        Vector3 spawnPosition = player.transform.position + spawnOffset;
+            // Adjust the range for the Y-axis offset
+            float yOffset = Random.Range(-maxDistance, maxDistance) * 0.5f; // Use a smaller range by multiplying by 0.5f
 
-        // Set the Z position to be the same as the player's
-        spawnPosition.z = player.transform.position.z;
+            // Add the adjusted Y-axis offset
+            spawnOffset += Vector3.up * yOffset;
+
+            spawnPosition = player.transform.position + spawnOffset;
+
+            // Set the Z position to be the same as the player's
+            spawnPosition.z = player.transform.position.z;
+        }
+        while (Vector3.Distance(spawnPosition, player.transform.position) < minDistance);
 
         GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
         if (spawnedObject != null)
@@ -220,6 +229,7 @@ public class GameManager : MonoBehaviour
             spawnedObject.SetActive(true);
         }
     }
+
 
 
 
