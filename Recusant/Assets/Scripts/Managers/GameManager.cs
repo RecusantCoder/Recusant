@@ -391,12 +391,28 @@ public class GameManager : MonoBehaviour
             if (weaponLevelCount.ContainsKey(threeItems[i].itemName))
             {
                 int weaponLevel = weaponLevelCount[threeItems[i].itemName];
+                
+                //Setting description in LevelSlot UI
+                Transform description = levelSlot.transform.Find("LevelButton/WeaponImage/Description");
+                TextMeshProUGUI descriptionText = description.GetComponent<TextMeshProUGUI>();
+
+                Debug.Log("WL " + weaponLevel + " name " + threeItems[i].itemName);
+                
                 if (weaponLevel == 0)
                 {
                     weaponLevelImage1Image.sprite = Resources.Load<Sprite>("Sprites/confusedItem");
                     Color c = weaponLevelImage2Image.color;
                     c.a = 0.0f;
                     weaponLevelImage2Image.color = c;
+
+                    if (threeItems[i].levelDescriptions.Count > 0)
+                    {
+                        descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
+                    }
+                    else
+                    {
+                        descriptionText.text = " ";
+                    }
                 }
                 
                 if (weaponLevel >= 1 && weaponLevel <= 5)
