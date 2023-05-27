@@ -27,8 +27,12 @@ public class EnemyStats : CharacterStats
         
             KillCounter.instance.EnemyKilled();
 
-            GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
-            
+            int randomNumber = Random.Range(1, 301);
+            if (randomNumber > 200)
+            {
+                GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
+            }
+
             CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
             if (circleCollider != null)
             {
