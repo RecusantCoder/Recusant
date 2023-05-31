@@ -12,9 +12,9 @@ public class EnemyStats : CharacterStats
 
     private void Start()
     {
-
-        startingHealth = currentHealth;
+        currentHealth = maxHealth;
         alreadyDied = false;
+        Debug.Log("my health is " + currentHealth);
     }
     
     public override void Die()
@@ -72,13 +72,15 @@ public class EnemyStats : CharacterStats
             spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }
 
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
         alreadyDied = false;
         CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
         if (circleCollider != null)
         {
             circleCollider.enabled = true;
         }
+        
+        Debug.Log("my health is now " + currentHealth);
     }
 
 

@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public GameObject sasquets;
     public GameObject testingWobble;
     public GameObject iceSnake;
+    public GameObject zombie;
     
     
 
@@ -134,7 +135,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy(testingWobble);
+                SpawnEnemy(zombie);
                 creations++;
             }
         }
