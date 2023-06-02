@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy(zombie);
+                SpawnEnemy(iceSnake);
                 creations++;
             }
         }
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy(sasquets);
+                SpawnEnemy(zombie);
                 creations++;
             }
         }
@@ -153,7 +153,15 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy(iceSnake);
+                SpawnEnemy(testingWobble);
+                creations++;
+            }
+        }
+        if (Mathf.FloorToInt(timer) > 180 && Mathf.FloorToInt(timer) <= 240 && Mathf.FloorToInt(timer) % 2 == 0)
+        {
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                SpawnEnemy(sasquets);
                 creations++;
             }
         }

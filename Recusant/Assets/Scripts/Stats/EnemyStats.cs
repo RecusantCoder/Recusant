@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    public GameObject orbPrefab;
+    public List<string> orbPrefabsPaths;
     public float fadeDuration = 1.0f; // Duration of the fade in seconds
     private SpriteRenderer spriteRenderer;
     private int startingHealth;
@@ -12,9 +12,16 @@ public class EnemyStats : CharacterStats
 
     private void Start()
     {
+        orbPrefabsPaths = new List<string>();
+        orbPrefabsPaths.Add("PreFabs/Orbs/RedOrb");
+        orbPrefabsPaths.Add("PreFabs/Orbs/GreenOrb");
+        orbPrefabsPaths.Add("PreFabs/Orbs/BlueOrb");
+        orbPrefabsPaths.Add("PreFabs/Orbs/PinkOrb");
+        orbPrefabsPaths.Add("PreFabs/Orbs/OrangeOrb");
+        
+        
         currentHealth = maxHealth;
         alreadyDied = false;
-        Debug.Log("my health is " + currentHealth);
     }
     
     public override void Die()
@@ -30,7 +37,27 @@ public class EnemyStats : CharacterStats
             int randomNumber = Random.Range(1, 301);
             if (randomNumber > 200)
             {
-                GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
+                int index = 0;
+                if (randomNumber > 250)
+                {
+                    index = 1;
+                }
+
+                if (randomNumber > 275)
+                {
+                    index = 2;
+                }
+
+                if (randomNumber > 285)
+                {
+                    index = 3;
+                }
+
+                if (randomNumber > 295)
+                {
+                    index = 4;
+                }
+                GameObject orb = Instantiate(Resources.Load<GameObject>(orbPrefabsPaths[index]), transform.position, transform.rotation);
             }
 
             CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
@@ -80,7 +107,6 @@ public class EnemyStats : CharacterStats
             circleCollider.enabled = true;
         }
         
-        Debug.Log("my health is now " + currentHealth);
     }
 
 

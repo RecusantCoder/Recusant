@@ -172,106 +172,18 @@ public class LevelBar : MonoBehaviour
     public void setupLevels()
     {
         levels = new List<float>();
-       
-        
-        levels.Add(83);
-        levels.Add(174);
-        levels.Add(276);
-        levels.Add(388);
-        levels.Add(512);
-        levels.Add(650);
-        levels.Add(801);
-        levels.Add(969);
-        levels.Add(1154);
-        levels.Add(1358);
-        levels.Add(1584);
-        levels.Add(1833);
-        levels.Add(2107);
-        levels.Add(2411);
-        levels.Add(2746);
-        levels.Add(3115);
-        levels.Add(3523);
-        levels.Add(3973);
-        levels.Add(4470);
-        levels.Add(5018);
-        levels.Add(5624);
-        levels.Add(6291);
-        levels.Add(7028);
-        levels.Add(7842);
-        levels.Add(8740);
-        levels.Add(9730);
-        levels.Add(10824);
-        levels.Add(12031);
-        levels.Add(13363);
-        levels.Add(14833);
-        levels.Add(16456);
-        levels.Add(18247);
-        levels.Add(20224);
-        levels.Add(22406);
-        levels.Add(24815);
-        levels.Add(27473);
-        levels.Add(30408);
-        levels.Add(33648);
-        levels.Add(37224);
-        levels.Add(41171);
-        levels.Add(45529);
-        levels.Add(50339);
-        levels.Add(55649);
-        levels.Add(61512);
-        levels.Add(67983);
-        levels.Add(75127);
-        levels.Add(83014);
-        levels.Add(91721);
-        levels.Add(101333);
-        levels.Add(111945);
-        levels.Add(123660);
-        levels.Add(136594);
-        levels.Add(150872);
-        levels.Add(166636);
-        levels.Add(184040);
-        levels.Add(203254);
-        levels.Add(224466);
-        levels.Add(247886);
-        levels.Add(273742);
-        levels.Add(302288);
-        levels.Add(333804);
-        levels.Add(368599);
-        levels.Add(407015);
-        levels.Add(449428);
-        levels.Add(496254);
-        levels.Add(547953);
-        levels.Add(605032);
-        levels.Add(668051);
-        levels.Add(737627);
-        levels.Add(814445);
-        levels.Add(899257);
-        levels.Add(992895);
-        levels.Add(1096278);
-        levels.Add(1210421);
-        levels.Add(1336443);
-        levels.Add(1475581);
-        levels.Add(1629200);
-        levels.Add(1798808);
-        levels.Add(1986068);
-        levels.Add(2192818);
-        levels.Add(2421087);
-        levels.Add(2673114);
-        levels.Add(2951373);
-        levels.Add(3258594);
-        levels.Add(3597792);
-        levels.Add(3972294);
-        levels.Add(4385776);
-        levels.Add(4842295);
-        levels.Add(5346332);
-        levels.Add(5902831);
-        levels.Add(6517253);
-        levels.Add(7195629);
-        levels.Add(7944614);
-        levels.Add(8771558);
-        levels.Add(9684577);
-        levels.Add(10692629);
-        levels.Add(11805606);
-        levels.Add(13034431);
-        
+
+        int modulus = 10;
+
+        for (int i = 1; i < 201; i++)
+        {
+            if (i%modulus == 0)
+            {
+                modulus += 10;
+            }
+            float threshold = i * modulus;
+            levels.Add(threshold);
+            Debug.Log(threshold + " " + i);
+        }
     }
 }

@@ -207,17 +207,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee34e7e1b3ce8484a92c96f5a71e4e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 45
   damage:
-    baseValue: 10
+    baseValue: 7
   armor:
-    baseValue: 5
+    baseValue: 7
   healthRegen:
     baseValue: 0
   speed:
     baseValue: 0
-  orbPrefab: {fileID: 4656285219614233988, guid: 18008d2e16f4b422fbc17f2d71b4f712, type: 3}
+  orbPrefab: {fileID: 6728238297868292978, guid: 2b14112c8fe7742e3a63f82acf454aca, type: 3}
   fadeDuration: 1
+  alreadyDied: 0
 --- !u!114 &1983673978173697316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupRadius: 4
-  interactionTransform: {fileID: 0}
+  interactionTransform: {fileID: 5233477032484415769}
 --- !u!23 &1100175928436974533
 MeshRenderer:
   m_ObjectHideFlags: 0
