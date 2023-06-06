@@ -39,6 +39,12 @@ public class Bullet : MonoBehaviour
             other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack);
 
         }
+        if (other.transform.tag == "Breakable")
+        {
+            other.gameObject.GetComponent<Breakable>().Damaged();
+        }
+        
+            
 
         if (penetrations == 0)
         {

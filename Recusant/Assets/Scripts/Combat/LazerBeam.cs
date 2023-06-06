@@ -43,5 +43,10 @@ public class LazerBeam : MonoBehaviour
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(lazerDamage);
 
         }
+        
+        if (other.transform.tag == "Breakable")
+        {
+            other.gameObject.GetComponent<Breakable>().Damaged();
+        }
     }
 }
