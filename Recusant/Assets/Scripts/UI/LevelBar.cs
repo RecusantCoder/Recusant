@@ -183,7 +183,7 @@ public class LevelBar : MonoBehaviour
             }
             float threshold = i * modulus;
             levels.Add(threshold);
-            Debug.Log(threshold + " " + i);
+            //Debug.Log(threshold + " " + i);
         }
     }
 }
