@@ -9,9 +9,11 @@ public class EnemyStats : CharacterStats
     private SpriteRenderer spriteRenderer;
     private int startingHealth;
     public bool alreadyDied;
+    private EnemyController _enemyController;
 
     private void Start()
     {
+        _enemyController = GetComponent<EnemyController>();
         orbPrefabsPaths = new List<string>();
         orbPrefabsPaths.Add("PreFabs/Orbs/RedOrb");
         orbPrefabsPaths.Add("PreFabs/Orbs/GreenOrb");
@@ -65,6 +67,8 @@ public class EnemyStats : CharacterStats
             {
                 circleCollider.enabled = false;
             }
+
+            _enemyController.moveSpeed = 0;
         
             StartCoroutine(FadeOut());
         }
