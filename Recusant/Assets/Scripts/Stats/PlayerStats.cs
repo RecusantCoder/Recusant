@@ -57,6 +57,7 @@ public class PlayerStats : CharacterStats
             damage.AddModifier(newItem.damageModifier);
             healthRegen.AddModifier(newItem.healthRegenModifier);
             speed.AddModifier(newItem.speedModifier);
+            pickupRadius.AddModifier(newItem.pickupRadiusModifier);
         }
         
         if (oldItem != null)
@@ -64,7 +65,8 @@ public class PlayerStats : CharacterStats
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
             healthRegen.RemoveModifier(oldItem.healthRegenModifier);
-            speed.AddModifier(oldItem.speedModifier);
+            speed.RemoveModifier(oldItem.speedModifier);
+            pickupRadius.RemoveModifier(oldItem.pickupRadiusModifier);
         }
     }
 

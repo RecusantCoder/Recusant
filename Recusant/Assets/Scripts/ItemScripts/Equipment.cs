@@ -11,6 +11,7 @@ public class Equipment : Item
     public int damageModifier;
     public int healthRegenModifier;
     public int speedModifier;
+    public int pickupRadiusModifier;
 
     public override void Use()
     {

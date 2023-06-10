@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -21,11 +22,12 @@ public class PlayerMovement : MonoBehaviour
     public float spawnRadius = 10f;
 
     private PlayerStats playerStats;
+    private PlayerStats _playerStats;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _playerStats = GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -40,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         Collider2D[] nearItems = Physics2D.OverlapCircleAll(pickupPoint.position, pickupRadius, itemLayers);
+        Debug.Log("Nearby items count: " + nearItems.Length);
+
         foreach (Collider2D nearItem in nearItems)
         {
             Interactable interactable = nearItem.GetComponent<Interactable>();
@@ -50,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         updateMoveSpeedWithSpeedModifier();
-
+        updatePickupRadiusWithPickupRadiusModifier();
     }
 
     private void FixedUpdate()
@@ -111,11 +115,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void updateMoveSpeedWithSpeedModifier()
     {
-        playerStats = GetComponent<PlayerStats>();
+        playerStats = _playerStats;
         float speed = playerStats.speed.GetValue();
         if (moveSpeed != speed)
         {
             moveSpeed = speed;
+        }
+    }
+    
+    private void updatePickupRadiusWithPickupRadiusModifier()
+    {
+        playerStats = _playerStats;
+        float pickupRadiusLocal = playerStats.pickupRadius.GetValue();
+        if (pickupRadius != pickupRadiusLocal)
+        {
+            pickupRadius = pickupRadiusLocal;
         }
     }
 }

@@ -5,13 +5,20 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public float pickupRadius = 1f;
+    public float pickupRadius;
     public Transform interactionTransform;	// The transform from where we interact in case you want to offset it
 
     private bool isFocus = false;
     private Transform player;
 
     private bool hasInteracted = false;
+
+    private PlayerStats _playerStats;
+
+    private void Start()
+    {
+        pickupRadius = PlayerManager.instance.player.GetComponent<PlayerStats>().pickupRadius.GetValue();
+    }
 
     public virtual void Interact()
     {
@@ -22,9 +29,11 @@ public class Interactable : MonoBehaviour
 
     private void Update()
     {
+        updatePickupRadiusWithPickupRadiusModifier();
         if (isFocus && !hasInteracted)
         {
             float distance = Vector2.Distance(player.position, transform.position);
+            
             if (distance <= pickupRadius)
             {
                 Interact();
@@ -58,5 +67,10 @@ public class Interactable : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(interactionTransform.position, pickupRadius);
+    }
+    
+    private void updatePickupRadiusWithPickupRadiusModifier()
+    {
+        pickupRadius = PlayerManager.instance.player.GetComponent<PlayerStats>().pickupRadius.GetValue();
     }
 }
