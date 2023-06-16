@@ -60,6 +60,11 @@ public class Inventory : MonoBehaviour
                 
                 if (onItemChangedCallback != null)
                     onItemChangedCallback.Invoke();
+
+                if (item is Equipment)
+                {
+                    item.Use();
+                }
             }
             
         }
