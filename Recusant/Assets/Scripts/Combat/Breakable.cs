@@ -16,6 +16,7 @@ public class Breakable : MonoBehaviour
         equipmentPrefabsPaths.Add("PreFabs/Pickups/Exolegs");
         equipmentPrefabsPaths.Add("PreFabs/Pickups/Body_Armor");
         equipmentPrefabsPaths.Add("PreFabs/Pickups/Targeting_Computer");
+        equipmentPrefabsPaths.Add("PreFabs/Pickups/Haurio");
 
     }
 

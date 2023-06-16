@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         Collider2D[] nearItems = Physics2D.OverlapCircleAll(pickupPoint.position, pickupRadius, itemLayers);
-        Debug.Log("Nearby items count: " + nearItems.Length);
+        //Debug.Log("Nearby items count: " + nearItems.Length);
 
         foreach (Collider2D nearItem in nearItems)
         {

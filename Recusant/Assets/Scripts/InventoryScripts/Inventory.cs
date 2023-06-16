@@ -32,7 +32,22 @@ public class Inventory : MonoBehaviour
 
     public bool Add(Item item)
     {
-        if (!item.isDefaultItem)
+        bool alreadyInInventory = false;
+        foreach (var pickup in items)
+        {
+            if (pickup.itemName == item.itemName)
+            {
+                alreadyInInventory = true;
+            }
+        }
+
+        if (!(item is Equipment) && alreadyInInventory)
+        {
+            //Level up the item instead
+            GameManager.instance.LevelSelectedWeapon(item.itemName);
+        }
+
+        if (!item.isDefaultItem && !alreadyInInventory)
         {
             if (items.Count >= space)
             {
@@ -41,6 +56,7 @@ public class Inventory : MonoBehaviour
             } else
             {
                 items.Add(item);
+                GameManager.instance.weaponLevelCount.Add(item.itemName, 0);
                 
                 if (onItemChangedCallback != null)
                     onItemChangedCallback.Invoke();
