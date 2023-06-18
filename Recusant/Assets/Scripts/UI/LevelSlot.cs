@@ -39,7 +39,7 @@ public class LevelSlot : MonoBehaviour
         //adds item to inventory if not already there
         if (!Inventory.instance.items.Contains(item))
         {
-            Inventory.instance.Add(item);
+            Inventory.instance.Add(item, true);
         }
         
     }

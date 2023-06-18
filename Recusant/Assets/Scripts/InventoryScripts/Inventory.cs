@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
     //sending item removal
     public event Action<Item> OnItemRemoved;
 
-    public bool Add(Item item)
+    public bool Add(Item item, bool pickedUp)
     {
         bool alreadyInInventory = false;
         foreach (var pickup in items)
@@ -56,18 +56,31 @@ public class Inventory : MonoBehaviour
             } else
             {
                 items.Add(item);
-                GameManager.instance.weaponLevelCount.Add(item.itemName, 0);
+
+                try
+                {
+                    if (!(item is Equipment))
+                    {
+                        GameManager.instance.weaponLevelCount.Add(item.itemName, 0);
+                    }
                 
+                    if (item is Equipment && pickedUp)
+                    {
+                        item.Use();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
                 if (onItemChangedCallback != null)
                     onItemChangedCallback.Invoke();
-
-                if (item is Equipment)
-                {
-                    item.Use();
-                }
             }
             
         }
+
         return true;
     }
 
