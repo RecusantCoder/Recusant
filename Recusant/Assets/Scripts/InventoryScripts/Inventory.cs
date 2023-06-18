@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour
             {
                 items.Add(item);
 
-                try
+                try 
                 {
                     if (!(item is Equipment))
                     {
