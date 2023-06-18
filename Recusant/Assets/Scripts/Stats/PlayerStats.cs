@@ -12,6 +12,8 @@ public class PlayerStats : CharacterStats
     private float elapsed = 0f;
     public float creationTime = 1f;
     private float timePassed = 0f;
+    
+    private Dictionary<string, EquipmentLogic> logicMap = new Dictionary<string, EquipmentLogic>();
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,10 @@ public class PlayerStats : CharacterStats
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
         //healthBarUI = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
         healthbar.SetMaxHealth(currentHealth);
+        
+        // Populate the logic map
+        logicMap.Add("Targeting_Computer", new TargetingComputerLogic());
+        // Add other item names and logic scripts as needed
     }
     
     private void Update()
@@ -49,8 +55,31 @@ public class PlayerStats : CharacterStats
         FindObjectOfType<AudioManager>().Play("lowsound");
     }
 
-    void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
+    void OnEquipmentChanged(Equipment newItem, Equipment oldItem, int lvl)
     {
+        if (oldItem != null)
+        {
+            armor.RemoveModifier(oldItem.armorModifier);
+            damage.RemoveModifier(oldItem.damageModifier);
+            healthRegen.RemoveModifier(oldItem.healthRegenModifier);
+            speed.RemoveModifier(oldItem.speedModifier);
+            pickupRadius.RemoveModifier(oldItem.pickupRadiusModifier);
+            
+            //adding new level updates to the item before equipping
+            if (logicMap.ContainsKey(newItem.itemName)) {
+                EquipmentLogic logic = logicMap[newItem.itemName];
+                logic.ApplyLogic(newItem, lvl);
+            }
+        }
+
+        if (logicMap.ContainsKey(newItem.itemName)) {
+            if (oldItem == null)
+            {
+                EquipmentLogic logic = logicMap[newItem.itemName];
+                logic.ApplyLogic(newItem, 1);
+            }
+        }
+
         if (newItem != null)
         {
             armor.AddModifier(newItem.armorModifier);
@@ -59,16 +88,8 @@ public class PlayerStats : CharacterStats
             speed.AddModifier(newItem.speedModifier);
             pickupRadius.AddModifier(newItem.pickupRadiusModifier);
         }
-        
-        if (oldItem != null)
-        {
-            armor.RemoveModifier(oldItem.armorModifier);
-            damage.RemoveModifier(oldItem.damageModifier);
-            healthRegen.RemoveModifier(oldItem.healthRegenModifier);
-            speed.RemoveModifier(oldItem.speedModifier);
-            pickupRadius.RemoveModifier(oldItem.pickupRadiusModifier);
-        }
     }
+
 
     public override void Die()
     {
