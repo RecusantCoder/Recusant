@@ -36,8 +36,7 @@ public class EquipmentManager : MonoBehaviour
     GameObject targetEquipmentSlotButton;
     GameObject targetEquipmentSlotIcon;
     Image targetEquipmentSlotIconImage;
-
-    private int lastSlotFilled;
+    
     private int[] equipmentLevelsArray;
 
     private void Start()
@@ -45,15 +44,17 @@ public class EquipmentManager : MonoBehaviour
         _inventory = Inventory.instance;
         int numOfSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numOfSlots];
-        lastSlotFilled = 0;
         equipmentLevelsArray = new int[numOfSlots];
-        
+        for (int i = 0; i < equipmentLevelsArray.Length; i++)
+        {
+            equipmentLevelsArray[i] = 1;
+        }
     }
 
     public void Equip(Equipment newItem)
     {
         //int slotIndex = (int)newItem.equipmentSlot;
-        int slotIndex = lastSlotFilled;
+        int slotIndex = 0;
 
         for (int i = 0; i < currentEquipment.Length; i++)
         {
@@ -64,8 +65,12 @@ public class EquipmentManager : MonoBehaviour
                     slotIndex = i;
                 }
             }
+            else
+            {
+                slotIndex = i;
+            }
         }
-        
+
 
         Equipment oldItem = null;
 
@@ -84,18 +89,11 @@ public class EquipmentManager : MonoBehaviour
         if (onEquipmentChanged != null)
         {
             onEquipmentChanged.Invoke(newItem, oldItem, equipmentLevelsArray[slotIndex]);
-            Debug.Log("Invoked onEquipmentChanged " + newItem.damageModifier);
         }
         
         currentEquipment[slotIndex] = newItem;
         
         UpdateEquipmentSlot(slotIndex, true);
-
-        if (currentEquipment.Length != lastSlotFilled)
-        {
-            lastSlotFilled++;
-            Debug.Log("LSF: " + lastSlotFilled);
-        }
 
         equipmentLevelsArray[slotIndex]++;
 

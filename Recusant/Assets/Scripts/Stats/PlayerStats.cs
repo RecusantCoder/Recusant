@@ -14,6 +14,7 @@ public class PlayerStats : CharacterStats
     private float timePassed = 0f;
     
     private Dictionary<string, EquipmentLogic> logicMap = new Dictionary<string, EquipmentLogic>();
+    EquipmentLogic logic = null;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,8 @@ public class PlayerStats : CharacterStats
         
         // Populate the logic map
         logicMap.Add("Targeting_Computer", new TargetingComputerLogic());
-        // Add other item names and logic scripts as needed
+        logicMap.Add("Exolegs", new ExolegsLogic());
+        logicMap.Add("Helmet", new HelmetLogic());
     }
     
     private void Update()
@@ -64,20 +66,13 @@ public class PlayerStats : CharacterStats
             healthRegen.RemoveModifier(oldItem.healthRegenModifier);
             speed.RemoveModifier(oldItem.speedModifier);
             pickupRadius.RemoveModifier(oldItem.pickupRadiusModifier);
-            
-            //adding new level updates to the item before equipping
-            if (logicMap.ContainsKey(newItem.itemName)) {
-                EquipmentLogic logic = logicMap[newItem.itemName];
-                logic.ApplyLogic(newItem, lvl);
-            }
         }
-
-        if (logicMap.ContainsKey(newItem.itemName)) {
-            if (oldItem == null)
-            {
-                EquipmentLogic logic = logicMap[newItem.itemName];
-                logic.ApplyLogic(newItem, 1);
-            }
+        
+        //adding new level updates to the item before equipping
+        if (logicMap.ContainsKey(newItem.itemName))
+        {
+            logic = logicMap[newItem.itemName];
+            logic.ApplyLogic(newItem, oldItem == null ? 1 : lvl);
         }
 
         if (newItem != null)

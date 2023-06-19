@@ -53,7 +53,8 @@ public class Inventory : MonoBehaviour
             {
                 Debug.Log("Inventory is full.");
                 return false;
-            } else
+            } 
+            else
             {
                 items.Add(item);
 
