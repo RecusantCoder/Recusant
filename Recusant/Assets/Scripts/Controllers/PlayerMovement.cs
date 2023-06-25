@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _playerStats = GetComponent<PlayerStats>();
+        GameObject UI = GameObject.FindWithTag("Canvas");
+        joystick = UI.GetComponentInChildren<FloatingJoystick>();
     }
 
     // Update is called once per frame

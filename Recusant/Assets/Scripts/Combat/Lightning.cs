@@ -16,7 +16,8 @@ public class Lightning : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
+        
+        lightningDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
     }
 
     private void Update()

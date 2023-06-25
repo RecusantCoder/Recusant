@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour
             if (distance <= pickupRadius)
             {
                 Interact();
-                Debug.Log("Interact!");
+                //Debug.Log("Interact!");
                 hasInteracted = true;
             }
         }

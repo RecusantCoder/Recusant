@@ -15,6 +15,8 @@ public class LazerBeam : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        
+        lazerDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
     }
 
     private void Update()

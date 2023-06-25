@@ -21,6 +21,9 @@ public class Bullet : MonoBehaviour
         bulletCollider = GetComponent<Collider2D>();
         IgnoreBulletCollisions();
         
+        //Adding damage modifier
+        bulletDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        
         Destroy(gameObject, 1f);
     }
 
