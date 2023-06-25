@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -47,6 +48,11 @@ public class PlayerStats : CharacterStats
             }
         }
         
+    }
+
+    private void OnDestroy()
+    {
+        EquipmentManager.instance.onEquipmentChanged -= OnEquipmentChanged;
     }
 
 

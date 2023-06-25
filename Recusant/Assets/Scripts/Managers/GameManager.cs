@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     public GameObject testingWobble;
     public GameObject iceSnake;
     public GameObject zombie;
+
+    private GameObject joystick;
     
     
 
@@ -361,9 +363,11 @@ public class GameManager : MonoBehaviour
     {
         FindLevelUpScreen();
         levelUpScreen.SetActive(true);
-        
-        //Disable pause button until level up is over
+
+        //Disable pause button and joystick until level up is over
         pauseButton.gameObject.SetActive(false);
+        FindFloatingJoystick();
+        joystick.SetActive(false);
 
         // Find the child object by tag
         Transform levelSlotParent = levelUpScreen.transform.Find("LevelSlotParent");
@@ -491,6 +495,9 @@ public class GameManager : MonoBehaviour
         AssignPauseButton();
         pauseButton.gameObject.SetActive(true);
         
+        FindFloatingJoystick();
+        joystick.SetActive(true);
+        
         Debug.Log("Hiding LevelUpScreen");
         ResumeGame();
         if (PlayerActionTakenEvent != null)
@@ -521,14 +528,24 @@ public class GameManager : MonoBehaviour
         pauseScreen = pauseScreenTransform.gameObject;
         pauseScreen.SetActive(false);
     }
+
+    private void FindFloatingJoystick()
+    {
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform joystickTransform = canvas.transform.Find("Floating Joystick");
+        joystick = joystickTransform.gameObject;
+        joystick.SetActive(false);
+    }
     
     public void ShowPauseScreen()
     {
         FindGamePauseScreen();
+        FindFloatingJoystick();
         
         if (isPaused)
         {
             pauseScreen.SetActive(false);
+            joystick.SetActive(true);
             ResumeGame();
         }
         else
@@ -536,6 +553,8 @@ public class GameManager : MonoBehaviour
             // Set the pause screen to active
             pauseScreen.SetActive(true);
 
+            joystick.SetActive(false);
+            
             // Pause the game
             PauseGame();
         }

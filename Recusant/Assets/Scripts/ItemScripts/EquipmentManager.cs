@@ -27,6 +27,9 @@ public class EquipmentManager : MonoBehaviour
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem, int lvl);
     public OnEquipmentChanged onEquipmentChanged;
     
+    public delegate void EquipmentLevelDelegate(Item equipment, int itemLevelLocal);
+    public EquipmentLevelDelegate EldEvent;
+    
     private Equipment[] currentEquipment;
     private Inventory _inventory;
 
@@ -89,6 +92,7 @@ public class EquipmentManager : MonoBehaviour
         if (onEquipmentChanged != null)
         {
             onEquipmentChanged.Invoke(newItem, oldItem, equipmentLevelsArray[slotIndex]);
+            EldEvent?.Invoke(newItem, equipmentLevelsArray[slotIndex]);
         }
         
         currentEquipment[slotIndex] = newItem;
