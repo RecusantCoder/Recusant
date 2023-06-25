@@ -62,7 +62,10 @@ public class Inventory : MonoBehaviour
                 {
                     if (!(item is Equipment))
                     {
-                        GameManager.instance.weaponLevelCount.Add(item.itemName, 0);
+                        if (!GameManager.instance.weaponLevelCount.ContainsKey(item.itemName))
+                        {
+                            GameManager.instance.weaponLevelCount.Add(item.itemName, 0);
+                        }
                     }
                 
                     if (item is Equipment && pickedUp)
