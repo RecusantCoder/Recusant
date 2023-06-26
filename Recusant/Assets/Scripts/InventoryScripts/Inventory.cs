@@ -32,12 +32,14 @@ public class Inventory : MonoBehaviour
 
     public bool Add(Item item, bool pickedUp)
     {
+        Debug.Log("in inventory add method with: " + item.itemName);
         bool alreadyInInventory = false;
         foreach (var pickup in items)
         {
             if (pickup.itemName == item.itemName)
             {
                 alreadyInInventory = true;
+                Debug.Log(pickup + " already in inventory");
             }
         }
 
@@ -64,7 +66,19 @@ public class Inventory : MonoBehaviour
                     {
                         if (!GameManager.instance.weaponLevelCount.ContainsKey(item.itemName))
                         {
-                            GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
+                            if (pickedUp)
+                            {
+                                GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
+                                Debug.Log("Added " + item.itemName + " at level 1");
+                            }
+                        }
+                        else
+                        {
+                            if (pickedUp)
+                            {
+                                GameManager.instance.LevelSelectedWeapon(item.name);
+                                Debug.Log("Levelled " + item.itemName);
+                            }
                         }
                     }
                 

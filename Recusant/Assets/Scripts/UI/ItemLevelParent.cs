@@ -11,10 +11,13 @@ public class ItemLevelParent : MonoBehaviour
 
     private void Awake()
     {
+        itemDictionary = new Dictionary<Item, int>();
+    }
+
+    private void Start()
+    {
         EquipmentManager.instance.EldEvent += HandleEquipmentEvent;
         Inventory.instance.onItemChangedCallback += HandleInventoryEvent;
-        itemDictionary = new Dictionary<Item, int>();
-        Debug.Log("created itemdict");
     }
 
     private void HandleInventoryEvent()
@@ -34,7 +37,6 @@ public class ItemLevelParent : MonoBehaviour
                 itemDictionary.Add(i, localWeaponLevelCount[i.itemName]);
             }
         }
-        Debug.Log(itemDictionary.Count + " dictionary size");
     }
 
     private void HandleEquipmentEvent(Item equipment, int itemLevelLocal)
@@ -47,9 +49,6 @@ public class ItemLevelParent : MonoBehaviour
         {
             itemDictionary.Add(equipment, itemLevelLocal);
         }
-        
-        Debug.Log(itemDictionary.Count + " dictionary size");
-        
     }
 
     private void OnDestroy()
@@ -71,20 +70,6 @@ public class ItemLevelParent : MonoBehaviour
         Dictionary<string, int> localWeaponLevelCount = GameManager.instance.weaponLevelCount;
         foreach (var i in Inventory.instance.items)
         {
-            if (Inventory.instance.items == null)
-            {
-                Debug.Log("inventory is null");
-            }
-
-            if (itemDictionary == null)
-            {
-                Debug.Log("item dict is null");
-            }
-
-            if (i == null)
-            {
-                Debug.Log("i is null");
-            }
             if (itemDictionary.ContainsKey(i))
             {
                 if (localWeaponLevelCount.ContainsKey(i.itemName))
