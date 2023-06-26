@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (!GameManager.instance.weaponLevelCount.ContainsKey(item.itemName))
                         {
-                            GameManager.instance.weaponLevelCount.Add(item.itemName, 0);
+                            GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
                         }
                     }
                 

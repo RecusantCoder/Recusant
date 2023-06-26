@@ -53,7 +53,6 @@ public class Mossberg : Weapon
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        Debug.Log("firing mossberg with sf " + shotFrequency);
 
         for (int i = 0; i < pellets; i++)
         {

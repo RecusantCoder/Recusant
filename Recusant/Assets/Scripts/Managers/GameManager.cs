@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     public GameObject zombie;
 
     private GameObject joystick;
+    private GameObject itemLevels;
     
     
 
@@ -100,6 +101,8 @@ public class GameManager : MonoBehaviour
         FindGamePauseScreen();
         FindTimerText();
         AssignPauseButton();
+        //FindItemLevelsMenu();
+        
     }
 
     // Update is called once per frame
@@ -541,11 +544,13 @@ public class GameManager : MonoBehaviour
     {
         FindGamePauseScreen();
         FindFloatingJoystick();
+        //FindItemLevelsMenu();
         
         if (isPaused)
         {
             pauseScreen.SetActive(false);
             joystick.SetActive(true);
+            //itemLevels.SetActive(false);
             ResumeGame();
         }
         else
@@ -554,6 +559,7 @@ public class GameManager : MonoBehaviour
             pauseScreen.SetActive(true);
 
             joystick.SetActive(false);
+            //itemLevels.SetActive(true);
             
             // Pause the game
             PauseGame();
@@ -614,6 +620,14 @@ public class GameManager : MonoBehaviour
     private void ClearInventory()
     {
         Inventory.instance.items = new List<Item>();
+    }
+    
+    private void FindItemLevelsMenu()
+    {
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform itemLevelsTransform = canvas.transform.Find("ItemLevels");
+        itemLevels = itemLevelsTransform.gameObject;
+        itemLevels.SetActive(false);
     }
     
 
