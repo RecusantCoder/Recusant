@@ -9,11 +9,12 @@ public class ItemLevelParent : MonoBehaviour
     public GameObject itemLevelSlot;
     private Dictionary<Item, int> itemDictionary;
 
-    private void Start()
+    private void Awake()
     {
         EquipmentManager.instance.EldEvent += HandleEquipmentEvent;
         Inventory.instance.onItemChangedCallback += HandleInventoryEvent;
         itemDictionary = new Dictionary<Item, int>();
+        Debug.Log("created itemdict");
     }
 
     private void HandleInventoryEvent()
@@ -33,7 +34,7 @@ public class ItemLevelParent : MonoBehaviour
                 itemDictionary.Add(i, localWeaponLevelCount[i.itemName]);
             }
         }
-        Debug.Log(itemDictionary.Count);
+        Debug.Log(itemDictionary.Count + " dictionary size");
     }
 
     private void HandleEquipmentEvent(Item equipment, int itemLevelLocal)
@@ -47,7 +48,7 @@ public class ItemLevelParent : MonoBehaviour
             itemDictionary.Add(equipment, itemLevelLocal);
         }
         
-        Debug.Log(itemDictionary.Count);
+        Debug.Log(itemDictionary.Count + " dictionary size");
         
     }
 
@@ -67,6 +68,36 @@ public class ItemLevelParent : MonoBehaviour
             Destroy(child);
         }
         
+        Dictionary<string, int> localWeaponLevelCount = GameManager.instance.weaponLevelCount;
+        foreach (var i in Inventory.instance.items)
+        {
+            if (Inventory.instance.items == null)
+            {
+                Debug.Log("inventory is null");
+            }
+
+            if (itemDictionary == null)
+            {
+                Debug.Log("item dict is null");
+            }
+
+            if (i == null)
+            {
+                Debug.Log("i is null");
+            }
+            if (itemDictionary.ContainsKey(i))
+            {
+                if (localWeaponLevelCount.ContainsKey(i.itemName))
+                {
+                    itemDictionary[i] = localWeaponLevelCount[i.itemName];
+                }
+            }
+            else
+            {
+                itemDictionary.Add(i, localWeaponLevelCount[i.itemName]);
+            }
+        }
+        
         foreach (var j in itemDictionary)
         {
             GameObject instantiatedObject = Instantiate(itemLevelSlot, transform);
@@ -74,4 +105,5 @@ public class ItemLevelParent : MonoBehaviour
             childScript.FillImages(j.Key, j.Value);
         }
     }
+    
 }

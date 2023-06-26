@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         FindGamePauseScreen();
         FindTimerText();
         AssignPauseButton();
-        //FindItemLevelsMenu();
+        FindItemLevelsMenu();
         
     }
 
@@ -542,15 +542,17 @@ public class GameManager : MonoBehaviour
     
     public void ShowPauseScreen()
     {
+        Debug.Log("showing pause screen");
+        
         FindGamePauseScreen();
         FindFloatingJoystick();
-        //FindItemLevelsMenu();
+        FindItemLevelsMenu();
         
         if (isPaused)
         {
             pauseScreen.SetActive(false);
             joystick.SetActive(true);
-            //itemLevels.SetActive(false);
+            itemLevels.SetActive(false);
             ResumeGame();
         }
         else
@@ -559,7 +561,7 @@ public class GameManager : MonoBehaviour
             pauseScreen.SetActive(true);
 
             joystick.SetActive(false);
-            //itemLevels.SetActive(true);
+            itemLevels.SetActive(true);
             
             // Pause the game
             PauseGame();
