@@ -32,6 +32,8 @@ public class Shooting : MonoBehaviour
     void Start()
     {
         _inventory = Inventory.instance;
+        GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
+        joystick = JoyStickObject.GetComponent<FloatingJoystick>();
 
         // Create instances of each weapon
         glockComponent = autoFirePoint.gameObject.AddComponent<Glock>();
@@ -89,12 +91,12 @@ public class Shooting : MonoBehaviour
         firePoint.transform.position = player.transform.position;
         autoFirePoint.transform.position = player.transform.position;
         
-        //rotation
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
         if (angle != -90f)
         {
             rb.rotation = angle;
         }
+        
     }
     
     
