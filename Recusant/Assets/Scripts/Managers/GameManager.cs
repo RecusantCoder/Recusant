@@ -74,8 +74,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject joystick;
     private GameObject itemLevels;
-    
-    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Restart");
         
         player = GameObject.FindWithTag("Player").transform;
+        GameObject startingItem = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/Mossberg"), player.position, player.rotation);
 
         //Setting up LevelUp Screen
         weaponLevelCount = new Dictionary<string, int>();
