@@ -27,6 +27,7 @@ public class Shooting : MonoBehaviour
     private LazerGun lazerGunComponent;
     private Fulmen fulmenComponent;
     private Mossberg mossbergComponent;
+    private Grenade grenadeComponent;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,7 @@ public class Shooting : MonoBehaviour
         lazerGunComponent = firePoint.gameObject.AddComponent<LazerGun>();
         fulmenComponent = firePoint.gameObject.AddComponent<Fulmen>();
         mossbergComponent = firePoint.gameObject.AddComponent<Mossberg>();
+        grenadeComponent = firePoint.gameObject.AddComponent<Grenade>();
     }
 
     // Update is called once per frame
@@ -77,6 +79,10 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "LazerGun")
             {
                 lazerGunComponent.Shoot(firePoint, weaponLevelCountLocal["LazerGun"]);
+            }
+            else if (item.itemName == "Grenade")
+            {
+                grenadeComponent.Shoot(firePoint, weaponLevelCountLocal["Grenade"]);
             }
         }
         
