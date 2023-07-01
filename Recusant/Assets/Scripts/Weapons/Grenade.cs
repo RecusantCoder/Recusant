@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Grenade : Weapon
 {
-    public int damage;
+    public int damage = 100;
     public int localWeaponLevel;
     public float throwSpeed = 10f;
     public int numOfThrows = 1;
+    private int penetrations = 0;
+    
     
     protected new List<float> times = new List<float>();
     protected new List<float> firedList = new List<float>();
@@ -48,14 +50,18 @@ public class Grenade : Weapon
     {
         Debug.Log("Throwing grenade");
         Quaternion rotationA = Quaternion.Euler(0f, 0f, 0f);
-        GameObject grenadeObject = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/ThrownGrenade"), firePoint.position, firePoint.rotation * rotationA);
-        Rigidbody2D rb = grenadeObject.GetComponent<Rigidbody2D>();
-        rb.AddForce(grenadeObject.transform.up * throwSpeed, ForceMode2D.Impulse);
+        GameObject thrownGrenade = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/ThrownGrenade"), firePoint.position, firePoint.rotation * rotationA);
+        Rigidbody2D rb = thrownGrenade.GetComponent<Rigidbody2D>();
+        rb.AddForce(thrownGrenade.transform.up * throwSpeed, ForceMode2D.Impulse);
         
         // Apply torque for spinning motion
         float torqueForce = 10f;
         rb.AddTorque(torqueForce, ForceMode2D.Impulse);
         
+        //Modify the values on the thrownGrenade
+        ThrownGrenade thrownGrenadeScript = thrownGrenade.GetComponent<ThrownGrenade>();
+        thrownGrenadeScript.grenadeDamage += damage;
+        thrownGrenadeScript.penetrations += penetrations;
     }
 
     protected override void WeaponLevels(int weaponLevel)

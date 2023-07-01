@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class ThrownGrenade : MonoBehaviour
 {
     public int grenadeDamage;
-    private int penetrations = 100;
+    public int penetrations = 0;
     
     private Collider2D grenadeCollider;
     
@@ -28,7 +29,7 @@ public class ThrownGrenade : MonoBehaviour
     {
         if (other.transform.tag == "Enemy")
         {
-            //other.gameObject.GetComponent<EnemyStats>().TakeDamage(bulletDamage);
+            other.gameObject.GetComponent<EnemyStats>().TakeDamage(grenadeDamage);
         }
         if (other.transform.tag == "Breakable")
         {
@@ -50,19 +51,36 @@ public class ThrownGrenade : MonoBehaviour
         Bullet[] bullets = FindObjectsOfType<Bullet>();
         foreach (Bullet bullet in bullets)
         {
-            if (bullet != this)
+            if (bullet != null && bullet != this)
             {
-                Physics2D.IgnoreCollision(grenadeCollider, bullet.GetComponent<Collider2D>());
+                Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
+                if (bulletCollider != null)
+                {
+                    Physics2D.IgnoreCollision(grenadeCollider, bulletCollider);
+                }
             }
         }
-        
+    
         Grenade[] grenades = FindObjectsOfType<Grenade>();
         foreach (Grenade grenade in grenades)
         {
-            if (grenade != this)
+            if (grenade != null && grenade != this)
             {
-                Physics2D.IgnoreCollision(grenadeCollider, grenade.GetComponent<Collider2D>());
+                Collider2D grenadeCollider = grenade.GetComponent<Collider2D>();
+                if (grenadeCollider != null)
+                {
+                    Physics2D.IgnoreCollision(grenadeCollider, grenadeCollider);
+                }
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Destroyed ThrownGrenade");
+        GameObject explosion = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Explosion"), transform.position, transform.rotation);
+        //Modify the values on the thrownGrenade
+        Explosion explosionScript = explosion.GetComponent<Explosion>();
+        explosionScript.explosionDamage = grenadeDamage;
     }
 }
