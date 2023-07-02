@@ -55,11 +55,6 @@ public class Glock : Weapon
         }
     }*/
 
-    private void Awake()
-    {
-        AudioManager.instance.Play("pistolGunshot");
-    }
-
     public void Shoot(Transform firePoint, int weaponLevel, bool enemyNear)
     {
 

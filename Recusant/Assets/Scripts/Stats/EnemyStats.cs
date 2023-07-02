@@ -10,8 +10,9 @@ public class EnemyStats : CharacterStats
     private int startingHealth;
     public bool alreadyDied;
     private EnemyController _enemyController;
+    private float previousMoveSpeed;
 
-    private void Start()
+    private void Awake()
     {
         _enemyController = GetComponent<EnemyController>();
         orbPrefabsPaths = new List<string>();
@@ -24,6 +25,12 @@ public class EnemyStats : CharacterStats
         
         currentHealth = maxHealth;
         alreadyDied = false;
+        previousMoveSpeed = _enemyController.moveSpeed;
+    }
+    
+    private void Start()
+    {
+        
     }
     
     public override void Die()
@@ -68,8 +75,9 @@ public class EnemyStats : CharacterStats
                 circleCollider.enabled = false;
             }
 
+            
             _enemyController.moveSpeed = 0;
-        
+
             StartCoroutine(FadeOut());
         }
     }
@@ -110,6 +118,8 @@ public class EnemyStats : CharacterStats
         {
             circleCollider.enabled = true;
         }
+        
+        _enemyController.moveSpeed = previousMoveSpeed;
         
     }
 

@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     public float damageRadius = 1f;
     
     public bool isFlipped = false;
-    private bool isKnockbackActive = false;
+    public bool isKnockbackActive = false;
 
     private float despawnRadius = 25f;
     private CircleCollider2D CC2D;
@@ -105,8 +105,6 @@ public class EnemyController : MonoBehaviour
     
     private void OnDrawGizmosSelected()
     {
-        
-        
         Gizmos.DrawWireSphere(gameObject.transform.position, damageRadius);
     }
     

@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStats playerStats;
     private PlayerStats _playerStats;
 
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
         
         updateMoveSpeedWithSpeedModifier();
         updatePickupRadiusWithPickupRadiusModifier();
+        
+        Debug.Log(joystick.Horizontal + " <-horizontal and vertical-> " + joystick.Vertical);
     }
 
     private void FixedUpdate()
