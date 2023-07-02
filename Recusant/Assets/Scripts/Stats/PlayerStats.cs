@@ -60,7 +60,7 @@ public class PlayerStats : CharacterStats
     {
         base.TakeDamage(damage);
         
-        FindObjectOfType<AudioManager>().Play("lowsound");
+        AudioManager.instance.Play("lowsound");
     }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem, int lvl)

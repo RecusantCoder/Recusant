@@ -11,6 +11,8 @@ public class Explosion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.instance.Play("Explosion");
+        
         animator = GetComponent<Animator>();
         hasPlayedOnce = false;
         

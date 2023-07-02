@@ -44,7 +44,7 @@ public class Food : Interactable
         PlayerManager.instance.player.GetComponent<PlayerStats>().currentHealth =
             PlayerManager.instance.player.GetComponent<PlayerStats>().maxHealth;
         
-        FindObjectOfType<AudioManager>().Play("pickup");
+        AudioManager.instance.Play("pickup");
         
         Destroy(gameObject);
     }
