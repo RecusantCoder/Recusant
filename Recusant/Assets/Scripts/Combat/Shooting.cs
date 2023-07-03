@@ -28,6 +28,7 @@ public class Shooting : MonoBehaviour
     private Fulmen fulmenComponent;
     private Mossberg mossbergComponent;
     private Grenade grenadeComponent;
+    private Machete macheteComponent;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class Shooting : MonoBehaviour
         fulmenComponent = firePoint.gameObject.AddComponent<Fulmen>();
         mossbergComponent = firePoint.gameObject.AddComponent<Mossberg>();
         grenadeComponent = firePoint.gameObject.AddComponent<Grenade>();
+        macheteComponent = firePoint.gameObject.AddComponent<Machete>();
     }
 
     // Update is called once per frame
@@ -83,6 +85,10 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "Grenade")
             {
                 grenadeComponent.Shoot(firePoint, weaponLevelCountLocal["Grenade"]);
+            } 
+            else if (item.itemName == "Machete")
+            {
+                macheteComponent.Shoot(firePoint, weaponLevelCountLocal["Machete"]);
             }
         }
         

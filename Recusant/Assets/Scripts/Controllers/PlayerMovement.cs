@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         updateMoveSpeedWithSpeedModifier();
         updatePickupRadiusWithPickupRadiusModifier();
         
-        Debug.Log(joystick.Horizontal + " <-horizontal and vertical-> " + joystick.Vertical);
+        //Debug.Log(joystick.Horizontal + " <-horizontal and vertical-> " + joystick.Vertical);
     }
 
     private void FixedUpdate()

@@ -29,7 +29,6 @@ public class ItemPickup : Interactable
     {
         if (item.name == "Mossberg")
         {
-            //gunshot audio
             AudioManager.instance.Play("shotgunPickup");
         } else if (item.name == "Glock")
         {
@@ -37,6 +36,12 @@ public class ItemPickup : Interactable
         } else if (item.name == "LazerGun")
         {
             AudioManager.instance.Play("lazerGunPickup");
+        } else if (item.name == "Machete")
+        {
+            AudioManager.instance.Play("MachetePickup");
+        } else if (item.name == "Grenade")
+        {
+            AudioManager.instance.Play("GrenadePickup");
         }
         
     }
