@@ -16,7 +16,7 @@ public class Lightning : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        
+        IgnoreBulletCollisions();
         lightningDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
     }
 
@@ -45,6 +45,20 @@ public class Lightning : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(lightningDamage);
 
+        }
+    }
+    
+    void IgnoreBulletCollisions()
+    {
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("111");
+        Collider2D projectileCollider = GetComponent<Collider2D>();
+        foreach (GameObject obj in objectsWithTag)
+        {
+            Collider2D collider = obj.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                Physics2D.IgnoreCollision(projectileCollider, collider);
+            }
         }
     }
 }

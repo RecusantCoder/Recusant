@@ -9,16 +9,12 @@ public class Bullet : MonoBehaviour
     public int bulletDamage = 1;
     public int penetrations = 0;
     private float knockBack = 0.1f;
-    
-    private Collider2D bulletCollider;
-    
+
 
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        
-        bulletCollider = GetComponent<Collider2D>();
         IgnoreBulletCollisions();
         
         //Adding damage modifier
@@ -61,12 +57,14 @@ public class Bullet : MonoBehaviour
     
     void IgnoreBulletCollisions()
     {
-        Bullet[] bullets = FindObjectsOfType<Bullet>();
-        foreach (Bullet bullet in bullets)
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("111");
+        Collider2D projectileCollider = GetComponent<Collider2D>();
+        foreach (GameObject obj in objectsWithTag)
         {
-            if (bullet != this)
+            Collider2D collider = obj.GetComponent<Collider2D>();
+            if (collider != null)
             {
-                Physics2D.IgnoreCollision(bulletCollider, bullet.GetComponent<Collider2D>());
+                Physics2D.IgnoreCollision(projectileCollider, collider);
             }
         }
     }

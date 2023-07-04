@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStats playerStats;
     private PlayerStats _playerStats;
 
+    public float lastNonZeroInput;
+
     
     
     
@@ -62,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
         updatePickupRadiusWithPickupRadiusModifier();
         
         //Debug.Log(joystick.Horizontal + " <-horizontal and vertical-> " + joystick.Vertical);
+        if (joystick.Horizontal != 0.00)
+        {
+            lastNonZeroInput = joystick.Horizontal;
+        }
     }
 
     private void FixedUpdate()

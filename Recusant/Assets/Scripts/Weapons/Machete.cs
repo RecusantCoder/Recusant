@@ -11,6 +11,9 @@ public class Machete : Weapon
     protected new float shotFrequency = 1.0f;
     protected new List<float> times = new List<float>();
     protected new List<float> firedList = new List<float>();
+
+    private int slashAudioCounter;
+    
     
     
     public override void Shoot(Transform firePoint, int weaponLevel)
@@ -39,7 +42,28 @@ public class Machete : Weapon
                 firedList[i]++;
 
                 FireShot(firePoint, weaponLevel);
-            
+
+                switch (slashAudioCounter)
+                {
+                    case 0:
+                        AudioManager.instance.Play("Slash1");
+                        break;
+                    case 1:
+                        AudioManager.instance.Play("Slash2");
+                        break;
+                    default:
+                        AudioManager.instance.Play("Slash3");
+                        break;
+                }
+                if (slashAudioCounter < 2)
+                {
+                    slashAudioCounter++;
+                }
+                else
+                {
+                    slashAudioCounter = 0;
+                }
+                
                 times[i] = Time.time;
             }
         }
@@ -55,8 +79,6 @@ public class Machete : Weapon
         Slash slashScript = slash.GetComponent<Slash>();
         slashScript.damage += macheteDamage; // Change the damage amount
         slashScript.firePointLocal = firePoint;
-        slashScript.horizontal = PlayerManager.instance.player.GetComponent<PlayerMovement>().joystick.Horizontal;
-        AudioManager.instance.Play("Slash");
     }
     
     protected override void WeaponLevels(int weaponLevel)

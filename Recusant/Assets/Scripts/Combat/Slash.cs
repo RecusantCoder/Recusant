@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,35 +7,34 @@ public class Slash : MonoBehaviour
 {
     public int damage = 1;
     private float knockBack = 0.1f;
-    
-    private Collider2D slashCollider;
 
     public Transform firePointLocal;
     public float horizontal;
-    
+    private PlayerMovement _playerMovement;
+
 
     private void Start()
     {
+        _playerMovement = PlayerManager.instance.player.GetComponent<PlayerMovement>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        
-        slashCollider = GetComponent<Collider2D>();
         IgnoreBulletCollisions();
         
         //Adding damage modifier
         damage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
-        
+
         StartCoroutine(RotateObject());
         
         Destroy(gameObject, 1f);
     }
-    
+
     private IEnumerator RotateObject()
     {
+        Debug.Log("horizontal " + _playerMovement.lastNonZeroInput);
         Quaternion startRotation = Quaternion.Euler(0f, 0f, 90f);
         Quaternion endRotation = Quaternion.Euler(0f, 0f, -90f);
         
-        if (horizontal <= 0)
+        if (_playerMovement.lastNonZeroInput < 0.00f)
         {
             startRotation = Quaternion.Euler(0f, 180f, 90f);
             endRotation = Quaternion.Euler(0f, 180f, -90f);
@@ -81,14 +81,17 @@ public class Slash : MonoBehaviour
     
     void IgnoreBulletCollisions()
     {
-        Bullet[] bullets = FindObjectsOfType<Bullet>();
-        foreach (Bullet bullet in bullets)
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("111");
+        Collider2D projectileCollider = GetComponent<Collider2D>();
+        foreach (GameObject obj in objectsWithTag)
         {
-            if (bullet != this)
+            Collider2D collider = obj.GetComponent<Collider2D>();
+            if (collider != null)
             {
-                Physics2D.IgnoreCollision(slashCollider, bullet.GetComponent<Collider2D>());
+                Physics2D.IgnoreCollision(projectileCollider, collider);
             }
         }
+        Debug.Log("Ran IgnoreBulletCollisions");
     }
 
 

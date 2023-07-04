@@ -7,20 +7,19 @@ public class ThrownGrenade : MonoBehaviour
 {
     public int grenadeDamage;
     public int penetrations = 0;
-    
-    private Collider2D grenadeCollider;
-    
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Grenade Thrown Started Beginning");
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        
-        grenadeCollider = GetComponent<Collider2D>();
         IgnoreBulletCollisions();
         
         //Adding damage modifier
         grenadeDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        
+        Debug.Log("Grenade Thrown Started End");
         
         Destroy(gameObject, 1f);
     }
@@ -44,33 +43,19 @@ public class ThrownGrenade : MonoBehaviour
         {
             penetrations--;
         }
+        Debug.Log("Collided with " + other.name);
     }
 
     void IgnoreBulletCollisions()
     {
-        Bullet[] bullets = FindObjectsOfType<Bullet>();
-        foreach (Bullet bullet in bullets)
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("111");
+        Collider2D projectileCollider = GetComponent<Collider2D>();
+        foreach (GameObject obj in objectsWithTag)
         {
-            if (bullet != null && bullet != this)
+            Collider2D collider = obj.GetComponent<Collider2D>();
+            if (collider != null)
             {
-                Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
-                if (bulletCollider != null)
-                {
-                    Physics2D.IgnoreCollision(grenadeCollider, bulletCollider);
-                }
-            }
-        }
-    
-        Grenade[] grenades = FindObjectsOfType<Grenade>();
-        foreach (Grenade grenade in grenades)
-        {
-            if (grenade != null && grenade != this)
-            {
-                Collider2D grenadeCollider = grenade.GetComponent<Collider2D>();
-                if (grenadeCollider != null)
-                {
-                    Physics2D.IgnoreCollision(grenadeCollider, grenadeCollider);
-                }
+                Physics2D.IgnoreCollision(projectileCollider, collider);
             }
         }
     }
