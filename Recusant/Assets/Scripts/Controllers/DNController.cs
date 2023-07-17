@@ -35,7 +35,7 @@ public class DNController : MonoBehaviour
 
     public void ShowDamage(float amount)
     {
-        
+
         myTextElement.fontSize = 7f;
         myTextElement.text = amount + "";
 

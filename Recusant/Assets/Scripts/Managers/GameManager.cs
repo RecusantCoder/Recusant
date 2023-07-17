@@ -259,6 +259,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("GAME OVER");
             FindGameOverScreen();
             gameOverScreen.SetActive(true);
+            AssignPauseButton();
+            pauseButton.gameObject.SetActive(false);
             PauseGame();
         }
     }
@@ -275,6 +277,14 @@ public class GameManager : MonoBehaviour
         //Finding GameOverScreen
         GameObject canvas = GameObject.FindWithTag("Canvas");
         Transform gameOverScreenTransform = canvas.transform.Find("GameOverScreen");
+        if (gameOverScreenTransform != null)
+        {
+            Debug.Log("found game over screen");
+        }
+        else
+        {
+            Debug.Log("its null dude");
+        }
         gameOverScreen = gameOverScreenTransform.gameObject;
         gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
         gameOverScreen.SetActive(false);
