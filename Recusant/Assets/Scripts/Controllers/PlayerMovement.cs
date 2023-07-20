@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public Joystick joystick;
     private Vector2 movement;
     public Animator animator;
-    
+    public bool isDegtyarev;
+
     //For interaction system
     public Interactable focus;
     public Transform pickupPoint;
@@ -35,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
         _playerStats = GetComponent<PlayerStats>();
         GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
         joystick = JoyStickObject.GetComponent<FloatingJoystick>();
+        isDegtyarev = true;
+        animator.SetBool("isDegtyarev", true);
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        
 
         Collider2D[] nearItems = Physics2D.OverlapCircleAll(pickupPoint.position, pickupRadius, itemLayers);
         //Debug.Log("Nearby items count: " + nearItems.Length);
@@ -67,7 +71,16 @@ public class PlayerMovement : MonoBehaviour
         if (joystick.Horizontal != 0.00)
         {
             lastNonZeroInput = joystick.Horizontal;
+            if (lastNonZeroInput <= 0.01)
+            {
+                animator.SetBool("isGoingLeft", true);
+            }
+            else
+            {
+                animator.SetBool("isGoingLeft", false);
+            }
         }
+        Debug.Log(lastNonZeroInput);
     }
 
     private void FixedUpdate()
