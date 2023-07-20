@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
     public Animator animator;
     public bool isDegtyarev;
+    public bool isMakwa;
 
     //For interaction system
     public Interactable focus;
@@ -36,8 +37,10 @@ public class PlayerMovement : MonoBehaviour
         _playerStats = GetComponent<PlayerStats>();
         GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
         joystick = JoyStickObject.GetComponent<FloatingJoystick>();
-        isDegtyarev = true;
-        animator.SetBool("isDegtyarev", true);
+        /*isDegtyarev = true;
+        animator.SetBool("isDegtyarev", true);*/
+        isMakwa = true;
+        animator.SetBool("isMakwa", true);
     }
 
     // Update is called once per frame
@@ -80,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isGoingLeft", false);
             }
         }
-        Debug.Log(lastNonZeroInput);
     }
 
     private void FixedUpdate()

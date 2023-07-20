@@ -22,7 +22,7 @@ AssetImportWorker0
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-49439
+50682
 Successfully changed project path to: /Users/goddard/Unity Projects/Recusant/Recusant
 /Users/goddard/Unity Projects/Recusant/Recusant
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -54,11 +54,11 @@ Successfully changed project path to: /Users/goddard/Unity Projects/Recusant/Rec
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [8666357248] Host "[IP] 192.168.0.233 [Port] 0 [Flags] 2 [Guid] 989917134 [EditorId] 989917134 [Version] 1048832 [Id] OSXEditor(0,Nathans-Mac-mini.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [8141676032] Host "[IP] 192.168.0.233 [Port] 0 [Flags] 2 [Guid] 1161254566 [EditorId] 1161254566 [Version] 1048832 [Id] OSXEditor(0,Nathans-Mac-mini.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [8666357248] Host "[IP] 192.168.0.233 [Port] 0 [Flags] 2 [Guid] 989917134 [EditorId] 989917134 [Version] 1048832 [Id] OSXEditor(0,Nathans-Mac-mini.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [8141676032] Host "[IP] 192.168.0.233 [Port] 0 [Flags] 2 [Guid] 1161254566 [EditorId] 1161254566 [Version] 1048832 [Id] OSXEditor(0,Nathans-Mac-mini.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 120.44 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 105.23 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.20f1 (577897200b8b)
 [Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/Resources/UnitySubsystems
@@ -73,84 +73,84 @@ Initialize mono
 Mono path[0] = '/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/Managed'
 Mono path[1] = '/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit-macos'
 Mono config path = '/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56167
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56438
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: /Applications/Unity/Hub/Editor/2021.3.20f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: /Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
 Register platform support module: /Applications/Unity/Hub/Editor/2021.3.20f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.002111 seconds.
+Registered in 0.001473 seconds.
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 [usbmuxd] Send listen message
 Native extension for iOS target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 103.30 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 103.45 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.516 seconds
+- Completed reload, in  0.481 seconds
 Domain Reload Profiling:
-	ReloadAssembly (516ms)
-		BeginReloadAssembly (63ms)
+	ReloadAssembly (481ms)
+		BeginReloadAssembly (51ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (0ms)
-		EndReloadAssembly (397ms)
-			LoadAssemblies (63ms)
+		EndReloadAssembly (376ms)
+			LoadAssemblies (52ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (74ms)
+			SetupTypeCache (67ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (19ms)
-			SetupLoadedEditorAssemblies (276ms)
+			RebuildScriptCaches (18ms)
+			SetupLoadedEditorAssemblies (263ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (57ms)
+				InitializePlatformSupportModulesInManaged (53ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (103ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (91ms)
-				ProcessInitializeOnLoadMethodAttributes (24ms)
+				ProcessInitializeOnLoadAttributes (83ms)
+				ProcessInitializeOnLoadMethodAttributes (23ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.001703 seconds.
+Registered in 0.004960 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image /Users/goddard/Unity Projects/Recusant/Recusant/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image /Users/goddard/Unity Projects/Recusant/Recusant/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll
 Native extension for iOS target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 108.42 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 105.28 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.911 seconds
+- Completed reload, in  0.857 seconds
 Domain Reload Profiling:
-	ReloadAssembly (912ms)
-		BeginReloadAssembly (60ms)
+	ReloadAssembly (857ms)
+		BeginReloadAssembly (61ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (3ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (16ms)
-		EndReloadAssembly (788ms)
-			LoadAssemblies (66ms)
+		EndReloadAssembly (733ms)
+			LoadAssemblies (65ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (195ms)
+			SetupTypeCache (172ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (51ms)
-			SetupLoadedEditorAssemblies (449ms)
+			RebuildScriptCaches (47ms)
+			SetupLoadedEditorAssemblies (423ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (11ms)
+				InitializePlatformSupportModulesInManaged (12ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (108ms)
-				BeforeProcessingInitializeOnLoad (85ms)
-				ProcessInitializeOnLoadAttributes (191ms)
-				ProcessInitializeOnLoadMethodAttributes (51ms)
+				RefreshPlugins (105ms)
+				BeforeProcessingInitializeOnLoad (82ms)
+				ProcessInitializeOnLoadAttributes (174ms)
+				ProcessInitializeOnLoadMethodAttributes (48ms)
 				AfterProcessingInitializeOnLoad (1ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -159,13 +159,13 @@ Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launching external process: /Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/Tools/UnityShaderCompiler
-Launched and connected shader compiler UnityShaderCompiler after 0.15 seconds
-Refreshing native plugins compatible for Editor in 0.65 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.72 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5495 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 60 unused Assets / (1.2 MB). Loaded Objects now: 5944.
-Memory consumption went from 209.7 MB to 208.5 MB.
-Total: 2.930292 ms (FindLiveObjects: 0.203459 ms CreateObjectMapping: 0.073125 ms MarkObjects: 2.363541 ms  DeleteObjects: 0.289375 ms)
+Memory consumption went from 209.8 MB to 208.5 MB.
+Total: 3.061333 ms (FindLiveObjects: 0.173875 ms CreateObjectMapping: 0.068417 ms MarkObjects: 2.516667 ms  DeleteObjects: 0.301833 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -179,55 +179,62 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 10034.882075 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ac0eb77ced69e045ca90d77bab665b0') in 0.537344 seconds 
+  Time since last request: 18138.257461 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaIdle.png
+  artifactKey: Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaIdle.png using Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbacae839921811663ef79b9188cf85f') in 0.082969 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 14.241313 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66f205ffb9691d448346e6ee7e3eeae4') in 0.050101 seconds 
+  Time since last request: 2.639435 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png
+  artifactKey: Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png using Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8a5840cd8f5be6835b90c2d8596f053') in 0.005820 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 26.029424 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bd95c66397230cf1d17ffc97b26f73d') in 0.006395 seconds 
+  Time since last request: 19.135279 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaIdle.png
+  artifactKey: Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaIdle.png using Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44abc34a304bb14b0b459cf3cbcf758a') in 0.006434 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 14.468364 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '831d6195384ef1cc55749cc9fc9782ba') in 0.012790 seconds 
+  Time since last request: 0.000121 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png
+  artifactKey: Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png using Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25cf3beb037ba6acfe1e24f9e32cb946') in 0.006557 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 9.575837 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '183e12c9c66208c0b07361637dc0f80b') in 0.010494 seconds 
+  Time since last request: 7.858506 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaIdle.png
+  artifactKey: Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaIdle.png using Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be37ff408b51fa46ab68ba09aefc5d6a') in 0.003964 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 204.841518 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4408d7f90385ffbf7c8cb82d465d976') in 0.008449 seconds 
+  Time since last request: 8.942471 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaIdle.png
+  artifactKey: Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaIdle.png using Guid(aff1e3b06aef54fd19d32a28d4dd3b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32ba2690eca4a4def1e26cd0ab439402') in 0.009518 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 25.006758 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '072eb529071835e65059ab7525807e7a') in 0.004032 seconds 
+  Time since last request: 8.227656 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaWalk copy.png
+  artifactKey: Guid(b2a44bf9d132e45a2acc8ea915a599bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaWalk copy.png using Guid(b2a44bf9d132e45a2acc8ea915a599bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7da80013bf1646d1c56f6a2851accb9c') in 0.004965 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 4.606576 seconds.
-  path: Assets/Sprites/PlayerCharacters/DegtyarevWalk.png
-  artifactKey: Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/PlayerCharacters/DegtyarevWalk.png using Guid(c55ef7824701c455188a9ce2c8cdbbea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c0a842771879fc06a67d6448c5eaea9') in 0.011752 seconds 
+  Time since last request: 3.981424 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaWalk copy.png
+  artifactKey: Guid(b2a44bf9d132e45a2acc8ea915a599bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaWalk copy.png using Guid(b2a44bf9d132e45a2acc8ea915a599bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '039e5bd9e6e69ea5ee17c5fd54b61ae2') in 0.012124 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 2399.451124 seconds.
-  path: Assets/animations/Degtyarev
-  artifactKey: Guid(b04eb299240fd46c69c560cad0176726) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/animations/Degtyarev using Guid(b04eb299240fd46c69c560cad0176726) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb006ddd1b9f3a432681cea5d4de55db') in 0.004548 seconds 
+  Time since last request: 7.101060 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png
+  artifactKey: Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png using Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f956427e83aed8f9b5ab56c4d1a2484') in 0.003637 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.012984 seconds.
+  path: Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png
+  artifactKey: Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/PlayerCharacters/MakwaWalkLeft.png using Guid(c9d466fe8acc647faa9ef47f4554e444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb64d0aec1fbe476f6d69ac5ebde3433') in 0.011750 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
