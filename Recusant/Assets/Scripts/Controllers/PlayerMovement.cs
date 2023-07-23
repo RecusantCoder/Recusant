@@ -12,8 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public Joystick joystick;
     private Vector2 movement;
     public Animator animator;
-    public bool isDegtyarev;
-    public bool isMakwa;
 
     //For interaction system
     public Interactable focus;
@@ -37,10 +35,7 @@ public class PlayerMovement : MonoBehaviour
         _playerStats = GetComponent<PlayerStats>();
         GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
         joystick = JoyStickObject.GetComponent<FloatingJoystick>();
-        isDegtyarev = true;
-        animator.SetBool("isDegtyarev", true);
-        /*isMakwa = true;
-        animator.SetBool("isMakwa", true);*/
+        CheckChosenName();
     }
 
     // Update is called once per frame
@@ -158,6 +153,20 @@ public class PlayerMovement : MonoBehaviour
         if (pickupRadius != pickupRadiusLocal)
         {
             pickupRadius = pickupRadiusLocal;
+        }
+    }
+
+    private void CheckChosenName()
+    {
+        String chosen = AudioManager.instance.chosenName;
+        if (chosen == "Degtyarev")
+        {
+            animator.SetBool("isDegtyarev", true);
+        }
+
+        if (chosen == "Makwa")
+        {
+            animator.SetBool("isMakwa", true);
         }
     }
 }

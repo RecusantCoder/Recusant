@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public static AudioManager instance;
     
+    //This variable should be moved to a proper instanced and non destroyable
+    public String chosenName;
+    
     
     // Start is called before the first frame update
     void Awake()

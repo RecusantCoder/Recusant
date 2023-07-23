@@ -11,5 +11,6 @@ public class CharacterSelect : MonoBehaviour
     public void SetCharacter()
     {
         Debug.Log(nameText.text + " has been chosen");
+        AudioManager.instance.chosenName = nameText.text;
     }
 }
