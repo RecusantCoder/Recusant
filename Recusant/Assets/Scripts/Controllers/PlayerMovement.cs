@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
         _playerStats = GetComponent<PlayerStats>();
         GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
         joystick = JoyStickObject.GetComponent<FloatingJoystick>();
-        /*isDegtyarev = true;
-        animator.SetBool("isDegtyarev", true);*/
-        isMakwa = true;
-        animator.SetBool("isMakwa", true);
+        isDegtyarev = true;
+        animator.SetBool("isDegtyarev", true);
+        /*isMakwa = true;
+        animator.SetBool("isMakwa", true);*/
     }
 
     // Update is called once per frame
