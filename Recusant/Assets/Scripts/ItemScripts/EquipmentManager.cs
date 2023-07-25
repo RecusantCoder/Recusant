@@ -147,4 +147,7 @@ public class EquipmentManager : MonoBehaviour
       
     }
     
+    public Equipment[] GetCurrentEquipment => currentEquipment;
+    public int[] GetEquipmentLevelsArray() => equipmentLevelsArray;
+
 }

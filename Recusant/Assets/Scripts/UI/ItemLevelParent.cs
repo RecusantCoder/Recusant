@@ -82,6 +82,29 @@ public class ItemLevelParent : MonoBehaviour
                 itemDictionary.Add(i, localWeaponLevelCount[i.itemName]);
             }
         }
+
+        int count = 0;
+        
+        foreach (var e in EquipmentManager.instance.GetCurrentEquipment)
+        {
+            if (EquipmentManager.instance.GetCurrentEquipment[count] != null)
+            {
+                if (itemDictionary.ContainsKey(e))
+                {
+                    if (EquipmentManager.instance.GetEquipmentLevelsArray()[count] == itemDictionary[e])
+                    {
+                        itemDictionary[e] = EquipmentManager.instance.GetEquipmentLevelsArray()[count];
+                    }
+                }
+                else
+                {
+                    itemDictionary.Add(e,
+                        itemDictionary[e] = EquipmentManager.instance.GetEquipmentLevelsArray()[count]);
+                }
+
+                count++;
+            }
+        }
         
         foreach (var j in itemDictionary)
         {
