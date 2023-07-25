@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         _playerStats = GetComponent<PlayerStats>();
         GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
         joystick = JoyStickObject.GetComponent<FloatingJoystick>();
-        CheckChosenName();
+        CheckChoiceManager();
     }
 
     // Update is called once per frame
@@ -156,15 +156,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void CheckChosenName()
+    private void CheckChoiceManager()
     {
-        String chosen = AudioManager.instance.chosenName;
-        if (chosen == "Degtyarev")
+        if (ChoiceManager.instance.chosenName == "Degtyarev")
         {
             animator.SetBool("isDegtyarev", true);
         }
 
-        if (chosen == "Makwa")
+        if (ChoiceManager.instance.chosenName == "Makwa")
         {
             animator.SetBool("isMakwa", true);
         }
