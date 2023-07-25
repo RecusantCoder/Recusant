@@ -167,5 +167,14 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isMakwa", true);
         }
+
+        if (ChoiceManager.instance.chosenWeapon == "MossbergSprite")
+        { 
+            GameObject chosenWeapon = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/Mossberg"), transform.position, transform.rotation);
+        } 
+        else if (ChoiceManager.instance.chosenWeapon == "GlockSprite")
+        {
+            GameObject chosenWeapon = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/Glock"), transform.position, transform.rotation);
+        }
     }
 }
