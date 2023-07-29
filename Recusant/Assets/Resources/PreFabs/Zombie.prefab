@@ -32,7 +32,7 @@ RectTransform:
   m_GameObject: {fileID: 2983177206156312383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5763732838018152404}
@@ -60,6 +60,7 @@ MonoBehaviour:
   moveSpeed: 0.5
   damageRadius: 0.5
   isFlipped: 0
+  isKnockbackActive: 0
 --- !u!114 &457398507777118195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +95,9 @@ MonoBehaviour:
     baseValue: 0
   speed:
     baseValue: 0
-  orbPrefab: {fileID: 4656285219614233988, guid: 18008d2e16f4b422fbc17f2d71b4f712, type: 3}
+  pickupRadius:
+    baseValue: 0
+  orbPrefabsPaths: []
   fadeDuration: 1
   alreadyDied: 0
 --- !u!114 &457398507777118197

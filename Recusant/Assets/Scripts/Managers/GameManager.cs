@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     public int amountToSpawn = 1;
     private bool isPaused = false;
     
-    
     //For timer
     private float timer = 0.0f;
     [SerializeField]
@@ -149,7 +148,7 @@ public class GameManager : MonoBehaviour
         
         if (Mathf.FloorToInt(timer) > 60 && Mathf.FloorToInt(timer) <= 120 && Mathf.FloorToInt(timer) % 2 == 0)
         {
-            for (int i = 0; i < amountToSpawn; i++)
+            for (int i = 0; i < amountToSpawn + 10; i++)
             {
                 SpawnEnemy(zombie);
                 creations++;
@@ -158,7 +157,7 @@ public class GameManager : MonoBehaviour
         
         if (Mathf.FloorToInt(timer) > 120 && Mathf.FloorToInt(timer) <= 180 && Mathf.FloorToInt(timer) % 2 == 0)
         {
-            for (int i = 0; i < amountToSpawn; i++)
+            for (int i = 0; i < amountToSpawn + 20; i++)
             {
                 SpawnEnemy(testingWobble);
                 creations++;
@@ -166,7 +165,7 @@ public class GameManager : MonoBehaviour
         }
         if (Mathf.FloorToInt(timer) > 180 && Mathf.FloorToInt(timer) <= 240 && Mathf.FloorToInt(timer) % 2 == 0)
         {
-            for (int i = 0; i < amountToSpawn; i++)
+            for (int i = 0; i < amountToSpawn + 30; i++)
             {
                 SpawnEnemy(sasquets);
                 creations++;

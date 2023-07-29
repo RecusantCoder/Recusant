@@ -8,6 +8,7 @@ public class Orb : Interactable
     public string thisName;
     private GameObject _player;
     private bool isPickedUp = false;
+    public CircleCollider2D circleCollider;
 
     private void Start()
     {
@@ -33,6 +34,8 @@ public class Orb : Interactable
     {
         Transform playerTransform = _player.transform;
         float speed = 2f; // Adjust the speed at which the object moves towards the player
+
+        circleCollider.enabled = false;
         
         while (Vector3.Distance(transform.position, playerTransform.position) > 0.1f)
         {
