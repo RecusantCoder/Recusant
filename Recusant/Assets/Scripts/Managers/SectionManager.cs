@@ -189,18 +189,51 @@ public class SectionManager : MonoBehaviour
                 
                 // Spawn 10-20 random tilePrefabs within the area of the sectionPrefab
                 int numberOfTilePrefabs = Random.Range(10, 20);
-                for (int i = 0; i < numberOfTilePrefabs; i++)
+                // Make sure you have 9 tilePrefabs in your array
+                int squareSize = 5;
+                for (int row = 0; row < squareSize; row++)
                 {
-                    Debug.Log("Spawning a grass tile!");
-                    //GameObject randomTilePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
-                    GameObject randomTilePrefab = tilePrefabs[0];
-                    GameObject spawnedTilePrefab = Instantiate(randomTilePrefab) as GameObject;
-                    spawnedTilePrefab.transform.SetParent(spawnedSection.transform);
-                    // Set the position of the spawned collidePrefab within the area of the sectionPrefab
-                    Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
-                    spawnedTilePrefab.transform.localPosition = randomPosition;
-                    Debug.Log("Spawned a grass tile!");
+                    for (int col = 0; col < squareSize; col++)
+                    {
+                        int tileIndex = 4; // Default to middle tile (tilePrefabs[4])
+
+                        // Top left corner
+                        if (row == 0 && col == 0)
+                            tileIndex = 0;
+                        // Top right corner
+                        else if (row == 0 && col == squareSize - 1)
+                            tileIndex = 2;
+                        // Bottom left corner
+                        else if (row == squareSize - 1 && col == 0)
+                            tileIndex = 6;
+                        // Bottom right corner
+                        else if (row == squareSize - 1 && col == squareSize - 1)
+                            tileIndex = 8;
+                        // Top tiles
+                        else if (row == 0)
+                            tileIndex = 1;
+                        // Left tiles
+                        else if (col == 0)
+                            tileIndex = 3;
+                        // Right tiles
+                        else if (col == squareSize - 1)
+                            tileIndex = 5;
+                        // Bottom tiles
+                        else if (row == squareSize - 1)
+                            tileIndex = 7;
+
+                        GameObject spawnedTilePrefab = Instantiate(tilePrefabs[tileIndex], spawnedSection.transform);
+
+                        // Set the position of the spawned tilePrefab within the area of the sectionPrefab
+                        float offsetX = (col - (squareSize - 1) / 2f) * 0.32f;
+                        float offsetY = ((squareSize - 1) / 2f - row) * 0.32f; // Invert the row position
+                        Vector2 randomPosition = new Vector2(offsetX + 0.16f, offsetY + 0.16f);
+
+                        spawnedTilePrefab.transform.localPosition = randomPosition;
+                    }
                 }
+
+
             }
 
             spawn = spawnTemp;
