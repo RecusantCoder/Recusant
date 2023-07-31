@@ -27,6 +27,7 @@ public class ObjectPoolManager : MonoBehaviour
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject obj = Instantiate(prefab);
+                obj.transform.SetParent(transform);
                 obj.SetActive(false);
                 objectPool.Add(obj);
             }

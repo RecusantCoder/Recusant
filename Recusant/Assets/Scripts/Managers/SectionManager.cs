@@ -6,6 +6,7 @@ public class SectionManager : MonoBehaviour
 {
     public GameObject[] sectionPrefabs;
     public GameObject[] collidePrefabs;
+    public GameObject[] tilePrefabs;
     private Transform playerTransform;
     private Vector2 spawn = new Vector2(0f, 0f);
     private float sectionLength = 10.24f;
@@ -183,6 +184,22 @@ public class SectionManager : MonoBehaviour
                     // Set the position of the spawned collidePrefab within the area of the sectionPrefab
                     Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
                     spawnedCollidePrefab.transform.localPosition = randomPosition;
+                }
+                
+                
+                // Spawn 10-20 random tilePrefabs within the area of the sectionPrefab
+                int numberOfTilePrefabs = Random.Range(10, 20);
+                for (int i = 0; i < numberOfTilePrefabs; i++)
+                {
+                    Debug.Log("Spawning a grass tile!");
+                    //GameObject randomTilePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
+                    GameObject randomTilePrefab = tilePrefabs[0];
+                    GameObject spawnedTilePrefab = Instantiate(randomTilePrefab) as GameObject;
+                    spawnedTilePrefab.transform.SetParent(spawnedSection.transform);
+                    // Set the position of the spawned collidePrefab within the area of the sectionPrefab
+                    Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
+                    spawnedTilePrefab.transform.localPosition = randomPosition;
+                    Debug.Log("Spawned a grass tile!");
                 }
             }
 
