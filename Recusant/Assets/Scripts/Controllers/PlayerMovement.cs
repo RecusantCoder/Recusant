@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float lastNonZeroInput;
 
+    public ParticleSystem dust;
+
     
     
     
@@ -72,10 +74,12 @@ public class PlayerMovement : MonoBehaviour
             if (lastNonZeroInput <= 0.01)
             {
                 animator.SetBool("isGoingLeft", true);
+                dust.Play();
             }
             else
             {
                 animator.SetBool("isGoingLeft", false);
+                dust.Play();
             }
         }
     }
@@ -87,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         //rotation
         //float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
         //rb.rotation = angle;
+        
+        
     }
     
     /*
