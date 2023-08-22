@@ -42,6 +42,9 @@ public class ItemPickup : Interactable
         } else if (item.name == "Grenade")
         {
             AudioManager.instance.Play("GrenadePickup");
+        } else if (item.name == "Flamethrower")
+        {
+            AudioManager.instance.Play("FlamethrowerPickup");
         }
         
     }
