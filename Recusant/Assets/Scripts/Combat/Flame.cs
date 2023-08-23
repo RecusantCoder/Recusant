@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Flame : MonoBehaviour
 {
-    public int damage = 1;
+    private int _damage = 5;
     private float knockBack = 0.1f;
+    public int duration = 3;
 
     public Transform firePointLocal;
     public float horizontal;
@@ -21,9 +22,15 @@ public class Flame : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        damage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        _damage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
 
         Destroy(gameObject, 1f);
+    }
+
+    public int Damage
+    {
+        get => _damage;
+        set => _damage = value;
     }
 
 
@@ -34,7 +41,7 @@ public class Flame : MonoBehaviour
         //Debug.Log("Collided with " + other.name);
         if (other.transform.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyStats>().TakeDamage(damage);
+            other.gameObject.GetComponent<EnemyStats>().TakeDamage(_damage);
             
             // Calculate the hit direction based on the bullet's position and enemy's position
             Vector2 hitDirection = other.transform.position - transform.position;
@@ -42,9 +49,7 @@ public class Flame : MonoBehaviour
 
             // Apply knockback to the enemy
             other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack);
-            GameObject fireParticlePrefab = Resources.Load<GameObject>("PreFabs/Particles/TinyFlames");
-            GameObject fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
-            fireParticles.transform.SetParent(other.gameObject.transform);
+            other.gameObject.GetComponent<StatusEffectController>().ApplyFireStatusEffect(_damage, duration);
 
         }
         if (other.transform.tag == "Breakable")

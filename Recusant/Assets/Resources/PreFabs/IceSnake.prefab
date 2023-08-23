@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 416875658663941164}
   - component: {fileID: 5395585535646738221}
   - component: {fileID: 760428969345431531}
+  - component: {fileID: 861567209957563658}
   m_Layer: 0
   m_Name: IceSnake
   m_TagString: Enemy
@@ -299,6 +300,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &861567209957563658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482670143085668871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5588f97c7e5b04cf7a835496bf7ed3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireParticlePrefab: {fileID: 3369669701704144115, guid: 049b801931dee4ba3b3e8a8dd1927970, type: 3}
 --- !u!1 &4802189783679820948
 GameObject:
   m_ObjectHideFlags: 0

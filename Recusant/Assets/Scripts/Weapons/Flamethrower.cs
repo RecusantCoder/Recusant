@@ -81,7 +81,9 @@ public class Flamethrower : Weapon
 
         // Get the bullet script component and change its damage amount
         Flame flameScript = flame.GetComponent<Flame>();
-        flameScript.damage += flameDamage; // Change the damage amount
+        Debug.Log("Flame damage before = " + flameScript.Damage);
+        flameScript.Damage = flameScript.Damage += flameDamage;
+        Debug.Log("Flame damage after = " + flameScript.Damage);
         flameScript.firePointLocal = firePoint;
     }
     
