@@ -8,12 +8,13 @@ public class Flamethrower : Weapon
     public float flameSpread = 30f;
 
     protected new int localWeaponlevel;
-    protected new int numOfShots = 10;
+    protected new int numOfShots = 20;
     protected new float shotFrequency = 1.0f;
     protected new List<float> times = new List<float>();
     protected new List<float> firedList = new List<float>();
 
     private int flameAudioCounter;
+    private int shotOffset = 0;
     
     
     
@@ -23,6 +24,7 @@ public class Flamethrower : Weapon
         
         for (int i = 0; i < numOfShots; i++)
         {
+            shotOffset += shotOffset + 5;
             if (times.Capacity < numOfShots)
             {
                 for (int j = 0; j < 100; j++)
@@ -31,7 +33,7 @@ public class Flamethrower : Weapon
                     firedList.Add(0);
                 }
             }
-            float shotFrequency3 = 1.5f + (0.1f * i);
+            float shotFrequency3 = 1.5f + (0.05f * i);
             
             if (firedList[i] > 1)
             {
@@ -42,6 +44,10 @@ public class Flamethrower : Weapon
             {
                 firedList[i]++;
 
+                //Offsetting the firepoint
+                Vector3 offsetFirepoint = firePoint.eulerAngles;
+                offsetFirepoint.z += shotOffset;
+                firePoint.eulerAngles = offsetFirepoint;
                 FireShot(firePoint, weaponLevel);
 
                 switch (flameAudioCounter)
@@ -73,17 +79,14 @@ public class Flamethrower : Weapon
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        Quaternion rotationA = Quaternion.Euler(0f, 0f, Random.Range(-flameSpread, flameSpread));
-        GameObject flame = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Flame"), firePoint.position, firePoint.rotation * rotationA);
+        GameObject flame = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Flame"), firePoint.position, firePoint.rotation);
         Rigidbody2D rb = flame.GetComponent<Rigidbody2D>();
         
         rb.AddForce(flame.transform.up * flameSpeed, ForceMode2D.Impulse);
 
         // Get the bullet script component and change its damage amount
         Flame flameScript = flame.GetComponent<Flame>();
-        Debug.Log("Flame damage before = " + flameScript.Damage);
         flameScript.Damage = flameScript.Damage += flameDamage;
-        Debug.Log("Flame damage after = " + flameScript.Damage);
         flameScript.firePointLocal = firePoint;
     }
     
