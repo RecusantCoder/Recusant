@@ -8,6 +8,7 @@ public class CharacterSelectionManager : MonoBehaviour
 {
     public GameObject buttonPrefab;
     public Transform gridPanel;
+    [SerializeField] public GameObject playbutton;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class CharacterSelectionManager : MonoBehaviour
         text.text = name;
         Image weaponImage = characterSelect.transform.Find("Weapon").GetComponent<Image>();
         weaponImage.sprite = Resources.Load<Sprite>(weaponImagePath);
+        characterSelect.GetComponent<CharacterSelect>().playButton = playbutton;
     }
 }
 

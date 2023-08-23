@@ -10,11 +10,15 @@ public class CharacterSelect : MonoBehaviour
     private TMP_Text nameText;
     [SerializeField]
     private Image weaponImage;
+    
+    public GameObject playButton;
 
     public void SetCharacter()
     {
         Debug.Log(nameText.text + " has been chosen with " + weaponImage.sprite.name);
         ChoiceManager.instance.chosenName = nameText.text;
         ChoiceManager.instance.chosenWeapon = weaponImage.sprite.name;
+        
+        playButton.SetActive(true);
     }
 }
