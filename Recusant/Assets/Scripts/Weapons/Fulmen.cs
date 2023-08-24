@@ -8,14 +8,14 @@ public class Fulmen : Weapon
     
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
-    protected new float shotFrequency = 3.0f;
+    protected new float shotFrequency = 30.0f;
     protected new List<float> times = new List<float>();
     protected new List<float> firedList = new List<float>();
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
         
-        if (Time.time - lastShotTime > 2.0f)
+        if (Time.time - lastShotTime > shotFrequency)
         {
             fulmenLevels(weaponLevel);
             GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, firePoint.rotation);
