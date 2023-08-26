@@ -5,19 +5,35 @@ using UnityEngine;
 public class FlashExplosion : MonoBehaviour
 {
     public int explosionDamage = 0;
-    private float knockBackDuration = 1f;
+    private float knockBackDuration = 10f;
+    public Animator animator;
+    private bool hasPlayedOnce;
+    public GameObject animatorObject;
     
 
     // Start is called before the first frame update
     void Start()
     {
         AudioManager.instance.Play("FlashExplosion");
-
+        hasPlayedOnce = false;
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
         explosionDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
         Destroy(gameObject, 3.0f);
+    }
+    
+    void Update()
+    {
+        if (!hasPlayedOnce && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.25)
+        {
+            hasPlayedOnce = true;
+        }
+
+        if (hasPlayedOnce)
+        {
+            animatorObject.SetActive(false);
+        }
     }
 
     

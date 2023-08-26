@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     private Vector2 movement;
     public float moveSpeed = 5f;
     private Animator animator;
+    private bool hasPlayedOnce;
     
     CharacterCombat combat;
     public float damageRadius = 1f;
@@ -19,6 +20,9 @@ public class EnemyController : MonoBehaviour
 
     private float despawnRadius = 25f;
     private CircleCollider2D CC2D;
+    
+    private Coroutine knockbackCoroutine; 
+    private float moveSpeedMemory = 0;
 
     private void Start()
     {
@@ -28,7 +32,7 @@ public class EnemyController : MonoBehaviour
         combat = GetComponent<CharacterCombat>();
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
-
+        moveSpeedMemory = moveSpeed;
     }
 
     private void Update()
@@ -65,7 +69,14 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isKnockbackActive)
+        {
+            moveSpeed = moveSpeedMemory;
             moveCharacter(movement);
+        }
+        else
+        {
+            moveSpeed = 0;
+        }
     }
 
 
@@ -110,9 +121,18 @@ public class EnemyController : MonoBehaviour
     
     public void ApplyKnockback(Vector2 hitDirection, float knockbackForce, float knockbackDuration)
     {
+        Debug.Log("ApplyKnockback");
+        
         // Disable movement during knockback
         isKnockbackActive = true;
         
+        // If a knockback coroutine is already running, stop it
+        if (knockbackCoroutine != null)
+        {
+            StopCoroutine(knockbackCoroutine);
+        }
+
+
         // Apply the knockback force to the enemy's rigidbody
         rb.AddForce(hitDirection * knockbackForce, ForceMode2D.Impulse);
         
@@ -124,9 +144,17 @@ public class EnemyController : MonoBehaviour
     
     private IEnumerator EnableMovementAfterKnockback(float duration)
     {
+        Debug.Log("EnableMovementAfterKnockback");
+        // Store the original velocity
+        Vector2 originalVelocity = rb.velocity;
+        // Set the velocity to zero to stop any ongoing movement
+        rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(duration); // Adjust this delay based on your preference
         isKnockbackActive = false;
         HitFlash(false);
+        // Restore the original velocity after knockback effect ends
+        rb.velocity = originalVelocity;
+        knockbackCoroutine = null; // Reset the knockbackCoroutine reference
     }
 
     private void HitFlash(bool wasHit)
