@@ -54,6 +54,8 @@ public class Grenade : Weapon
         Rigidbody2D rb = thrownGrenade.GetComponent<Rigidbody2D>();
         rb.AddForce(thrownGrenade.transform.up * throwSpeed, ForceMode2D.Impulse);
         
+        AudioManager.instance.Play("Throw");
+        
         // Apply torque for spinning motion
         float torqueForce = 10f;
         rb.AddTorque(torqueForce, ForceMode2D.Impulse);

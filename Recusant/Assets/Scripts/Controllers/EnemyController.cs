@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(gameObject.transform.position, damageRadius);
     }
     
-    public void ApplyKnockback(Vector2 hitDirection, float knockbackForce)
+    public void ApplyKnockback(Vector2 hitDirection, float knockbackForce, float knockbackDuration)
     {
         // Disable movement during knockback
         isKnockbackActive = true;
@@ -119,12 +119,12 @@ public class EnemyController : MonoBehaviour
         HitFlash(true);
 
         // Enable movement after knockback is complete
-        StartCoroutine(EnableMovementAfterKnockback());
+        StartCoroutine(EnableMovementAfterKnockback(knockbackDuration));
     }
     
-    private IEnumerator EnableMovementAfterKnockback()
+    private IEnumerator EnableMovementAfterKnockback(float duration)
     {
-        yield return new WaitForSeconds(0.25f); // Adjust this delay based on your preference
+        yield return new WaitForSeconds(duration); // Adjust this delay based on your preference
         isKnockbackActive = false;
         HitFlash(false);
     }

@@ -39,7 +39,7 @@ public class ItemPickup : Interactable
         } else if (item.name == "Machete")
         {
             AudioManager.instance.Play("MachetePickup");
-        } else if (item.name == "Grenade")
+        } else if (item.name == "Grenade" || item.name == "Flashbang")
         {
             AudioManager.instance.Play("GrenadePickup");
         } else if (item.name == "Flamethrower")

@@ -17,14 +17,28 @@ public class Fulmen : Weapon
         
         if (Time.time - lastShotTime > shotFrequency)
         {
-            fulmenLevels(weaponLevel);
+            UpdateWeaponBehavior(weaponLevel);
             GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, firePoint.rotation);
             lastShotTime = Time.time;
             AudioManager.instance.Play("lightning");
         }
     }
+    
+    protected override void WeaponLevels(int weaponLevel)
+    {
+        if (localWeaponlevel != weaponLevel && weaponLevel <= 10)
+        {
+            int oldLevel = localWeaponlevel;
+            localWeaponlevel = weaponLevel;
 
-    void fulmenLevels(int weaponLevel)
+            for (int level = oldLevel + 1; level <= localWeaponlevel; level++)
+            {
+                UpdateWeaponBehavior(level);
+            }
+        }
+    }
+
+    void UpdateWeaponBehavior(int weaponLevel)
     {
         switch (weaponLevel)
         {

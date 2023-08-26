@@ -7,6 +7,7 @@ public class Slash : MonoBehaviour
 {
     public int damage = 1;
     private float knockBack = 0.1f;
+    private float knockBackDuration = 0.25f;
 
     public Transform firePointLocal;
     public float horizontal;
@@ -70,7 +71,7 @@ public class Slash : MonoBehaviour
             hitDirection.Normalize();
 
             // Apply knockback to the enemy
-            other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack);
+            other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack, knockBackDuration);
 
         }
         if (other.transform.tag == "Breakable")
