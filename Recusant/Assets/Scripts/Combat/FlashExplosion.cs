@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlashExplosion : MonoBehaviour
 {
     public int explosionDamage = 0;
-    private float knockBackDuration = 10f;
+    private float knockBackDuration = 2f;
     public Animator animator;
     private bool hasPlayedOnce;
     public GameObject animatorObject;
