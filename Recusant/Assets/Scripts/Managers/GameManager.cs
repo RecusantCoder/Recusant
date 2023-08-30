@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public GameObject testingWobble;
     public GameObject iceSnake;
     public GameObject zombie;
+    public GameObject mushroom;
 
     private GameObject joystick;
     private GameObject itemLevels;
@@ -141,7 +142,8 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                SpawnEnemy(iceSnake);
+                //SpawnEnemy(iceSnake);
+                SpawnEnemy(mushroom);
                 creations++;
             }
         }

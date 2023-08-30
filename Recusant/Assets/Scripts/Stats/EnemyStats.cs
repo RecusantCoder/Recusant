@@ -84,6 +84,7 @@ public class EnemyStats : CharacterStats
 
     private IEnumerator FadeOut()
     {
+        Debug.Log("Calling Fade out");
         Color startColor = spriteRenderer.color;
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // Fully transparent color
 
