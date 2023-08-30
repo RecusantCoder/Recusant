@@ -7,6 +7,20 @@ public class StatusEffectController : MonoBehaviour
 {
     public GameObject fireParticlePrefab;
     private Coroutine flameCoroutine;
+    public GameObject slimePuddlePrefab;
+    private Coroutine makeSlimePuddles;
+    private Vector2 lastPosition;
+    public bool isMushroom;
+    
+    private void Start()
+    {
+        lastPosition = transform.position;
+        if (isMushroom)
+        {
+            Debug.Log("I am a mushroom!");
+            ApplySlimePuddlesStatusEffect();
+        }
+    }
     
     // Call this method to apply a fire status effect
     public void ApplyFireStatusEffect(int flameDamage, int flameDuration)
@@ -37,5 +51,36 @@ public class StatusEffectController : MonoBehaviour
 
         // Coroutine finished, reset reference
         flameCoroutine = null;
+    }
+
+    private void ApplySlimePuddlesStatusEffect()
+    {
+        if (makeSlimePuddles != null)
+        {
+            StopCoroutine(makeSlimePuddles);
+        }
+        makeSlimePuddles = StartCoroutine(MakeSlimePuddles());
+    }
+    
+    private IEnumerator MakeSlimePuddles()
+    {
+        while (true)
+        {
+            float distanceMoved = Vector2.Distance(transform.position, lastPosition);
+            if (distanceMoved >= 1.0f)
+            {
+                Debug.Log("Made a Slime Puddle.");
+                // Instantiate a slime puddle prefab at the current enemy position
+                GameObject slimePuddle = Instantiate(slimePuddlePrefab, transform.position, Quaternion.identity);
+                
+                // Destroy the slime puddle after 10 seconds
+                Destroy(slimePuddle, 10.0f);
+
+                // Update the last position
+                lastPosition = transform.position;
+            }
+
+            yield return null; // Wait for the next frame
+        }
     }
 }
