@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     
     private Coroutine knockbackCoroutine; 
     private float moveSpeedMemory = 0;
+    public bool isDead;
 
     private void Start()
     {
@@ -111,7 +112,10 @@ public class EnemyController : MonoBehaviour
 
     void moveCharacter(Vector2 direction)
     {
-        rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
+        if (!isDead)
+        {
+            rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
+        }
     }
     
     private void OnDrawGizmosSelected()

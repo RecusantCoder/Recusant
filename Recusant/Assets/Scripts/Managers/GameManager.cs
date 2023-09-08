@@ -139,19 +139,36 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
+        if (Mathf.FloorToInt(timer) == 120 && Mathf.FloorToInt(timer) % 2 == 0)
+        {
+            SpawnEnemy(mushroom);
+            SpawnEnemy(mushroom);
+            SpawnEnemy(mushroom);
+            SpawnEnemy(mushroom);
+            SpawnEnemy(mushroom);
+        }
+        if (Mathf.FloorToInt(timer) == 60 && Mathf.FloorToInt(timer) % 2 == 0)
+        {
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+        }
+        
         if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
         {
+            amountToSpawn = 1;
             for (int i = 0; i < amountToSpawn; i++)
             {
-                //SpawnEnemy(iceSnake);
-                //SpawnEnemy(mushroom);
-                SpawnEnemy(turtle);
+                SpawnEnemy(iceSnake);
                 creations++;
             }
         }
         
         if (Mathf.FloorToInt(timer) > 60 && Mathf.FloorToInt(timer) <= 120 && Mathf.FloorToInt(timer) % 2 == 0)
         {
+            amountToSpawn = 2;
             for (int i = 0; i < amountToSpawn + 10; i++)
             {
                 SpawnEnemy(zombie);
@@ -161,6 +178,7 @@ public class GameManager : MonoBehaviour
         
         if (Mathf.FloorToInt(timer) > 120 && Mathf.FloorToInt(timer) <= 180 && Mathf.FloorToInt(timer) % 2 == 0)
         {
+            amountToSpawn = 3;
             for (int i = 0; i < amountToSpawn + 20; i++)
             {
                 SpawnEnemy(testingWobble);
@@ -169,6 +187,7 @@ public class GameManager : MonoBehaviour
         }
         if (Mathf.FloorToInt(timer) > 180 && Mathf.FloorToInt(timer) <= 240 && Mathf.FloorToInt(timer) % 2 == 0)
         {
+            amountToSpawn = 4;
             for (int i = 0; i < amountToSpawn + 30; i++)
             {
                 SpawnEnemy(sasquets);

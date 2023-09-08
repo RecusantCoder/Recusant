@@ -77,6 +77,7 @@ public class EnemyStats : CharacterStats
 
             
             _enemyController.moveSpeed = 0;
+            _enemyController.isDead = true;
 
             StartCoroutine(FadeOut());
         }
@@ -121,7 +122,7 @@ public class EnemyStats : CharacterStats
         }
         
         _enemyController.moveSpeed = previousMoveSpeed;
-        
+        _enemyController.isDead = false;
     }
 
 
