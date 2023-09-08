@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     private Coroutine knockbackCoroutine; 
     private float moveSpeedMemory = 0;
     public bool isDead;
+    public bool isTurtle;
 
     private void Start()
     {
@@ -54,6 +55,12 @@ public class EnemyController : MonoBehaviour
                 if (CC2D != null && CC2D.isActiveAndEnabled)
                 {
                     combat.Attack(targetStats);
+                    if (isTurtle)
+                    {
+                        Debug.Log("Creating turtleExplosion");
+                        GameObject turtleExplosion = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/TurtleExplosion"), transform.position, transform.rotation);
+                        isTurtle = false;
+                    }
                 }
             }
         }
