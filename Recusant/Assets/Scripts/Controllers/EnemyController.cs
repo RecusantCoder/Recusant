@@ -60,6 +60,7 @@ public class EnemyController : MonoBehaviour
                         Debug.Log("Creating turtleExplosion");
                         GameObject turtleExplosion = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/TurtleExplosion"), transform.position, transform.rotation);
                         isTurtle = false;
+                        Destroy(gameObject);
                     }
                 }
             }

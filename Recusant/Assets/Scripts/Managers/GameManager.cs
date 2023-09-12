@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public GameObject zombie;
     public GameObject mushroom;
     public GameObject turtle;
+    public GameObject smallplant;
 
     private GameObject joystick;
     private GameObject itemLevels;
@@ -139,13 +140,22 @@ public class GameManager : MonoBehaviour
 
     private void enemySpawnInfo()
     {
+        if (Mathf.FloorToInt(timer) == 6 && Mathf.FloorToInt(timer) % 2 == 0)
+        {
+            SpawnEnemy(smallplant);
+            SpawnEnemy(smallplant);
+            SpawnEnemy(smallplant);
+            SpawnEnemy(smallplant);
+            SpawnEnemy(smallplant);
+        }
+        
         if (Mathf.FloorToInt(timer) == 120 && Mathf.FloorToInt(timer) % 2 == 0)
         {
-            SpawnEnemy(mushroom);
-            SpawnEnemy(mushroom);
-            SpawnEnemy(mushroom);
-            SpawnEnemy(mushroom);
-            SpawnEnemy(mushroom);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
+            SpawnEnemy(turtle);
         }
         if (Mathf.FloorToInt(timer) == 60 && Mathf.FloorToInt(timer) % 2 == 0)
         {
@@ -156,7 +166,7 @@ public class GameManager : MonoBehaviour
             SpawnEnemy(turtle);
         }
         
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
+        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
         {
             amountToSpawn = 1;
             for (int i = 0; i < amountToSpawn; i++)
@@ -193,7 +203,7 @@ public class GameManager : MonoBehaviour
                 SpawnEnemy(sasquets);
                 creations++;
             }
-        }
+        }*/
     }
     
     /*private void SpawnEnemy(GameObject prefab)

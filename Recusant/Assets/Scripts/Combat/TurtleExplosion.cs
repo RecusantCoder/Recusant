@@ -20,7 +20,7 @@ public class TurtleExplosion : MonoBehaviour
         //Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
         //explosionDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject, 1.0f);
     }
     
     void Update()
