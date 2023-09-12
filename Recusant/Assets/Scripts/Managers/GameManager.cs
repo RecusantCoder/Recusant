@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour
         }
     }*/
     
-    private void SpawnEnemy(GameObject prefab)
+    public void SpawnEnemy(GameObject prefab)
     {
         float minDistance = spawnRadiusMin; // Minimum distance from the player
         float maxDistance = spawnRadiusMax; // Maximum distance from the player

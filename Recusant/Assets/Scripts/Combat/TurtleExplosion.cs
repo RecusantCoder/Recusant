@@ -46,6 +46,16 @@ public class TurtleExplosion : MonoBehaviour
             Debug.Log("Turtle Explode!!!");
             other.gameObject.GetComponent<PlayerStats>().TakeDamage(explosionDamage);
         }
+        
+        if (other.transform.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<EnemyStats>().TakeDamage(explosionDamage + 1000);
+            
+            // Calculate the hit direction based on the bullet's position and enemy's position
+            Vector2 hitDirection = other.transform.position - transform.position;
+            hitDirection.Normalize();
+            other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, 0.01f, knockBackDuration);
+        }
     }
     
     void IgnoreBulletCollisions()

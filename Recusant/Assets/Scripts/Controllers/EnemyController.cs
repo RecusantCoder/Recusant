@@ -24,7 +24,6 @@ public class EnemyController : MonoBehaviour
     private Coroutine knockbackCoroutine; 
     private float moveSpeedMemory = 0;
     public bool isDead;
-    public bool isTurtle;
 
     private void Start()
     {
@@ -55,13 +54,7 @@ public class EnemyController : MonoBehaviour
                 if (CC2D != null && CC2D.isActiveAndEnabled)
                 {
                     combat.Attack(targetStats);
-                    if (isTurtle)
-                    {
-                        Debug.Log("Creating turtleExplosion");
-                        GameObject turtleExplosion = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/TurtleExplosion"), transform.position, transform.rotation);
-                        isTurtle = false;
-                        Destroy(gameObject);
-                    }
+                    SpecialActionOnCombat();
                 }
             }
         }
@@ -185,7 +178,25 @@ public class EnemyController : MonoBehaviour
         return distance > despawnRadius;
     }
 
-    
+    private void SpecialActionOnCombat()
+    {
+        if (gameObject.name.Contains("Turtle"))
+        {
+            Debug.Log("Creating turtleExplosion");
+            GameObject turtleExplosion = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/TurtleExplosion"), transform.position, transform.rotation);
+            ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+        }
+        
+        if (gameObject.name.Contains("PlantSmall"))
+        {
+            Debug.Log("I am a small plant, i was hit!");
+        }
+    }
+
+    private void SpecialActionOnDeath()
+    {
+        
+    }
     
     
 
