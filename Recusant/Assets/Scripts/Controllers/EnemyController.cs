@@ -178,7 +178,7 @@ public class EnemyController : MonoBehaviour
         return distance > despawnRadius;
     }
 
-    private void SpecialActionOnCombat()
+    public void SpecialActionOnCombat()
     {
         if (gameObject.name.Contains("Turtle"))
         {
@@ -193,9 +193,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void SpecialActionOnDeath()
+    public void SpecialActionOnDeath()
     {
-        
+        if (gameObject.name.Contains("PlantSmall"))
+        {
+            Debug.Log("Creating PlantMedium");
+            GameManager.instance.SpawnEnemy(GameManager.instance.mediumPlant, gameObject.transform.position);
+        }
     }
     
     

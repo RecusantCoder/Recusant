@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     public GameObject mushroom;
     public GameObject turtle;
     public GameObject smallplant;
+    public GameObject mediumPlant;
 
     private GameObject joystick;
     private GameObject itemLevels;
@@ -274,6 +275,18 @@ public class GameManager : MonoBehaviour
             EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
             enemyStats.ReMade();
             spawnedObject.transform.position = spawnPosition;
+            spawnedObject.SetActive(true);
+        }
+    }
+    
+    public void SpawnEnemy(GameObject prefab, Vector3 position)
+    {
+        GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
+        if (spawnedObject != null)
+        {
+            EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
+            enemyStats.ReMade();
+            spawnedObject.transform.position = position;
             spawnedObject.SetActive(true);
         }
     }

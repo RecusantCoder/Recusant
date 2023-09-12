@@ -101,6 +101,7 @@ public class EnemyStats : CharacterStats
         }
 
         spriteRenderer.color = endColor; // Ensure the final color is set correctly
+        _enemyController.SpecialActionOnDeath();
         ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
     }
 
