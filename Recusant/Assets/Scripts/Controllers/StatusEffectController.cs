@@ -11,6 +11,7 @@ public class StatusEffectController : MonoBehaviour
     private Coroutine makeSlimePuddles;
     private Vector2 lastPosition;
     public bool isMushroom;
+    public bool isOnFire;
     
     private void Start()
     {
@@ -25,12 +26,16 @@ public class StatusEffectController : MonoBehaviour
     // Call this method to apply a fire status effect
     public void ApplyFireStatusEffect(int flameDamage, int flameDuration)
     {
-        // Instantiate the fire particle effect at a fixed local position
-        GameObject fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
+        if (!isOnFire)
+        {
+            // Instantiate the fire particle effect at a fixed local position
+            GameObject fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
 
-        // Attach the fire particle effect to the current game object as a child
-        fireParticles.transform.SetParent(transform);
-        
+            // Attach the fire particle effect to the current game object as a child
+            fireParticles.transform.SetParent(transform);
+            isOnFire = true;
+        }
+
         if (flameCoroutine != null)
         {
             StopCoroutine(flameCoroutine); // Stop previous coroutine if it's still running
@@ -49,6 +54,7 @@ public class StatusEffectController : MonoBehaviour
             elapsedTime += 1f;
         }
 
+        isOnFire = false;
         // Coroutine finished, reset reference
         flameCoroutine = null;
     }

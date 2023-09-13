@@ -31,6 +31,7 @@ public class Shooting : MonoBehaviour
     private Machete macheteComponent;
     private Flamethrower flamethrowerComponent;
     private Flashbang flashbangComponent;
+    private Molotov molotovComponent;
     
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,7 @@ public class Shooting : MonoBehaviour
         macheteComponent = firePoint.gameObject.AddComponent<Machete>();
         flamethrowerComponent = firePoint.gameObject.AddComponent<Flamethrower>();
         flashbangComponent = firePoint.gameObject.AddComponent<Flashbang>();
+        molotovComponent = firePoint.gameObject.AddComponent<Molotov>();
     }
 
     // Update is called once per frame
@@ -101,6 +103,9 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "Flashbang")
             {
                 flashbangComponent.Shoot(firePoint, weaponLevelCountLocal["Flashbang"]);
+            } else if (item.itemName == "Molotov")
+            {
+                molotovComponent.Shoot(firePoint, weaponLevelCountLocal["Molotov"]);
             }
         }
         
