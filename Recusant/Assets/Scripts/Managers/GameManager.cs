@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     public GameObject turtle;
     public GameObject smallplant;
     public GameObject mediumPlant;
+    public GameObject largePlant;
 
     private GameObject joystick;
     private GameObject itemLevels;

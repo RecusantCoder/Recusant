@@ -199,6 +199,10 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Creating PlantMedium");
             GameManager.instance.SpawnEnemy(GameManager.instance.mediumPlant, gameObject.transform.position);
+        } else if (gameObject.name.Contains("PlantMedium"))
+        {
+            Debug.Log("Creating PlantLarge");
+            GameManager.instance.SpawnEnemy(GameManager.instance.largePlant, gameObject.transform.position);
         }
     }
     
