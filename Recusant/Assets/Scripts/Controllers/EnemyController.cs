@@ -38,13 +38,13 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(player.position, transform.position);
-        
+
         FaceTarget();
         FaceTarget2D();
         
         //Debug.Log("Distance: " + distance + " and Radius: " + damageRadius);
 
+        /*float distance = Vector3.Distance(player.position, transform.position);
         if (distance <= damageRadius)
         {
             
@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
                     SpecialActionOnCombat();
                 }
             }
-        }
+        }*/
         
         //If this leaves the Screen bounds, return to Pool
         if (IsOutOfPlayerRadius())
@@ -78,6 +78,17 @@ public class EnemyController : MonoBehaviour
         else
         {
             moveSpeed = 0;
+        }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    { 
+        CharacterStats targetStats = player.GetComponent<CharacterStats>();
+        if (other.transform.tag == "Player")
+        {
+            combat.Attack(targetStats);
+            SpecialActionOnCombat();
+
         }
     }
 

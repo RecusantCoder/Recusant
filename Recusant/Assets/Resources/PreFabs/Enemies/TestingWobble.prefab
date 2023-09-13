@@ -168,6 +168,7 @@ MonoBehaviour:
   damageRadius: 0.15
   isFlipped: 0
   isKnockbackActive: 0
+  isDead: 0
 --- !u!50 &1028925521625565217
 Rigidbody2D:
   serializedVersion: 4
@@ -297,9 +298,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.12
 --- !u!114 &5415841608894587171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireParticlePrefab: {fileID: 3369669701704144115, guid: 049b801931dee4ba3b3e8a8dd1927970, type: 3}
+  slimePuddlePrefab: {fileID: 0}
+  isMushroom: 0
 --- !u!1 &8274819900324923053
 GameObject:
   m_ObjectHideFlags: 0
