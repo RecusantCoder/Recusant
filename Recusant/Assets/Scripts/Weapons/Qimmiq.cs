@@ -18,7 +18,8 @@ public class Qimmiq : Weapon
         if (Time.time - lastShotTime > shotFrequency)
         {
             UpdateWeaponBehavior(weaponLevel);
-            GameObject lightning = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/QimmiqAttack"), firePoint.position, firePoint.rotation);
+            GameObject qimmiqAttack = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/QimmiqAttack"));
+            qimmiqAttack.transform.position = firePoint.position;
             lastShotTime = Time.time;
             AudioManager.instance.Play("SingleBark");
         }
