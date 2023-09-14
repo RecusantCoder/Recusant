@@ -32,6 +32,7 @@ public class Shooting : MonoBehaviour
     private Flamethrower flamethrowerComponent;
     private Flashbang flashbangComponent;
     private Molotov molotovComponent;
+    private Qimmiq qimmiqComponent;
     
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class Shooting : MonoBehaviour
         flamethrowerComponent = firePoint.gameObject.AddComponent<Flamethrower>();
         flashbangComponent = firePoint.gameObject.AddComponent<Flashbang>();
         molotovComponent = firePoint.gameObject.AddComponent<Molotov>();
+        qimmiqComponent = firePoint.gameObject.AddComponent<Qimmiq>();
     }
 
     // Update is called once per frame
@@ -106,6 +108,9 @@ public class Shooting : MonoBehaviour
             } else if (item.itemName == "Molotov")
             {
                 molotovComponent.Shoot(firePoint, weaponLevelCountLocal["Molotov"]);
+            } else if (item.itemName == "Qimmiq")
+            {
+                qimmiqComponent.Shoot(firePoint, weaponLevelCountLocal["Qimmiq"]);
             }
         }
         
