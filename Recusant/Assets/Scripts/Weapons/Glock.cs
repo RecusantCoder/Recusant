@@ -152,7 +152,6 @@ public class Glock : Weapon
                 break;
             case 3:
                 print("Lvl 3 glock");
-                numOfShots++;
                 bulletDamage += 5;
                 break;
             case 4:

@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 1, 15));
     }
 
     public void Restart()
@@ -116,20 +117,7 @@ public class GameManager : MonoBehaviour
     {
         //Timer
         timer += Time.deltaTime;
-        // Check if a second has passed
-        int currentSecond = Mathf.FloorToInt(timer);
-        if (currentSecond != lastSecond)
-        {
-            lastSecond = currentSecond;
-            enemySpawnInfo();
-        }
-        
-        
         timerText.text = timeConvert(timer);
-        /*if (Mathf.FloorToInt(timer) % 1 == 0)
-        {
-            enemySpawnInfo();
-        }*/
     }
 
     private string timeConvert(float time)
@@ -140,35 +128,32 @@ public class GameManager : MonoBehaviour
         return niceTime;
     }
 
+    private IEnumerator SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(GameObject enemy, int startTimeInSeconds, int duration, int interval, int amount)
+    {
+        float startTime = Time.time + startTimeInSeconds; // Calculate the start time.
+        float endTime = startTime + duration; // Calculate the end time.
+    
+        while (Time.time < endTime)
+        {
+            // Calculate the number of active enemies.
+            int activeEnemyCount = ObjectPoolManager.Instance.CountActiveObjectsInPool(enemy);
+        
+            // If the active enemy count is less than the desired amount, spawn more enemies.
+            if (activeEnemyCount < amount)
+            {
+                // Spawn an enemy.
+                SpawnEnemy(enemy);
+            }
+        
+            // Wait for the specified interval before the next spawn.
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
     private void enemySpawnInfo()
     {
-        if (Mathf.FloorToInt(timer) == 6 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            SpawnEnemy(smallplant);
-            SpawnEnemy(smallplant);
-            SpawnEnemy(smallplant);
-            SpawnEnemy(smallplant);
-            SpawnEnemy(smallplant);
-        }
-        
-        if (Mathf.FloorToInt(timer) == 120 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-        }
-        if (Mathf.FloorToInt(timer) == 60 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-            SpawnEnemy(turtle);
-        }
-        
-        /*if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
+
+        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
         {
             amountToSpawn = 1;
             for (int i = 0; i < amountToSpawn; i++)
@@ -205,7 +190,7 @@ public class GameManager : MonoBehaviour
                 SpawnEnemy(sasquets);
                 creations++;
             }
-        }*/
+        }
     }
     
     /*private void SpawnEnemy(GameObject prefab)
@@ -293,10 +278,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
-
-    
     //Managing UI
     public void EndGame()
     {

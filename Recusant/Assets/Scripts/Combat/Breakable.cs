@@ -6,18 +6,11 @@ using UnityEngine;
 public class Breakable : MonoBehaviour
 {
     private Animator animator;
-    public List<string> equipmentPrefabsPaths;
+    public List<GameObject> equipmentPrefabs;
     private bool wasDamaged;
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-        equipmentPrefabsPaths = new List<string>();
-        equipmentPrefabsPaths.Add("PreFabs/Pickups/Helmet");
-        equipmentPrefabsPaths.Add("PreFabs/Pickups/Exolegs");
-        equipmentPrefabsPaths.Add("PreFabs/Pickups/Body_Armor");
-        equipmentPrefabsPaths.Add("PreFabs/Pickups/Targeting_Computer");
-        equipmentPrefabsPaths.Add("PreFabs/Pickups/Haurio");
-
     }
 
     public void Damaged()
@@ -41,7 +34,7 @@ public class Breakable : MonoBehaviour
 
     private void SpawnEquipment()
     {
-        int index = UnityEngine.Random.Range(0, equipmentPrefabsPaths.Count);
-        GameObject equipment = Instantiate(Resources.Load<GameObject>(equipmentPrefabsPaths[index]), transform.position, transform.rotation);
+        int index = UnityEngine.Random.Range(0, equipmentPrefabs.Count);
+        GameObject equipment = Instantiate((equipmentPrefabs[index]), transform.position, transform.rotation);
     }
 }

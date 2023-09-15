@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,11 @@ public class ObjectPoolManager : MonoBehaviour
     {
         Instance = this;
         InitializePools();
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void InitializePools()
@@ -70,5 +76,26 @@ public class ObjectPoolManager : MonoBehaviour
             }
         }
     }
+
+    public int CountActiveObjectsInPool(GameObject prefab)
+    {
+        int count = 0;
+
+        if (objectPools.ContainsKey(prefab))
+        {
+            List<GameObject> objectPool = objectPools[prefab];
+
+            foreach (var obj in objectPool)
+            {
+                if (obj.activeSelf)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
 
 }
