@@ -85,7 +85,36 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 1, 15));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 0.1f, 15));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 1, 50));
+
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 180, 60, 1, 40));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 240, 60, 1, 30));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 240, 60, 1, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 1, 10));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 1, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 360, 60, 1, 20));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 1, 20));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 1, 15));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 1, 80));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 1, 100));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 1, 15));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 540, 60, 1, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 1, 10));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 1, 10));
+
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 1, 300));
     }
 
     public void Restart()
@@ -97,7 +126,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Restart");
         
         player = GameObject.FindWithTag("Player").transform;
-        //GameObject startingItem = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/Mossberg"), player.position, player.rotation);
 
         //Setting up LevelUp Screen
         weaponLevelCount = new Dictionary<string, int>();
@@ -128,12 +156,15 @@ public class GameManager : MonoBehaviour
         return niceTime;
     }
 
-    private IEnumerator SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(GameObject enemy, int startTimeInSeconds, int duration, int interval, int amount)
+    private IEnumerator SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(GameObject enemy, int startTimeInSeconds, int duration, float interval, int amount)
     {
-        float startTime = Time.time + startTimeInSeconds; // Calculate the start time.
-        float endTime = startTime + duration; // Calculate the end time.
-    
-        while (Time.time < endTime)
+        // Wait until the specified start time.
+        while (timer < startTimeInSeconds)
+        {
+            yield return null; // Wait for the next frame.
+        }
+        
+        while (timer <= startTimeInSeconds + duration)
         {
             // Calculate the number of active enemies.
             int activeEnemyCount = ObjectPoolManager.Instance.CountActiveObjectsInPool(enemy);
@@ -150,83 +181,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void enemySpawnInfo()
-    {
-
-        if (Mathf.FloorToInt(timer) > 0 && Mathf.FloorToInt(timer) <= 60 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            amountToSpawn = 1;
-            for (int i = 0; i < amountToSpawn; i++)
-            {
-                SpawnEnemy(iceSnake);
-                creations++;
-            }
-        }
-        
-        if (Mathf.FloorToInt(timer) > 60 && Mathf.FloorToInt(timer) <= 120 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            amountToSpawn = 2;
-            for (int i = 0; i < amountToSpawn + 10; i++)
-            {
-                SpawnEnemy(zombie);
-                creations++;
-            }
-        }
-        
-        if (Mathf.FloorToInt(timer) > 120 && Mathf.FloorToInt(timer) <= 180 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            amountToSpawn = 3;
-            for (int i = 0; i < amountToSpawn + 20; i++)
-            {
-                SpawnEnemy(testingWobble);
-                creations++;
-            }
-        }
-        if (Mathf.FloorToInt(timer) > 180 && Mathf.FloorToInt(timer) <= 240 && Mathf.FloorToInt(timer) % 2 == 0)
-        {
-            amountToSpawn = 4;
-            for (int i = 0; i < amountToSpawn + 30; i++)
-            {
-                SpawnEnemy(sasquets);
-                creations++;
-            }
-        }
-    }
-    
-    /*private void SpawnEnemy(GameObject prefab)
-    {
-        //float radius = 5f;
-        Vector3 randomPos = Random.insideUnitSphere * spawnRadius;
-        randomPos += player.transform.position;
-        randomPos.y = 0f;
-    
-        Vector3 direction = randomPos - player.transform.position;
-        direction.Normalize();
-    
-        float dotProduct = Vector3.Dot(player.transform.forward, direction);
-        float dotProductAngle = Mathf.Acos(dotProduct / player.transform.forward.magnitude * direction.magnitude);
-    
-        randomPos.x = Mathf.Cos(dotProductAngle) * spawnRadius + player.transform.position.x;
-        randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * spawnRadius + player.transform.position.y;
-        randomPos.z = player.transform.position.z;
-    
-        //GameObject go = Instantiate(_spherePrefab, randomPos, Quaternion.identity);
-        //GameObject go = Instantiate(Resources.Load(enemyFilePath, typeof(GameObject)), randomPos, Quaternion.identity) as GameObject;
-
-        //go.transform.position = randomPos;
-        
-        
-        
-        GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
-        if (spawnedObject != null)
-        {
-            EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
-            enemyStats.ReMade();
-            spawnedObject.transform.position = randomPos;
-            spawnedObject.SetActive(true);
-        }
-    }*/
-    
     public void SpawnEnemy(GameObject prefab)
     {
         float minDistance = spawnRadiusMin; // Minimum distance from the player
