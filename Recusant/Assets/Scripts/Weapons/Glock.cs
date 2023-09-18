@@ -22,18 +22,15 @@ public class Glock : Weapon
 
     public void Shoot(Transform firePoint, int weaponLevel, bool enemyNear)
     {
-
         firePointPassed = firePoint;
         weaponLevelPassed = weaponLevel;
-
         if (enemyNear)
         {
             StartFiring();
-            isFiring = true;
         }
-        else
+        if (!enemyNear)
         {
-            StopFiring();
+            Debug.Log("No enemy in range. " + isFiring + " <-is Firing");
         }
     }
     
@@ -45,30 +42,17 @@ public class Glock : Weapon
         }
     }
 
-    public void StopFiring()
-    {
-        if (isFiring)
-        {
-            StopCoroutine(firingCoroutine);
-            isFiring = false;
-        }
-    }
-
     private IEnumerator FireGroups()
     {
         isFiring = true;
-
-        while (isFiring)
-        {
-            for (int i = 0; i < numOfShots; i++)
-            {
-                WeaponLevels(weaponLevelPassed);
-                FireShot(firePointPassed, weaponLevelPassed);
-                yield return new WaitForSeconds(shotDelay);
-            }
-
-            yield return new WaitForSeconds(groupDelay);
+        for (int i = 0; i < numOfShots; i++)
+        { 
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
+            yield return new WaitForSeconds(shotDelay);
         }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
     }
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
