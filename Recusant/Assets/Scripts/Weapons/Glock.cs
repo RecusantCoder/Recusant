@@ -7,53 +7,18 @@ public class Glock : Weapon
 {
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
-    private float lastShotTime1;
     private int bulletDamage = 10;
     private int penetrations = 0;
 
-    private float lastShotTime2;
-    
     private int localWeaponlevel;
     private int numOfShots = 1;
-    private float shotFrequency = 1.0f;
-    //private List<float> times = new List<float>();
-    //private List<float> firedList = new List<float>();
-    
-    public float groupDelay = 1.0f;
+
+    public float groupDelay = 1.2f;
     public float shotDelay = 0.1f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
     private int weaponLevelPassed;
     private Transform firePointPassed;
-
-    /*public override void Shoot(Transform firePoint, int weaponLevel)
-    {
-
-        for (int i = 0; i < numOfShots; i++)
-        {
-            if (times.Count < numOfShots)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            
-                shotFrequency = 1.0f + (0.1f * i);
-
-                if (Time.time - times[i] > shotFrequency)
-            {
-                WeaponLevels(weaponLevel);
-                
-                FireShot(firePoint, weaponLevel);
-                
-                firedList[i]++;
-            
-                times[i] = Time.time;
-            }
-        }
-    }*/
 
     public void Shoot(Transform firePoint, int weaponLevel, bool enemyNear)
     {
@@ -108,8 +73,6 @@ public class Glock : Weapon
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        Debug.Log("firing glock with sf " + shotFrequency + " and numOfShots " + numOfShots + " and level " + localWeaponlevel);
-        
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet2"), firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         
@@ -152,7 +115,7 @@ public class Glock : Weapon
                 break;
             case 3:
                 print("Lvl 3 glock");
-                bulletDamage += 5;
+                groupDelay -= 0.2f;
                 break;
             case 4:
                 print("Lvl 4 glock");
@@ -160,7 +123,7 @@ public class Glock : Weapon
                 break;
             case 5:
                 print("Lvl 5 glock");
-                penetrations++;
+                bulletDamage += 10;
                 break;
             case 6:
                 print("Lvl 6 glock");
@@ -168,12 +131,11 @@ public class Glock : Weapon
                 break;
             case 7:
                 print("Lvl 7 glock");
-                numOfShots++;
-                bulletDamage += 5;
+                penetrations++;
                 break;
             case 8:
                 print("Lvl 8 glock");
-                numOfShots++;
+                bulletDamage += 10;
                 break;
             case 9:
                 print("Lvl 9 glock");
@@ -184,7 +146,7 @@ public class Glock : Weapon
             case 10:
                 print("Lvl 10 glock");
                 numOfShots++;
-                bulletDamage += 50;
+                bulletDamage += 5;
                 penetrations++;
                 break;
             default:
