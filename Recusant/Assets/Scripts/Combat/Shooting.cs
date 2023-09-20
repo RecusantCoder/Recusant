@@ -33,6 +33,12 @@ public class Shooting : MonoBehaviour
     private Flashbang flashbangComponent;
     private Molotov molotovComponent;
     private Qimmiq qimmiqComponent;
+    private Body_Armor bodyArmorComponent;
+    private Exolegs exolegsComponent;
+    private Fleshy fleshyComponent;
+    private Haurio haurioComponent;
+    private Helmet helmetComponent;
+    private Targeting_Computer targetingComputerComponent;
     
     // Start is called before the first frame update
     void Start()
@@ -52,6 +58,12 @@ public class Shooting : MonoBehaviour
         flashbangComponent = firePoint.gameObject.AddComponent<Flashbang>();
         molotovComponent = firePoint.gameObject.AddComponent<Molotov>();
         qimmiqComponent = firePoint.gameObject.AddComponent<Qimmiq>();
+        bodyArmorComponent = firePoint.gameObject.AddComponent<Body_Armor>();
+        exolegsComponent = firePoint.gameObject.AddComponent<Exolegs>();
+        fleshyComponent = firePoint.gameObject.AddComponent<Fleshy>();
+        haurioComponent = firePoint.gameObject.AddComponent<Haurio>();
+        helmetComponent = firePoint.gameObject.AddComponent<Helmet>();
+        targetingComputerComponent = firePoint.gameObject.AddComponent<Targeting_Computer>();
     }
 
     // Update is called once per frame
@@ -105,12 +117,38 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "Flashbang")
             {
                 flashbangComponent.Shoot(firePoint, weaponLevelCountLocal["Flashbang"]);
-            } else if (item.itemName == "Molotov")
+            } 
+            else if (item.itemName == "Molotov")
             {
                 molotovComponent.Shoot(firePoint, weaponLevelCountLocal["Molotov"]);
-            } else if (item.itemName == "Qimmiq")
+            } 
+            else if (item.itemName == "Qimmiq")
             {
                 qimmiqComponent.Shoot(firePoint, weaponLevelCountLocal["Qimmiq"]);
+            } 
+            else if (item.itemName == "Body_Armor")
+            {
+                bodyArmorComponent.Shoot(firePoint, weaponLevelCountLocal["Body_Armor"]);
+            } 
+            else if (item.itemName == "Exolegs")
+            {
+                exolegsComponent.Shoot(firePoint, weaponLevelCountLocal["Exolegs"]);
+            }
+            else if (item.itemName == "Fleshy")
+            {
+                fleshyComponent.Shoot(firePoint, weaponLevelCountLocal["Fleshy"]);
+            }
+            else if (item.itemName == "Haurio")
+            {
+                haurioComponent.Shoot(firePoint, weaponLevelCountLocal["Haurio"]);
+            }
+            else if (item.itemName == "Helmet")
+            {
+                helmetComponent.Shoot(firePoint, weaponLevelCountLocal["Helmet"]);
+            } 
+            else if (item.itemName == "Targeting_Computer")
+            {
+                targetingComputerComponent.Shoot(firePoint, weaponLevelCountLocal["Targeting_Computer"]);
             }
         }
         

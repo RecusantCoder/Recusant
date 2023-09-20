@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public float spawnRadius = 10f;
 
     private PlayerStats playerStats;
-    private PlayerStats _playerStats;
 
     public float lastNonZeroInput;
 
@@ -34,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerStats = GetComponent<PlayerStats>();
+        playerStats = GetComponent<PlayerStats>();
         GameObject JoyStickObject = GameObject.FindWithTag("Joystick");
         joystick = JoyStickObject.GetComponent<FloatingJoystick>();
         CheckChoiceManager();
@@ -87,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     { //Movement
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+        //Debug.Log(moveSpeed + " movespeed");
         
         //rotation
         //float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
@@ -144,17 +144,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void updateMoveSpeedWithSpeedModifier()
     {
-        playerStats = _playerStats;
-        float speed = playerStats.speed.GetValue();
+        float speed = 1;
+        if (playerStats.speed.GetValue() != 1)
+        {
+            speed = (float)playerStats.speed.GetValue() / 10 + 1 - 0.1f;
+        }
         if (moveSpeed != speed)
         {
             moveSpeed = speed;
         }
+        Debug.Log(speed + " <-speed and moveSpeed-> " + moveSpeed);
     }
     
     private void updatePickupRadiusWithPickupRadiusModifier()
     {
-        playerStats = _playerStats;
         float pickupRadiusLocal = playerStats.pickupRadius.GetValue();
         if (pickupRadius != pickupRadiusLocal)
         {

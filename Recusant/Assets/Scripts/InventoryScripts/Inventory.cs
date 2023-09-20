@@ -43,10 +43,11 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (!(item is Equipment) && alreadyInInventory)
+        if (alreadyInInventory)
         {
             //Level up the item instead
             GameManager.instance.LevelSelectedWeapon(item.itemName);
+            Debug.Log("Levelled " + item.itemName);
         }
 
         if (!item.isDefaultItem && !alreadyInInventory)
@@ -64,24 +65,8 @@ public class Inventory : MonoBehaviour
                 {
                     if (!GameManager.instance.weaponLevelCount.ContainsKey(item.itemName))
                     {
-                        if (pickedUp)
-                        {
-                            GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
-                            Debug.Log("Added " + item.itemName + " at level 1");
-                        }
-                    }
-                    else
-                    {
-                        if (pickedUp)
-                        {
-                            GameManager.instance.LevelSelectedWeapon(item.name);
-                            Debug.Log("Levelled " + item.itemName);
-                        }
-                    }
-
-                    if (item is Equipment)
-                    {
-                        item.Use();
+                        GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
+                        Debug.Log("Added " + item.itemName + " at level 1");
                     }
                 }
                 catch (Exception e)
@@ -94,6 +79,11 @@ public class Inventory : MonoBehaviour
                     onItemChangedCallback.Invoke();
             }
             
+        }
+        
+        if (item is Equipment)
+        {
+            item.Use();
         }
 
         return true;
