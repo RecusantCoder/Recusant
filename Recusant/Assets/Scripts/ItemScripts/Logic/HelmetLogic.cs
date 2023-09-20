@@ -9,34 +9,34 @@ public class HelmetLogic : EquipmentLogic
         switch (equipmentLevel)
         {
             case 1:
-                equipment.armorModifier = 5;
+                equipment.armorModifier = 1;
                 break;
             case 2:
-                equipment.armorModifier = 10;
+                equipment.armorModifier = 2;
                 break;
             case 3:
-                equipment.armorModifier = 15;
+                equipment.armorModifier = 3;
                 break;
             case 4:
-                equipment.armorModifier = 20;
+                equipment.armorModifier = 4;
                 break;
             case 5:
-                equipment.armorModifier = 25;
+                equipment.armorModifier = 5;
                 break;
             case 6:
-                equipment.armorModifier = 30;
+                equipment.armorModifier = 6;
                 break;
             case 7:
-                equipment.armorModifier = 35;
+                equipment.armorModifier = 7;
                 break;
             case 8:
-                equipment.armorModifier = 40;
+                equipment.armorModifier = 8;
                 break;
             case 9:
-                equipment.armorModifier = 45;
+                equipment.armorModifier = 9;
                 break;
             case 10:
-                equipment.armorModifier = 50;
+                equipment.armorModifier = 10;
                 break;
             default:
                 Debug.Log("No logic applied to " + equipment.itemName);

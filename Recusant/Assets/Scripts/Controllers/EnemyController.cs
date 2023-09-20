@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 5f;
     private Animator animator;
     private bool hasPlayedOnce;
+    private CharacterStats targetStats;
     
     CharacterCombat combat;
     public float damageRadius = 1f;
@@ -24,12 +25,16 @@ public class EnemyController : MonoBehaviour
     private Coroutine knockbackCoroutine; 
     private float moveSpeedMemory = 0;
     public bool isDead;
+    
+    private bool isTouchingPlayer = false;
+    private float damageTimer = 0f;
+    private float damageInterval = 1f;
 
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         player = PlayerManager.instance.player.transform;
-        
+        targetStats = player.GetComponent<CharacterStats>();
         combat = GetComponent<CharacterCombat>();
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
@@ -42,28 +47,21 @@ public class EnemyController : MonoBehaviour
         FaceTarget();
         FaceTarget2D();
         
-        //Debug.Log("Distance: " + distance + " and Radius: " + damageRadius);
-
-        /*float distance = Vector3.Distance(player.position, transform.position);
-        if (distance <= damageRadius)
+        if (isTouchingPlayer)
         {
-            
-            CharacterStats targetStats = player.GetComponent<CharacterStats>();
-            if (targetStats != null)
+            damageTimer += Time.deltaTime;
+            if (damageTimer >= damageInterval)
             {
-                if (CC2D != null && CC2D.isActiveAndEnabled)
-                {
-                    combat.Attack(targetStats);
-                    SpecialActionOnCombat();
-                }
+                combat.Attack(targetStats);
+                SpecialActionOnCombat();
+                damageTimer = 0f; // Reset the timer
             }
-        }*/
+        }
         
         //If this leaves the Screen bounds, return to Pool
         if (IsOutOfPlayerRadius())
         {
             ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
-            //Debug.Log("return to pool");
         }
         
     }
@@ -80,15 +78,21 @@ public class EnemyController : MonoBehaviour
             moveSpeed = 0;
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D other)
-    { 
-        CharacterStats targetStats = player.GetComponent<CharacterStats>();
+    {
         if (other.transform.tag == "Player")
         {
-            combat.Attack(targetStats);
-            SpecialActionOnCombat();
-
+            isTouchingPlayer = true;
+            damageTimer = 0f;
+        }
+    }
+    
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            isTouchingPlayer = false;
         }
     }
 

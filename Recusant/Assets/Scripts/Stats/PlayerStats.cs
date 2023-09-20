@@ -28,6 +28,7 @@ public class PlayerStats : CharacterStats
         logicMap.Add("Targeting_Computer", new TargetingComputerLogic());
         logicMap.Add("Exolegs", new ExolegsLogic());
         logicMap.Add("Helmet", new HelmetLogic());
+        logicMap.Add("Fleshy", new FleshyLogic());
     }
     
     private void Update()
