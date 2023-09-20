@@ -42,7 +42,7 @@ public class Interactable : MonoBehaviour
             }
         }
         
-        Debug.Log("pickup radius in interactable " + pickupRadius);
+        //Debug.Log("pickup radius in interactable " + pickupRadius);
     }
     
     // Called when the object starts being focused

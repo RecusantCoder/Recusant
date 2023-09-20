@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public float lastNonZeroInput;
 
     public ParticleSystem dust;
+    
 
     
     
@@ -82,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
                 dust.Play();
             }
         }
+        
+        
     }
 
     private void FixedUpdate()
@@ -96,17 +99,6 @@ public class PlayerMovement : MonoBehaviour
         
     }
     
-    /*
-    //if player touches another collider
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        Interactable interactable = col.GetComponent<Interactable>();
-
-        if (interactable != null)
-        {
-            SetFocus(interactable);
-        }
-    }*/
     
     // Set our focus to a new focus
     void SetFocus (Interactable newFocus)
@@ -149,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerStats.speed.GetValue() != 1)
         {
             speed = (float)playerStats.speed.GetValue() / 10 + 1 - 0.1f;
+            speed -= (float)playerStats.weight.GetValue() / 10;
         }
         if (moveSpeed != speed)
         {
@@ -164,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             pickupRadius = pickupRadiusLocal;
         }
         
-        Debug.Log("Pickup radius in playerMovement: " + pickupRadius + " and pickupRadiusLocal: " +  pickupRadiusLocal);
+        //Debug.Log("Pickup radius in playerMovement: " + pickupRadius + " and pickupRadiusLocal: " +  pickupRadiusLocal);
     }
 
     private void CheckChoiceManager()

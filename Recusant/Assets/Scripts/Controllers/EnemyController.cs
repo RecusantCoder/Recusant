@@ -52,6 +52,7 @@ public class EnemyController : MonoBehaviour
             damageTimer += Time.deltaTime;
             if (damageTimer >= damageInterval)
             {
+                gameObject.GetComponent<EnemyStats>().TakeDamage(targetStats.spikeDamage.GetValue());
                 combat.Attack(targetStats);
                 SpecialActionOnCombat();
                 damageTimer = 0f; // Reset the timer

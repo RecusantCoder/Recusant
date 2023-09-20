@@ -14,7 +14,7 @@ public class QimmiqAttack : MonoBehaviour
     public float moveSpeed = 5f;
     private float searchRadius = 4f; 
     private float knockBack = 0.1f;
-    private float knockBackDuration = 0.25f;// Radius to search for enemies
+    private float knockBackDuration = 0.25f;
     public bool isFlipped = false;
     private bool isTouchingEnemy = false;
     private float damageTimer = 0f;
