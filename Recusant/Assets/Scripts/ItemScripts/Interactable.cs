@@ -41,6 +41,8 @@ public class Interactable : MonoBehaviour
                 hasInteracted = true;
             }
         }
+        
+        Debug.Log("pickup radius in interactable " + pickupRadius);
     }
     
     // Called when the object starts being focused
@@ -71,6 +73,6 @@ public class Interactable : MonoBehaviour
     
     private void updatePickupRadiusWithPickupRadiusModifier()
     {
-        pickupRadius = PlayerManager.instance.player.GetComponent<PlayerStats>().pickupRadius.GetValue();
+        pickupRadius = PlayerManager.instance.player.GetComponent<PlayerStats>().pickupRadius.GetValue() * 0.32f + 0.32f;
     }
 }

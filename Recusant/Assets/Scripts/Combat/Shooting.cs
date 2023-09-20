@@ -20,7 +20,7 @@ public class Shooting : MonoBehaviour
     public Dictionary<string, int> weaponLevelCountLocal;
     
     //Autokilling enemies
-    private float searchRadius = 4f; // Radius to search for enemies
+    private float searchRadius = 3f; // Radius to search for enemies
     public Transform autoFirePoint;
 
     private Glock glockComponent;

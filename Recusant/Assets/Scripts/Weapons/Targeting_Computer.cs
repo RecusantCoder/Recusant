@@ -5,7 +5,7 @@ using UnityEngine;
 public class Targeting_Computer : Weapon
 {
     private int localWeaponlevel;
-    
+
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
         WeaponLevels(weaponLevel);

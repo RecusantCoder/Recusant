@@ -41,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { // Input
+    {
+        // Input
         //movement.x = Input.GetAxisRaw("Horizontal");
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;
@@ -153,16 +154,17 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = speed;
         }
-        Debug.Log(speed + " <-speed and moveSpeed-> " + moveSpeed);
     }
     
     private void updatePickupRadiusWithPickupRadiusModifier()
     {
-        float pickupRadiusLocal = playerStats.pickupRadius.GetValue();
+        float pickupRadiusLocal = playerStats.pickupRadius.GetValue() * 0.32f + 0.32f;
         if (pickupRadius != pickupRadiusLocal)
         {
             pickupRadius = pickupRadiusLocal;
         }
+        
+        Debug.Log("Pickup radius in playerMovement: " + pickupRadius + " and pickupRadiusLocal: " +  pickupRadiusLocal);
     }
 
     private void CheckChoiceManager()
