@@ -98,8 +98,7 @@ public class ItemLevelParent : MonoBehaviour
                 }
                 else
                 {
-                    itemDictionary.Add(e,
-                        itemDictionary[e] = EquipmentManager.instance.GetEquipmentLevelsArray()[count]);
+                    itemDictionary.Add(e, itemDictionary[e] = EquipmentManager.instance.GetEquipmentLevelsArray()[count]);
                 }
 
                 count++;

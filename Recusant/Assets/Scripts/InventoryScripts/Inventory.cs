@@ -62,27 +62,24 @@ public class Inventory : MonoBehaviour
 
                 try 
                 {
-                    if (!(item is Equipment))
+                    if (!GameManager.instance.weaponLevelCount.ContainsKey(item.itemName))
                     {
-                        if (!GameManager.instance.weaponLevelCount.ContainsKey(item.itemName))
+                        if (pickedUp)
                         {
-                            if (pickedUp)
-                            {
-                                GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
-                                Debug.Log("Added " + item.itemName + " at level 1");
-                            }
-                        }
-                        else
-                        {
-                            if (pickedUp)
-                            {
-                                GameManager.instance.LevelSelectedWeapon(item.name);
-                                Debug.Log("Levelled " + item.itemName);
-                            }
+                            GameManager.instance.weaponLevelCount.Add(item.itemName, 1);
+                            Debug.Log("Added " + item.itemName + " at level 1");
                         }
                     }
-                
-                    if (item is Equipment && pickedUp)
+                    else
+                    {
+                        if (pickedUp)
+                        {
+                            GameManager.instance.LevelSelectedWeapon(item.name);
+                            Debug.Log("Levelled " + item.itemName);
+                        }
+                    }
+
+                    if (item is Equipment)
                     {
                         item.Use();
                     }

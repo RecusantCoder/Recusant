@@ -30,7 +30,7 @@ public class Glock : Weapon
         }
         if (!enemyNear)
         {
-            Debug.Log("No enemy in range. " + isFiring + " <-is Firing");
+            //Debug.Log("No enemy in range. " + isFiring + " <-is Firing");
         }
     }
     

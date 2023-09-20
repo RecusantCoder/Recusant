@@ -342,6 +342,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        randomWeapons[2] = weaponsList[10];
         return randomWeapons;
     }
     
