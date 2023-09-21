@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int bulletDamage = 1;
+    public int bulletDamage = 0;
     public int penetrations = 0;
     private float knockBack = 0.1f;
     private float knockBackDuration = 0.25f;
@@ -19,7 +19,13 @@ public class Bullet : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        bulletDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        Debug.Log("Bullet damage before changes " + bulletDamage);
+        float damageToPercent = (float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1;
+        Debug.Log("damageToPercent: " + damageToPercent);
+        damageToPercent = bulletDamage * damageToPercent;
+        Debug.Log("damgeToPrct with bullet damage " + damageToPercent);
+        bulletDamage = (int)damageToPercent;
+        Debug.Log("bullet damage final: " + bulletDamage);
         
         Destroy(gameObject, 1f);
     }
