@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Flame : MonoBehaviour
 {
-    private int _damage = 5;
+    private int _damage = 0;
     private float knockBack = 0.1f;
     public int duration = 3;
     private float knockBackDuration = 0.25f;
@@ -23,7 +23,7 @@ public class Flame : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        _damage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        _damage = (int)(_damage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
 
         Destroy(gameObject, 1f);
     }

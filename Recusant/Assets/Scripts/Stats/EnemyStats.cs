@@ -102,7 +102,27 @@ public class EnemyStats : CharacterStats
 
         spriteRenderer.color = endColor; // Ensure the final color is set correctly
         _enemyController.SpecialActionOnDeath();
+        FindAndDestroyAttachedStatusEffects();
         ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+    }
+
+    private void FindAndDestroyAttachedStatusEffects()
+    {
+        string childObjectName = "TinyFlames";
+        
+        // Use Transform.Find to search for the child by name.
+        Transform childTransform = transform.Find(childObjectName);
+
+        // Check if the childTransform is found.
+        if (childTransform != null)
+        {
+            // Destroy the child object.
+            Destroy(childTransform.gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("Child object not found: " + childObjectName);
+        }
     }
 
     public void ReMade() //for being returned from the object pool

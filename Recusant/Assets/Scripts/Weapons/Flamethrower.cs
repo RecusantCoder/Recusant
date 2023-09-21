@@ -3,77 +3,107 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Flamethrower : Weapon
 {
-    private int flameDamage = 1;
-    public float flameSpeed = 5f;
+    private int flameDamage = 10;
+    public float flameSpeed = 2f;
     public float flameSpread = 30f;
 
     protected new int localWeaponlevel;
-    protected new int numOfShots = 20;
-    protected new float shotFrequency = 1.0f;
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    protected new int numOfShots = 3;
+    
+    public float groupDelay = 3.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
 
     private int flameAudioCounter;
     private int shotOffset = 0;
+    private int directionCounter = 0;
     
     
     
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
         
-        for (int i = 0; i < numOfShots; i++)
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        
+        if (!isFiring)
         {
-            shotOffset += shotOffset + 5;
-            if (times.Capacity < numOfShots)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            float shotFrequency3 = 1.5f + (0.05f * i);
-            
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.5f;
-            }
-
-            if (Time.time - times[i] > shotFrequency3)
-            {
-                firedList[i]++;
-
-                //Offsetting the firepoint
-                Vector3 offsetFirepoint = firePoint.eulerAngles;
-                offsetFirepoint.z += shotOffset;
-                firePoint.eulerAngles = offsetFirepoint;
-                FireShot(firePoint, weaponLevel);
-
-                switch (flameAudioCounter)
-                {
-                    case 0:
-                        AudioManager.instance.Play("Flame1");
-                        break;
-                    case 1:
-                        AudioManager.instance.Play("Flame2");
-                        break;
-                    default:
-                        AudioManager.instance.Play("Flame3");
-                        break;
-                }
-                if (flameAudioCounter < 2)
-                {
-                    flameAudioCounter++;
-                }
-                else
-                {
-                    flameAudioCounter = 0;
-                }
-                
-                times[i] = Time.time;
-            }
+            firingCoroutine = StartCoroutine(FireGroups());
         }
+    }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
+        
+        //Offsetting the firepoint
+        shotOffset = 0;
+        Vector3 offsetFirepoint = firePointPassed.eulerAngles;
+        offsetFirepoint.z = SetupFirepointPassed();
+        for (int i = 0; i < numOfShots; i++)
+        { 
+            shotOffset += 1;
+            WeaponLevels(weaponLevelPassed);
+            
+            offsetFirepoint.z += shotOffset;
+            firePointPassed.eulerAngles = offsetFirepoint;
+            FireShot(firePointPassed, weaponLevelPassed);
+
+            switch (flameAudioCounter)
+            {
+                case 0:
+                    AudioManager.instance.Play("Flame1");
+                    break;
+                case 1:
+                    AudioManager.instance.Play("Flame2");
+                    break;
+                default:
+                    AudioManager.instance.Play("Flame3");
+                    break;
+            }
+            if (flameAudioCounter < 2)
+            {
+                flameAudioCounter++;
+            }
+            else
+            {
+                flameAudioCounter = 0;
+            }
+            yield return new WaitForSeconds(shotDelay);
+        }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
+    }
+
+    private int SetupFirepointPassed()
+    {
+        int angle = 0;
+        if (directionCounter == 4)
+        {
+            directionCounter = 0;
+        }
+
+        switch (directionCounter)
+        {
+            case 0:
+                angle = 0;
+                break;
+            case 1:
+                angle = 90;
+                break;
+            case 2:
+                angle = 180;
+                break;
+            case 3:
+                angle = 270;
+                break;
+        }
+
+        directionCounter++;
+        return angle;
     }
     
 
@@ -114,50 +144,47 @@ public class Flamethrower : Weapon
                 break;
             case 2:
                 print("Lvl 2 Flamethrower");
-                flameDamage += 10;
+                flameDamage += 5;
                 numOfShots += 1;
                 break;
             case 3:
                 print("Lvl 3 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
+                flameSpeed += 0.25f;
                 break;
             case 4:
                 print("Lvl 4 Flamethrower");
-                flameDamage += 10;
+                flameDamage += 5;
                 numOfShots += 1;
                 break;
             case 5:
                 print("Lvl 5 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
+                flameSpeed += 0.25f;
                 break;
             case 6:
                 print("Lvl 6 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
                 numOfShots++;
                 break;
             case 7:
                 print("Lvl 7 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
+                flameSpeed += 0.25f;
                 break;
             case 8:
                 print("Lvl 8 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
                 numOfShots++;
                 break;
             case 9:
                 print("Lvl 9 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
+                flameSpeed += 0.25f;
                 break;
             case 10:
                 print("Lvl 10 Flamethrower");
-                flameDamage += 10;
-                numOfShots += 1;
+                flameDamage += 5;
                 numOfShots++;
                 break;
             default:

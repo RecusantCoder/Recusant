@@ -34,6 +34,7 @@ public class StatusEffectController : MonoBehaviour
             // Attach the fire particle effect to the current game object as a child
             fireParticles.transform.SetParent(transform);
             isOnFire = true;
+            Destroy(fireParticles, flameDuration);
         }
 
         if (flameCoroutine != null)

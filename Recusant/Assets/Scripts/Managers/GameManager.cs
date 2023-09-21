@@ -344,7 +344,7 @@ public class GameManager : MonoBehaviour
         }
 
         //For debugging choosing an equipment on levelup
-        randomWeapons[2] = weaponsList[10];
+        //randomWeapons[2] = weaponsList[10];
         
         return randomWeapons;
     }
