@@ -48,11 +48,6 @@ public class QimmiqAttack : MonoBehaviour
         {
         }
 
-        if (!isTouchingEnemy)
-        {
-            //Debug.Log("not touching!");
-        }
-        
         if (isTouchingEnemy && currentEnemy != null)
         {
             damageTimer += Time.deltaTime;
@@ -99,7 +94,6 @@ public class QimmiqAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Entered collider.");
         if (other.transform.tag == "Enemy")
         {
             isTouchingEnemy = true;
@@ -111,7 +105,6 @@ public class QimmiqAttack : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("Exited Collider.");
         if (other.transform.tag == "Enemy")
         {
             isTouchingEnemy = false;
