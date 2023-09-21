@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4025512776923426345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -54.949306, y: 22.76594, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6698706325368052415}
@@ -140,8 +140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDamage: 0
+  knockBackDuration: 0
   animator: {fileID: 1928386463142848802}
   animatorObject: {fileID: 4141504614184944093}
+  flashExplosionRadius: 0
 --- !u!1 &4141504614184944093
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 1144789206249882124, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
       propertyPath: m_Name
       value: SmokeParticles (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1144789206249882124, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1144789206249882130, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
       propertyPath: looping
@@ -497,6 +503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmokeParticles
       objectReference: {fileID: 0}
+    - target: {fileID: 1144789206249882124, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1144789206249882130, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
       propertyPath: looping
       value: 0
@@ -591,11 +601,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1144789206249882131, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.33333334
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1144789206249882131, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 1144789206249882131, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3333333
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 1144789206249882131, guid: b4a0c0b672c204c4cb06c1bf57d75547, type: 3}
       propertyPath: m_LocalPosition.x

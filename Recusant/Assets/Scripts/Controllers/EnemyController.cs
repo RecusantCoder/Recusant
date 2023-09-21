@@ -170,11 +170,15 @@ public class EnemyController : MonoBehaviour
         Vector2 originalVelocity = rb.velocity;
         // Set the velocity to zero to stop any ongoing movement
         rb.velocity = Vector2.zero;
+        // freeze constraints to fully stop it
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(duration); // Adjust this delay based on your preference
         isKnockbackActive = false;
         HitFlash(false);
         // Restore the original velocity after knockback effect ends
         rb.velocity = originalVelocity;
+        // unfreeze constraints
+        rb.constraints = RigidbodyConstraints2D.None;
         knockbackCoroutine = null; // Reset the knockbackCoroutine reference
     }
 

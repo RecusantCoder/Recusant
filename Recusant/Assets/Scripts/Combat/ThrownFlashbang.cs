@@ -6,7 +6,8 @@ public class ThrownFlashbang : MonoBehaviour
 {
     public int grenadeDamage;
     public int penetrations = 0;
-    public int effectRadius = 1;
+    public int effectRadius = 0;
+    public float thrownFlashbangDuration = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class ThrownFlashbang : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        grenadeDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        grenadeDamage = (int)(grenadeDamage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
         
         Debug.Log("Flash Thrown Started End");
         
@@ -28,7 +29,7 @@ public class ThrownFlashbang : MonoBehaviour
     {
         if (other.transform.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyStats>().TakeDamage(grenadeDamage);
+            //other.gameObject.GetComponent<EnemyStats>().TakeDamage(grenadeDamage);
         }
         if (other.transform.tag == "Breakable")
         {
@@ -67,5 +68,7 @@ public class ThrownFlashbang : MonoBehaviour
         //Modify the values on the thrownGrenade
         FlashExplosion explosionScript = explosion.GetComponent<FlashExplosion>();
         explosionScript.explosionDamage = grenadeDamage;
+        explosionScript.flashExplosionRadius += effectRadius;
+        explosionScript.knockBackDuration += thrownFlashbangDuration;
     }
 }

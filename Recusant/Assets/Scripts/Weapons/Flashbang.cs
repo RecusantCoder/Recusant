@@ -9,42 +9,39 @@ public class Flashbang : Weapon
     public float throwSpeed = 10f;
     public int numOfThrows = 1;
     private int penetrations = 0;
-    private int flashRadius = 5;
+    private int flashRadius = 1;
+    private float flashbangDuration = 1.0f;
     
     
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    public float groupDelay = 3.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
-        
-        for (int i = 0; i < numOfThrows; i++)
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        if (!isFiring)
         {
-            if (times.Capacity < numOfThrows)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            float shotFrequency3 = 3.5f + (0.1f * i);
-            
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.5f;
-            }
-
-            if (Time.time - times[i] > shotFrequency3)
-            {
-                firedList[i]++;
-
-                FireShot(firePoint, weaponLevel);
-            
-                times[i] = Time.time;
-            }
+            firingCoroutine = StartCoroutine(FireGroups());
         }
+    }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
+        for (int i = 0; i < numOfThrows; i++)
+        { 
+            Debug.Log("group delay: " + groupDelay);
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
+            yield return new WaitForSeconds(shotDelay);
+        }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
     }
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
@@ -63,7 +60,8 @@ public class Flashbang : Weapon
         
         //Modify the values on the thrownGrenade
         ThrownFlashbang thrownGrenadeScript = thrownGrenade.GetComponent<ThrownFlashbang>();
-        
+        thrownGrenadeScript.thrownFlashbangDuration += flashbangDuration;
+        thrownGrenadeScript.effectRadius += flashRadius;
     }
 
     protected override void WeaponLevels(int weaponLevel)
@@ -86,40 +84,39 @@ public class Flashbang : Weapon
         {
             case 2:
                 print("Lvl 2 flash");
-                flashRadius += 10;
+                flashbangDuration++;
                 break;
             case 3:
                 print("Lvl 3 flash");
-                flashRadius += 10;
+                groupDelay -= 0.5f;
                 break;
             case 4:
                 print("Lvl 4 flash");
-                flashRadius += 10;
+                flashRadius ++;
                 break;
             case 5:
                 print("Lvl 5 flash");
-                flashRadius += 10;
+                flashbangDuration++;
                 break;
             case 6:
                 print("Lvl 6 flash");
-                flashRadius += 10;
+                groupDelay -= 0.5f;
                 break;
             case 7:
                 print("Lvl 7 flash");
-                flashRadius += 10;
+                flashRadius ++;
                 break;
             case 8:
                 print("Lvl 8 flash");
-                flashRadius += 10;
+                flashbangDuration++;
                 break;
             case 9:
                 print("Lvl 9 flash");
-                flashRadius += 10;
+                groupDelay -= 0.5f;
                 break;
             case 10:
                 print("Lvl 10 flash");
-                flashRadius += 10;
-                ;
+                flashRadius ++;
                 break;
             default:
                 print("Default flash.");
