@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class QimmiqAttack : MonoBehaviour
 {
-    private int qimmiqDamage = 50;
+    public int qimmiqDamage = 0;
     private Rigidbody2D rb;
     public Transform targetTransform;
     CharacterCombat combat;
     private CircleCollider2D CC2D;
     private float moveSpeedMemory = 0;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 2f;
     private float searchRadius = 4f; 
     private float knockBack = 0.1f;
     private float knockBackDuration = 0.25f;
     public bool isFlipped = false;
     private bool isTouchingEnemy = false;
     private float damageTimer = 0f;
-    private float damageInterval = 1f;
+    private float damageInterval = 0.5f;
     private GameObject currentEnemy = null; // Store the current enemy.
 
     private void Start()
@@ -26,7 +26,8 @@ public class QimmiqAttack : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        qimmiqDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        qimmiqDamage = (int)(qimmiqDamage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
+        Debug.Log("qimmmiqAttackDamage: " + qimmiqDamage);
         
         rb = this.GetComponent<Rigidbody2D>();
 
@@ -46,18 +47,30 @@ public class QimmiqAttack : MonoBehaviour
         catch (Exception e)
         {
         }
+
+        if (!isTouchingEnemy)
+        {
+            //Debug.Log("not touching!");
+        }
         
         if (isTouchingEnemy && currentEnemy != null)
         {
             damageTimer += Time.deltaTime;
             if (damageTimer >= damageInterval)
             {
-                currentEnemy.GetComponent<EnemyStats>().TakeDamage(qimmiqDamage);
-                // Calculate the hit direction based on the QimmiqAttack's position and enemy's position
-                Vector2 hitDirection = currentEnemy.transform.position - transform.position;
-                hitDirection.Normalize();
-                // Apply knockback to the enemy
-                currentEnemy.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack, knockBackDuration);
+                if (currentEnemy != null)
+                {
+                    currentEnemy.GetComponent<EnemyStats>().TakeDamage(qimmiqDamage);
+                    if (currentEnemy != null)
+                    {
+                        // Calculate the hit direction based on the QimmiqAttack's position and enemy's position
+                        Vector2 hitDirection = currentEnemy.transform.position - transform.position;
+                        hitDirection.Normalize();
+                        // Apply knockback to the enemy
+                        currentEnemy.GetComponent<EnemyController>()
+                            .ApplyKnockback(hitDirection, knockBack, knockBackDuration);
+                    }
+                }
 
                 damageTimer = 0f; // Reset the timer
             }
@@ -73,26 +86,32 @@ public class QimmiqAttack : MonoBehaviour
         }
         catch (Exception e)
         {
+            //Debug.Log("no enemy found");
         }
         if (targetTransform != null)
         {
             Vector2 direction = targetTransform.position - gameObject.transform.position;
+            // Normalize the direction vector to have a length of 1
+            direction.Normalize();
             rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Entered collider.");
         if (other.transform.tag == "Enemy")
         {
             isTouchingEnemy = true;
             damageTimer = 0f;
             currentEnemy = other.gameObject; // Store the current enemy.
+            currentEnemy.GetComponent<EnemyStats>().TakeDamage(qimmiqDamage);
         }
     }
     
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log("Exited Collider.");
         if (other.transform.tag == "Enemy")
         {
             isTouchingEnemy = false;
@@ -122,7 +141,7 @@ public class QimmiqAttack : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            float distance = Vector2.Distance( GameManager.instance.player.position, enemy.transform.position);
             if (distance <= searchRadius && distance < nearestDistance)
             {
                 CircleCollider2D enemyCollider = enemy.GetComponent<CircleCollider2D>();
