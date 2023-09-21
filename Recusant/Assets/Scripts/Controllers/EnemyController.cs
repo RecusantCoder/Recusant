@@ -151,6 +151,7 @@ public class EnemyController : MonoBehaviour
         if (knockbackCoroutine != null)
         {
             StopCoroutine(knockbackCoroutine);
+            knockbackCoroutine = null;
         }
 
 
@@ -160,7 +161,7 @@ public class EnemyController : MonoBehaviour
         HitFlash(true);
 
         // Enable movement after knockback is complete
-        StartCoroutine(EnableMovementAfterKnockback(knockbackDuration));
+        knockbackCoroutine = StartCoroutine(EnableMovementAfterKnockback(knockbackDuration));
     }
     
     private IEnumerator EnableMovementAfterKnockback(float duration)
@@ -177,8 +178,9 @@ public class EnemyController : MonoBehaviour
         HitFlash(false);
         // Restore the original velocity after knockback effect ends
         rb.velocity = originalVelocity;
-        // unfreeze constraints
+        // unfreeze constraints, but keep z constraint
         rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         knockbackCoroutine = null; // Reset the knockbackCoroutine reference
     }
 

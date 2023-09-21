@@ -90,6 +90,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
         StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
         
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 0.1f, 15));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
+        
         StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 1, 50));
 
         StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 180, 60, 1, 40));
