@@ -92,7 +92,7 @@ public class QimmiqAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.transform.tag == "Enemy")
         {
@@ -101,9 +101,14 @@ public class QimmiqAttack : MonoBehaviour
             currentEnemy = other.gameObject; // Store the current enemy.
             currentEnemy.GetComponent<EnemyStats>().TakeDamage(qimmiqDamage);
         }
+
+        if (other.transform.CompareTag("Breakable"))
+        {
+            other.gameObject.GetComponent<Breakable>().Damaged();
+        }
     }
     
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnCollisionExit2D(Collision2D other)
     {
         if (other.transform.tag == "Enemy")
         {
