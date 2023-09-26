@@ -8,13 +8,14 @@ public class Fulmen : Weapon
     protected new int numOfShots = 1;
     
     public float groupDelay = 60.0f;
-    public float shotDelay = 0.1f;
+    public float shotDelay = 1.0f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
     private int weaponLevelPassed;
     private Transform firePointPassed;
 
     private float fulmenChanceToSave = 15.0f;
+    private bool isSafe = false;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
@@ -61,9 +62,9 @@ public class Fulmen : Weapon
     
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, firePoint.rotation);
+        GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, Quaternion.identity);
         Lightning lightningScript = lightning.GetComponent<Lightning>();
-        lightningScript.lightningChanceToSave += fulmenChanceToSave;
+        lightningScript.safeLightning = IsSaved();
         AudioManager.instance.Play("lightning");
     }
     
@@ -130,5 +131,13 @@ public class Fulmen : Weapon
                 break;
         }
         print (" with group delay: " + groupDelay + " and chance: " + fulmenChanceToSave);
+    }
+    
+    bool IsSaved()
+    {
+        int randomNumber = Random.Range(1, 101);
+        bool saved = randomNumber <= fulmenChanceToSave;
+        Debug.Log("randomNumber: " + randomNumber + " chanceToSave: " + fulmenChanceToSave + " IsSaved: " + saved);
+        return saved;
     }
 }

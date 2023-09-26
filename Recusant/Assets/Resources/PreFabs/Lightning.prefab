@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 485164194422322995}
   - component: {fileID: 4938389835261776341}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3615628983889580184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: 3.49, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 9006911600620610190}
   - component: {fileID: 4910721668697170490}
   - component: {fileID: 2855784927190141867}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lightning
   m_TagString: 111
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52afe6bf3afdb4f45b37754eed09f55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creationTime: 1
+  safeLightning: 0
 --- !u!61 &2855784927190141867
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.056344986, y: 1.763648}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -230,5 +230,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 32, y: 32}
   m_EdgeRadius: 0
