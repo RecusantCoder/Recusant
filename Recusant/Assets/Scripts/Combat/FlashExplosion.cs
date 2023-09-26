@@ -21,7 +21,6 @@ public class FlashExplosion : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        explosionDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
         Debug.Log("duration: " + knockBackDuration + " radius: " + flashExplosionRadius);
         Destroy(gameObject, 1.0f);
     }

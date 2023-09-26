@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class ThrownGrenade : MonoBehaviour
 {
-    public int grenadeDamage;
+    public int grenadeDamage = 0;
     public int penetrations = 0;
+    public int thrownGrenadeRadius = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +18,11 @@ public class ThrownGrenade : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        grenadeDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        grenadeDamage = (int)(grenadeDamage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
         
         Debug.Log("Grenade Thrown Started End");
         
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -66,6 +67,7 @@ public class ThrownGrenade : MonoBehaviour
         GameObject explosion = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Explosion"), transform.position, transform.rotation);
         //Modify the values on the thrownGrenade
         Explosion explosionScript = explosion.GetComponent<Explosion>();
-        explosionScript.explosionDamage = grenadeDamage;
+        explosionScript.explosionDamage += grenadeDamage;
+        explosionScript.explosionRadius += thrownGrenadeRadius;
     }
 }

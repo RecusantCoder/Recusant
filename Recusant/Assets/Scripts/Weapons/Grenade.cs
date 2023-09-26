@@ -4,52 +4,49 @@ using UnityEngine;
 
 public class Grenade : Weapon
 {
-    public int damage = 100;
+    public int damage = 10;
     public int localWeaponLevel;
     public float throwSpeed = 10f;
     public int numOfThrows = 1;
     private int penetrations = 0;
+    private int grenadeRadius = 1;
     
     
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    public float groupDelay = 5.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
-        
-        for (int i = 0; i < numOfThrows; i++)
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        if (!isFiring)
         {
-            if (times.Capacity < numOfThrows)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            float shotFrequency3 = 3.5f + (0.1f * i);
-            
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.5f;
-            }
-
-            if (Time.time - times[i] > shotFrequency3)
-            {
-                firedList[i]++;
-
-                FireShot(firePoint, weaponLevel);
-            
-                times[i] = Time.time;
-            }
+            firingCoroutine = StartCoroutine(FireGroups());
         }
+    }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
+        for (int i = 0; i < numOfThrows; i++)
+        { 
+            Debug.Log("group delay: " + groupDelay);
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
+            yield return new WaitForSeconds(shotDelay);
+        }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
     }
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
         Debug.Log("Throwing grenade");
-        Quaternion rotationA = Quaternion.Euler(0f, 0f, 0f);
+        Quaternion rotationA = Quaternion.Euler(0f, 0f, 180f);
         GameObject thrownGrenade = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/ThrownGrenade"), firePoint.position, firePoint.rotation * rotationA);
         Rigidbody2D rb = thrownGrenade.GetComponent<Rigidbody2D>();
         rb.AddForce(thrownGrenade.transform.up * throwSpeed, ForceMode2D.Impulse);
@@ -64,6 +61,7 @@ public class Grenade : Weapon
         ThrownGrenade thrownGrenadeScript = thrownGrenade.GetComponent<ThrownGrenade>();
         thrownGrenadeScript.grenadeDamage += damage;
         thrownGrenadeScript.penetrations += penetrations;
+        thrownGrenadeScript.thrownGrenadeRadius += grenadeRadius;
     }
 
     protected override void WeaponLevels(int weaponLevel)
@@ -95,6 +93,7 @@ public class Grenade : Weapon
             case 4:
                 print("Lvl 4 grenade");
                 damage += 10;
+                grenadeRadius++;
                 break;
             case 5:
                 print("Lvl 5 grenade");
@@ -103,6 +102,7 @@ public class Grenade : Weapon
             case 6:
                 print("Lvl 6 grenade");
                 damage += 10;
+                groupDelay -= 0.5f;
                 break;
             case 7:
                 print("Lvl 7 grenade");
@@ -111,6 +111,7 @@ public class Grenade : Weapon
             case 8:
                 print("Lvl 8 grenade");
                 damage += 10;
+                grenadeRadius++;
                 break;
             case 9:
                 print("Lvl 9 grenade");
@@ -119,7 +120,7 @@ public class Grenade : Weapon
             case 10:
                 print("Lvl 10 grenade");
                 damage += 10;
-                ;
+                groupDelay -= 0.5f;
                 break;
             default:
                 print("Default grenade.");

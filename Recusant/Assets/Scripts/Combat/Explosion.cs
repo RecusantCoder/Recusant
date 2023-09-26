@@ -7,10 +7,12 @@ public class Explosion : MonoBehaviour
     public int explosionDamage = 0;
     private Animator animator;
     private bool hasPlayedOnce;
+    public int explosionRadius = 0;
     
     // Start is called before the first frame update
     void Start()
     {
+        transform.localScale = new Vector3(explosionRadius, explosionRadius, explosionRadius);
         AudioManager.instance.Play("Explosion");
         
         animator = GetComponent<Animator>();
@@ -19,8 +21,7 @@ public class Explosion : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        explosionDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
-        
+
     }
 
     // Update is called once per frame
@@ -44,6 +45,10 @@ public class Explosion : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(explosionDamage);
             
+        }
+        if (other.transform.tag == "Breakable")
+        {
+            other.gameObject.GetComponent<Breakable>().Damaged();
         }
     }
     

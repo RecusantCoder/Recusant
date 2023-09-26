@@ -22,7 +22,7 @@ public class ThrownFlashbang : MonoBehaviour
         
         Debug.Log("Flash Thrown Started End");
         
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
     
     private void OnTriggerEnter2D(Collider2D other)
