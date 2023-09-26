@@ -4,24 +4,67 @@ using UnityEngine;
 
 public class Fulmen : Weapon
 {
-    private float lastShotTime;
-    
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
-    protected new float shotFrequency = 30.0f;
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    
+    public float groupDelay = 60.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
+
+    private float fulmenChanceToSave = 15.0f;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        
-        if (Time.time - lastShotTime > shotFrequency)
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        if (!isFiring)
         {
-            UpdateWeaponBehavior(weaponLevel);
-            GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, firePoint.rotation);
-            lastShotTime = Time.time;
-            AudioManager.instance.Play("lightning");
+            firingCoroutine = StartCoroutine(FireGroups());
         }
+
+        if (weaponLevel > localWeaponlevel)
+        {
+            RestartFiring();
+        }
+    }
+    
+    // Method to stop the current coroutine and start a new one
+    private void RestartFiring()
+    {
+        if (isFiring)
+        {
+            // Stop the current firing coroutine
+            StopCoroutine(firingCoroutine);
+            isFiring = false;
+        }
+
+        // Start a new firing coroutine
+        firingCoroutine = StartCoroutine(FireGroups());
+    }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
+        for (int i = 0; i < numOfShots; i++)
+        { 
+            Debug.Log("group delay: " + groupDelay);
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
+            yield return new WaitForSeconds(shotDelay);
+        }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
+    }
+    
+    protected override void FireShot(Transform firePoint, int weaponLevel)
+    {
+        GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, firePoint.rotation);
+        Lightning lightningScript = lightning.GetComponent<Lightning>();
+        lightningScript.lightningChanceToSave += fulmenChanceToSave;
+        AudioManager.instance.Play("lightning");
     }
     
     protected override void WeaponLevels(int weaponLevel)
@@ -44,37 +87,48 @@ public class Fulmen : Weapon
         {
             case 1:
                 print ("Lvl 1 Fulmen");
+                groupDelay -= 6.0f;
                 break;
             case 2:
                 print ("Lvl 2 Fulmen");
+                fulmenChanceToSave += 10.0f;
                 break;
             case 3:
                 print ("Lvl 3 Fulmen");
+                groupDelay -= 6.0f;
                 break;
             case 4:
                 print ("Lvl 4 Fulmen");
+                fulmenChanceToSave += 10.0f;
                 break;
             case 5:
                 print ("Lvl 5 Fulmen");
+                groupDelay -= 6.0f;
                 break;
             case 6:
                 print ("Lvl 6 Fulmen");
+                fulmenChanceToSave += 10.0f;
                 break;
             case 7:
                 print ("Lvl 7 Fulmen");
+                groupDelay -= 6.0f;
                 break;
             case 8:
                 print ("Lvl 8 Fulmen");
+                fulmenChanceToSave += 10.0f;
                 break;
             case 9:
                 print ("Lvl 9 Fulmen");
+                groupDelay -= 6.0f;
                 break;
             case 10:
                 print ("Lvl 10 Fulmen");
+                fulmenChanceToSave += 10.0f;
                 break;
             default:
                 print ("Default Fulmen.");
                 break;
         }
+        print (" with group delay: " + groupDelay + " and chance: " + fulmenChanceToSave);
     }
 }

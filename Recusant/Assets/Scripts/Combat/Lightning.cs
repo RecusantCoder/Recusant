@@ -2,49 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Lightning : MonoBehaviour
 {
-    private int lightningDamage = 1000;
-    
-    //Timing
-    private float elapsed = 0f;
-    public float creationTime = 1f;
-    private float timePassed = 0f;
-
+    public float lightningChanceToSave = 0.0f;
+    private bool safe;
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        lightningDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        safe = IsSaved();
+        Debug.Log(safe + " <-is safe, chance-> " + lightningChanceToSave);
+        Destroy(gameObject, 0.5f);
     }
 
-    private void Update()
-    {
-        //was using for action every second
-        elapsed += Time.deltaTime;
-        if (elapsed >= 1f)
-        {
-            elapsed = elapsed % 1f;
-            timePassed++;
-            if (timePassed >= creationTime)
-            {
-                Destroy(gameObject);
-                
-                timePassed = 0f;
-            }
-        }
-        
-    }
-    
     private void OnTriggerEnter2D(Collider2D other)
     { 
         //Debug.Log("Collided with " + other.name);
         if (other.transform.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyStats>().TakeDamage(lightningDamage);
-
+            other.gameObject.GetComponent<EnemyStats>().Die();
+        }
+        if (other.transform.tag == "Breakable")
+        {
+            other.gameObject.GetComponent<Breakable>().Damaged();
+        }
+        if (other.transform.tag == "Orb")
+        {
+            if (!safe)
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
     
@@ -61,4 +51,19 @@ public class Lightning : MonoBehaviour
             }
         }
     }
+
+    bool IsSaved()
+    {
+        int randomNumber = Random.Range(1, 101);
+        Debug.Log(randomNumber + " <-rng");
+        if (randomNumber <= lightningChanceToSave)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
 }
