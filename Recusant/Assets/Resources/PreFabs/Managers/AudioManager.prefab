@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4024520914258713090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4024520914258713091}
+  - component: {fileID: 4024520914258713148}
+  - component: {fileID: 5546035483439904893}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4024520914258713091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024520914258713090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4024520914258713148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024520914258713090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a02610f61463463895a91a31b66a567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: pickup
+    clip: {fileID: 8300000, guid: 608ffc57eb412473088fbb5b492835e5, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: DrivingSong1
+    clip: {fileID: 8300000, guid: d5ba5b6a9948a4ad3b4a8cba53f483ee, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 1
+    isMusic: 1
+    source: {fileID: 0}
+  - name: levelup
+    clip: {fileID: 8300000, guid: aa6be84bbae0a4444a461e16dc25fa34, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: lowsound
+    clip: {fileID: 8300000, guid: 5a4a0a873722a495d89a827e12085fe7, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: lightning
+    clip: {fileID: 8300000, guid: ee92b33add252411dae72f3f7b77229f, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: gunshot
+    clip: {fileID: 8300000, guid: 970c5eb13683f4016a7f064245379006, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: shotgunGunshot
+    clip: {fileID: 8300000, guid: fecc3e7a0166a104cb810435f6fdf37b, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: shotgunPickup
+    clip: {fileID: 8300000, guid: af63539a5e39c99489395bdea2471f60, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: pistolPickup
+    clip: {fileID: 8300000, guid: 406c929b7299afb469c82778f8d15d5b, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: pistolGunshot
+    clip: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: lazerGunGunshot
+    clip: {fileID: 8300000, guid: 4d6d816408e48e7428e863203522508f, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: lazerGunPickup
+    clip: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: f0bba60dd1813bd40af826dbaa99b983, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Slash1
+    clip: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
+    volume: 0.105
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: MachetePickup
+    clip: {fileID: 8300000, guid: 80502e18f68bb734b9dded7bb8d2e750, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: GrenadePickup
+    clip: {fileID: 8300000, guid: 705d9285ed4fbf44bb8de3b4f75ff969, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Slash2
+    clip: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: FlamethrowerPickup
+    clip: {fileID: 8300000, guid: ac1cb04ab9cfeb74c8de45aa81c06351, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Slash3
+    clip: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Flame1
+    clip: {fileID: 8300000, guid: b5b38fa9dc40e4742a9ce57bd028c647, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Flame2
+    clip: {fileID: 8300000, guid: b5b38fa9dc40e4742a9ce57bd028c647, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Flame3
+    clip: {fileID: 8300000, guid: b5b38fa9dc40e4742a9ce57bd028c647, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: FlashExplosion
+    clip: {fileID: 8300000, guid: 8b3f676fe7b41044495a2964396b8ba3, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: Throw
+    clip: {fileID: 8300000, guid: 425b173908d24124facd5a0b17af5f52, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: SingleBark
+    clip: {fileID: 8300000, guid: e906558110b8c4cfe9d6b415c87c3234, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - name: DoubleBark
+    clip: {fileID: 8300000, guid: 11882d6709cd54dd981bb4bcb28e53d5, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    isMusic: 0
+    source: {fileID: 0}
+  chosenName: 
+--- !u!114 &5546035483439904893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024520914258713090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee25187c53224a2591e1b5ef3554cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectID: 

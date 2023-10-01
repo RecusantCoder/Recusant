@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour
         Transform levelSlotParent = levelUpScreen.transform.Find("LevelSlotParent");
 
         // Instantiate the LevelSlot prefab as a child of the LevelSlotParent
-        GameObject levelSlotPrefab = Resources.Load<GameObject>("Prefabs/LevelSlot");
+        GameObject levelSlotPrefab = Resources.Load<GameObject>("PreFabs/UI/LevelSlot");
 
         List<Item> threeItems = ThreeRandomItems();
         

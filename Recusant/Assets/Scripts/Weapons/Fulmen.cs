@@ -6,7 +6,7 @@ public class Fulmen : Weapon
 {
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
-    
+
     public float groupDelay = 60.0f;
     public float shotDelay = 1.0f;
     private bool isFiring = false;
@@ -62,7 +62,7 @@ public class Fulmen : Weapon
     
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        GameObject lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), firePoint.position, Quaternion.identity);
+        GameObject lightning = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Lightning"), firePoint.position, Quaternion.identity);
         Lightning lightningScript = lightning.GetComponent<Lightning>();
         lightningScript.safeLightning = IsSaved();
         AudioManager.instance.Play("lightning");

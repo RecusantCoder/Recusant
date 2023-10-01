@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Glock : Weapon
 {
-    public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
     private int bulletDamage = 10;
     private int penetrations = 0;
@@ -57,7 +56,7 @@ public class Glock : Weapon
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        GameObject bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet2"), firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Bullet2"), firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         
         //rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);

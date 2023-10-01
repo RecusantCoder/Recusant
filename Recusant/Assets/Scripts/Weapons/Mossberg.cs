@@ -57,7 +57,7 @@ public class Mossberg : Weapon
         for (int i = 0; i < pellets; i++)
         {
             Quaternion rotationA = Quaternion.Euler(0f, 0f, Random.Range(-pelletSpread, pelletSpread));
-            GameObject pellet = Instantiate(Resources.Load<GameObject>("Prefabs/Pellet"), firePoint.position, firePoint.rotation * rotationA);
+            GameObject pellet = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Pellet"), firePoint.position, firePoint.rotation * rotationA);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
             rb.AddForce(pellet.transform.up * bulletSpeed, ForceMode2D.Impulse);
            
