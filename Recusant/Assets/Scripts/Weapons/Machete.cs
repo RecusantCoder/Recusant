@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Machete : Weapon
 {
-    private int macheteDamage = 15;
-
+    private int macheteDamage = 5;
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
+    
     protected new float shotFrequency = 1.0f;
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    public float groupDelay = 3.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
 
     private int slashAudioCounter;
     
@@ -18,55 +22,46 @@ public class Machete : Weapon
     
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
-        
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        if (!isFiring)
+        {
+            firingCoroutine = StartCoroutine(FireGroups());
+        }
+    }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
         for (int i = 0; i < numOfShots; i++)
         {
-            if (times.Capacity < numOfShots)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            float shotFrequency3 = 1.5f + (0.1f * i);
-            
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.5f;
-            }
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
 
-            if (Time.time - times[i] > shotFrequency3)
+            switch (slashAudioCounter)
             {
-                firedList[i]++;
-
-                FireShot(firePoint, weaponLevel);
-
-                switch (slashAudioCounter)
-                {
-                    case 0:
-                        AudioManager.instance.Play("Slash1");
-                        break;
-                    case 1:
-                        AudioManager.instance.Play("Slash2");
-                        break;
-                    default:
-                        AudioManager.instance.Play("Slash3");
-                        break;
-                }
-                if (slashAudioCounter < 2)
-                {
-                    slashAudioCounter++;
-                }
-                else
-                {
-                    slashAudioCounter = 0;
-                }
-                
-                times[i] = Time.time;
+                case 0:
+                    AudioManager.instance.Play("Slash1");
+                    break;
+                case 1:
+                    AudioManager.instance.Play("Slash2");
+                    break;
+                default:
+                    AudioManager.instance.Play("Slash3");
+                    break;
             }
+            if (slashAudioCounter < 2)
+            {
+                slashAudioCounter++;
+            }
+            else
+            {
+                slashAudioCounter = 0;
+            }
+            yield return new WaitForSeconds(shotDelay);
         }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
     }
     
 
@@ -105,50 +100,38 @@ public class Machete : Weapon
                 break;
             case 2:
                 print("Lvl 2 Machete");
-                macheteDamage += 10;
                 numOfShots += 1;
                 break;
             case 3:
                 print("Lvl 3 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
+                macheteDamage += 5;
                 break;
             case 4:
                 print("Lvl 4 Machete");
-                macheteDamage += 10;
                 numOfShots += 1;
                 break;
             case 5:
                 print("Lvl 5 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
+                macheteDamage += 5;
                 break;
             case 6:
                 print("Lvl 6 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
                 numOfShots++;
                 break;
             case 7:
                 print("Lvl 7 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
+                macheteDamage += 5;
                 break;
             case 8:
                 print("Lvl 8 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
                 numOfShots++;
                 break;
             case 9:
                 print("Lvl 9 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
+                macheteDamage += 5;
                 break;
             case 10:
                 print("Lvl 10 Machete");
-                macheteDamage += 10;
-                numOfShots += 1;
                 numOfShots++;
                 break;
             default:

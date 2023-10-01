@@ -6,22 +6,20 @@ public class ThrownMolotov : MonoBehaviour
 {
     public int grenadeDamage;
     public int penetrations = 0;
-    public int effectRadius = 1;
+    public int effectRadius = 0;
+    public float thrownMolotovDuration = 0;
     private int shotOffset = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Molotov Thrown Started Beginning");
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        
+        /*
         //Adding damage modifier
-        grenadeDamage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
-        
-        Debug.Log("molotov Thrown Started End");
-        
+        grenadeDamage = (int)(grenadeDamage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
+        */
         Destroy(gameObject, 1f);
     }
     

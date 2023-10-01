@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour
 {
-    public int damage = 1;
+    public int damage = 0;
     private float knockBack = 0.1f;
     private float knockBackDuration = 0.25f;
 
@@ -22,11 +22,11 @@ public class Slash : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        damage += PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue();
+        damage = (int)(damage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
 
         StartCoroutine(RotateObject());
         
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
 
     private IEnumerator RotateObject()

@@ -4,51 +4,47 @@ using UnityEngine;
 
 public class Mossberg : Weapon
 {
-    public GameObject bulletPrefab;
     public int pellets = 5;
     public float bulletSpeed = 20f;
     private float pelletSpread = 20f;
-    private int bulletDamage = 10;
+    private int bulletDamage = 5;
     private int penetrations = 0;
     
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
-    protected new float shotFrequency = 2.0f;
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    
+    
+    public float groupDelay = 2.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
     
     
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
-        
-        for (int i = 0; i < numOfShots; i++)
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        if (!isFiring)
         {
-            if (times.Capacity < numOfShots)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            float shotFrequency3 = 1.5f + (0.1f * i);
-            
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.5f;
-            }
-
-            if (Time.time - times[i] > shotFrequency3)
-            {
-                firedList[i]++;
-
-                FireShot(firePoint, weaponLevel);
-            
-                times[i] = Time.time;
-            }
+            firingCoroutine = StartCoroutine(FireGroups());
         }
     }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
+        for (int i = 0; i < numOfShots; i++)
+        {
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
+            yield return new WaitForSeconds(shotDelay);
+        }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
+    }
+
     
 
     protected override void FireShot(Transform firePoint, int weaponLevel)

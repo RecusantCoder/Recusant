@@ -9,41 +9,38 @@ public class Molotov : Weapon
     public float throwSpeed = 10f;
     public int numOfThrows = 1;
     private int penetrations = 0;
-    private int flashRadius = 5;
+    private int molotovRadius = 1;
+    private float molotovDuration = 1.0f;
     
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    public float groupDelay = 3.0f;
+    public float shotDelay = 0.1f;
+    private bool isFiring = false;
+    private Coroutine firingCoroutine;
+    private int weaponLevelPassed;
+    private Transform firePointPassed;
 
+    
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
-        WeaponLevels(weaponLevel);
-        
+        firePointPassed = firePoint;
+        weaponLevelPassed = weaponLevel;
+        if (!isFiring)
+        {
+            firingCoroutine = StartCoroutine(FireGroups());
+        }
+    }
+    
+    private IEnumerator FireGroups()
+    {
+        isFiring = true;
         for (int i = 0; i < numOfThrows; i++)
         {
-            if (times.Capacity < numOfThrows)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    times.Add(0);
-                    firedList.Add(0);
-                }
-            }
-            float shotFrequency3 = 3.5f + (0.1f * i);
-            
-            if (firedList[i] > 1)
-            {
-                shotFrequency3 = 1.5f;
-            }
-
-            if (Time.time - times[i] > shotFrequency3)
-            {
-                firedList[i]++;
-
-                FireShot(firePoint, weaponLevel);
-            
-                times[i] = Time.time;
-            }
+            WeaponLevels(weaponLevelPassed);
+            FireShot(firePointPassed, weaponLevelPassed);
+            yield return new WaitForSeconds(shotDelay);
         }
+        yield return new WaitForSeconds(groupDelay);
+        isFiring = false;
     }
 
     protected override void FireShot(Transform firePoint, int weaponLevel)
@@ -63,6 +60,8 @@ public class Molotov : Weapon
         //Modify the values on the thrownGrenade
         ThrownMolotov thrownGrenadeScript = thrownGrenade.GetComponent<ThrownMolotov>();
         thrownGrenadeScript.grenadeDamage += damage;
+        thrownGrenadeScript.effectRadius += molotovRadius;
+        thrownGrenadeScript.thrownMolotovDuration += molotovRadius;
     }
 
     protected override void WeaponLevels(int weaponLevel)
@@ -85,48 +84,35 @@ public class Molotov : Weapon
         {
             case 2:
                 print("Lvl 2 molotov");
-                flashRadius += 10;
-                damage += 5;
+                molotovRadius++;
                 break;
             case 3:
                 print("Lvl 3 molotov");
-                flashRadius += 10;
-                damage += 5;
                 break;
             case 4:
                 print("Lvl 4 molotov");
-                flashRadius += 10;
-                damage += 5;
+                groupDelay -= 0.5f;
                 break;
             case 5:
                 print("Lvl 5 molotov");
-                flashRadius += 10;
-                damage += 5;
                 break;
             case 6:
                 print("Lvl 6 molotov");
-                flashRadius += 10;
-                damage += 5;
+                molotovRadius++;
                 break;
             case 7:
                 print("Lvl 7 molotov");
-                flashRadius += 10;
-                damage += 5;
                 break;
             case 8:
                 print("Lvl 8 molotov");
-                flashRadius += 10;
-                damage += 5;
+                groupDelay -= 0.5f;
                 break;
             case 9:
                 print("Lvl 9 molotov");
-                flashRadius += 10;
-                damage += 5;
                 break;
             case 10:
                 print("Lvl 10 molotov");
-                flashRadius += 10;
-                damage += 5;
+                molotovRadius++;
                 break;
             default:
                 print("Default molotov.");

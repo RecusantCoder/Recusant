@@ -9,6 +9,7 @@ public class Flame : MonoBehaviour
     private float knockBack = 0.1f;
     public int duration = 3;
     private float knockBackDuration = 0.25f;
+    public int penetrations = 0;
 
     public Transform firePointLocal;
     public float horizontal;
@@ -50,12 +51,21 @@ public class Flame : MonoBehaviour
 
             // Apply knockback to the enemy
             other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack, knockBackDuration);
-            other.gameObject.GetComponent<StatusEffectController>().ApplyFireStatusEffect(_damage, duration);
+            other.gameObject.GetComponent<StatusEffectController>().ApplyFireStatusEffect(_damage/10, duration);
 
         }
         if (other.transform.tag == "Breakable")
         {
             other.gameObject.GetComponent<Breakable>().Damaged();
+        }
+        
+        if (penetrations == 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            penetrations--;
         }
     }
     
