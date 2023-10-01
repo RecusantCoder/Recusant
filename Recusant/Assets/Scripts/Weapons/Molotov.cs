@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Molotov : Weapon
 {
-    public int damage = 0;
+    public int damage = 10;
     public int localWeaponLevel;
-    public float throwSpeed = 10f;
+    public float throwSpeed = 1.0f;
     public int numOfThrows = 1;
     private int penetrations = 0;
     private int molotovRadius = 1;
@@ -88,6 +88,7 @@ public class Molotov : Weapon
                 break;
             case 3:
                 print("Lvl 3 molotov");
+                damage += 10;
                 break;
             case 4:
                 print("Lvl 4 molotov");
@@ -95,6 +96,7 @@ public class Molotov : Weapon
                 break;
             case 5:
                 print("Lvl 5 molotov");
+                damage += 10;
                 break;
             case 6:
                 print("Lvl 6 molotov");
@@ -102,6 +104,7 @@ public class Molotov : Weapon
                 break;
             case 7:
                 print("Lvl 7 molotov");
+                damage += 10;
                 break;
             case 8:
                 print("Lvl 8 molotov");
@@ -109,10 +112,12 @@ public class Molotov : Weapon
                 break;
             case 9:
                 print("Lvl 9 molotov");
+                damage += 10;
                 break;
             case 10:
                 print("Lvl 10 molotov");
                 molotovRadius++;
+                damage += 10;
                 break;
             default:
                 print("Default molotov.");

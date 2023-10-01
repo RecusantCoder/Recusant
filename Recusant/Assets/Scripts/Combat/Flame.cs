@@ -7,7 +7,7 @@ public class Flame : MonoBehaviour
 {
     private int _damage = 0;
     private float knockBack = 0.1f;
-    public int duration = 3;
+    public int duration = 10;
     private float knockBackDuration = 0.25f;
     public int penetrations = 0;
 
@@ -51,7 +51,10 @@ public class Flame : MonoBehaviour
 
             // Apply knockback to the enemy
             other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, knockBack, knockBackDuration);
-            other.gameObject.GetComponent<StatusEffectController>().ApplyFireStatusEffect(_damage/10, duration);
+            
+            // Apply fire damage over time
+            int enemyHealth10Percent = other.gameObject.GetComponent<EnemyStats>().maxHealth / 10;
+            other.gameObject.GetComponent<StatusEffectController>().ApplyFireStatusEffect(enemyHealth10Percent, duration);
 
         }
         if (other.transform.tag == "Breakable")

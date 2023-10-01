@@ -16,16 +16,13 @@ public class ThrownMolotov : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        /*
-        //Adding damage modifier
-        grenadeDamage = (int)(grenadeDamage * ((float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1));
-        */
+
         Destroy(gameObject, 1f);
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.tag == "Enemy")
+        if (other.transform.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(grenadeDamage);
         }
@@ -63,7 +60,7 @@ public class ThrownMolotov : MonoBehaviour
     {
         AudioManager.instance.Play("Flame1");
         Debug.Log("Destroyed ThrownMolotov");
-        for (int i = 0; i < 36; i++)
+        for (int i = 0; i < 12; i++)
         {
             Vector3 offsetFirepoint = gameObject.transform.eulerAngles;
             offsetFirepoint.z += shotOffset;

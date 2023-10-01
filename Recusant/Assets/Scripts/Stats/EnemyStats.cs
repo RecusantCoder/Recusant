@@ -146,6 +146,8 @@ public class EnemyStats : CharacterStats
         _enemyController.isDead = false;
     }
 
+    
+
 
     private void Update()
     {

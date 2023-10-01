@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Flamethrower : Weapon
 {
-    private int flameDamage = 10;
+    private int flameDamage = 1;
     public float flameSpeed = 2f;
     public float flameSpread = 30f;
 
     protected new int localWeaponlevel;
-    protected new int numOfShots = 3;
+    protected new int numOfShots = 10;
     
     public float groupDelay = 3.0f;
     public float shotDelay = 0.1f;
@@ -144,47 +144,47 @@ public class Flamethrower : Weapon
                 break;
             case 2:
                 print("Lvl 2 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 numOfShots += 1;
                 break;
             case 3:
                 print("Lvl 3 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 flameSpeed += 0.25f;
                 break;
             case 4:
                 print("Lvl 4 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 numOfShots += 1;
                 break;
             case 5:
                 print("Lvl 5 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 flameSpeed += 0.25f;
                 break;
             case 6:
                 print("Lvl 6 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 numOfShots++;
                 break;
             case 7:
                 print("Lvl 7 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 flameSpeed += 0.25f;
                 break;
             case 8:
                 print("Lvl 8 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 numOfShots++;
                 break;
             case 9:
                 print("Lvl 9 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 flameSpeed += 0.25f;
                 break;
             case 10:
                 print("Lvl 10 Flamethrower");
-                flameDamage += 5;
+                flameDamage += 1;
                 numOfShots++;
                 break;
             default:
