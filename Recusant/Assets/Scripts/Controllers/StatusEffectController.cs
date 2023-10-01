@@ -12,6 +12,7 @@ public class StatusEffectController : MonoBehaviour
     private Vector2 lastPosition;
     public bool isMushroom;
     public bool isOnFire;
+    private GameObject fireParticles;
     
     private void Start()
     {
@@ -21,6 +22,10 @@ public class StatusEffectController : MonoBehaviour
             Debug.Log("I am a mushroom!");
             ApplySlimePuddlesStatusEffect();
         }
+        
+        fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
+        fireParticles.transform.SetParent(transform);
+        fireParticles.SetActive(false);
     }
     
     // Call this method to apply a fire status effect
@@ -28,11 +33,7 @@ public class StatusEffectController : MonoBehaviour
     {
         if (!isOnFire)
         {
-            // Instantiate the fire particle effect at a fixed local position
-            GameObject fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
-
-            // Attach the fire particle effect to the current game object as a child
-            fireParticles.transform.SetParent(transform);
+            fireParticles.SetActive(true);
             isOnFire = true;
             Destroy(fireParticles, flameDuration);
         }
@@ -56,6 +57,7 @@ public class StatusEffectController : MonoBehaviour
         }
 
         isOnFire = false;
+        fireParticles.SetActive(false);
         // Coroutine finished, reset reference
         flameCoroutine = null;
     }
@@ -89,5 +91,10 @@ public class StatusEffectController : MonoBehaviour
 
             yield return null; // Wait for the next frame
         }
+    }
+
+    private void OnDisable()
+    {
+        fireParticles.SetActive(false);
     }
 }
