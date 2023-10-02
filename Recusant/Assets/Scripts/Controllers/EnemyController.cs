@@ -12,8 +12,8 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private bool hasPlayedOnce;
     private CharacterStats targetStats;
+    private EnemyStats thisEnemyStats;
     
-    CharacterCombat combat;
     public float damageRadius = 1f;
     
     public bool isFlipped = false;
@@ -28,14 +28,14 @@ public class EnemyController : MonoBehaviour
     
     private bool isTouchingPlayer = false;
     private float damageTimer = 0f;
-    private float damageInterval = 1f;
+    private float damageInterval = 0.1f;
 
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         player = PlayerManager.instance.player.transform;
         targetStats = player.GetComponent<CharacterStats>();
-        combat = GetComponent<CharacterCombat>();
+        thisEnemyStats = gameObject.GetComponent<EnemyStats>();
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
         moveSpeedMemory = moveSpeed;
@@ -52,8 +52,8 @@ public class EnemyController : MonoBehaviour
             damageTimer += Time.deltaTime;
             if (damageTimer >= damageInterval)
             {
-                gameObject.GetComponent<EnemyStats>().TakeDamage(targetStats.spikeDamage.GetValue());
-                combat.Attack(targetStats);
+                thisEnemyStats.TakeDamage(targetStats.spikeDamage.GetValue());
+                targetStats.TakeDamage(thisEnemyStats.damage.GetValue());
                 SpecialActionOnCombat();
                 damageTimer = 0f; // Reset the timer
             }

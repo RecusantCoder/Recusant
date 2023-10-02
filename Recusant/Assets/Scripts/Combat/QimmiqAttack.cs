@@ -8,7 +8,6 @@ public class QimmiqAttack : MonoBehaviour
     public int qimmiqDamage = 0;
     private Rigidbody2D rb;
     public Transform targetTransform;
-    CharacterCombat combat;
     private CircleCollider2D CC2D;
     private float moveSpeedMemory = 0;
     public float moveSpeed = 2f;
@@ -30,8 +29,6 @@ public class QimmiqAttack : MonoBehaviour
         Debug.Log("qimmmiqAttackDamage: " + qimmiqDamage);
         
         rb = this.GetComponent<Rigidbody2D>();
-
-        combat = GetComponent<CharacterCombat>();
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
         moveSpeedMemory = moveSpeed;

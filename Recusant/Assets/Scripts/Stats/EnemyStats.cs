@@ -46,7 +46,7 @@ public class EnemyStats : CharacterStats
             int randomNumber = Random.Range(1, 301);
             if (randomNumber > 200)
             {
-                int index = 0;
+                /*int index = 0;
                 if (randomNumber > 250)
                 {
                     index = 1;
@@ -67,6 +67,10 @@ public class EnemyStats : CharacterStats
                     index = 4;
                 }
                 GameObject orb = Instantiate(Resources.Load<GameObject>(orbPrefabsPaths[index]), transform.position, transform.rotation);
+                
+                */
+                
+                GameObject orb = Instantiate(Resources.Load<GameObject>(orbPrefabsPaths[0]), transform.position, transform.rotation);
             }
 
             CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();

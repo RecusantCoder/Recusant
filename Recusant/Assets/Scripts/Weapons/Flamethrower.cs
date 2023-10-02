@@ -89,16 +89,16 @@ public class Flamethrower : Weapon
         switch (directionCounter)
         {
             case 0:
-                angle = 0;
+                angle = 0 -30;
                 break;
             case 1:
-                angle = 90;
+                angle = 90 -30;
                 break;
             case 2:
-                angle = 180;
+                angle = 180 -30;
                 break;
             case 3:
-                angle = 270;
+                angle = 270 -30;
                 break;
         }
 
