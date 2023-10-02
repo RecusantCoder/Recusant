@@ -11,7 +11,7 @@ public class StatusEffectController : MonoBehaviour
     private Coroutine makeSlimePuddles;
     private Vector2 lastPosition;
     public bool isMushroom;
-    public bool isOnFire;
+    public bool isBurning;
     private GameObject fireParticles;
     
     private void Start()
@@ -23,19 +23,18 @@ public class StatusEffectController : MonoBehaviour
             ApplySlimePuddlesStatusEffect();
         }
         
-        fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
-        fireParticles.transform.SetParent(transform);
-        fireParticles.SetActive(false);
     }
-    
+
     // Call this method to apply a fire status effect
     public void ApplyFireStatusEffect(int flameDamage, int flameDuration)
     {
-        if (!isOnFire)
+        if (!isBurning)
         {
-            fireParticles.SetActive(true);
-            isOnFire = true;
-            Destroy(fireParticles, flameDuration);
+            // Instantiate the fire particle effect at a fixed local position
+            fireParticles = Instantiate(fireParticlePrefab, transform.position, Quaternion.identity);
+            // Attach the fire particle effect to the current game object as a child
+            fireParticles.transform.SetParent(transform);
+            isBurning = true;
         }
 
         if (flameCoroutine != null)
@@ -45,7 +44,7 @@ public class StatusEffectController : MonoBehaviour
         flameCoroutine = StartCoroutine(ApplyFlameDamage(flameDamage, flameDuration));
 
     }
-    
+
     private IEnumerator ApplyFlameDamage(int damage, float duration)
     {
         float elapsedTime = 0f;
@@ -56,11 +55,13 @@ public class StatusEffectController : MonoBehaviour
             elapsedTime += 1f;
         }
 
-        isOnFire = false;
-        fireParticles.SetActive(false);
+        isBurning = false;
+        Destroy(fireParticles);
         // Coroutine finished, reset reference
         flameCoroutine = null;
     }
+
+    
 
     private void ApplySlimePuddlesStatusEffect()
     {
@@ -93,8 +94,10 @@ public class StatusEffectController : MonoBehaviour
         }
     }
 
+
     private void OnDisable()
     {
-        fireParticles.SetActive(false);
+        Destroy(fireParticles);
+        isBurning = false;
     }
 }
