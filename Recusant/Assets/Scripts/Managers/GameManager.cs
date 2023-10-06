@@ -89,38 +89,34 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
         StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
-        
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 0.1f, 15));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 1, 50));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 60, 60, 0.1f, 30));
 
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 180, 60, 1, 40));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 240, 60, 1, 30));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 240, 60, 1, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 1, 10));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 1, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 360, 60, 1, 20));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 1, 20));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 1, 15));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 1, 80));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 1, 100));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 1, 15));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 540, 60, 1, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 1, 10));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 1, 10));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 0.1f, 150));
 
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 1, 300));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 180, 60, 0.1f, 40));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 240, 60, 0.1f, 30));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 240, 60, 0.1f, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 0.1f, 10));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 0.1f, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 360, 60, 0.1f, 20));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 0.1f, 20));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 0.1f, 15));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 0.1f, 160));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 420, 60, 0.1f, 80));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 0.1f, 100));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 0.1f, 30));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 540, 60, 0.1f, 30));
+        
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 0.1f, 100));
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 0.1f, 10));
+
+        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 0.1f, 300));
     }
 
     public void Restart()
@@ -330,9 +326,34 @@ public class GameManager : MonoBehaviour
     {
         List<Item> randomWeapons = new List<Item>();
         int count = 0;
+
+        List<Item> shuffledWeapons = new List<Item>();
+
+        if (Inventory.instance.items.Count == Inventory.instance.space)
+        {
+            //If inventory is full, only show weapons that are in inventory to level
+            //This prevents player from getting new weapons when inventory is full
+            print("inventory Size: " + Inventory.instance.items.Count());
+            print("Items in Inventory.Instance: ");
+            foreach (var item in Inventory.instance.items)
+            {
+                print(item.name);
+                foreach (var weapon in weaponLevelCount)
+                {
+                    if (weaponLevelCount[item.itemName] != 10)
+                    {
+                        shuffledWeapons.Add(item);
+                    }
+                }
+                shuffledWeapons = shuffledWeapons.OrderBy(item => Random.value).ToList();
+            }
+        }
+        else
+        {
+            // Shuffle the weaponsList
+            shuffledWeapons = weaponsList.OrderBy(item => Random.value).ToList();
+        }
         
-        // Shuffle the weaponsList
-        List<Item> shuffledWeapons = weaponsList.OrderBy(item => Random.value).ToList();
 
         foreach (Item weapon in shuffledWeapons)
         {

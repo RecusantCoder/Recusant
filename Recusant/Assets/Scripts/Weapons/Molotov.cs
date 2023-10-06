@@ -6,7 +6,7 @@ public class Molotov : Weapon
 {
     public int damage = 10;
     public int localWeaponLevel;
-    public float throwSpeed = 1.0f;
+    public float throwSpeed = 3.0f;
     public int numOfThrows = 1;
     private int penetrations = 0;
     private int molotovRadius = 1;

@@ -6,7 +6,7 @@ public class Flashbang : Weapon
 {
     public int damage = 0;
     public int localWeaponLevel;
-    public float throwSpeed = 3f;
+    public float throwSpeed = 3.0f;
     public int numOfThrows = 1;
     private int penetrations = 0;
     private int flashRadius = 1;

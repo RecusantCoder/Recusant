@@ -18,6 +18,7 @@ public class Glock : Weapon
     private Coroutine firingCoroutine;
     private int weaponLevelPassed;
     private Transform firePointPassed;
+    private int audioCounter;
 
     public void Shoot(Transform firePoint, int weaponLevel, bool enemyNear)
     {
@@ -48,6 +49,28 @@ public class Glock : Weapon
         { 
             WeaponLevels(weaponLevelPassed);
             FireShot(firePointPassed, weaponLevelPassed);
+            
+            switch (audioCounter)
+            {
+                case 0:
+                    AudioManager.instance.Play("pistolGunshot");
+                    break;
+                case 1:
+                    AudioManager.instance.Play("pistolGunshot1");
+                    break;
+                default:
+                    AudioManager.instance.Play("pistolGunshot2");
+                    break;
+            }
+            if (audioCounter < 2)
+            {
+                audioCounter++;
+            }
+            else
+            {
+                audioCounter = 0;
+            }
+            
             yield return new WaitForSeconds(shotDelay);
         }
         yield return new WaitForSeconds(groupDelay);
@@ -61,8 +84,6 @@ public class Glock : Weapon
         
         //rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
         rb.velocity = firePoint.right * bulletSpeed;
-        
-        AudioManager.instance.Play("pistolGunshot");
 
         // Get the bullet script component and change its damage amount
         Bullet bulletScript = bullet.GetComponent<Bullet>();

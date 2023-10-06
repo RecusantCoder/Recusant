@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
     
     public List<Item> items = new List<Item>();
-    public int space = 20;
+    public int space = 8;
     
     //sending item removal
     public event Action<Item> OnItemRemoved;

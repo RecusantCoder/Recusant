@@ -6,7 +6,7 @@ public class Grenade : Weapon
 {
     public int damage = 10;
     public int localWeaponLevel;
-    public float throwSpeed = 10f;
+    public float throwSpeed = 3f;
     public int numOfThrows = 1;
     private int penetrations = 0;
     private int grenadeRadius = 1;
