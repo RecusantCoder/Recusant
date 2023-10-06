@@ -1031,3 +1031,110 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001683 seconds.
+Begin MonoManager ReloadAssembly
+Thread 0x29b687000 may have been prematurely finalized
+Symbol file LoadedFromMemory doesn't match image /Users/goddard/Unity Projects/Recusant/Recusant/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image /Users/goddard/Unity Projects/Recusant/Recusant/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.71 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.914 seconds
+Domain Reload Profiling:
+	ReloadAssembly (915ms)
+		BeginReloadAssembly (131ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (63ms)
+		EndReloadAssembly (722ms)
+			LoadAssemblies (46ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (222ms)
+			ReleaseScriptCaches (3ms)
+			RebuildScriptCaches (50ms)
+			SetupLoadedEditorAssemblies (349ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (24ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (66ms)
+				ProcessInitializeOnLoadAttributes (201ms)
+				ProcessInitializeOnLoadMethodAttributes (55ms)
+				AfterProcessingInitializeOnLoad (1ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.98 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5373 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 35 unused Assets / (0.8 MB). Loaded Objects now: 6182.
+Memory consumption went from 280.4 MB to 279.6 MB.
+Total: 3.295042 ms (FindLiveObjects: 0.209125 ms CreateObjectMapping: 0.117292 ms MarkObjects: 2.621666 ms  DeleteObjects: 0.346125 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 3794.780655 seconds.
+  path: Assets/Items/Fleshy.asset
+  artifactKey: Guid(831afb95098fd4267b0930ade0cee3fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Fleshy.asset using Guid(831afb95098fd4267b0930ade0cee3fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3afb5532fa1f993f6732bc587598eb8') in 0.687378 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3723.309865 seconds.
+  path: Assets/Items/Exolegs.asset
+  artifactKey: Guid(ffd4ea94fdb724904a6b1cb3530a04b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Exolegs.asset using Guid(ffd4ea94fdb724904a6b1cb3530a04b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21aa88579ca1a4fe0722dd04218be6c2') in 0.012930 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000135 seconds.
+  path: Assets/Items/LazerGun.asset
+  artifactKey: Guid(85d7afc2668784d24a949893288ae20b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/LazerGun.asset using Guid(85d7afc2668784d24a949893288ae20b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52c51733327c83ee289a94bbc4501af2') in 0.003354 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/Items/Haurio.asset
+  artifactKey: Guid(80b36b65601aa46e7b4acf234e0d99c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Haurio.asset using Guid(80b36b65601aa46e7b4acf234e0d99c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94a76e1102cd7d5c999852e20b00f71b') in 0.004711 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000079 seconds.
+  path: Assets/Items/Helmet.asset
+  artifactKey: Guid(a5f3cb9f2e1154d88bc209e5474f31e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Helmet.asset using Guid(a5f3cb9f2e1154d88bc209e5474f31e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b00fa92c0caff7ae7d104b36311b0552') in 0.005159 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/Items/Flashbang.asset
+  artifactKey: Guid(ebdce73d1b6594bd9a4fa4515a0b6e43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Flashbang.asset using Guid(ebdce73d1b6594bd9a4fa4515a0b6e43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f595e6e60f841b7c686e5b5a298cab52') in 0.005458 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/Items/Fulmen.asset
+  artifactKey: Guid(9a2256ad709c04bd99bd2747819ae687) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Fulmen.asset using Guid(9a2256ad709c04bd99bd2747819ae687) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c120e6c6003bb38ed8dbabe1f8b05eed') in 0.017920 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/Items/Machete.asset
+  artifactKey: Guid(07f1613e648d54721829c5cc5e574dfa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Items/Machete.asset using Guid(07f1613e648d54721829c5cc5e574dfa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a187f4051b1b734490272dfb990bc4ee') in 0.005129 seconds 
