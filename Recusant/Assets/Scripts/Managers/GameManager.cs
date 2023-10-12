@@ -403,6 +403,12 @@ public class GameManager : MonoBehaviour
         GameObject levelSlotPrefab = Resources.Load<GameObject>("PreFabs/UI/LevelSlot");
 
         List<Item> threeItems = ThreeRandomItems();
+        //Check ThreeRandomItems to make sure they are not all the same
+        if (threeItems[0].itemName == threeItems[1].itemName)
+        {
+            threeItems = ThreeRandomItems();
+        }
+        
         
         Debug.Log(threeItems.Count + " is threeItems count");
 
@@ -436,6 +442,9 @@ public class GameManager : MonoBehaviour
                 Transform description = levelSlot.transform.Find("LevelButton/WeaponImage/Description");
                 TextMeshProUGUI descriptionText = description.GetComponent<TextMeshProUGUI>();
 
+                Transform itemNameField = levelSlot.transform.Find("LevelButton/WeaponImage/ItemName");
+                TextMeshProUGUI itemNameFieldText = itemNameField.GetComponent<TextMeshProUGUI>();
+
                 Debug.Log("WL " + weaponLevel + " name " + threeItems[i].itemName);
                 
                 if (weaponLevel == 0)
@@ -448,10 +457,12 @@ public class GameManager : MonoBehaviour
                     if (threeItems[i].levelDescriptions.Count > 0)
                     {
                         descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
+                        itemNameFieldText.text = threeItems[i].itemName;
                     }
                     else
                     {
                         descriptionText.text = " ";
+                        itemNameFieldText.text = " ";
                     }
                 }
                 
@@ -466,6 +477,7 @@ public class GameManager : MonoBehaviour
                     if (threeItems[i].levelDescriptions.Count > 0)
                     {
                         descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
+                        itemNameFieldText.text = threeItems[i].itemName;
                     }
                     else
                     {
@@ -489,6 +501,7 @@ public class GameManager : MonoBehaviour
                     if (threeItems[i].levelDescriptions.Count > 0)
                     {
                         descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
+                        itemNameFieldText.text = threeItems[i].itemName;
                     }
                     else
                     {

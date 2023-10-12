@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class AudioManager : MonoBehaviour
     
     //This variable should be moved to a proper instanced and non destroyable
     public String chosenName;
+    
+    private float previousMusicVolume;
+    private float previousSoundVolume;
+
     
     
     // Start is called before the first frame update
@@ -54,7 +59,7 @@ public class AudioManager : MonoBehaviour
     
     public void SetMusicVolume(float volume)
     {
-        
+        Debug.Log("Music at: " + volume);
         foreach (var s in AudioManager.instance.sounds)
         {
             if (s.isMusic)
@@ -67,6 +72,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetSoundVolume(float volume)
     {
+        Debug.Log("Sound at: " + volume);
         foreach (var s in AudioManager.instance.sounds)
         {
             if (s == null)
@@ -90,4 +96,35 @@ public class AudioManager : MonoBehaviour
         // Run code here when the object is destroyed
         Debug.Log("AudioManager has been destroyed!");
     }
+    
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("OnSceneLoaded for AudioManager");
+        if (scene.name == "MainMenu")
+        {
+            // Mute all sounds except "DrivingSong1"
+            SetMusicVolume(0.1f);
+            SetSoundVolume(0);
+            Debug.Log("SceneLoaded MainMenu AudioManager");
+        }
+        else
+        {
+            // Restore the previous audio volumes
+            SetMusicVolume(0.1f);
+            SetSoundVolume(0.1f);
+            Debug.Log("Sceneloaded other AudioManager");
+        }
+    }
+
+
 }

@@ -39,6 +39,8 @@ public class EnemyController : MonoBehaviour
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
         moveSpeedMemory = moveSpeed;
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void Update()

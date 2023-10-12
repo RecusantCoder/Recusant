@@ -40,6 +40,9 @@ public class Shooting : MonoBehaviour
     private Helmet helmetComponent;
     private Targeting_Computer targetingComputerComponent;
     
+    //Flamethrower's private firepoint
+    public Transform flamethrowerFirepoint;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +57,7 @@ public class Shooting : MonoBehaviour
         mossbergComponent = firePoint.gameObject.AddComponent<Mossberg>();
         grenadeComponent = firePoint.gameObject.AddComponent<Grenade>();
         macheteComponent = firePoint.gameObject.AddComponent<Machete>();
-        flamethrowerComponent = firePoint.gameObject.AddComponent<Flamethrower>();
+        flamethrowerComponent = flamethrowerFirepoint.gameObject.AddComponent<Flamethrower>();
         flashbangComponent = firePoint.gameObject.AddComponent<Flashbang>();
         molotovComponent = firePoint.gameObject.AddComponent<Molotov>();
         qimmiqComponent = firePoint.gameObject.AddComponent<Qimmiq>();
@@ -112,7 +115,7 @@ public class Shooting : MonoBehaviour
             }
             else if (item.itemName == "Flamethrower")
             {
-                flamethrowerComponent.Shoot(firePoint, weaponLevelCountLocal["Flamethrower"]);
+                flamethrowerComponent.Shoot(flamethrowerFirepoint, weaponLevelCountLocal["Flamethrower"]);
             } 
             else if (item.itemName == "Flashbang")
             {
@@ -160,8 +163,10 @@ public class Shooting : MonoBehaviour
     
     private void FixedUpdate()
     {
-        firePoint.transform.position = player.transform.position;
-        autoFirePoint.transform.position = player.transform.position;
+        var position = player.transform.position;
+        firePoint.transform.position = position;
+        autoFirePoint.transform.position = position;
+        flamethrowerFirepoint.transform.position = position;
         
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
         if (angle != -90f)

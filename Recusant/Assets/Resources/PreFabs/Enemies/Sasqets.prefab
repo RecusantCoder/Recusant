@@ -184,7 +184,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &1983673978173697314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +220,10 @@ MonoBehaviour:
   speed:
     baseValue: 0
   pickupRadius:
+    baseValue: 0
+  weight:
+    baseValue: 0
+  spikeDamage:
     baseValue: 0
   orbPrefabsPaths: []
   fadeDuration: 1
@@ -311,7 +315,7 @@ MonoBehaviour:
   fireParticlePrefab: {fileID: 3369669701704144115, guid: 049b801931dee4ba3b3e8a8dd1927970, type: 3}
   slimePuddlePrefab: {fileID: 0}
   isMushroom: 0
-  isOnFire: 0
+  isBurning: 0
 --- !u!1 &5199784225858835325
 GameObject:
   m_ObjectHideFlags: 0
