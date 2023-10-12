@@ -79,44 +79,16 @@ public class GameManager : MonoBehaviour
     private GameObject joystick;
     private GameObject itemLevels;
     
+    private List<Coroutine> coroutineList = new List<Coroutine>();
+
+    
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 0.1f, 15));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 60, 60, 0.1f, 30));
-
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 0.1f, 150));
-
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 180, 60, 0.1f, 40));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 240, 60, 0.1f, 30));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 240, 60, 0.1f, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 0.1f, 10));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 0.1f, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 360, 60, 0.1f, 20));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 0.1f, 20));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 0.1f, 15));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 0.1f, 160));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 420, 60, 0.1f, 80));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 0.1f, 100));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 0.1f, 30));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 540, 60, 0.1f, 30));
-        
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 0.1f, 100));
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 0.1f, 10));
-
-        StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 0.1f, 300));
+        StartEnemyCoroutines();
     }
 
     public void Restart()
@@ -140,6 +112,8 @@ public class GameManager : MonoBehaviour
         AssignPauseButton();
         FindItemLevelsMenu();
         
+        StopEnemyCoroutines();
+        StartEnemyCoroutines();
     }
 
     // Update is called once per frame
@@ -668,6 +642,77 @@ public class GameManager : MonoBehaviour
         itemLevels = itemLevelsTransform.gameObject;
         itemLevels.SetActive(false);
     }
+    
+    private void StartEnemyCoroutines()
+    {
+        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 0.1f, 15));
+
+        Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
+        Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
+        Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 60, 60, 0.1f, 30));
+
+        Coroutine enemyCoroutine4 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 0.1f, 150));
+
+        Coroutine enemyCoroutine5 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 180, 60, 0.1f, 40));
+        
+        Coroutine enemyCoroutine6 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 240, 60, 0.1f, 30));
+        Coroutine enemyCoroutine7 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 240, 60, 0.1f, 30));
+        
+        Coroutine enemyCoroutine8 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 0.1f, 10));
+        Coroutine enemyCoroutine9 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 0.1f, 30));
+        
+        Coroutine enemyCoroutine10 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 360, 60, 0.1f, 20));
+        Coroutine enemyCoroutine11 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 0.1f, 20));
+        
+        Coroutine enemyCoroutine12 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 0.1f, 15));
+        Coroutine enemyCoroutine13 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 0.1f, 160));
+        Coroutine enemyCoroutine14 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 420, 60, 0.1f, 80));
+        
+        Coroutine enemyCoroutine15 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 0.1f, 100));
+        
+        Coroutine enemyCoroutine16 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 0.1f, 30));
+        Coroutine enemyCoroutine17 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(iceSnake, 540, 60, 0.1f, 30));
+        
+        Coroutine enemyCoroutine18 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 0.1f, 100));
+        Coroutine enemyCoroutine19 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 0.1f, 10));
+
+        Coroutine enemyCoroutine20 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 0.1f, 300));
+        
+        coroutineList.Add(enemyCoroutine0);
+        coroutineList.Add(enemyCoroutine1);
+        coroutineList.Add(enemyCoroutine2);
+        coroutineList.Add(enemyCoroutine3);
+        coroutineList.Add(enemyCoroutine4);
+        coroutineList.Add(enemyCoroutine5);
+        coroutineList.Add(enemyCoroutine6);
+        coroutineList.Add(enemyCoroutine7);
+        coroutineList.Add(enemyCoroutine8);
+        coroutineList.Add(enemyCoroutine9);
+        coroutineList.Add(enemyCoroutine10);
+        coroutineList.Add(enemyCoroutine11);
+        coroutineList.Add(enemyCoroutine12);
+        coroutineList.Add(enemyCoroutine13);
+        coroutineList.Add(enemyCoroutine14);
+        coroutineList.Add(enemyCoroutine15);
+        coroutineList.Add(enemyCoroutine16);
+        coroutineList.Add(enemyCoroutine17);
+        coroutineList.Add(enemyCoroutine18);
+        coroutineList.Add(enemyCoroutine19);
+        coroutineList.Add(enemyCoroutine20);
+    }
+
+    private void StopEnemyCoroutines()
+    {
+        if (coroutineList.Count > 0)
+        {
+            foreach (var coroutine in coroutineList)
+            {
+                StopCoroutine(coroutine);
+            }
+            coroutineList.Clear();
+        }
+    }
+
     
 
 }

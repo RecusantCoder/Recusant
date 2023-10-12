@@ -29,9 +29,12 @@ public class EnemyController : MonoBehaviour
     private bool isTouchingPlayer = false;
     private float damageTimer = 0f;
     private float damageInterval = 0.1f;
+    
+    Transform myObjectTransform;
 
     private void Start()
     {
+        myObjectTransform = gameObject.transform;
         rb = this.GetComponent<Rigidbody2D>();
         player = PlayerManager.instance.player.transform;
         targetStats = player.GetComponent<CharacterStats>();
@@ -39,7 +42,6 @@ public class EnemyController : MonoBehaviour
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
         moveSpeedMemory = moveSpeed;
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
@@ -66,7 +68,11 @@ public class EnemyController : MonoBehaviour
         {
             ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
         }
-        
+
+        //Trying to stop enemy from rotating on its z axis on Build version
+        var rotation = myObjectTransform.rotation;
+        rotation = Quaternion.Euler(rotation.eulerAngles.x, rotation.eulerAngles.y, 0f);
+        myObjectTransform.rotation = rotation;
     }
 
     private void FixedUpdate()
