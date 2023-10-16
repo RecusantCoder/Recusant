@@ -38,11 +38,7 @@ public class Amulet : Interactable
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
             yield return null;
         }
-        
-        //Heal to max health, not to healAmount
-        PlayerManager.instance.player.GetComponent<PlayerStats>().currentHealth =
-            PlayerManager.instance.player.GetComponent<PlayerStats>().maxHealth;
-        
+
         AudioManager.instance.Play("pickup");
 
         StartCoroutine(KillAndTarget());
