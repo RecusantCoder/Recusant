@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wobble : MonoBehaviour
-{
+{/*
     // Public variables show up in the Inspector
     public Vector3 RotateSpeed = new Vector3 (10.0F, 10.0F, 10.0F);
     public Vector3 WobbleAmount = new Vector3 (0.1F, 0.1F, 0.1F);
@@ -69,5 +69,5 @@ public class Wobble : MonoBehaviour
 
 
         
-    }
+    }*/
 }
