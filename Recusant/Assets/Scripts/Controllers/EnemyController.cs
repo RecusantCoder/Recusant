@@ -102,6 +102,7 @@ public class EnemyController : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             isTouchingPlayer = false;
+            damageTimer = 0f;
         }
     }
 
