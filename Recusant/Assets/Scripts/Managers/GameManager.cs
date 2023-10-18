@@ -553,6 +553,7 @@ public class GameManager : MonoBehaviour
     
     public void ShowPauseScreen()
     {
+        AudioManager.instance.Play("pauseOn");
         Debug.Log("showing pause screen");
         
         FindGamePauseScreen();
