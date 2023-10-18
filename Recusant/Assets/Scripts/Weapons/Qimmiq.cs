@@ -10,8 +10,7 @@ public class Qimmiq : Weapon
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
     protected new float shotFrequency = 0.1f;
-    protected new List<float> times = new List<float>();
-    protected new List<float> firedList = new List<float>();
+    
     private int numberOfQimmiqAllowed = 1;
     private int numberOfQimmiqSpawned = 0;
     public int damage = 10;

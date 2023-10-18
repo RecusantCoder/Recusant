@@ -39,13 +39,12 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(transform.name + " health is at " + currentHealth);
         
         //Show Damage Numbers
-        GameObject damageNum = Instantiate(Resources.Load("PreFabs/UI/DamageNumbers", typeof(GameObject))) as GameObject;
-        damageNum.transform.position = transform.position;
-        damageNum.GetComponent<DNController>().ShowDamage(damage);
-        
-        
-        
-
+        if (damage > 0)
+        {
+            GameObject damageNum = Instantiate(Resources.Load("PreFabs/UI/DamageNumbers", typeof(GameObject))) as GameObject;
+            damageNum.transform.position = transform.position;
+            damageNum.GetComponent<DNController>().ShowDamage(damage);
+        }
 
         if (currentHealth <= 0)
         {
