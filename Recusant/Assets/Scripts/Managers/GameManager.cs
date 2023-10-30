@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     
     public GameObject pauseScreen;
     private GameObject pauseButton;
+    private GameObject steelContainerScreen;
     
     //Object Pooling
     public GameObject sasquets;
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour
         
         FindGameOverScreen();
         FindGamePauseScreen();
+        FindSteelContainerScreen();
         FindTimerText();
         AssignPauseButton();
         FindItemLevelsMenu();
@@ -590,6 +592,38 @@ public class GameManager : MonoBehaviour
             pauseButtonTransform = canvas.transform.Find("/PauseButton");
         }
         pauseButton = pauseButtonTransform.gameObject;
+    }
+    
+    public void ShowSteelContainerScreen()
+    {
+        Debug.Log("showing SteelContainer screen");
+        FindSteelContainerScreen();
+        FindFloatingJoystick();
+
+        if (isPaused)
+        {
+            steelContainerScreen.SetActive(false);
+            joystick.SetActive(true);
+            ResumeGame();
+        }
+        else
+        {
+            // Set the steelContainerScreen to active
+            steelContainerScreen.SetActive(true);
+            joystick.SetActive(false);
+
+            // Pause the game
+            PauseGame();
+        }
+    }
+
+    private void FindSteelContainerScreen()
+    {
+        //Finding SteelContainerScreen
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+        Transform steelContainerTransform = canvas.transform.Find("SteelContainerScreen");
+        steelContainerScreen = steelContainerTransform.gameObject;
+        steelContainerScreen.SetActive(false);
     }
     
     private void OnEnable()
