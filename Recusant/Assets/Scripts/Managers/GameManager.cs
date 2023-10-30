@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     //for LevelUp Screen
     [SerializeField]
     public List<Item> weaponsList;
+    [SerializeField]
+    public List<Item> evolutionWeaponsList;
     public Dictionary<string, int> weaponLevelCount;
     private GameObject levelUpScreen;
     public LevelBar levelBar; //event from LevelBar
@@ -599,6 +601,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("showing SteelContainer screen");
         FindSteelContainerScreen();
         FindFloatingJoystick();
+        pauseButton.gameObject.SetActive(false);
 
         if (isPaused)
         {
@@ -624,6 +627,21 @@ public class GameManager : MonoBehaviour
         Transform steelContainerTransform = canvas.transform.Find("SteelContainerScreen");
         steelContainerScreen = steelContainerTransform.gameObject;
         steelContainerScreen.SetActive(false);
+    }
+    
+    public void HideSteelContainerScreen()
+    {
+        FindSteelContainerScreen();
+
+        //Enable Pause Button
+        AssignPauseButton();
+        pauseButton.gameObject.SetActive(true);
+        
+        FindFloatingJoystick();
+        joystick.SetActive(true);
+        
+        Debug.Log("Hiding SteelContainerScreen");
+        ResumeGame();
     }
     
     private void OnEnable()
