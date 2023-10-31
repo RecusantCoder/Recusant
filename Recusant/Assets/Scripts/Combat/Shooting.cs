@@ -40,6 +40,7 @@ public class Shooting : MonoBehaviour
     private Helmet helmetComponent;
     private Targeting_Computer targetingComputerComponent;
     private SwoleSamoyed swoleSamoyedComponent;
+    private FlameShield flameShieldComponent;
     
     //Flamethrower's private firepoint
     public Transform flamethrowerFirepoint;
@@ -69,6 +70,7 @@ public class Shooting : MonoBehaviour
         helmetComponent = firePoint.gameObject.AddComponent<Helmet>();
         targetingComputerComponent = firePoint.gameObject.AddComponent<Targeting_Computer>();
         swoleSamoyedComponent = firePoint.gameObject.AddComponent<SwoleSamoyed>();
+        flameShieldComponent = firePoint.gameObject.AddComponent<FlameShield>();
     }
 
     // Update is called once per frame
@@ -158,6 +160,10 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "SwoleSamoyed")
             {
                 swoleSamoyedComponent.Shoot(firePoint, weaponLevelCountLocal["SwoleSamoyed"]);
+            }
+            else if (item.itemName == "FlameShield")
+            {
+                flameShieldComponent.Shoot(firePoint, weaponLevelCountLocal["FlameShield"]);
             }
         }
         
