@@ -23,6 +23,27 @@ public class ItemLevelParent : MonoBehaviour
     private void HandleInventoryEvent()
     {
         Dictionary<string, int> localWeaponLevelCount = GameManager.instance.weaponLevelCount;
+        
+        // Create a list to store items to remove from the itemDictionary
+        List<Item> itemsToRemove = new List<Item>();
+        
+        // Check each item in the itemDictionary
+        foreach (var item in itemDictionary.Keys)
+        {
+            if (!Inventory.instance.items.Contains(item))
+            {
+                // If the item is not in the inventory, add it to the removal list
+                itemsToRemove.Add(item);
+            }
+        }
+
+        // Remove items from the itemDictionary that are no longer in the inventory
+        foreach (var itemToRemove in itemsToRemove)
+        {
+            itemDictionary.Remove(itemToRemove);
+        }
+        
+        // Now, update the itemDictionary for items still in the inventory
         foreach (var i in Inventory.instance.items)
         {
             if (itemDictionary.ContainsKey(i))
@@ -59,6 +80,7 @@ public class ItemLevelParent : MonoBehaviour
 
     public void InstantiateUIElements()
     {
+        Debug.Log("items in inventory, according to InstatiateUIElements: ");
         int childCount = transform.childCount;
 
         for (int i = childCount - 1; i >= 0; i--)
@@ -70,6 +92,7 @@ public class ItemLevelParent : MonoBehaviour
         Dictionary<string, int> localWeaponLevelCount = GameManager.instance.weaponLevelCount;
         foreach (var i in Inventory.instance.items)
         {
+            Debug.Log(i.itemName + " in inventory");
             if (itemDictionary.ContainsKey(i))
             {
                 if (localWeaponLevelCount.ContainsKey(i.itemName))
