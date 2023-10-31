@@ -32,7 +32,7 @@ public class Shooting : MonoBehaviour
     private Flamethrower flamethrowerComponent;
     private Flashbang flashbangComponent;
     private Molotov molotovComponent;
-    private Qimmiq qimmiqComponent;
+    public Qimmiq qimmiqComponent;
     private Body_Armor bodyArmorComponent;
     private Exolegs exolegsComponent;
     private Fleshy fleshyComponent;

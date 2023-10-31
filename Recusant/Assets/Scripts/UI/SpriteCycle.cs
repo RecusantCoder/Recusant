@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class SpriteCycle : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class SpriteCycle : MonoBehaviour
     public List<(int, string)> evolutionList = new List<(int, string)>();
 
     public Item targetEvolution;
+    public Shooting shooting;
 
     public List<Sprite> sprites;
     public Image image;
@@ -19,8 +22,9 @@ public class SpriteCycle : MonoBehaviour
 
     private void Start()
     {
+        shooting = GameManager.instance.player.GetComponent<Shooting>();
         
-        comboList.Add(("Fleshy", "Qimmiq"));
+        comboList.Add(("Qimmiq", "Fleshy"));
         comboList.Add(("Flamethrower", "Body_Armor"));
         comboList.Add(("Flashbang", "Grenade"));
         comboList.Add(("Fulmen", "Haurio"));
@@ -51,6 +55,8 @@ public class SpriteCycle : MonoBehaviour
         StartCoroutine(CycleSprites());
     }
 
+    //cycles thru available items and then gives an evolution if available
+    //if not, then it gives an upgrade to an existing item
     private IEnumerator CycleSprites()
     {
         int count = 0;
@@ -93,7 +99,31 @@ public class SpriteCycle : MonoBehaviour
                 }
             }
             image.sprite = targetEvolution.icon;
+            
+            //removes combo items from inventory
+            List<string> itemsToRemoveOnEvolution = ItemsToRemove(targetEvolution.itemName);
+            List<Item> tempInventoryCopy = new List<Item>(Inventory.instance.items);
+            foreach (var item in tempInventoryCopy)
+            {
+                if (itemsToRemoveOnEvolution.Contains(item.itemName))
+                {
+                    //kills off existing qimmiqs if evo is SwoleSamoyed
+                    if (item.itemName == "Qimmiq")
+                    {
+                        shooting.qimmiqComponent.KillAndRespawnQimmiqs();
+                    }
+                    Inventory.instance.Remove(item);
+                }
+            }
+            
             Inventory.instance.Add(targetEvolution, false);
+        }
+        else
+        {
+            int rand = Random.Range(0, Inventory.instance.items.Count-1);
+            Item tempItem = Inventory.instance.items[rand];
+            image.sprite = tempItem.icon;
+            Inventory.instance.Add(tempItem, false);
         }
 
         Debug.Log("Ended CycleSprites.");
@@ -163,7 +193,23 @@ public class SpriteCycle : MonoBehaviour
         }
         return availableEvolutions;
     }
-    
+
+    //Takes a string of the evolution's name, then searches the evolution list for the index needed
+    //takes the index and gets the 2 item's names from the combo list, and returns them in a list
+    public List<string> ItemsToRemove(string evolutionName)
+    {
+        List<string> returnList = new List<string>();
+        foreach (var evolution in evolutionList)
+        {
+            if (evolution.Item2 == evolutionName)
+            {
+                returnList.Add(comboList[evolution.Item1].Item1);
+                returnList.Add(comboList[evolution.Item1].Item2);
+            }
+        }
+
+        return returnList;
+    }
     
 }
 

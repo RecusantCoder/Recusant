@@ -34,7 +34,7 @@ public class Qimmiq : Weapon
         }
     }
     
-    private void KillAndRespawnQimmiqs()
+    public void KillAndRespawnQimmiqs()
     {
         foreach (var qimmy in listOfQimmiqAttacks)
         {
