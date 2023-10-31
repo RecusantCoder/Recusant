@@ -10,7 +10,7 @@ public class SwoleSamoyedAttack : MonoBehaviour
     public Transform targetTransform;
     private CircleCollider2D CC2D;
     private float moveSpeedMemory = 0;
-    public float moveSpeed = 360f;
+    private float moveSpeed = 180f;
     private float searchRadius = 1f; 
     private float knockBack = 10.0f;
     private float knockBackDuration = 5.0f;
@@ -63,6 +63,7 @@ public class SwoleSamoyedAttack : MonoBehaviour
                         // Apply knockback to the enemy
                         currentEnemy.GetComponent<EnemyController>()
                             .ApplyKnockback(hitDirection, knockBack, knockBackDuration);
+                        HealPlayer();
                     }
                 }
 
@@ -130,5 +131,16 @@ public class SwoleSamoyedAttack : MonoBehaviour
     public void FaceTarget2D()
     {
         transform.rotation = transform.position.y > player.transform.position.y ? Quaternion.Euler(0f, 180f, 0f) : Quaternion.identity;
+    }
+
+    public void HealPlayer()
+    {
+        GameManager.instance.player.GetComponent<PlayerStats>().RegenHealth();
+    }
+    
+    public float MoveSpeed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = value; }
     }
 }

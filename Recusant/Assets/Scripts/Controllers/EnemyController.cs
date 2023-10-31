@@ -168,9 +168,12 @@ public class EnemyController : MonoBehaviour
         rb.AddForce(hitDirection * knockbackForce, ForceMode2D.Impulse);
         
         HitFlash(true);
-
-        // Enable movement after knockback is complete
-        knockbackCoroutine = StartCoroutine(EnableMovementAfterKnockback(knockbackDuration));
+        
+        if (gameObject.activeSelf)
+        {
+            // Enable movement after knockback is complete
+            knockbackCoroutine = StartCoroutine(EnableMovementAfterKnockback(knockbackDuration));
+        }
     }
     
     private IEnumerator EnableMovementAfterKnockback(float duration)

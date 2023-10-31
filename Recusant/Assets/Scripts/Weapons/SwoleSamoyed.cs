@@ -8,9 +8,9 @@ public class SwoleSamoyed : Weapon
     
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
-    protected new float shotFrequency = 0.1f;
+    protected new float shotFrequency = 1.0f;
     
-    private int numberOfSwoleSamoyedAllowed = 1;
+    private int numberOfSwoleSamoyedAllowed = 4;
     private int numberOfSwoleSamoyedSpawned = 0;
     public int damage = 100;
     public int speed = 0;
@@ -19,12 +19,15 @@ public class SwoleSamoyed : Weapon
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
         WeaponLevels(weaponLevel);
+
+        shotFrequency = 2.0f / numberOfSwoleSamoyedAllowed;
+        
         if (Time.time - lastShotTime > shotFrequency && numberOfSwoleSamoyedSpawned < numberOfSwoleSamoyedAllowed)
         {
             GameObject swoleSamoyedAttack = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/SwoleSamoyedAttack"));
             SwoleSamoyedAttack swoleSamoyedScript = swoleSamoyedAttack.GetComponent<SwoleSamoyedAttack>();
             swoleSamoyedScript.swoleSamoyedDamage += damage;
-            swoleSamoyedScript.moveSpeed += speed;
+            swoleSamoyedScript.MoveSpeed += speed;
             listOfSwoleSamoyedAttacks.Add(swoleSamoyedAttack);
             swoleSamoyedAttack.transform.position = firePoint.position;
             lastShotTime = Time.time;
