@@ -5,6 +5,7 @@ using UnityEngine;
 public class MiniNukeExplosion : MonoBehaviour
 {
     public int explosionDamage = 0;
+    private Animator animator;
     private bool hasPlayedOnce;
     public int explosionRadius = 0;
     
@@ -14,14 +15,26 @@ public class MiniNukeExplosion : MonoBehaviour
         transform.localScale = new Vector3(explosionRadius, explosionRadius, explosionRadius);
         AudioManager.instance.Play("Explosion");
         
+        animator = GetComponent<Animator>();
         hasPlayedOnce = false;
         
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
-        
-        Destroy(gameObject, 1.0f);
 
+    }
+    
+    void Update()
+    {
+        if (!hasPlayedOnce && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            hasPlayedOnce = true;
+        }
+
+        if (hasPlayedOnce)
+        {
+            Destroy(gameObject);
+        }
     }
 
     
