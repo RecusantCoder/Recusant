@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,5 +66,11 @@ public class MiniNukeExplosion : MonoBehaviour
                 Physics2D.IgnoreCollision(projectileCollider, collider);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameObject radiationZone = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/RadiationZone"), transform.position, transform.rotation);
+        RadiationZone radiationZoneScript = radiationZone.GetComponent<RadiationZone>();
     }
 }
