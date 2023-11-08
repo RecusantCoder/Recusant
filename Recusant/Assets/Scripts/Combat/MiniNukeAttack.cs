@@ -11,6 +11,8 @@ public class MiniNukeAttack : MonoBehaviour
     public Vector3 miniNukeSpawnPosition;
     public Vector3 miniNukeEndPosition;
 
+    public GameObject crosshair;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,14 +45,6 @@ public class MiniNukeAttack : MonoBehaviour
             other.gameObject.GetComponent<Breakable>().Damaged();
         }
         
-        if (penetrations == 0)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            penetrations--;
-        }
         Debug.Log("Collided with " + other.name);
     }
 
@@ -76,6 +70,7 @@ public class MiniNukeAttack : MonoBehaviour
         MiniNukeExplosion miniNukeExplosionScript = explosion.GetComponent<MiniNukeExplosion>();
         miniNukeExplosionScript.explosionDamage += miniNukeAttackDamage;
         miniNukeExplosionScript.explosionRadius += miniNukeAttackRadius;
+        Destroy(crosshair);
     }
     
     

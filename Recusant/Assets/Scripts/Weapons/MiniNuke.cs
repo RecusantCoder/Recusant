@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MiniNuke : Weapon
 {
@@ -22,6 +24,8 @@ public class MiniNuke : Weapon
     public float spawnRadius = 4.0f;
     public float spawnHeight = 10.0f;
     public float downwardForce = 1.0f;
+
+    private GameObject crosshair;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
@@ -57,6 +61,10 @@ public class MiniNuke : Weapon
         //Vector3 spawnPosition = firePoint.transform.position + new Vector3(randomXOffset, spawnHeight, 0);
         float angle = Random.Range(0, 360);
         Vector3 endPosition = firePoint.transform.position + new Vector3(randomXOffset, 0, 0);
+        
+        GameObject crosshairPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/GroundCrosshair");
+        crosshair = Instantiate(crosshairPrefab, endPosition, Quaternion.identity);
+
         Vector3 spawnPosition = endPosition;
         spawnPosition.y += spawnHeight;
         
@@ -67,6 +75,7 @@ public class MiniNuke : Weapon
         miniNukeAttackScript.miniNukeAttackDamage += damage;
         miniNukeAttackScript.miniNukeSpawnPosition = spawnPosition;
         miniNukeAttackScript.miniNukeEndPosition = endPosition;
+        miniNukeAttackScript.crosshair = crosshair;
 
         // Add a downward force to the MiniNuke.
         Rigidbody2D rb = miniNukeAttack.GetComponent<Rigidbody2D>();
