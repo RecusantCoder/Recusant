@@ -9,10 +9,15 @@ public class Orb : Interactable
     private GameObject _player;
     private bool isPickedUp = false;
     public CircleCollider2D circleCollider;
+    public bool movingToPlayer;
 
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        if (movingToPlayer)
+        {
+            PickUp();
+        }
     }
 
     public override void Interact()
@@ -32,6 +37,7 @@ public class Orb : Interactable
     
     IEnumerator MoveToPlayerAndDestroy()
     {
+        Debug.Log("Orb moving to player");
         Transform playerTransform = _player.transform;
         float speed = 2f; // Adjust the speed at which the object moves towards the player
 

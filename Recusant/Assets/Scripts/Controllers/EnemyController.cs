@@ -32,6 +32,10 @@ public class EnemyController : MonoBehaviour
     
     Transform myObjectTransform;
 
+    public bool isProcessed;
+    public Vector2 processorLocation;
+    public bool passedCheckpoint;
+
     private void Start()
     {
         myObjectTransform = gameObject.transform;
@@ -136,11 +140,22 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void moveCharacter(Vector2 direction)
+    public void moveCharacter(Vector2 direction)
     {
         if (!isDead)
         {
-            rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
+            if (isProcessed)
+            {
+                // Calculate the new position using Vector2.MoveTowards
+                Vector2 newPosition = Vector2.MoveTowards(transform.position, processorLocation, 2 * Time.deltaTime);
+
+                // Move the rigidbody to the new position
+                rb.MovePosition(newPosition);
+            }
+            else
+            {
+                rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
+            }
         }
     }
     

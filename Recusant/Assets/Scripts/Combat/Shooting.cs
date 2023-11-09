@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
@@ -42,6 +43,7 @@ public class Shooting : MonoBehaviour
     private SwoleSamoyed swoleSamoyedComponent;
     private FlameShield flameShieldComponent;
     private MiniNuke miniNukeComponent;
+    private Haurifulminator haurifulminatorComponenet;
     
     //Flamethrower's private firepoint
     public Transform flamethrowerFirepoint;
@@ -73,6 +75,7 @@ public class Shooting : MonoBehaviour
         swoleSamoyedComponent = firePoint.gameObject.AddComponent<SwoleSamoyed>();
         flameShieldComponent = firePoint.gameObject.AddComponent<FlameShield>();
         miniNukeComponent = firePoint.gameObject.AddComponent<MiniNuke>();
+        haurifulminatorComponenet = firePoint.gameObject.AddComponent<Haurifulminator>();
     }
 
     // Update is called once per frame
@@ -170,6 +173,9 @@ public class Shooting : MonoBehaviour
             else if (item.itemName == "MiniNuke")
             {
                 miniNukeComponent.Shoot(firePoint, weaponLevelCountLocal["MiniNuke"]);
+            } else if (item.itemName == "Haurifulminator")
+            {
+                haurifulminatorComponenet.Shoot(firePoint, weaponLevelCountLocal["Haurifulminator"]);
             }
         }
         

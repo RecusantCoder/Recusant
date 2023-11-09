@@ -70,7 +70,7 @@ public class FlameShield : Weapon
             case 10:
                 break;
             default:
-                print ("Default Qimmiq.");
+                print ("Default FlameShield.");
                 break;
         }
     }

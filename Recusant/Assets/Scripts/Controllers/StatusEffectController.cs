@@ -13,7 +13,7 @@ public class StatusEffectController : MonoBehaviour
     public bool isMushroom;
     public bool isBurning;
     private GameObject fireParticles;
-    
+
     private void Start()
     {
         lastPosition = transform.position;

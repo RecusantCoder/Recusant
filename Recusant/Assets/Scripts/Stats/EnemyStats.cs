@@ -11,6 +11,7 @@ public class EnemyStats : CharacterStats
     public bool alreadyDied;
     private EnemyController _enemyController;
     private float previousMoveSpeed;
+    public bool wasProcessed;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class EnemyStats : CharacterStats
     
     private void Start()
     {
-        
+        wasProcessed = false;
     }
     
     public override void Die()
@@ -71,6 +72,11 @@ public class EnemyStats : CharacterStats
                 */
                 
                 GameObject orb = Instantiate(Resources.Load<GameObject>(orbPrefabsPaths[0]), transform.position, transform.rotation);
+                if (wasProcessed)
+                {
+                    Debug.Log("Orb made with processed");
+                    orb.GetComponent<Orb>().movingToPlayer = true;
+                }
             }
 
             CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
@@ -149,6 +155,9 @@ public class EnemyStats : CharacterStats
         _enemyController.isKnockbackActive = false;
         _enemyController.moveSpeed = previousMoveSpeed;
         _enemyController.isDead = false;
+        wasProcessed = false;
+        _enemyController.isProcessed = false;
+        _enemyController.passedCheckpoint = false;
     }
 
     
