@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class MiniNuke : Weapon
 {
-    public int damage = 10;
+    public int damage = 0;
     public int localWeaponLevel;
     public float throwSpeed = 3f;
     public int numOfThrows = 1;
@@ -14,7 +14,7 @@ public class MiniNuke : Weapon
     private int grenadeRadius = 1;
     
     
-    public float groupDelay = 1.0f;
+    public float groupDelay = 100.0f;
     public float shotDelay = 0.1f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RadiationZone : MonoBehaviour
 {
-    public int radiationDamage = 1337;
+    private int radiationDamage = 1;
     public float radiationRadius = 1;
     public float radiationZoneLifetime = 10;
     
@@ -26,6 +26,13 @@ public class RadiationZone : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyStats>().TakeDamage(radiationDamage);
             
+            // Apply fire damage over time
+            int enemyHealth10Percent = other.gameObject.GetComponent<EnemyStats>().maxHealth / 3;
+            other.gameObject.GetComponent<StatusEffectController>().ApplyFireStatusEffect(enemyHealth10Percent, 10);
+            // Calculate the hit direction based on the bullet's position and enemy's position
+            Vector2 hitDirection = other.transform.position - transform.position;
+            hitDirection.Normalize();
+            other.gameObject.GetComponent<EnemyController>().ApplyKnockback(hitDirection, 0.01f, 10);
         }
         if (other.transform.tag == "Breakable")
         {

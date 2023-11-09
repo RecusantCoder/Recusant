@@ -192,10 +192,10 @@ public class GameManager : MonoBehaviour
         GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
         if (spawnedObject != null)
         {
+            spawnedObject.SetActive(true);
             EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
             enemyStats.ReMade();
             spawnedObject.transform.position = spawnPosition;
-            spawnedObject.SetActive(true);
         }
     }
     
@@ -204,10 +204,11 @@ public class GameManager : MonoBehaviour
         GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
         if (spawnedObject != null)
         {
+            spawnedObject.SetActive(true);
             EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
             enemyStats.ReMade();
             spawnedObject.transform.position = position;
-            spawnedObject.SetActive(true);
+            
         }
     }
 

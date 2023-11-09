@@ -145,7 +145,8 @@ public class EnemyStats : CharacterStats
         {
             circleCollider.enabled = true;
         }
-        
+
+        _enemyController.isKnockbackActive = false;
         _enemyController.moveSpeed = previousMoveSpeed;
         _enemyController.isDead = false;
     }

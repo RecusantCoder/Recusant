@@ -22,6 +22,9 @@ public class MiniNukeExplosion : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");     
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         IgnoreBulletCollisions();
+        
+        GameObject radiationZone = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/RadiationZone"), transform.position, transform.rotation);
+        RadiationZone radiationZoneScript = radiationZone.GetComponent<RadiationZone>();
 
     }
     
@@ -67,10 +70,5 @@ public class MiniNukeExplosion : MonoBehaviour
             }
         }
     }
-
-    private void OnDestroy()
-    {
-        GameObject radiationZone = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/RadiationZone"), transform.position, transform.rotation);
-        RadiationZone radiationZoneScript = radiationZone.GetComponent<RadiationZone>();
-    }
+    
 }
