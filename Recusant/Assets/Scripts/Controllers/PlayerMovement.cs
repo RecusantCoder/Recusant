@@ -26,11 +26,14 @@ public class PlayerMovement : MonoBehaviour
     public float lastNonZeroInput;
 
     public ParticleSystem dust;
-    
 
-    
-    
-    
+    public Vector2 Movement
+    {
+        get => movement;
+        private set => movement = value;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

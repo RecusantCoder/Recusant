@@ -43,7 +43,8 @@ public class Shooting : MonoBehaviour
     private SwoleSamoyed swoleSamoyedComponent;
     private FlameShield flameShieldComponent;
     private MiniNuke miniNukeComponent;
-    private Haurifulminator haurifulminatorComponenet;
+    private Haurifulminator haurifulminatorComponent;
+    private Bosco boscoComponent;
     
     //Flamethrower's private firepoint
     public Transform flamethrowerFirepoint;
@@ -75,7 +76,8 @@ public class Shooting : MonoBehaviour
         swoleSamoyedComponent = firePoint.gameObject.AddComponent<SwoleSamoyed>();
         flameShieldComponent = firePoint.gameObject.AddComponent<FlameShield>();
         miniNukeComponent = firePoint.gameObject.AddComponent<MiniNuke>();
-        haurifulminatorComponenet = firePoint.gameObject.AddComponent<Haurifulminator>();
+        haurifulminatorComponent = firePoint.gameObject.AddComponent<Haurifulminator>();
+        boscoComponent = firePoint.gameObject.AddComponent<Bosco>();
     }
 
     // Update is called once per frame
@@ -175,7 +177,10 @@ public class Shooting : MonoBehaviour
                 miniNukeComponent.Shoot(firePoint, weaponLevelCountLocal["MiniNuke"]);
             } else if (item.itemName == "Haurifulminator")
             {
-                haurifulminatorComponenet.Shoot(firePoint, weaponLevelCountLocal["Haurifulminator"]);
+                haurifulminatorComponent.Shoot(firePoint, weaponLevelCountLocal["Haurifulminator"]);
+            } else if (item.itemName == "Bosco")
+            {
+                boscoComponent.Shoot(firePoint, weaponLevelCountLocal["Bosco"]);
             }
         }
         
