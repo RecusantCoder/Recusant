@@ -51,8 +51,28 @@ public class GameManager : MonoBehaviour
     public Transform player;
     
     //for game end
-    public bool gameEnded = false;
+    //public bool gameEnded = false;
     private GameObject gameOverScreen;
+    
+    private bool yourBool;
+
+    // Define a property for your boolean variable
+    public bool gameEnded
+    {
+        get { return yourBool; }
+        set
+        {
+            // Check if the value is actually changing
+            if (yourBool != value)
+            {
+                // Log the change
+                Debug.Log("YourBool changed to: " + value);
+
+                // Set the new value
+                yourBool = value;
+            }
+        }
+    }
     
     //for LevelUp Screen
     [SerializeField]
@@ -222,9 +242,61 @@ public class GameManager : MonoBehaviour
             Debug.Log("GAME OVER");
             FindGameOverScreen();
             gameOverScreen.SetActive(true);
+            UpdateReviveCount(PlayerManager.instance.player.GetComponent<CharacterStats>().revives.GetValue());
             AssignPauseButton();
             pauseButton.gameObject.SetActive(false);
             PauseGame();
+        }
+        else
+        {
+            Debug.Log("gameEnded = " + gameEnded);
+            Debug.Log("i guess gameEnded is true?");
+        }
+    }
+
+    //Should only be called if the player has a revive
+    public void ContinueGame()
+    {
+        gameEnded = false;
+        Debug.Log("In ContinueGame: " + gameEnded);
+        Debug.Log("CONTINUING GAME");
+        FindGameOverScreen();
+        AssignPauseButton();
+        pauseButton.gameObject.SetActive(true);
+        ResumeGame();
+        CharacterStats cs = PlayerManager.instance.player.GetComponent<CharacterStats>();
+        cs.currentHealth = cs.maxHealth;
+        cs.revives.RemoveModifier(1);
+    }
+    
+    void UpdateReviveCount(int count)
+    {
+        Transform reviveCountTransform = gameOverScreen.transform.Find("ReviveCount");
+        reviveCountTransform.gameObject.SetActive(true);
+        Transform continueButton = gameOverScreen.transform.Find("Continue");
+        continueButton.gameObject.SetActive(true);
+        
+        if (reviveCountTransform != null)
+        {
+            TextMeshProUGUI reviveCountText = reviveCountTransform.GetComponent<TextMeshProUGUI>();
+            if (reviveCountText != null)
+            {
+                reviveCountText.text = "Revives: " + count.ToString();
+            }
+            else
+            {
+                Debug.LogWarning("TextMeshProUGUI component not found on ReviveCount child.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ReviveCount child not found under GameOverScreen.");
+        }
+
+        if (count < 1)
+        {
+            reviveCountTransform.gameObject.SetActive(false);
+            continueButton.gameObject.SetActive(false);
         }
     }
 

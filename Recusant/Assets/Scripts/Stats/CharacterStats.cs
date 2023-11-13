@@ -16,6 +16,7 @@ public class CharacterStats : MonoBehaviour
     public Stat pickupRadius;
     public Stat weight;
     public Stat spikeDamage;
+    public Stat revives;
 
 
     private void Awake()

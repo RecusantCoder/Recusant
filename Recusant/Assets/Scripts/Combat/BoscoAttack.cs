@@ -25,8 +25,7 @@ public class BoscoAttack : MonoBehaviour
     private void Update()
     {
         nearEnemy = FindNearestEnemy();
-        Debug.Log(nearEnemy + " <-nearEnemy");
-        
+
         Vector2 playerMovement = GameManager.instance.player.GetComponent<PlayerMovement>().Movement;
 
         if (playerMovement is not { x: 0.000f, y: 0.000f })
@@ -55,7 +54,7 @@ public class BoscoAttack : MonoBehaviour
 
             // Get the bullet script component and change its damage amount
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.bulletDamage = 100; // Change the damage amount
+            bulletScript.bulletDamage = 0; // Change the damage amount
             bulletScript.penetrations = 100;
         }
     }

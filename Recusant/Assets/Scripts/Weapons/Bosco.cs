@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,6 +82,8 @@ public class Bosco : Weapon
         switch (weaponLevel)
         {
             case 1:
+                GameManager.instance.player.GetComponent<CharacterStats>().revives.AddModifier(1);
+                Debug.Log("Added revive");
                 break;
             case 2:
                 break;

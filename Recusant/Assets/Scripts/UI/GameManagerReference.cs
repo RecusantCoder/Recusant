@@ -7,30 +7,36 @@ public class GameManagerReference : MonoBehaviour
 {
     private GameManager gameManager;
     public Button button;
+    public bool isMenuButton;
+    public bool isContinueButton;
 
     
-    private void Awake()
-    {
-        gameManager = GameManager.instance;
-        
-        try
-        {
-        button = GetComponent<Button>();
-        
-        button.onClick.AddListener(gameManager.MainMenu);
-
-        
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-    }
+    
     private void Start()
     {
         // Find and assign the initial reference to the Game Manager
         gameManager = GameManager.instance;
+        
+        try
+        {
+            button = GetComponent<Button>();
+
+            if (isMenuButton)
+            {
+                button.onClick.AddListener(gameManager.MainMenu);
+            }
+
+            if (isContinueButton)
+            {
+                button.onClick.AddListener(gameManager.ContinueGame);
+            }
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+            Debug.Log("Ree");
+        }
         
     }
 
