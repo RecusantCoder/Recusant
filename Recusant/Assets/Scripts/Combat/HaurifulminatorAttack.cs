@@ -86,4 +86,9 @@ public class HaurifulminatorAttack : MonoBehaviour
             }
         }
     }
+    
+    private void OnDestroy()
+    {
+        PlayerManager.instance.player.GetComponent<Shooting>().haurifulminatorComponent.ProjectileDestroyed();
+    }
 }

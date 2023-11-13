@@ -8,12 +8,15 @@ public class Bosco : Weapon
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
 
-    public float groupDelay = 60.0f;
+    public float groupDelay = 0.1f;
     public float shotDelay = 1.0f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
     private int weaponLevelPassed;
     private Transform firePointPassed;
+
+    private int numberOfProjectilesAllowed = 1;
+    private int numberOfProjectilesSpawned = 0;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
@@ -59,8 +62,12 @@ public class Bosco : Weapon
     
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        GameObject boscoAttack = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/BoscoAttack"), firePoint.position, Quaternion.identity);
-        
+        if (numberOfProjectilesSpawned < numberOfProjectilesAllowed)
+        {
+            GameObject boscoAttack = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/BoscoAttack"), firePoint.position, Quaternion.identity);
+            numberOfProjectilesSpawned++;
+        }
+
     }
     
     protected override void WeaponLevels(int weaponLevel)
@@ -107,5 +114,10 @@ public class Bosco : Weapon
                 print ("Default BoscoAttack.");
                 break;
         }
+    }
+
+    public void ProjectileDestroyed()
+    {
+        numberOfProjectilesSpawned--;
     }
 }

@@ -7,12 +7,15 @@ public class Haurifulminator : Weapon
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
 
-    public float groupDelay = 60.0f;
+    public float groupDelay = 2.0f;
     public float shotDelay = 1.0f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
     private int weaponLevelPassed;
     private Transform firePointPassed;
+    
+    private int numberOfProjectilesAllowed = 1;
+    private int numberOfProjectilesSpawned = 0;
 
     public override void Shoot(Transform firePoint, int weaponLevel)
     {
@@ -59,8 +62,12 @@ public class Haurifulminator : Weapon
     
     protected override void FireShot(Transform firePoint, int weaponLevel)
     {
-        GameObject processor = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Processor"), firePoint.position, Quaternion.identity);
-        
+        if (numberOfProjectilesSpawned < numberOfProjectilesAllowed)
+        {
+            GameObject processor = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Processor"),
+                firePoint.position, Quaternion.identity);
+            numberOfProjectilesSpawned++;
+        }
     }
     
     protected override void WeaponLevels(int weaponLevel)
@@ -105,5 +112,10 @@ public class Haurifulminator : Weapon
                 print ("Default Haurifulminator.");
                 break;
         }
+    }
+    
+    public void ProjectileDestroyed()
+    {
+        numberOfProjectilesSpawned--;
     }
 }

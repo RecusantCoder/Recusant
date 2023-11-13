@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class BoscoAttack : MonoBehaviour
     private float bulletSpeed = 30f;
     private float offset = 1.0f;
     private GameObject player;
+    
     
     
     // Start is called before the first frame update
@@ -54,7 +56,7 @@ public class BoscoAttack : MonoBehaviour
 
             // Get the bullet script component and change its damage amount
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.bulletDamage = 0; // Change the damage amount
+            bulletScript.bulletDamage = 1; // Change the damage amount
             bulletScript.penetrations = 100;
         }
     }
@@ -99,5 +101,8 @@ public class BoscoAttack : MonoBehaviour
         return nearestEnemy;
     }
 
-
+    private void OnDestroy()
+    {
+        PlayerManager.instance.player.GetComponent<Shooting>().boscoComponent.ProjectileDestroyed();
+    }
 }

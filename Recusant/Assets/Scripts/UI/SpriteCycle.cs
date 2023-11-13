@@ -36,7 +36,7 @@ public class SpriteCycle : MonoBehaviour
         evolutionList.Add((0, "SwoleSamoyed"));
         evolutionList.Add((1, "FlameShield"));
         evolutionList.Add((2, "MiniNuke"));
-        evolutionList.Add((3, "PerfectStorm"));
+        evolutionList.Add((3, "Haurifulminator"));
         evolutionList.Add((4, "Bosco"));
         evolutionList.Add((5, "LivingPlasma"));
         evolutionList.Add((6, "BladeStorm"));

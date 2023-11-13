@@ -43,8 +43,8 @@ public class Shooting : MonoBehaviour
     private SwoleSamoyed swoleSamoyedComponent;
     private FlameShield flameShieldComponent;
     private MiniNuke miniNukeComponent;
-    private Haurifulminator haurifulminatorComponent;
-    private Bosco boscoComponent;
+    public Haurifulminator haurifulminatorComponent;
+    public Bosco boscoComponent;
     
     //Flamethrower's private firepoint
     public Transform flamethrowerFirepoint;
