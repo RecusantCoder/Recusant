@@ -7,7 +7,7 @@ public class Haurifulminator : Weapon
     protected new int localWeaponlevel;
     protected new int numOfShots = 1;
 
-    public float groupDelay = 2.0f;
+    public float groupDelay = 30.0f;
     public float shotDelay = 1.0f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
@@ -67,6 +67,7 @@ public class Haurifulminator : Weapon
             GameObject processor = Instantiate(Resources.Load<GameObject>("PreFabs/Projectiles/Processor"),
                 firePoint.position, Quaternion.identity);
             numberOfProjectilesSpawned++;
+            Destroy(processor, 10.0f);
         }
     }
     

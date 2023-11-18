@@ -9,6 +9,7 @@ public class HaurifulminatorAttack : MonoBehaviour
     public Transform rightPoint;
     public Transform killPoint;
     public float attractForce = 10f;
+    private GameObject[] enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class HaurifulminatorAttack : MonoBehaviour
     private void PerformAttack()
     {
         // Find all instances of EnemyController in the scene.
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (GameObject enemyObject in enemies)
         {
@@ -89,6 +90,12 @@ public class HaurifulminatorAttack : MonoBehaviour
     
     private void OnDestroy()
     {
+        foreach (var enemy in enemies)
+        {
+            EnemyStats enemyStats = enemy.gameObject.GetComponent<EnemyStats>();
+            enemyStats.wasProcessed = true;
+            enemyStats.TakeDamage(666);
+        }
         PlayerManager.instance.player.GetComponent<Shooting>().haurifulminatorComponent.ProjectileDestroyed();
     }
 }
