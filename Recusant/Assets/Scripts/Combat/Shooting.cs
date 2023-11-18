@@ -45,6 +45,7 @@ public class Shooting : MonoBehaviour
     private MiniNuke miniNukeComponent;
     public Haurifulminator haurifulminatorComponent;
     public Bosco boscoComponent;
+    public DirectionalVectorDisruptor directionalVectorDisruptorComponent;
     
     //Flamethrower's private firepoint
     public Transform flamethrowerFirepoint;
@@ -78,6 +79,7 @@ public class Shooting : MonoBehaviour
         miniNukeComponent = firePoint.gameObject.AddComponent<MiniNuke>();
         haurifulminatorComponent = firePoint.gameObject.AddComponent<Haurifulminator>();
         boscoComponent = firePoint.gameObject.AddComponent<Bosco>();
+        directionalVectorDisruptorComponent = firePoint.gameObject.AddComponent<DirectionalVectorDisruptor>();
     }
 
     // Update is called once per frame
@@ -181,6 +183,9 @@ public class Shooting : MonoBehaviour
             } else if (item.itemName == "Bosco")
             {
                 boscoComponent.Shoot(firePoint, weaponLevelCountLocal["Bosco"]);
+            } else if (item.itemName == "DirectionalVectorDisruptor")
+            {
+                directionalVectorDisruptorComponent.Shoot(firePoint, weaponLevelCountLocal["DirectionalVectorDisruptor"]);
             }
         }
         
