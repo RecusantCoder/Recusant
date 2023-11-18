@@ -195,9 +195,11 @@ public class LevelBar : MonoBehaviour
                 xpRequirement += 16;
             }
 
-            levels.Add(threshold);
+            //levels.Add(threshold);
 
             cumulativeXP += threshold; // Update cumulative XP
+            
+            levels.Add(cumulativeXP);
 
             Debug.Log("Level " + i + " Threshold: " + threshold + " difference: " + (threshold - prevThreshold) + " Cumulative XP: " + cumulativeXP);
             prevThreshold = threshold;
