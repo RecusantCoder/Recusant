@@ -436,6 +436,35 @@ public class GameManager : MonoBehaviour
         //gameOverScreen.GetComponent<ObjectDestroyedEvent>().OnDestroyed.AddListener(ObjectDestroyed);
         levelUpScreen.SetActive(false);
     }
+    
+    bool AreItemsUnique(List<Item> itemList)
+    {
+        HashSet<string> itemNames = new HashSet<string>();
+
+        foreach (Item item in itemList)
+        {
+            if (!itemNames.Add(item.itemName))
+            {
+                // If the item name is already in the HashSet, it's not unique
+                return false;
+            }
+        }
+
+        // All item names are unique
+        return true;
+    }
+    
+    List<Item> GenerateUniqueItemList()
+    {
+        List<Item> uniqueItems = ThreeRandomItems();
+
+        while (!AreItemsUnique(uniqueItems))
+        {
+            uniqueItems = ThreeRandomItems();
+        }
+
+        return uniqueItems;
+    }
 
     public void LevelUp()
     {
@@ -453,12 +482,7 @@ public class GameManager : MonoBehaviour
         // Instantiate the LevelSlot prefab as a child of the LevelSlotParent
         GameObject levelSlotPrefab = Resources.Load<GameObject>("PreFabs/UI/LevelSlot");
 
-        List<Item> threeItems = ThreeRandomItems();
-        //Check ThreeRandomItems to make sure they are not all the same
-        if (threeItems[0].itemName == threeItems[1].itemName)
-        {
-            threeItems = ThreeRandomItems();
-        }
+        List<Item> threeItems = GenerateUniqueItemList();
         
         
         Debug.Log(threeItems.Count + " is threeItems count");
