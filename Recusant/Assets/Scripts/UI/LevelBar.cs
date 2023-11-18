@@ -172,18 +172,37 @@ public class LevelBar : MonoBehaviour
     public void setupLevels()
     {
         levels = new List<float>();
-
-        int modulus = 10;
+    
+        float prevThreshold = 0;
+        int xpRequirement = 5; // Initial XP requirement for level 1
+        int cumulativeXP = 0; // Variable to keep track of cumulative XP
 
         for (int i = 1; i < 201; i++)
         {
-            if (i%modulus == 0)
+            int threshold = xpRequirement;
+
+            // Add logic here to calculate XP requirement based on the level
+            if (i < 20)
             {
-                modulus += 10;
+                xpRequirement += 10;
             }
-            float threshold = i * modulus;
+            else if (i < 40)
+            {
+                xpRequirement += 13;
+            }
+            else
+            {
+                xpRequirement += 16;
+            }
+
             levels.Add(threshold);
-            //Debug.Log(threshold + " " + i);
+
+            cumulativeXP += threshold; // Update cumulative XP
+
+            Debug.Log("Level " + i + " Threshold: " + threshold + " difference: " + (threshold - prevThreshold) + " Cumulative XP: " + cumulativeXP);
+            prevThreshold = threshold;
         }
     }
+
+
 }

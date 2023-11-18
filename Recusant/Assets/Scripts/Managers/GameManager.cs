@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartEnemyCoroutines();
+        //StartEnemyCoroutines();
     }
 
     public void Restart()
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         FindItemLevelsMenu();
         
         StopEnemyCoroutines();
-        StartEnemyCoroutines();
+        //StartEnemyCoroutines();
     }
 
     // Update is called once per frame

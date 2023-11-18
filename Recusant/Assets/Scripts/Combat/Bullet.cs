@@ -19,13 +19,13 @@ public class Bullet : MonoBehaviour
         IgnoreBulletCollisions();
         
         //Adding damage modifier
-        Debug.Log("Bullet damage before changes " + bulletDamage);
+        //Debug.Log("Bullet damage before changes " + bulletDamage);
         float damageToPercent = (float)PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue() / 10 + 1;
-        Debug.Log("damageToPercent: " + damageToPercent);
+        //Debug.Log("damageToPercent: " + damageToPercent);
         damageToPercent = bulletDamage * damageToPercent;
-        Debug.Log("damgeToPrct with bullet damage " + damageToPercent);
+        //Debug.Log("damgeToPrct with bullet damage " + damageToPercent);
         bulletDamage = (int)damageToPercent;
-        Debug.Log("bullet damage final: " + bulletDamage);
+        //Debug.Log("bullet damage final: " + bulletDamage);
         
         Destroy(gameObject, 1f);
     }
