@@ -30,6 +30,13 @@ public class DVDAttack : MonoBehaviour
 
         // Check for collisions with screen edges
         CheckScreenEdges();
+        
+        // Check if the object is out of the camera's view
+        if (!IsVisible())
+        {
+            // Destroy the object if it's no longer visible
+            Destroy(gameObject);
+        }
     }
     
     int RandomSign()
@@ -45,6 +52,13 @@ public class DVDAttack : MonoBehaviour
             Color randomColor = colors[Random.Range(0, colors.Length)];
             visualRenderer.color = randomColor;
         }
+    }
+    
+    bool IsVisible()
+    {
+        // Check if the object is visible in the camera's view
+        Renderer renderer = visualRenderer.GetComponent<Renderer>();
+        return renderer.isVisible;
     }
 
     // Method to perform the attack and update EnemyController for each enemy.
