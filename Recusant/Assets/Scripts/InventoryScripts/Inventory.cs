@@ -43,14 +43,27 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        //Level up the item instead
         if (alreadyInInventory)
         {
-            //Level up the item instead
-            GameManager.instance.LevelSelectedWeapon(item.itemName);
-            Debug.Log("Levelled " + item.itemName);
+            if (!GameManager.instance.restrictedList.Contains(item))
+            {
+                if (GameManager.instance.weaponLevelCount[item.itemName] <= 8)
+                {
+                    GameManager.instance.LevelSelectedWeapon(item.itemName);
+                    Debug.Log("Levelled " + item.itemName);
+                }
+                else
+                {
+                    // if it is level 9, then add to restricted list and level to lvl 10
+                    GameManager.instance.LevelSelectedWeapon(item.itemName);
+                    GameManager.instance.restrictedList.Add(item);
+                    Debug.Log("Levelled " + item.itemName + " ADDED to Restricted");
+                }
+            }
         }
 
-        if (!item.isDefaultItem && !alreadyInInventory)
+        if (!item.isDefaultItem && !alreadyInInventory && !GameManager.instance.restrictedList.Contains(item))
         {
             if (items.Count >= space)
             {

@@ -74,12 +74,13 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    //for LevelUp Screen
     [SerializeField]
     public List<Item> weaponsList;
     [SerializeField]
     public List<Item> evolutionWeaponsList;
     public Dictionary<string, int> weaponLevelCount;
+    public List<Item> restrictedList;
+    
     private GameObject levelUpScreen;
     public LevelBar levelBar; //event from LevelBar
     public static event Action PlayerActionTakenEvent;
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
     
     private List<Coroutine> coroutineList = new List<Coroutine>();
 
-    
+
 
 
 
