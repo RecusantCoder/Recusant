@@ -20,6 +20,8 @@ public class SpriteCycle : MonoBehaviour
 
     private int currentIndex = 0;
 
+    public UISteelContainer uiSteelContainer;
+
     private void Start()
     {
         shooting = GameManager.instance.player.GetComponent<Shooting>();
@@ -38,7 +40,7 @@ public class SpriteCycle : MonoBehaviour
         evolutionList.Add((2, "MiniNuke"));
         evolutionList.Add((3, "Haurifulminator"));
         evolutionList.Add((4, "Bosco"));
-        evolutionList.Add((5, "LivingPlasma"));
+        evolutionList.Add((5, "DirectionalVectorDisruptor"));
         evolutionList.Add((6, "BladeStorm"));
         evolutionList.Add((7, "Che16"));
     }
@@ -126,6 +128,8 @@ public class SpriteCycle : MonoBehaviour
             Inventory.instance.Add(tempItem, false);
         }
 
+        uiSteelContainer.EnableCloseButton();
+        
         Debug.Log("Ended CycleSprites.");
     }
 

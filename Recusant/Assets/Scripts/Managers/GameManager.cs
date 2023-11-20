@@ -333,19 +333,19 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        isPaused = true;
+        GameManager.instance.isPaused = true;
         Time.timeScale = 0;
     }
     
     public void ResumeGame()
     {
-        isPaused = false;
+        GameManager.instance.isPaused = false;
         Time.timeScale = 1;
     }
     
     public bool IsGamePaused()
     {
-        return isPaused;
+        return GameManager.instance.isPaused;
     }
 
     public void QuitGame()
@@ -661,7 +661,7 @@ public class GameManager : MonoBehaviour
         FindFloatingJoystick();
         FindItemLevelsMenu();
         
-        if (isPaused)
+        if (IsGamePaused())
         {
             pauseScreen.SetActive(false);
             joystick.SetActive(true);
@@ -700,14 +700,16 @@ public class GameManager : MonoBehaviour
         FindFloatingJoystick();
         pauseButton.gameObject.SetActive(false);
 
-        if (isPaused)
+        if (IsGamePaused())
         {
+            Debug.Log("isPaused");
             steelContainerScreen.SetActive(false);
             joystick.SetActive(true);
             ResumeGame();
         }
         else
         {
+            Debug.Log("else");
             // Set the steelContainerScreen to active
             steelContainerScreen.SetActive(true);
             joystick.SetActive(false);

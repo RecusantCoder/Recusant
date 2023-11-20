@@ -16,4 +16,9 @@ public class DisableButton : MonoBehaviour
     {
         myButton.interactable = true; // Re-enable the button
     }
+    
+    private void OnEnable()
+    {
+        EnableButton();
+    }
 }

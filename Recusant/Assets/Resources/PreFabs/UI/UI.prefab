@@ -5900,6 +5900,7 @@ MonoBehaviour:
   image: {fileID: 6924479975749511044}
   cycleInterval: 0.1
   totalDuration: 3
+  uiSteelContainer: {fileID: 5502384036007408635}
 --- !u!1 &6527204014418163193
 GameObject:
   m_ObjectHideFlags: 0
@@ -6644,6 +6645,7 @@ GameObject:
   - component: {fileID: 4452500973348931780}
   - component: {fileID: 7627049152385331399}
   - component: {fileID: 4200572475217726604}
+  - component: {fileID: 5502384036007408635}
   m_Layer: 5
   m_Name: SteelContainerScreen
   m_TagString: LevelUpScreen
@@ -6714,6 +6716,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5502384036007408635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773093544641855240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5561fe47dd03405d8d9e85328711128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openButton: {fileID: 2339574622595524872}
+  closeButton: {fileID: 8366875061683473932}
 --- !u!1 &8062150409808194353
 GameObject:
   m_ObjectHideFlags: 0
