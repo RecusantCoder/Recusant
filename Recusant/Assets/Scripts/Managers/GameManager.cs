@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
     public List<Item> evolutionWeaponsList;
     public Dictionary<string, int> weaponLevelCount;
     public List<Item> restrictedList;
-    
+    public List<GameObject> disabledObjects;
+
     private GameObject levelUpScreen;
     public LevelBar levelBar; //event from LevelBar
     public static event Action PlayerActionTakenEvent;
@@ -334,12 +335,14 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        TargetAllByTag(false, "UIEffects");
         GameManager.instance.isPaused = true;
         Time.timeScale = 0;
     }
     
     public void ResumeGame()
     {
+        TargetAllByTag(true, "UIEffects");
         GameManager.instance.isPaused = false;
         Time.timeScale = 1;
     }
@@ -347,6 +350,30 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused()
     {
         return GameManager.instance.isPaused;
+    }
+
+    public void TargetAllByTag(bool active, string tag)
+    {
+        if (active)
+        {
+            foreach (var disabledObj in disabledObjects)
+            {
+                disabledObj.SetActive(true);
+            }
+            disabledObjects.Clear();
+        }
+        else
+        {
+            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.CompareTag(tag))
+                {
+                    disabledObjects.Add(obj);
+                    obj.SetActive(false);
+                }
+            }
+        }
     }
 
     public void QuitGame()
