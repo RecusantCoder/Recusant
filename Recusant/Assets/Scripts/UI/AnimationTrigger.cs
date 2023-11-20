@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class AnimationTrigger : MonoBehaviour
 {
-    public Animator animator;  // Reference to the Animator component
-    public Button uiButton;    // Reference to the UI Button component
+    public Animator animator;  
+    public Button uiButton;
+    public Button closeButton;
+    public Image image;
 
     private void Start()
     {
@@ -20,4 +22,10 @@ public class AnimationTrigger : MonoBehaviour
         // Trigger the animation by setting the trigger parameter
         animator.SetTrigger("MyTrigger");
     }
+
+    public void SetAnimationBackToImage()
+    {
+        image.sprite = Resources.Load<Sprite>("Sprites/Steel");
+    }
+    
 }

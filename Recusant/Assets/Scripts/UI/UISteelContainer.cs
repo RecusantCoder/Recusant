@@ -24,4 +24,6 @@ public class UISteelContainer : MonoBehaviour
         DisableCloseButton();
         openButton.interactable = true;
     }
+    
+    
 }

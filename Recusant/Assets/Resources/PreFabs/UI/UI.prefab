@@ -5805,6 +5805,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8744669939874773558}
   uiButton: {fileID: 2339574622595524872}
+  closeButton: {fileID: 8366875061683473932}
+  image: {fileID: 6033595057388645513}
 --- !u!1 &6163457785857061011
 GameObject:
   m_ObjectHideFlags: 0
@@ -7357,6 +7359,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4865157534197120169}
+        m_TargetAssemblyTypeName: AnimationTrigger, Assembly-CSharp
+        m_MethodName: SetAnimationBackToImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 8471205426075197045}
         m_TargetAssemblyTypeName: DisableButton, Assembly-CSharp
         m_MethodName: ButtonPressed
