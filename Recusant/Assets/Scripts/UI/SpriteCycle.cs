@@ -57,6 +57,22 @@ public class SpriteCycle : MonoBehaviour
         StartCoroutine(CycleSprites());
     }
 
+    public void ZeroImageAlpha()
+    {
+        //Make image field visible
+        Color currentColor = image.color;
+        currentColor.a = 0f;
+        image.color = currentColor;
+    }
+
+    public void FullImageAlpha()
+    {
+        //Make image field visible
+        Color currentColor = image.color;
+        currentColor.a = 255f;
+        image.color = currentColor;
+    }
+
     //cycles thru available items and then gives an evolution if available
     //if not, then it gives an upgrade to an existing item
     private IEnumerator CycleSprites()
@@ -65,10 +81,7 @@ public class SpriteCycle : MonoBehaviour
         float elapsedTime = 0f;
         float startTime = Time.realtimeSinceStartup;
         
-        //Make image field visible
-        Color currentColor = image.color;
-        currentColor.a = 255f;
-        image.color = currentColor;
+        FullImageAlpha();
         
         while (elapsedTime < totalDuration && count < 20)
         {
