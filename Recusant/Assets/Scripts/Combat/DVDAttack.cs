@@ -90,7 +90,6 @@ public class DVDAttack : MonoBehaviour
         if (other.transform.tag == "Enemy")
         {
             EnemyStats enemyStats = other.gameObject.GetComponent<EnemyStats>();
-            enemyStats.wasProcessed = true;
             enemyStats.TakeDamage(attackDamage);
         }
 
