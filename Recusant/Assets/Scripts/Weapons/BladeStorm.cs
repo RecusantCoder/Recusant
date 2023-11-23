@@ -145,7 +145,7 @@ public class BladeStorm : Weapon
             case 10:
                 break;
             default:
-                print ("Default BladeStormAttack.");
+                print ("Default BladeStorm.");
                 break;
         }
     }
