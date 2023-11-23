@@ -51,6 +51,9 @@ public class Shooting : MonoBehaviour
     //Flamethrower's private firepoint
     public Transform flamethrowerFirepoint;
     
+    //Bladestorm's personal firepoint
+    public Transform bladeStormFirepoint;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +84,7 @@ public class Shooting : MonoBehaviour
         haurifulminatorComponent = firePoint.gameObject.AddComponent<Haurifulminator>();
         boscoComponent = firePoint.gameObject.AddComponent<Bosco>();
         directionalVectorDisruptorComponent = firePoint.gameObject.AddComponent<DirectionalVectorDisruptor>();
-        bladeStormComponent = firePoint.gameObject.AddComponent<BladeStorm>();
+        bladeStormComponent = bladeStormFirepoint.gameObject.AddComponent<BladeStorm>();
     }
 
     // Update is called once per frame
@@ -190,7 +193,7 @@ public class Shooting : MonoBehaviour
                 directionalVectorDisruptorComponent.Shoot(firePoint, weaponLevelCountLocal["DirectionalVectorDisruptor"]);
             } else if (item.itemName == "BladeStorm")
             {
-                bladeStormComponent.Shoot(firePoint, weaponLevelCountLocal["BladeStorm"]);
+                bladeStormComponent.Shoot(bladeStormFirepoint, weaponLevelCountLocal["BladeStorm"]);
             }
         }
         
@@ -206,6 +209,7 @@ public class Shooting : MonoBehaviour
         firePoint.transform.position = position;
         autoFirePoint.transform.position = position;
         flamethrowerFirepoint.transform.position = position;
+        bladeStormFirepoint.transform.position = position;
         
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg -90f;
         if (angle != -90f)

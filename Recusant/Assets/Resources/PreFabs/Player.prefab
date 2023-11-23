@@ -989,6 +989,7 @@ Transform:
   - {fileID: 1295544682308472937}
   - {fileID: 2355292183650432983}
   - {fileID: 2280067627746493918}
+  - {fileID: 5762478372082992124}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1154,6 +1155,8 @@ MonoBehaviour:
     baseValue: 0
   spikeDamage:
     baseValue: 0
+  revives:
+    baseValue: 0
   healthbar: {fileID: 0}
   creationTime: 1
 --- !u!114 &1471726363006081063
@@ -1186,7 +1189,13 @@ MonoBehaviour:
   rb: {fileID: 924848427}
   player: {fileID: 1471726363006081071}
   autoFirePoint: {fileID: 1295544682308472937}
+  qimmiqComponent: {fileID: 0}
+  haurifulminatorComponent: {fileID: 0}
+  boscoComponent: {fileID: 0}
+  directionalVectorDisruptorComponent: {fileID: 0}
+  bladeStormComponent: {fileID: 0}
   flamethrowerFirepoint: {fileID: 2280067627746493918}
+  bladeStormFirepoint: {fileID: 5762478372082992124}
 --- !u!1 &2005930995664655693
 GameObject:
   m_ObjectHideFlags: 0
@@ -6167,6 +6176,59 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &3186978587528907384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5762478372082992124}
+  - component: {fileID: 1640684205885019453}
+  m_Layer: 7
+  m_Name: BladeStormFirepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5762478372082992124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186978587528907384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1471726363006081069}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1640684205885019453
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186978587528907384}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4378427295931224996
 GameObject:
   m_ObjectHideFlags: 0

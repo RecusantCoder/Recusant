@@ -6,15 +6,18 @@ public class BladeStorm : Weapon
 {
     protected new int localWeaponlevel;
     protected new int numOfShots = 8;
+    private int numOfGroups = 8;
+    private int groupCount = 0;
+    private int offset = 45;
 
-    public float groupDelay = 0.001f;
-    public float shotDelay = 0.16f;
+    public float groupDelay = 0.12f;
+    public float shotDelay = 0.001f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
     private int weaponLevelPassed;
     private Transform firePointPassed;
     
-    private int numberOfProjectilesAllowed = 100;
+    private int numberOfProjectilesAllowed = 1000;
     private int numberOfProjectilesSpawned = 0;
     
     private Vector2 direction;
@@ -58,13 +61,28 @@ public class BladeStorm : Weapon
             FireShot(firePointPassed, weaponLevelPassed);
             
             // Calculate the angle in radians
-            float angleInRadians = i * Mathf.PI / 4;
+            float angleInRadians = i * Mathf.PI / 4 + offset;
             // Calculate the direction vector
             direction = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
             
             yield return new WaitForSeconds(shotDelay);
         }
         yield return new WaitForSeconds(groupDelay);
+        if (groupCount < 7)
+        {
+            groupCount++;
+            offset += 45;
+        }
+        else
+        {
+            groupCount = 0;
+            offset = 45;
+        }
+
+        if (groupCount == 5 || groupCount == 1)
+        {
+            AudioManager.instance.Play("BladeStorm");
+        }
         isFiring = false;
     }
     
@@ -83,7 +101,7 @@ public class BladeStorm : Weapon
             rb.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             
             // Add a force to the bullet in the specified direction
-            rb.AddForce(direction * 10f, ForceMode2D.Impulse);
+            rb.AddForce(direction * 2.5f, ForceMode2D.Impulse);
             Destroy(attack, 1.0f);
         }
     }

@@ -7,6 +7,8 @@ public class BladeStormAttack : MonoBehaviour
     private int attackDamage = 100;
     private float knockBack = 0.1f;
     private float knockBackDuration = 0.25f;
+    public float rotationSpeed = 180f; // Adjust the rotation speed as needed
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,12 @@ public class BladeStormAttack : MonoBehaviour
         //Debug.Log("bullet damage final: " + bulletDamage);
         
         Destroy(gameObject, 1f);
+    }
+    
+    void FixedUpdate()
+    {
+        // Rotate the object by a constant rate (adjust the multiplier as needed)
+        transform.Rotate(Vector3.forward * (Time.fixedDeltaTime * rotationSpeed));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
