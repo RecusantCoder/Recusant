@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        disabledObjects = new List<GameObject>();
         ResumeGame();
 
         timer = 0.0f;
@@ -825,7 +826,7 @@ public class GameManager : MonoBehaviour
     
     private void StartEnemyCoroutines()
     {
-        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 0, 60, 0.1f, 15));
+        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 1, 60, 0.1f, 15));
 
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
         Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
