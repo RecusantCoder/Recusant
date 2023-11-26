@@ -103,6 +103,22 @@ public class SectionManager : MonoBehaviour
         }
     }
 
+    private void SpawnBreakable(Transform spawnedSection)
+    {
+        // Spawn 2-5 random collidePrefabs within the area of the sectionPrefab
+        //This method was extracted, also collidePrefabs[0] is Crate
+        int numberOfCollidePrefabs = Random.Range(2, 6);
+        for (int i = 0; i < numberOfCollidePrefabs; i++)
+        {
+            GameObject randomCollidePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
+            GameObject spawnedCollidePrefab = Instantiate(randomCollidePrefab) as GameObject;
+            spawnedCollidePrefab.transform.SetParent(spawnedSection.transform);
+            // Set the position of the spawned collidePrefab within the area of the sectionPrefab
+            Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
+            spawnedCollidePrefab.transform.localPosition = randomPosition;
+        }
+    }
+
     private void SpawnSection(SectionDirection sd)
     {
         if (!startPoint)
@@ -174,17 +190,7 @@ public class SectionManager : MonoBehaviour
                 spawnedSection.transform.position = spawn;
                 spawnedSections.Add(spawn, spawnedSection);
                 
-                // Spawn 2-5 random collidePrefabs within the area of the sectionPrefab
-                int numberOfCollidePrefabs = Random.Range(2, 6);
-                for (int i = 0; i < numberOfCollidePrefabs; i++)
-                {
-                    GameObject randomCollidePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
-                    GameObject spawnedCollidePrefab = Instantiate(randomCollidePrefab) as GameObject;
-                    spawnedCollidePrefab.transform.SetParent(spawnedSection.transform);
-                    // Set the position of the spawned collidePrefab within the area of the sectionPrefab
-                    Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
-                    spawnedCollidePrefab.transform.localPosition = randomPosition;
-                }
+                SpawnBreakable(spawnedSection.transform);
                 
                 
                 // Spawn 10-20 random tilePrefabs within the area of the sectionPrefab
