@@ -306,7 +306,7 @@ public class GameManager : MonoBehaviour
     public void HideGameOverScreen()
     {
         gameEnded = false;
-        gameOverScreen.SetActive(false);
+        FindGameOverScreen();
         Debug.Log("Called HideGameOverScreen");
     }
     
@@ -330,8 +330,9 @@ public class GameManager : MonoBehaviour
     
     public void MainMenu()
     {
-        SceneManager.LoadScene("Scenes/MainMenu");
+        UpdateDataManager();
         HideGameOverScreen();
+        SceneManager.LoadScene("Scenes/MainMenu");
     }
 
     public void PauseGame()
@@ -894,6 +895,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    private void UpdateDataManager()
+    {
+        bool noTargetFound = false;
+        try
+        {
+            Debug.Log("Running UpdateDataManager");
+            DataManager.Instance.LoadData();
+            List<Total> totals = DataManager.Instance.GetData<Total>("totals");
+            if (totals.Count == 0)
+            {
+                Debug.Log("totals.count is 0");
+                noTargetFound = true;
+            }
+            foreach (var total in totals)
+            {
+                if (total.name == "coins")
+                {
+                    total.value += CoinCounter.instance.coinCount;
+                    Debug.Log("Saving CoinCount: " + CoinCounter.instance.coinCount + " new total: " + total.value);
+                }
+                else
+                {
+                    noTargetFound = true;
+                }
+            }
+
+            if (noTargetFound)
+            {
+                Total newTotal = new Total(CoinCounter.instance.coinCount, "coins");
+                totals.Add(newTotal);
+                Debug.Log("Saving CoinCount: " + CoinCounter.instance.coinCount + " new total: " + newTotal.value);
+            }
+            
+            DataManager.Instance.SetData("totals", totals);
+            DataManager.Instance.SaveData();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Catch: " + e);
+        }
+    }
 
 }
