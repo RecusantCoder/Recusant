@@ -330,7 +330,9 @@ public class GameManager : MonoBehaviour
     
     public void MainMenu()
     {
-        UpdateDataManager();
+        //UpdateDataManager();
+        //AddGameCoinsToTotal();
+        SimpleAddGameCoinsToTotal();
         HideGameOverScreen();
         SceneManager.LoadScene("Scenes/MainMenu");
     }
@@ -895,7 +897,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpdateDataManager()
+    /*private void UpdateDataManager()
     {
         bool noTargetFound = false;
         try
@@ -930,6 +932,39 @@ public class GameManager : MonoBehaviour
             
             DataManager.Instance.SetData("totals", totals);
             DataManager.Instance.SaveData();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Catch: " + e);
+        }
+    }*/
+    
+    private void AddGameCoinsToTotal()
+    {
+        try
+        {
+            Debug.Log("Running add game coins to total");
+            JSONSave.instance.LoadData();
+            Debug.Log("Coin value is currently: " + JSONSave.instance.GetCoinsValue() + " and adding: " + CoinCounter.instance.coinCount + " for a total of: " + (JSONSave.instance.GetCoinsValue() + CoinCounter.instance.coinCount));
+            JSONSave.instance.SetCoinsValue(JSONSave.instance.GetCoinsValue() + CoinCounter.instance.coinCount);
+            JSONSave.instance.SaveData();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Catch: " + e);
+        }
+    }
+    
+    private void SimpleAddGameCoinsToTotal()
+    {
+        try
+        {
+            Debug.Log("Running Simple Add");
+            DataManager.Instance.LoadCoinsTotal();
+            int initialValue = DataManager.Instance.GetDataManagerCoinsTotal().value;
+            int saveValue = initialValue + CoinCounter.instance.coinCount;
+            DataManager.Instance.SaveCoinsTotal(saveValue);
+            Debug.Log("Saved coins at new total: " + saveValue);
         }
         catch (Exception e)
         {
