@@ -42,7 +42,7 @@ public class JSONSave : MonoBehaviour
 
     private void CreateCoinsData()
     {
-        coins = new Total();
+        //coins = new Total();
     }
 
     private void SetPaths()

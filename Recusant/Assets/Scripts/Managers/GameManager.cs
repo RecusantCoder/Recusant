@@ -330,9 +330,7 @@ public class GameManager : MonoBehaviour
     
     public void MainMenu()
     {
-        //UpdateDataManager();
-        //AddGameCoinsToTotal();
-        SimpleAddGameCoinsToTotal();
+        AddNewCoins();
         HideGameOverScreen();
         SceneManager.LoadScene("Scenes/MainMenu");
     }
@@ -897,74 +895,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*private void UpdateDataManager()
+    private void AddNewCoins()
     {
-        bool noTargetFound = false;
         try
         {
-            Debug.Log("Running UpdateDataManager");
-            DataManager.Instance.LoadData();
-            List<Total> totals = DataManager.Instance.GetData<Total>("totals");
-            if (totals.Count == 0)
-            {
-                Debug.Log("totals.count is 0");
-                noTargetFound = true;
-            }
-            foreach (var total in totals)
-            {
-                if (total.name == "coins")
-                {
-                    total.value += CoinCounter.instance.coinCount;
-                    Debug.Log("Saving CoinCount: " + CoinCounter.instance.coinCount + " new total: " + total.value);
-                }
-                else
-                {
-                    noTargetFound = true;
-                }
-            }
-
-            if (noTargetFound)
-            {
-                Total newTotal = new Total(CoinCounter.instance.coinCount, "coins");
-                totals.Add(newTotal);
-                Debug.Log("Saving CoinCount: " + CoinCounter.instance.coinCount + " new total: " + newTotal.value);
-            }
+            Debug.Log("Running Add New Coins");
+            DataManager dataManager = DataManager.Instance;
+            List<Total> loadedData = dataManager.LoadData<Total>(DataManager.DataType.Total);
+            // Find the specific Total object by name
+            Total totalToModify = loadedData.Find(t => t.name == "coinsTotal");
             
-            DataManager.Instance.SetData("totals", totals);
-            DataManager.Instance.SaveData();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Catch: " + e);
-        }
-    }*/
-    
-    private void AddGameCoinsToTotal()
-    {
-        try
-        {
-            Debug.Log("Running add game coins to total");
-            JSONSave.instance.LoadData();
-            Debug.Log("Coin value is currently: " + JSONSave.instance.GetCoinsValue() + " and adding: " + CoinCounter.instance.coinCount + " for a total of: " + (JSONSave.instance.GetCoinsValue() + CoinCounter.instance.coinCount));
-            JSONSave.instance.SetCoinsValue(JSONSave.instance.GetCoinsValue() + CoinCounter.instance.coinCount);
-            JSONSave.instance.SaveData();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Catch: " + e);
-        }
-    }
-    
-    private void SimpleAddGameCoinsToTotal()
-    {
-        try
-        {
-            Debug.Log("Running Simple Add");
-            DataManager.Instance.LoadCoinsTotal();
-            int initialValue = DataManager.Instance.GetDataManagerCoinsTotal().value;
-            int saveValue = initialValue + CoinCounter.instance.coinCount;
-            DataManager.Instance.SaveCoinsTotal(saveValue);
-            Debug.Log("Saved coins at new total: " + saveValue);
+            if (totalToModify != null)
+            {
+                // Modify the value
+                totalToModify.value += CoinCounter.instance.coinCount;
+
+                // Save the modified list
+                dataManager.SaveData(loadedData, DataManager.DataType.Total);
+
+                Debug.Log($"Modified coins value");
+            }
+            else
+            {
+                Debug.Log($"Total not found.");
+            }
         }
         catch (Exception e)
         {

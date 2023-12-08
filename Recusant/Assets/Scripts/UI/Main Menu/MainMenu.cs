@@ -15,11 +15,6 @@ public class MainMenu : MonoBehaviour
     {
         LoadCoinCount();
     }
-
-    private void OnEnable()
-    {
-        //LoadCoinCount();
-    }
     
     public void PlayGame()
     {
@@ -33,23 +28,17 @@ public class MainMenu : MonoBehaviour
         Debug.Log("QUIT!");
     }
 
-    private void NewLoadCoinCount()
-    {
-        try
-        {
-            Debug.Log("New load coin count");
-            JSONSave.instance.LoadData();
-            coinDisplayText.text = JSONSave.instance.GetCoinsValue() + "";
-        }
-        catch (Exception e)
-        {
-            Debug.Log("error in NewLoadCoinCount: " + e);
-        }
-    }
-
     private void LoadCoinCount()
     {
-        coinDisplayText.text = DataManager.Instance.GetDataManagerCoinsTotal().value + "";
+        DataManager dataManager = DataManager.Instance;
+        List<Total> loadedData = dataManager.LoadData<Total>(DataManager.DataType.Total);
+        foreach (var total in loadedData)
+        {
+            if (total.name.Equals("coinsTotal"))
+            {
+                coinDisplayText.text = total.value + "";
+            }
+        }
         Debug.Log("Loaded Coin Count.");
     }
 
@@ -58,46 +47,5 @@ public class MainMenu : MonoBehaviour
         localCoinCount -= value;
         coinDisplayText.text = localCoinCount + "";
     }
-    
-    /*private void SaveToDataManager()
-    {
-        bool noTargetFound = false;
-        try
-        {
-            Debug.Log("Running SaveToDataManager in MainMenu");
-            DataManager.Instance.LoadData();
-            List<Total> totals = DataManager.Instance.GetData<Total>("totals");
-            if (totals.Count == 0)
-            {
-                Debug.Log("totals.count is 0");
-                noTargetFound = true;
-            }
-            foreach (var total in totals)
-            {
-                if (total.name == "coins")
-                {
-                    total.value = localCoinCount;
-                }
-                else
-                {
-                    noTargetFound = true;
-                }
-            }
-
-            if (noTargetFound)
-            {
-                //Total newTotal = new Total(0, "coins");
-                //totals.Add(newTotal);
-                Debug.Log("No target found.");
-            }
-            
-            DataManager.Instance.SetData("totals", totals);
-            DataManager.Instance.SaveData();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Catch: " + e);
-        }
-    }*/
     
 }
