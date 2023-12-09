@@ -21,7 +21,7 @@ public class DataManager
 
     public enum DataType
     {
-        Total, Achievement, Character, Setting
+        Total, Achievement, Character, Setting, Upgrade
     }
     
     [Serializable]
@@ -46,7 +46,7 @@ public class DataManager
     public List<T> LoadData<T>(DataType dataType) where T : class
     {
         string path = GetPath(dataType);
-
+        Debug.Log("Persistent Data Path: " + path);
         if (!File.Exists(path))
         {
             Debug.Log("No data file found.");
@@ -78,6 +78,9 @@ public class DataManager
                 break;
             case DataType.Setting:
                 path = Application.persistentDataPath + "/settings.json";
+                break;
+            case DataType.Upgrade:
+                path = Application.persistentDataPath + "/upgrades.json";
                 break;
             default:
                 Debug.Log("Default datatype");
@@ -111,48 +114,23 @@ public class DataManager
 
         List<Total> totals = new List<Total>
         {
-            new Total("coinsTotal", 0)
+            new Total("coinsTotal", 5)
+        };
+
+        List<Upgrade> upgrades = new List<Upgrade>
+        {
+            new Upgrade("Sprites/UpgradeSprites/Body_Armor", 1, "Armor", "Base armor increased."),
+            new Upgrade("Sprites/UpgradeSprites/coin",2, "Value", "Coin and orb values increased."),
+            new Upgrade("Sprites/UpgradeSprites/computer_chip",3, "Damage", "Overall damage increased."),
+            new Upgrade("Sprites/UpgradeSprites/Exolegs",4, "Speed", "Base speed increased."),
+            new Upgrade("Sprites/UpgradeSprites/haurio",5, "Attraction", "Base pickup radius increased.")
         };
         
         SaveData(achievements, DataType.Achievement);
         SaveData(characters, DataType.Character);
         SaveData(settings, DataType.Setting);
         SaveData(totals, DataType.Total);
+        SaveData(upgrades, DataType.Upgrade);
     }
-
-    /*public void LoadCoinsTotal()
-    {
-        string path = Application.persistentDataPath + "/data.json";
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            Total loadedData = JsonUtility.FromJson<Total>(json);
-            Debug.Log("Loaded coinsTotal: " + loadedData.name + " " + loadedData.value);
-            dataManagerCoinsTotal = loadedData;
-        }
-        else
-        {
-            Debug.Log("No coins total found.");
-        }
-    }
-
-    public void SaveCoinsTotal(int value)
-    {
-        Total coinsTotal = new Total();
-        coinsTotal.name = "coinsTotal";
-        coinsTotal.value = value;
-        string json = JsonUtility.ToJson(coinsTotal);
-        File.WriteAllText(Application.persistentDataPath + "/data.json", json);
-    }
-
-    public Total GetDataManagerCoinsTotal()
-    {
-        LoadCoinsTotal();
-        if (dataManagerCoinsTotal == null)
-        {
-            Debug.Log("dataManagerCoinsTotal was null");
-            SaveCoinsTotal(0);
-        }
-        return dataManagerCoinsTotal;
-    }*/
+    
 }
