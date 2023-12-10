@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
 
 public class MenuPanel : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MenuPanel : MonoBehaviour
     public TMP_Text selectedDescription;
     public GameObject gridItem;
     public Transform gridContainer;
+    public GameObject chosenGridItem;
     
     void Start()
     {
@@ -47,10 +49,25 @@ public class MenuPanel : MonoBehaviour
         image.sprite = Resources.Load<Sprite>(imagePath);
         TMP_Text text = newGridItem.transform.Find("Name").GetComponent<TMP_Text>();
         text.text = name;
+        TMP_Text levelText = newGridItem.transform.Find("Level").GetComponent<TMP_Text>();
+        levelText.text = "Level 1";
         
         GridItem gridItemScript = newGridItem.GetComponent<GridItem>();
         gridItemScript.upgrade = currentUpgrade;
         gridItemScript.selectedDescription = selectedDescription;
         gridItemScript.selectedUpgradePrice = selectedUpgradePrice;
+        gridItemScript.menuPanel = gameObject.GetComponent<MenuPanel>();
+        gridItemScript.GridItemSelected();
     }
+    
+    public void BuyUpgrade()
+    {
+        GridItem gridItem = chosenGridItem.GetComponent<GridItem>();
+        if (gridItem.upgrade.rank != gridItem.upgrade.prices.Length)
+        {
+            gridItem.upgrade.rank++;
+            gridItem.UpdateGridItemUI();
+        }
+    }
+    
 }

@@ -12,11 +12,14 @@ public class GridItem : MonoBehaviour
     
     public TMP_Text selectedUpgradePrice;
     public TMP_Text selectedDescription;
+
+    public MenuPanel menuPanel;
     
     public void GridItemSelected()
     {
         selectedDescription.text = upgrade.description;
-        selectedUpgradePrice.text = upgrade.price.ToString();
+        selectedUpgradePrice.text = GetCurrentPrice().ToString();
+        menuPanel.chosenGridItem = gameObject;
         
         StartCoroutine(ButtonClickEffect());
     }
@@ -32,4 +35,17 @@ public class GridItem : MonoBehaviour
         // Reset the button color to its original state
         gridItemBackground.color = Color.white;
     }
+
+    private int GetCurrentPrice()
+    {
+        return upgrade.prices[upgrade.rank - 1];
+    }
+
+    public void UpdateGridItemUI()
+    {
+        selectedUpgradePrice.text = GetCurrentPrice().ToString();
+        TMP_Text levelText = transform.Find("Level").GetComponent<TMP_Text>();
+        levelText.text = "Level " + upgrade.rank;
+    }
+    
 }
