@@ -36,7 +36,7 @@ public class GridItem : MonoBehaviour
         gridItemBackground.color = Color.white;
     }
 
-    private int GetCurrentPrice()
+    public int GetCurrentPrice()
     {
         return upgrade.prices[upgrade.rank - 1];
     }

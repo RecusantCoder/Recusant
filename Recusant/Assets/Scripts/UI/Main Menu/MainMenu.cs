@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("QUIT!");
     }
 
-    private void LoadCoinCount()
+    public void LoadCoinCount()
     {
         DataManager dataManager = DataManager.Instance;
         List<Total> loadedData = dataManager.LoadData<Total>(DataManager.DataType.Total);
