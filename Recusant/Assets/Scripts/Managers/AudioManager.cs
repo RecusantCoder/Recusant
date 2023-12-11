@@ -113,7 +113,7 @@ public class AudioManager : MonoBehaviour
         {
             // Mute all sounds except "DrivingSong1"
             SetMusicVolume(previousMusicVolume);
-            SetSoundVolume(0);
+            SetSoundVolume(previousSoundVolume);
             Debug.Log("SceneLoaded MainMenu AudioManager");
         }
         else

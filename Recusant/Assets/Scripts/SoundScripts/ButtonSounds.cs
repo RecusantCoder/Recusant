@@ -4,30 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ButtonSounds : MonoBehaviour
 {
-    //public Button myButton;
+    public Button myButton;
     public bool isBackButton;
     
     void Start()
     {
-        //myButton.onClick.AddListener(PlayButtonSound);
+        myButton = GetComponent<Button>();
+        myButton.onClick.AddListener(PlayButtonSound);
     }
 
     public void PlayButtonSound()
     {
         if (isBackButton)
         {
-            AudioManager.instance.Play("lowsound");
+            AudioManager.instance.Play("Back");
         }
         else
         {
-            AudioManager.instance.Play("pauseOn");
+            AudioManager.instance.Play("Next");
         }
         Debug.Log("Played button sound!");
     }
-
-    public void PlayLowSound()
-    {
-        AudioManager.instance.Play("pauseOn");
-        Debug.Log("PlayedPauseOn sound");
-    }
+    
 }

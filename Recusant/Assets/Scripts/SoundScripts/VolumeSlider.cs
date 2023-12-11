@@ -45,4 +45,5 @@ public class VolumeSlider : MonoBehaviour
             audioManager.SetSoundVolume(slider.value);
         }
     }
+    
 }
