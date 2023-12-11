@@ -19,17 +19,19 @@ public class AudioManager : MonoBehaviour
 
     
     
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
+        // If an instance already exists, destroy the new one
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        
+
+        // Otherwise, set this as the instance and make it persistent
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -75,16 +77,8 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Sound at: " + volume);
         foreach (var s in AudioManager.instance.sounds)
         {
-            if (s == null)
+            if (!s.isMusic)
             {
-               Debug.Log("The sound is null"); 
-            }
-            if (s.isMusic == false)
-            {
-                if (s.source == null)
-                {
-                    Debug.Log("The s.source is null"); 
-                }
                 s.source.volume = volume;
                 PlayerPrefs.SetFloat("volumeSound", volume);
             }
@@ -110,18 +104,23 @@ public class AudioManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnSceneLoaded for AudioManager");
+        
+        // Store previous volumes
+        previousMusicVolume = PlayerPrefs.GetFloat("volumeMusic", 0.1f);
+        previousSoundVolume = PlayerPrefs.GetFloat("volumeSound", 0.1f);
+
         if (scene.name == "MainMenu")
         {
             // Mute all sounds except "DrivingSong1"
-            SetMusicVolume(0.1f);
+            SetMusicVolume(previousMusicVolume);
             SetSoundVolume(0);
             Debug.Log("SceneLoaded MainMenu AudioManager");
         }
         else
         {
             // Restore the previous audio volumes
-            SetMusicVolume(0.1f);
-            SetSoundVolume(0.1f);
+            SetMusicVolume(previousMusicVolume);
+            SetSoundVolume(previousSoundVolume);
             Debug.Log("Sceneloaded other AudioManager");
         }
     }

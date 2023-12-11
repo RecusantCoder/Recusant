@@ -1348,17 +1348,6 @@ RectTransform:
   m_AnchoredPosition: {x: -482.18057, y: -48.717163}
   m_SizeDelta: {x: -8.52002, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &383704550 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4024520914258713148, guid: 48f15ee942c8d483390a2ec5420ca461, type: 3}
-  m_PrefabInstance: {fileID: 1156376173}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a02610f61463463895a91a31b66a567, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &452194959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,6 +2024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 760524956}
   - component: {fileID: 760524957}
+  - component: {fileID: 760524958}
   m_Layer: 5
   m_Name: VolumeSound
   m_TagString: Untagged
@@ -2115,19 +2105,20 @@ MonoBehaviour:
   m_Value: 0.1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 383704550}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SetSoundVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &760524958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760524955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3415670a8d36f477aaad028dc84dbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMusicSlider: 0
 --- !u!1 &848515852
 GameObject:
   m_ObjectHideFlags: 0
@@ -6587,6 +6578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2047326739}
   - component: {fileID: 2047326740}
+  - component: {fileID: 2047326741}
   m_Layer: 5
   m_Name: MusicSound
   m_TagString: Untagged
@@ -6667,19 +6659,20 @@ MonoBehaviour:
   m_Value: 0.1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 383704550}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SetMusicVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &2047326741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047326738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3415670a8d36f477aaad028dc84dbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMusicSlider: 1
 --- !u!1 &2065657758
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,6 @@ public class ButtonSounds : MonoBehaviour
     public void PlayLowSound()
     {
         AudioManager.instance.Play("pauseOn");
-        Debug.Log("PlayedLOwSound");
+        Debug.Log("PlayedPauseOn sound");
     }
 }
