@@ -31,6 +31,8 @@ public class VolumeSlider : MonoBehaviour
 
         // Set up the On Value Changed callback
         slider.onValueChanged.AddListener(delegate { OnSliderValueChanged(); });
+        
+        SetInitialSliderValue();
     }
 
     // Callback method for the slider value changed event
@@ -44,6 +46,12 @@ public class VolumeSlider : MonoBehaviour
         {
             audioManager.SetSoundVolume(slider.value);
         }
+    }
+    
+    private void SetInitialSliderValue()
+    {
+        float initialVolume = isMusicSlider ? audioManager.previousMusicVolume : audioManager.previousSoundVolume;
+        slider.value = initialVolume;
     }
     
 }

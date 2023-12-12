@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour
     //This variable should be moved to a proper instanced and non destroyable
     public String chosenName;
     
-    private float previousMusicVolume;
-    private float previousSoundVolume;
+    public float previousMusicVolume;
+    public float previousSoundVolume;
 
     
     
@@ -108,21 +108,11 @@ public class AudioManager : MonoBehaviour
         // Store previous volumes
         previousMusicVolume = PlayerPrefs.GetFloat("volumeMusic", 0.1f);
         previousSoundVolume = PlayerPrefs.GetFloat("volumeSound", 0.1f);
-
-        if (scene.name == "MainMenu")
-        {
-            // Mute all sounds except "DrivingSong1"
-            SetMusicVolume(previousMusicVolume);
-            SetSoundVolume(previousSoundVolume);
-            Debug.Log("SceneLoaded MainMenu AudioManager");
-        }
-        else
-        {
-            // Restore the previous audio volumes
-            SetMusicVolume(previousMusicVolume);
-            SetSoundVolume(previousSoundVolume);
-            Debug.Log("Sceneloaded other AudioManager");
-        }
+        
+        SetMusicVolume(previousMusicVolume);
+        SetSoundVolume(previousSoundVolume);
+        
+        Debug.Log("music volume: " + previousMusicVolume + " sound volume: " + previousSoundVolume);
     }
 
 
