@@ -25,16 +25,24 @@ public class CoinCounter : MonoBehaviour
     
     [SerializeField]
     public TMP_Text myTextElement;
-    public int coinCount = 0;
+    public float coinCount = 0;
 
     private void Start()
     {
         myTextElement.text = 0 + "";
     }
 
+    //Takes the amount of coins found and converts it to a float
+    //This float is multiplied by the modifier which is a percentage
+    //then the float value is set to an int for the coincounter UI
+    //ie. a modifier of 2 is a 20% coin increase
     public void CoinsFound(int amount)
     {
-        coinCount += amount;
-        myTextElement.text = coinCount + "";
+        float floatAmount = amount;
+        float valueModifier = floatAmount * PlayerManager.instance.player.GetComponent<PlayerStats>().value.GetValue();
+        valueModifier = (valueModifier / 10) + 1;
+        floatAmount *= valueModifier;
+        coinCount += floatAmount;
+        myTextElement.text = Mathf.RoundToInt(coinCount) + "";
     }
 }

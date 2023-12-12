@@ -83,7 +83,7 @@ public class MenuPanel : MonoBehaviour
         TMP_Text text = newGridItem.transform.Find("Name").GetComponent<TMP_Text>();
         text.text = name;
         TMP_Text levelText = newGridItem.transform.Find("Level").GetComponent<TMP_Text>();
-        levelText.text = currentUpgrade.rank.ToString();
+        levelText.text = "Level " + currentUpgrade.rank;
         
         GridItem gridItemScript = newGridItem.GetComponent<GridItem>();
         gridItemScript.upgrade = currentUpgrade;

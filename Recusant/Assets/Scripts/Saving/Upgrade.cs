@@ -8,7 +8,7 @@ public class Upgrade
     public int rank; //The current rank the player can purchase
 
     // Constructor
-    public Upgrade(string imagePath, int price, string name, string description, int[] prices, int rank)
+    public Upgrade(string imagePath, string name, string description, int[] prices, int rank)
     {
         this.imagePath = imagePath;
         this.name = name;

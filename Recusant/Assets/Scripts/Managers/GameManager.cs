@@ -908,7 +908,7 @@ public class GameManager : MonoBehaviour
             if (totalToModify != null)
             {
                 // Modify the value
-                totalToModify.value += CoinCounter.instance.coinCount;
+                totalToModify.value += Mathf.RoundToInt(CoinCounter.instance.coinCount);
 
                 // Save the modified list
                 dataManager.SaveData(loadedData, DataManager.DataType.Total);

@@ -119,11 +119,11 @@ public class DataManager
 
         List<Upgrade> upgrades = new List<Upgrade>
         {
-            new Upgrade("Sprites/UpgradeSprites/Body_Armor", 1, "Armor", "Base armor increased.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/coin",2, "Value", "Coin and orb values increased.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/computer_chip",3, "Damage", "Overall damage increased.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/Exolegs",4, "Speed", "Base speed increased.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/haurio",5, "Attraction", "Base pickup radius increased.", new int[] { 2, 4, 6, 8, 10 }, 1)
+            new Upgrade("Sprites/UpgradeSprites/Body_Armor", "Armor", "Armor up by 2 per lvl", new int[] { 2, 4, 6, 8, 10 }, 1),
+            new Upgrade("Sprites/UpgradeSprites/coin", "Value", "Coin value up by 10% per lvl.", new int[] { 2, 4, 6, 8, 10 }, 1),
+            new Upgrade("Sprites/UpgradeSprites/computer_chip", "Damage", "DMG up by 5 per lvl.", new int[] { 2, 4, 6, 8, 10 }, 1),
+            new Upgrade("Sprites/UpgradeSprites/Exolegs", "Speed", "Speed up by 20% per lvl.", new int[] { 2, 4, 6, 8, 10 }, 1),
+            new Upgrade("Sprites/UpgradeSprites/haurio", "Attraction", "Pickup Radius up by 20% per lvl", new int[] { 2, 4, 6, 8, 10 }, 1)
         };
         
         SaveData(achievements, DataType.Achievement);

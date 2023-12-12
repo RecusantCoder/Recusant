@@ -19,6 +19,7 @@ public class PlayerStats : CharacterStats
     {
         //healthBarUI = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
         healthbar.SetMaxHealth(currentHealth);
+        ApplyUpgrades();
     }
     
     private void Update()
@@ -63,5 +64,42 @@ public class PlayerStats : CharacterStats
         //healthBarUI.text = healthChange.ToString() + "%";
         healthbar.SetHealth((int)healthChange);
     }
-    
+
+    public void ApplyUpgrades()
+    {
+        try
+        {
+            Debug.Log("Running ApplyUpgrades");
+            DataManager dataManager = DataManager.Instance;
+            List<Upgrade> loadedData = dataManager.LoadData<Upgrade>(DataManager.DataType.Upgrade);
+
+            foreach (var upgrade in loadedData)
+            {
+                if (upgrade.rank > 1)
+                {
+                    Debug.Log("Applying Upgrades to " + upgrade.name);
+                    if (upgrade.name.Equals("Armor"))
+                    {
+                        armor.AddModifier((upgrade.rank - 1)* 2);
+                    } else if (upgrade.name.Equals("Value"))
+                    {
+                        value.AddModifier((upgrade.rank - 1));
+                    } else if (upgrade.name.Equals("Damage"))
+                    {
+                        damage.AddModifier((upgrade.rank - 1)* 5);
+                    } else if (upgrade.name.Equals("Speed"))
+                    {
+                        speed.AddModifier((upgrade.rank - 1));
+                    } else if (upgrade.name.Equals("Attraction"))
+                    {
+                        pickupRadius.AddModifier((upgrade.rank - 1)* 2);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Catch: " + e);
+        }
+    }
 }
