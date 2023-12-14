@@ -114,7 +114,8 @@ public class DataManager
 
         List<Total> totals = new List<Total>
         {
-            new Total("coinsTotal", 5)
+            new Total("coinsTotal", 5),
+            new Total("monstersKilled", 0)
         };
 
         List<Upgrade> upgrades = new List<Upgrade>
