@@ -118,8 +118,7 @@ public class DataManager
         {
             new Total("coinsTotal", 5),
             new Total("monstersKilled", 0),
-            new Total("timePlayedInMinutes", 0),
-            new Total("currentGameTimePlayedInMinutes",0)
+            new Total("timePlayedInMinutes", 0)
         };
 
         List<Upgrade> upgrades = new List<Upgrade>

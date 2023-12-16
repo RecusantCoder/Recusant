@@ -18,6 +18,7 @@ public class AchievementManager : MonoBehaviour
     }
     
     private List<Achievement> achievements;
+    private int localMinutesPassed = 0;
     
     
     //Events
@@ -76,7 +77,7 @@ public class AchievementManager : MonoBehaviour
             // Check conditions for unlocking achievements related to killing monsters
             if (monstersKilledTotal.value >= MONSTER_KILL_THRESHOLD_1)
             {
-                UnlockAchievement("First Kill");
+                UnlockAchievement("1st Kill");
             } else if (monstersKilledTotal.value >= MONSTER_KILL_THRESHOLD_2)
             {
                 UnlockAchievement("100 Down");
@@ -90,27 +91,19 @@ public class AchievementManager : MonoBehaviour
     {
         List<Total> totals = DataManager.Instance.LoadData<Total>(DataManager.DataType.Total);
         Total timePlayedTotal = totals.Find(total => total.name == "timePlayedInMinutes");
-        Total currentGameTimePlayedTotal = totals.Find(total => total.name == "currentGameTimePlayedInMinutes");
 
         if (timePlayedTotal != null)
         {
             timePlayedTotal.value++;
-
-            if (currentGameTimePlayedTotal.value > 30)
-            {
-                currentGameTimePlayedTotal.value = 0;
-            }
-            else
-            {
-                currentGameTimePlayedTotal.value++;
-            }
             DataManager.Instance.SaveData(totals, DataManager.DataType.Total);
 
+            localMinutesPassed++;
+
             // Check conditions for unlocking achievements related to killing monsters
-            if (currentGameTimePlayedTotal.value >= MINUTES_PASSED_THRESHOLD_1)
+            if (localMinutesPassed >= MINUTES_PASSED_THRESHOLD_1)
             {
-                UnlockAchievement("Five Minute Hero");
-            } else if (currentGameTimePlayedTotal.value >= MINUTES_PASSED_THRESHOLD_2)
+                UnlockAchievement("5 Minute Hero");
+            } else if (localMinutesPassed >= MINUTES_PASSED_THRESHOLD_2)
             {
                 UnlockAchievement("Halfway There");
             }

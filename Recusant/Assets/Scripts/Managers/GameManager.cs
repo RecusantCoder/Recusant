@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     //Event for saving time with Achievement Manager
     public event Action OnMinutePassed;
+    int lastMinuteTriggered = 0;
 
 
 
@@ -159,9 +160,9 @@ public class GameManager : MonoBehaviour
         string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
         
         //Calling when a minute has passed
-        int lastMinuteTriggered = 0;
         if (minutes > lastMinuteTriggered)
         {
+            Debug.Log("Minute Unlocked!");
             OnMinutePassed.Invoke();
             lastMinuteTriggered = minutes;
         }
