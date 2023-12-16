@@ -106,7 +106,8 @@ public class GameManager : MonoBehaviour
     
     private List<Coroutine> coroutineList = new List<Coroutine>();
 
-
+    //Event for saving time with Achievement Manager
+    public event Action OnMinutePassed;
 
 
 
@@ -156,6 +157,15 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timer / 60F);
         int seconds = Mathf.FloorToInt(timer - minutes * 60);
         string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+        
+        //Calling when a minute has passed
+        int lastMinuteTriggered = 0;
+        if (minutes > lastMinuteTriggered)
+        {
+            OnMinutePassed.Invoke();
+            lastMinuteTriggered = minutes;
+        }
+        
         return niceTime;
     }
 
@@ -925,5 +935,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Catch: " + e);
         }
     }
+    
 
 }

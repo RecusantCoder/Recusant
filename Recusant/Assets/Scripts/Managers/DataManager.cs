@@ -95,8 +95,10 @@ public class DataManager
         // Set up default data for different lists
         List<Achievement> achievements = new List<Achievement>
         {
-            new Achievement("", false, "First Kill", "Kill your first monster."),
-            new Achievement("", false, "Five Minute Hero", "Last more than five minutes.")
+            new Achievement("", false, "1st Kill", "Kill your 1st enemy."),
+            new Achievement("", false, "100 Down", "Kill 100 enemies."),
+            new Achievement("", false, "5 Minute Hero", "Last more than 5 minutes."),
+            new Achievement("", false, "Halfway There", "Last more than 15 minutes.")
             // Add more achievements as needed
         };
 
@@ -115,7 +117,9 @@ public class DataManager
         List<Total> totals = new List<Total>
         {
             new Total("coinsTotal", 5),
-            new Total("monstersKilled", 0)
+            new Total("monstersKilled", 0),
+            new Total("timePlayedInMinutes", 0),
+            new Total("currentGameTimePlayedInMinutes",0)
         };
 
         List<Upgrade> upgrades = new List<Upgrade>

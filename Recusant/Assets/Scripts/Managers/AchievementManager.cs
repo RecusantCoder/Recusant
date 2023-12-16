@@ -24,8 +24,13 @@ public class AchievementManager : MonoBehaviour
     public event Action<string> OnAchievementUnlocked;
     
     
-    //Thresholds
+    //Thresholds for kills
     private const int MONSTER_KILL_THRESHOLD_1 = 1;
+    private const int MONSTER_KILL_THRESHOLD_2 = 100;
+    
+    //Thresholds for time
+    private const int MINUTES_PASSED_THRESHOLD_1 = 5;
+    private const int MINUTES_PASSED_THRESHOLD_2 = 15;
     
     
     public void Start()
@@ -33,6 +38,7 @@ public class AchievementManager : MonoBehaviour
         // Subscribe to events or perform other initialization tasks
         // For example, you might want to subscribe to an event that triggers when a condition is met in your game.
         KillCounter.instance.OnKill += HandleMonsterKilled;
+        GameManager.instance.OnMinutePassed += HandleMinutePassed;
     }
     
     public void UnlockAchievement(string achievementName)
@@ -68,22 +74,53 @@ public class AchievementManager : MonoBehaviour
             DataManager.Instance.SaveData(totals, DataManager.DataType.Total);
 
             // Check conditions for unlocking achievements related to killing monsters
-            CheckMonsterKillingAchievements(monstersKilledTotal.value);
+            if (monstersKilledTotal.value >= MONSTER_KILL_THRESHOLD_1)
+            {
+                UnlockAchievement("First Kill");
+            } else if (monstersKilledTotal.value >= MONSTER_KILL_THRESHOLD_2)
+            {
+                UnlockAchievement("100 Down");
+            }
         }
     }
-
-    private void CheckMonsterKillingAchievements(int totalMonstersKilled)
+    
+    //handles a minute passing and updates the total time played
+    //and current game time played up to 31 minutes
+    private void HandleMinutePassed()
     {
-        if (totalMonstersKilled >= MONSTER_KILL_THRESHOLD_1)
+        List<Total> totals = DataManager.Instance.LoadData<Total>(DataManager.DataType.Total);
+        Total timePlayedTotal = totals.Find(total => total.name == "timePlayedInMinutes");
+        Total currentGameTimePlayedTotal = totals.Find(total => total.name == "currentGameTimePlayedInMinutes");
+
+        if (timePlayedTotal != null)
         {
-            UnlockAchievement("First Kill");
+            timePlayedTotal.value++;
+
+            if (currentGameTimePlayedTotal.value > 30)
+            {
+                currentGameTimePlayedTotal.value = 0;
+            }
+            else
+            {
+                currentGameTimePlayedTotal.value++;
+            }
+            DataManager.Instance.SaveData(totals, DataManager.DataType.Total);
+
+            // Check conditions for unlocking achievements related to killing monsters
+            if (currentGameTimePlayedTotal.value >= MINUTES_PASSED_THRESHOLD_1)
+            {
+                UnlockAchievement("Five Minute Hero");
+            } else if (currentGameTimePlayedTotal.value >= MINUTES_PASSED_THRESHOLD_2)
+            {
+                UnlockAchievement("Halfway There");
+            }
         }
-        
     }
     
     private void OnDestroy()
     {
         // Unsubscribe from events to avoid memory leaks
         KillCounter.instance.OnKill -= HandleMonsterKilled;
+        GameManager.instance.OnMinutePassed += HandleMinutePassed;
     }
 }
