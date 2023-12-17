@@ -19,6 +19,7 @@ public class AchievementManager : MonoBehaviour
     
     private List<Achievement> achievements;
     private int localMinutesPassed = 0;
+    private int localLevelsCount = 0;
     
     
     //Events
@@ -26,12 +27,22 @@ public class AchievementManager : MonoBehaviour
     
     
     //Thresholds for kills
-    private const int MONSTER_KILL_THRESHOLD_1 = 1;
-    private const int MONSTER_KILL_THRESHOLD_2 = 100;
+    private const int MONSTER_KILL_THRESHOLD_1 = 100;
+    private const int MONSTER_KILL_THRESHOLD_2 = 1000;
+    private const int MONSTER_KILL_THRESHOLD_3 = 10000;
     
     //Thresholds for time
     private const int MINUTES_PASSED_THRESHOLD_1 = 5;
     private const int MINUTES_PASSED_THRESHOLD_2 = 15;
+    private const int MINUTES_PASSED_THRESHOLD_3 = 30;
+    
+    //Thresholds for Levels
+    private const int LEVEL_THRESHOLD_1 = 5;
+    private const int LEVEL_THRESHOLD_2 = 15;
+    private const int LEVEL_THRESHOLD_3 = 30;
+    private const int LEVEL_THRESHOLD_4 = 60;
+    private const int LEVEL_THRESHOLD_5 = 90;
+    
     
     
     public void Start()
@@ -40,6 +51,8 @@ public class AchievementManager : MonoBehaviour
         // For example, you might want to subscribe to an event that triggers when a condition is met in your game.
         KillCounter.instance.OnKill += HandleMonsterKilled;
         GameManager.instance.OnMinutePassed += HandleMinutePassed;
+        LevelBar.instance.PlayerHasLevelledUp += HandleLevelUp;
+        Inventory.instance.ItemWasAdded += HandleInventoryChange;
     }
     
     public void UnlockAchievement(string achievementName)
@@ -75,12 +88,15 @@ public class AchievementManager : MonoBehaviour
             DataManager.Instance.SaveData(totals, DataManager.DataType.Total);
 
             // Check conditions for unlocking achievements related to killing monsters
-            if (monstersKilledTotal.value >= MONSTER_KILL_THRESHOLD_1)
+            if (monstersKilledTotal.value == MONSTER_KILL_THRESHOLD_1)
             {
-                UnlockAchievement("1st Kill");
-            } else if (monstersKilledTotal.value >= MONSTER_KILL_THRESHOLD_2)
+                UnlockAchievement("Targeting_Computer");
+            } else if (monstersKilledTotal.value == MONSTER_KILL_THRESHOLD_2)
             {
-                UnlockAchievement("100 Down");
+                UnlockAchievement("Qimmiq");
+            } else if (monstersKilledTotal.value == MONSTER_KILL_THRESHOLD_3)
+            {
+                UnlockAchievement("Erikson");
             }
         }
     }
@@ -100,13 +116,74 @@ public class AchievementManager : MonoBehaviour
             localMinutesPassed++;
 
             // Check conditions for unlocking achievements related to killing monsters
-            if (localMinutesPassed >= MINUTES_PASSED_THRESHOLD_1)
+            if (localMinutesPassed == MINUTES_PASSED_THRESHOLD_1)
             {
-                UnlockAchievement("5 Minute Hero");
-            } else if (localMinutesPassed >= MINUTES_PASSED_THRESHOLD_2)
+                UnlockAchievement("Grenade");
+            } else if (localMinutesPassed == MINUTES_PASSED_THRESHOLD_2)
             {
-                UnlockAchievement("Halfway There");
+                UnlockAchievement("LazerGun");
+            } else if (localMinutesPassed == MINUTES_PASSED_THRESHOLD_3)
+            {
+                UnlockAchievement("Zeno");
             }
+        }
+    }
+
+    // checks for relevant achievement level thresholds
+    private void HandleLevelUp()
+    {
+        localLevelsCount++;
+        if (localLevelsCount == LEVEL_THRESHOLD_1)
+        {
+            UnlockAchievement("Exolegs");
+        } else if (localLevelsCount == LEVEL_THRESHOLD_2)
+        {
+            UnlockAchievement("Haurio");
+        } else if (localLevelsCount == LEVEL_THRESHOLD_3)
+        {
+            UnlockAchievement("Body_Armor");
+        } else if (localLevelsCount == LEVEL_THRESHOLD_4)
+        {
+            UnlockAchievement("Flashbang");
+        } else if (localLevelsCount == LEVEL_THRESHOLD_5)
+        {
+            UnlockAchievement("Jacobi");
+        }
+    }
+
+    // checks for weapon upgrade or power up related achievements
+    private void HandleInventoryChange(string itemName)
+    {
+        int itemLevel = GameManager.instance.weaponLevelCount[itemName];
+        if (itemName.Equals("Glock"))
+        {
+            if (itemLevel == 10)
+            {
+                UnlockAchievement("Molotov");
+            }
+        } else if (itemName.Equals("Molotov"))
+        {
+            if (itemLevel == 10)
+            {
+                UnlockAchievement("Flamethrower");
+            }
+        } else if (itemName.Equals("Flamethrower"))
+        {
+            if (itemLevel == 10)
+            {
+                UnlockAchievement("Guevara");
+            }
+        } else if (itemName.Equals("Fleshy"))
+        {
+            UnlockAchievement("Fleshy");
+        }
+    }
+
+    public void PowerUpFound(string powerUpName)
+    {
+        if (powerUpName.Equals("Amulet"))
+        {
+            UnlockAchievement("Fulmen");
         }
     }
     
@@ -114,6 +191,8 @@ public class AchievementManager : MonoBehaviour
     {
         // Unsubscribe from events to avoid memory leaks
         KillCounter.instance.OnKill -= HandleMonsterKilled;
-        GameManager.instance.OnMinutePassed += HandleMinutePassed;
+        GameManager.instance.OnMinutePassed -= HandleMinutePassed;
+        LevelBar.instance.PlayerHasLevelledUp -= HandleLevelUp;
+        Inventory.instance.ItemWasAdded -= HandleInventoryChange;
     }
 }

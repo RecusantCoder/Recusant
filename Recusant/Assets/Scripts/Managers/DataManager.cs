@@ -95,10 +95,22 @@ public class DataManager
         // Set up default data for different lists
         List<Achievement> achievements = new List<Achievement>
         {
-            new Achievement("", false, "1st Kill", "Kill your 1st enemy."),
-            new Achievement("", false, "100 Down", "Kill 100 enemies."),
-            new Achievement("", false, "5 Minute Hero", "Last more than 5 minutes."),
-            new Achievement("", false, "Halfway There", "Last more than 15 minutes.")
+            new Achievement("", false, "Exolegs", "Reach level 5."),
+            new Achievement("", false, "Haurio", "Reach level 15."),
+            new Achievement("", false, "Body_Armor", "Reach level 30."),
+            new Achievement("", false, "Flashbang", "Reach level 60."),
+            new Achievement("", false, "Jacobi", "Reach level 90."),
+            new Achievement("", false, "Grenade", "Last more than 5 minutes."),
+            new Achievement("", false, "LazerGun", "Last more than 15 minutes."),
+            new Achievement("", false, "Zeno", "Last more than 30 minutes."),
+            new Achievement("", false, "Molotov", "Get a Glock to level 10."),
+            new Achievement("", false, "Flamethrower", "Get a Molotov to level 10."),
+            new Achievement("", false, "Fleshy", "Find a Fleshy on the map."),
+            new Achievement("", false, "Fulmen", "Pickup an Amulet."),
+            new Achievement("", false, "Guevara", "Get Flamethrower to level 10."),
+            new Achievement("", false, "Targeting_Computer", "Kill 100 enemies."),
+            new Achievement("", false, "Qimmiq", "Kill 1000 enemies."),
+            new Achievement("", false, "Erikson", "Kill 10000 enemies")
             // Add more achievements as needed
         };
 

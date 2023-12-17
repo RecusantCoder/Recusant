@@ -37,8 +37,11 @@ public class LevelBar : MonoBehaviour
     public static event LevelUpEventHandler OnLevelUp;
 
     public bool playerActionTaken = false;
+    
+    // Notify Levelup
+    public event Action PlayerHasLevelledUp;
 
-
+    
     private void Start()
     {
         myTextElement.text = "LVL 0";
@@ -78,6 +81,9 @@ public class LevelBar : MonoBehaviour
                 OnLevelUp(playerLevel);
                 Debug.Log("Called OnLevelUp");
             }
+            
+            PlayerHasLevelledUp?.Invoke();
+            
         }
     }
 

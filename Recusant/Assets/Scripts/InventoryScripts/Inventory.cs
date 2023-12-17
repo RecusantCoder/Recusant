@@ -27,11 +27,15 @@ public class Inventory : MonoBehaviour
     public List<Item> items = new List<Item>();
     public int space = 8;
     
+    //Event for Item has been added
+    public event Action<string> ItemWasAdded;
+    
     //sending item removal
     public event Action<Item> OnItemRemoved;
 
     public bool Add(Item item, bool pickedUp)
     {
+        ItemWasAdded?.Invoke(item.itemName);
         Debug.Log("in inventory add method with: " + item.itemName);
         bool alreadyInInventory = false;
         foreach (var pickup in items)

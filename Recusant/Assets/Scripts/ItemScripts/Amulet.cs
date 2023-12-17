@@ -7,6 +7,7 @@ public class Amulet : Interactable
     public string thisName;
     private GameObject _player;
     private bool isPickedUp = false;
+    
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class Amulet : Interactable
 
     void PickUp()
     {
+        AchievementManager.Instance.PowerUpFound("Amulet");
         StartCoroutine(MoveToPlayerAndDestroy());
     }
     
