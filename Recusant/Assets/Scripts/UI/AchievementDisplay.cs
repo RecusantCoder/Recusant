@@ -23,24 +23,65 @@ public class AchievementDisplay : MonoBehaviour
     
     #endregion
     
+    public TMP_Text achievementText;
+    public TMP_Text achievementDesc;
+    public float slideSpeed = 100f;
+    public float displayDuration = 2f;
     
-    [SerializeField]
-    public TMP_Text myTextElement;
-    
+    private RectTransform rectTransform;
+    private Vector3 originalPosition;
 
     private void Start()
     {
-        AchievementManager.Instance.OnAchievementUnlocked += DisplayAchievement;
+        rectTransform = GetComponent<RectTransform>();
+        originalPosition = rectTransform.anchoredPosition;
+        
+        Invoke(nameof(SubscribeToEvents), 1f);
     }
 
-    private void DisplayAchievement(string achievementName)
+    private void SubscribeToEvents()
     {
-        Debug.Log("Achievement Unlocked: " + achievementName);
+        GameManager.instance.GetComponent<AchievementManager>().OnAchievementUnlocked += DisplayAchievement;
+    }
+
+    private void DisplayAchievement(Achievement achievement)
+    {
+        Debug.Log("Achievement Unlocked: " + achievement.name);
+        achievementText.text = "Unlocked: " + achievement.name;
+        achievementDesc.text = achievement.description;
+        StartCoroutine("SlideInAndOut");
+    }
+    
+    private IEnumerator SlideInAndOut()
+    {
+        // Slide in
+        float timer = 0f;
+        while (timer < displayDuration)
+        {
+            rectTransform.anchoredPosition += Vector2.down * slideSpeed * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Wait for a short duration
+        yield return new WaitForSeconds(displayDuration);
+
+        // Slide out
+        timer = 0f;
+        while (timer < displayDuration)
+        {
+            rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, originalPosition, timer / displayDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset position
+        rectTransform.anchoredPosition = originalPosition;
     }
 
     private void OnDestroy()
     {
-        AchievementManager.Instance.OnAchievementUnlocked -= DisplayAchievement;
+        GameManager.instance.GetComponent<AchievementManager>().OnAchievementUnlocked -= DisplayAchievement;
     }
 }
 

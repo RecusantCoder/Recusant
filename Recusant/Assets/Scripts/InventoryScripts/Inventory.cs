@@ -35,7 +35,6 @@ public class Inventory : MonoBehaviour
 
     public bool Add(Item item, bool pickedUp)
     {
-        ItemWasAdded?.Invoke(item.itemName);
         Debug.Log("in inventory add method with: " + item.itemName);
         bool alreadyInInventory = false;
         foreach (var pickup in items)
@@ -102,6 +101,8 @@ public class Inventory : MonoBehaviour
         {
             item.Use();
         }
+        
+        ItemWasAdded?.Invoke(item.itemName);
 
         return true;
     }

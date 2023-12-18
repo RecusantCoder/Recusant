@@ -23,11 +23,11 @@ public class AchievementManager : MonoBehaviour
     
     
     //Events
-    public event Action<string> OnAchievementUnlocked;
+    public event Action<Achievement> OnAchievementUnlocked;
     
     
     //Thresholds for kills
-    private const int MONSTER_KILL_THRESHOLD_1 = 100;
+    private const int MONSTER_KILL_THRESHOLD_1 = 1;
     private const int MONSTER_KILL_THRESHOLD_2 = 1000;
     private const int MONSTER_KILL_THRESHOLD_3 = 10000;
     
@@ -65,9 +65,9 @@ public class AchievementManager : MonoBehaviour
             achievement.unlocked = true;
             
             DataManager.Instance.SaveData(achievements, DataManager.DataType.Achievement);
-
+            
             // Invoke the event to notify that an achievement is unlocked
-            OnAchievementUnlocked?.Invoke(achievementName);
+            OnAchievementUnlocked?.Invoke(achievement);
 
             // Perform any other actions when an achievement is unlocked
             Debug.Log($"Achievement Unlocked: {achievementName}");
@@ -189,6 +189,7 @@ public class AchievementManager : MonoBehaviour
     
     private void OnDestroy()
     {
+        Debug.Log("Achievement Manager was destroyed");
         // Unsubscribe from events to avoid memory leaks
         KillCounter.instance.OnKill -= HandleMonsterKilled;
         GameManager.instance.OnMinutePassed -= HandleMinutePassed;

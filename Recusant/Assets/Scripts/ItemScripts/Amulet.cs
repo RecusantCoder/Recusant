@@ -26,7 +26,7 @@ public class Amulet : Interactable
 
     void PickUp()
     {
-        AchievementManager.Instance.PowerUpFound("Amulet");
+        GameManager.instance.GetComponent<AchievementManager>().PowerUpFound("Amulet");
         StartCoroutine(MoveToPlayerAndDestroy());
     }
     
