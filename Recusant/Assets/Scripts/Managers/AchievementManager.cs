@@ -20,6 +20,8 @@ public class AchievementManager : MonoBehaviour
     private List<Achievement> achievements;
     private int localMinutesPassed = 0;
     private int localLevelsCount = 0;
+
+    [SerializeField] private List<Item> unlockableWeapons;
     
     
     //Events
@@ -53,6 +55,7 @@ public class AchievementManager : MonoBehaviour
         GameManager.instance.OnMinutePassed += HandleMinutePassed;
         LevelBar.instance.PlayerHasLevelledUp += HandleLevelUp;
         Inventory.instance.ItemWasAdded += HandleInventoryChange;
+        AddUnlockedWeaponsToGMWeaponsList();
     }
     
     public void UnlockAchievement(string achievementName)
@@ -184,6 +187,29 @@ public class AchievementManager : MonoBehaviour
         if (powerUpName.Equals("Amulet"))
         {
             UnlockAchievement("Fulmen");
+        }
+    }
+
+    //Adds unlocked weapons to the GameManager's weapons list
+    public void AddUnlockedWeaponsToGMWeaponsList()
+    {
+        List<Achievement> achievements = DataManager.Instance.LoadData<Achievement>(DataManager.DataType.Achievement);
+        foreach (var achieve in achievements)
+        {
+            if (achieve.unlocked)
+            {
+                foreach (var item in unlockableWeapons)
+                {
+                    if (achieve.name.Equals(item.itemName))
+                    {
+                        if (!GameManager.instance.weaponsList.Contains(item))
+                        {
+                            GameManager.instance.weaponsList.Add(item);
+                            Debug.Log("purple Added " + item + " to GM Weapons List");
+                        }
+                    }
+                }
+            }
         }
     }
     
