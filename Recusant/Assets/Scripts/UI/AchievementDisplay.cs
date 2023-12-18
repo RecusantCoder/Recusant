@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class AchievementDisplay : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class AchievementDisplay : MonoBehaviour
     
     public TMP_Text achievementText;
     public TMP_Text achievementDesc;
+    public Image image;
     public float slideSpeed = 100f;
     public float displayDuration = 2f;
     
@@ -49,6 +51,7 @@ public class AchievementDisplay : MonoBehaviour
         Debug.Log("Achievement Unlocked: " + achievement.name);
         achievementText.text = "Unlocked: " + achievement.name;
         achievementDesc.text = achievement.description;
+        image.sprite = Resources.Load<Sprite>(achievement.imagePath);
         StartCoroutine("SlideInAndOut");
     }
     

@@ -95,22 +95,22 @@ public class DataManager
         // Set up default data for different lists
         List<Achievement> achievements = new List<Achievement>
         {
-            new Achievement("", false, "Exolegs", "Reach level 5."),
-            new Achievement("", false, "Haurio", "Reach level 15."),
-            new Achievement("", false, "Body_Armor", "Reach level 30."),
-            new Achievement("", false, "Flashbang", "Reach level 60."),
-            new Achievement("", false, "Jacobi", "Reach level 90."),
-            new Achievement("", false, "Grenade", "Last more than 5 minutes."),
-            new Achievement("", false, "LazerGun", "Last more than 15 minutes."),
-            new Achievement("", false, "Zeno", "Last more than 30 minutes."),
-            new Achievement("", false, "Molotov", "Get a Glock to level 10."),
-            new Achievement("", false, "Flamethrower", "Get a Molotov to level 10."),
-            new Achievement("", false, "Fleshy", "Find a Fleshy on the map."),
-            new Achievement("", false, "Fulmen", "Pickup an Amulet."),
-            new Achievement("", false, "Guevara", "Get Flamethrower to level 10."),
-            new Achievement("", false, "Targeting_Computer", "Kill 100 enemies."),
-            new Achievement("", false, "Qimmiq", "Kill 1000 enemies."),
-            new Achievement("", false, "Erikson", "Kill 10000 enemies")
+            new Achievement("Sprites/AchievementSprites/Exolegs", false, "Exolegs", "Reach level 5."),
+            new Achievement("Sprites/AchievementSprites/haurio", false, "Haurio", "Reach level 15."),
+            new Achievement("Sprites/AchievementSprites/Body_Armor", false, "Body_Armor", "Reach level 30."),
+            new Achievement("Sprites/AchievementSprites/flashbang", false, "Flashbang", "Reach level 60."),
+            new Achievement("Sprites/Makwa", false, "Jacobi", "Reach level 90."),
+            new Achievement("Sprites/AchievementSprites/grenadeFull", false, "Grenade", "Last more than 5 minutes."),
+            new Achievement("Sprites/AchievementSprites/LazerGun", false, "LazerGun", "Last more than 15 minutes."),
+            new Achievement("Sprites/Makwa", false, "Zeno", "Last more than 30 minutes."),
+            new Achievement("Sprites/AchievementSprites/molotov", false, "Molotov", "Get a Glock to level 10."),
+            new Achievement("Sprites/AchievementSprites/flamethrower", false, "Flamethrower", "Get a Molotov to level 10."),
+            new Achievement("Sprites/AchievementSprites/Fleshy", false, "Fleshy", "Find a Fleshy on the map."),
+            new Achievement("Sprites/AchievementSprites/pila_fulgur_1", false, "Fulmen", "Pickup an Amulet."),
+            new Achievement("Sprites/Makwa", false, "Guevara", "Get Flamethrower to level 10."),
+            new Achievement("Sprites/AchievementSprites/computer_chip", false, "Targeting_Computer", "Kill 100 enemies."),
+            new Achievement("Sprites/AchievementSprites/qimmiq1_1", false, "Qimmiq", "Kill 1000 enemies."),
+            new Achievement("Sprites/Makwa", false, "Erikson", "Kill 10000 enemies")
             // Add more achievements as needed
         };
 
