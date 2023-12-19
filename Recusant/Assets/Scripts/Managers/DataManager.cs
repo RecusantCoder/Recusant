@@ -106,10 +106,10 @@ public class DataManager
             new Achievement("Sprites/AchievementSprites/molotov", false, "Molotov", "Get a Glock to level 10."),
             new Achievement("Sprites/AchievementSprites/flamethrower", false, "Flamethrower", "Get a Molotov to level 10."),
             new Achievement("Sprites/AchievementSprites/Fleshy", false, "Fleshy", "Find a Fleshy on the map."),
-            new Achievement("Sprites/AchievementSprites/pila_fulgur_1", false, "Fulmen", "Pickup an Amulet."),
+            new Achievement("Sprites/AchievementSprites/fulmen", false, "Fulmen", "Pickup an Amulet."),
             new Achievement("Sprites/Makwa", false, "Guevara", "Get Flamethrower to level 10."),
             new Achievement("Sprites/AchievementSprites/computer_chip", false, "Targeting_Computer", "Kill 100 enemies."),
-            new Achievement("Sprites/AchievementSprites/qimmiq1_1", false, "Qimmiq", "Kill 1000 enemies."),
+            new Achievement("Sprites/AchievementSprites/qimmiq2", false, "Qimmiq", "Kill 1000 enemies."),
             new Achievement("Sprites/Makwa", false, "Erikson", "Kill 10000 enemies")
             // Add more achievements as needed
         };
