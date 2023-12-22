@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private bool hasPlayedOnce;
     private CharacterStats targetStats;
     private EnemyStats thisEnemyStats;
+    private BoidMovement _boidMovement;
     
     public float damageRadius = 1f;
     
@@ -43,6 +44,7 @@ public class EnemyController : MonoBehaviour
         player = PlayerManager.instance.player.transform;
         targetStats = player.GetComponent<CharacterStats>();
         thisEnemyStats = gameObject.GetComponent<EnemyStats>();
+        _boidMovement = gameObject.GetComponent<BoidMovement>();
 
         CC2D = gameObject.GetComponent<CircleCollider2D>();
         moveSpeedMemory = moveSpeed;
@@ -154,7 +156,15 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
+                if (gameObject.name.Contains("Boid1"))
+                {
+                    _boidMovement.goodToMove = true;
+                }
+                else
+                {
+                    _boidMovement.goodToMove = false;
+                    rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
+                }
             }
         }
     }

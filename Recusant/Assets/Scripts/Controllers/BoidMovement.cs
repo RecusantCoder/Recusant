@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BoidMovement : MonoBehaviour
 {
@@ -15,44 +17,65 @@ public class BoidMovement : MonoBehaviour
     private float timeSinceLastRandomChange = 0f; 
     public float randomChangeDuration = 1f; 
     private float randomChangeCooldown = 0f;
+    public bool goodToMove;
+    private Rigidbody2D rb;
 
     private Vector2 velocity;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         // Initialize with a random velocity
         velocity = Random.insideUnitCircle.normalized * maxSpeed;
     }
 
     void Update()
     {
-        Vector2 separation = Separate();
-        Vector2 alignment = Align();
-        Vector2 cohesion = Cohere();
-        Vector2 boundaryAvoidance = AvoidBoundary();
-
-        // Combine the forces with weights (adjust these weights as needed)
-        Vector2 combinedForce = separation * 1.5f + alignment + cohesion * 2f + boundaryAvoidance;
-        combinedForce = Vector2.ClampMagnitude(combinedForce, maxForce);
-
-        // Adjust the boid's velocity based on the combined force
-        velocity += combinedForce * Time.deltaTime;
-        velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
-
-        // Move the boid
-        transform.Translate(velocity * Time.deltaTime);
         
-        // Randomly change direction occasionally
-        timeSinceLastRandomChange += Time.deltaTime;
-        if (timeSinceLastRandomChange >= randomChangeInterval && randomChangeCooldown <= 0f)
+    }
+
+    private void FixedUpdate()
+    {
+        if (goodToMove)
         {
-            ApplyRandomChange();
-            timeSinceLastRandomChange = 0f;
-            randomChangeCooldown = randomChangeDuration;
+            BoidMove();
         }
-        
-        // Update random change cooldown
-        randomChangeCooldown = Mathf.Max(0f, randomChangeCooldown - Time.deltaTime);
+    }
+
+    public void BoidMove()
+    {
+        if (gameObject.activeSelf)
+        {
+            Vector2 separation = Separate();
+            Vector2 alignment = Align();
+            Vector2 cohesion = Cohere();
+            Vector2 boundaryAvoidance = AvoidBoundary();
+
+            // Combine the forces with weights (adjust these weights as needed)
+            Vector2 combinedForce = separation * 1.5f + alignment + cohesion * 2f + boundaryAvoidance;
+            combinedForce = Vector2.ClampMagnitude(combinedForce, maxForce);
+
+            // Adjust the boid's velocity based on the combined force
+            velocity += combinedForce * Time.deltaTime;
+            velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+
+            // Move the boid
+            //transform.Translate(velocity * Time.deltaTime);
+            rb.AddForce(combinedForce);
+            
+
+            // Randomly change direction occasionally
+            timeSinceLastRandomChange += Time.deltaTime;
+            if (timeSinceLastRandomChange >= randomChangeInterval && randomChangeCooldown <= 0f)
+            {
+                ApplyRandomChange();
+                timeSinceLastRandomChange = 0f;
+                randomChangeCooldown = randomChangeDuration;
+            }
+
+            // Update random change cooldown
+            randomChangeCooldown = Mathf.Max(0f, randomChangeCooldown - Time.deltaTime);
+        }
     }
 
     Vector2 Separate()

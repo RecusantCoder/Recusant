@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
     public GameObject smallplant;
     public GameObject mediumPlant;
     public GameObject largePlant;
+    public GameObject boid1;
+    
 
     private GameObject joystick;
     private GameObject itemLevels;
@@ -838,7 +840,8 @@ public class GameManager : MonoBehaviour
     
     private void StartEnemyCoroutines()
     {
-        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 1, 60, 0.1f, 15));
+        //Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 1, 60, 0.1f, 15));
+        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boid1, 1, 60, 0.1f, 100));
 
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
         Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));

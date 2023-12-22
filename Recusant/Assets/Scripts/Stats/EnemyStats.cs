@@ -26,7 +26,10 @@ public class EnemyStats : CharacterStats
         
         currentHealth = maxHealth;
         alreadyDied = false;
-        previousMoveSpeed = _enemyController.moveSpeed;
+        if (_enemyController != null)
+        {
+            previousMoveSpeed = _enemyController.moveSpeed;
+        }
     }
     
     private void Start()
