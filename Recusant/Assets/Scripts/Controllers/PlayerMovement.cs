@@ -185,6 +185,9 @@ public class PlayerMovement : MonoBehaviour
             case "Bourglay":
                 animator.SetBool("isBourglay", true);
                 break;
+            case "Erikson":
+                animator.SetBool("isErikson", true);
+                break;
             default:
                 // code block
                 break;

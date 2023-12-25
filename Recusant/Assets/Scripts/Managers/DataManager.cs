@@ -99,18 +99,18 @@ public class DataManager
             new Achievement("Sprites/AchievementSprites/haurio", false, "Haurio", "Reach level 15."),
             new Achievement("Sprites/AchievementSprites/Body_Armor", false, "Body_Armor", "Reach level 30."),
             new Achievement("Sprites/AchievementSprites/flashbang", false, "Flashbang", "Reach level 60."),
-            new Achievement("Sprites/Makwa", false, "Jacobi", "Reach level 90."),
+            new Achievement("Sprites/PlayerSprites/Makwa", false, "Jacobi", "Reach level 90."),
             new Achievement("Sprites/AchievementSprites/grenadeFull", false, "Grenade", "Last more than 5 minutes."),
             new Achievement("Sprites/AchievementSprites/LazerGun", false, "LazerGun", "Last more than 15 minutes."),
-            new Achievement("Sprites/Makwa", false, "Zeno", "Last more than 30 minutes."),
+            new Achievement("Sprites/PlayerSprites/Zeno", false, "Zeno", "Last more than 30 minutes."),
             new Achievement("Sprites/AchievementSprites/molotov", false, "Molotov", "Get a Glock to level 10."),
             new Achievement("Sprites/AchievementSprites/flamethrower", false, "Flamethrower", "Get a Molotov to level 10."),
             new Achievement("Sprites/AchievementSprites/Fleshy", false, "Fleshy", "Find a Fleshy on the map."),
             new Achievement("Sprites/AchievementSprites/fulmen", false, "Fulmen", "Pickup an Amulet."),
-            new Achievement("Sprites/Makwa", false, "Guevara", "Get Flamethrower to level 10."),
+            new Achievement("Sprites/PlayerSprites/Guevara", false, "Guevara", "Get Flamethrower to level 10."),
             new Achievement("Sprites/AchievementSprites/computer_chip", false, "Targeting_Computer", "Kill 100 enemies."),
             new Achievement("Sprites/AchievementSprites/qimmiq2", false, "Qimmiq", "Kill 1000 enemies."),
-            new Achievement("Sprites/Makwa", false, "Erikson", "Kill 10000 enemies")
+            new Achievement("Sprites/PlayerSprites/Erikson", false, "Erikson", "Kill 10000 enemies")
             // Add more achievements as needed
         };
 
