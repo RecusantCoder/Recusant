@@ -165,23 +165,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckChoiceManager()
     {
-        if (ChoiceManager.instance.chosenName == "Degtyarev")
+        switch (ChoiceManager.instance.chosenName)
         {
-            animator.SetBool("isDegtyarev", true);
+            case "Degtyarev":
+                animator.SetBool("isDegtyarev", true);
+                break;
+            case "Makwa":
+                animator.SetBool("isMakwa", true);
+                break;
+            case "Guevara":
+                animator.SetBool("isGuevara", true);
+                break;
+            case "Zeno":
+                animator.SetBool("isZeno", true);
+                break;
+            case "Baratheon":
+                animator.SetBool("isBaratheon", true);
+                break;
+            case "Bourglay":
+                animator.SetBool("isBourglay", true);
+                break;
+            default:
+                // code block
+                break;
         }
-
-        if (ChoiceManager.instance.chosenName == "Makwa")
-        {
-            animator.SetBool("isMakwa", true);
-        }
-
-        if (ChoiceManager.instance.chosenWeapon == "MossbergSprite")
-        { 
-            GameObject chosenWeapon = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/Mossberg"), transform.position, transform.rotation);
-        } 
-        else if (ChoiceManager.instance.chosenWeapon == "GlockSprite")
-        {
-            GameObject chosenWeapon = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/Glock"), transform.position, transform.rotation);
-        }
+        
+        GameObject chosenWeapon = Instantiate(Resources.Load<GameObject>("PreFabs/Pickups/" + ChoiceManager.instance.chosenWeapon), transform.position, transform.rotation);
     }
 }

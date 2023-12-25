@@ -12,8 +12,22 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void Start()
     {
-        CreateCharacterButton("Sprites/Degtyarev", "Degtyarev", "Sprites/WeaponSprites/GlockSprite");
-        CreateCharacterButton("Sprites/Makwa", "Makwa", "Sprites/WeaponSprites/MossbergSprite");
+        //Rebel
+        CreateCharacterButton("Sprites/PlayerSprites/Guevara", "Guevara", "Sprites/WeaponSprites/Molotov");
+        //Encroacher
+        CreateCharacterButton("Sprites/PlayerSprites/Bourglay", "Bourglay", "Sprites/WeaponSprites/Machete");
+        //Criminal
+        CreateCharacterButton("Sprites/PlayerSprites/Degtyarev", "Degtyarev", "Sprites/WeaponSprites/Glock");
+        //Usurper
+        CreateCharacterButton("Sprites/PlayerSprites/Baratheon", "Baratheon", "Sprites/WeaponSprites/LazerGun");
+        //Survivor
+        CreateCharacterButton("Sprites/PlayerSprites/Makwa", "Makwa", "Sprites/WeaponSprites/Mossberg");
+        //Anarchist
+        CreateCharacterButton("Sprites/PlayerSprites/Zeno", "Zeno", "Sprites/WeaponSprites/Grenade");
+        //Nihilist
+        //Traveler
+        CreateCharacterButton("Sprites/PlayerSprites/Erikson", "Erikson", "Sprites/WeaponSprites/Qimmiq");
+        
     }
 
     private void CreateCharacterButton(string imagePath, string name, string weaponImagePath)

@@ -162,7 +162,10 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
-                    _boidMovement.goodToMove = false;
+                    if (_boidMovement != null)
+                    {
+                        _boidMovement.goodToMove = false;
+                    }
                     rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
                 }
             }
