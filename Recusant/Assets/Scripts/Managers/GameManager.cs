@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
     #endregion
     
     
-    private float spawnRadiusMin = 7f;
-    private float spawnRadiusMax = 14f;
+    private float spawnRadiusMin = 6f;
+    private float spawnRadiusMax = 8f;
     public int amountToSpawn = 1;
     private bool isPaused = false;
     
@@ -840,7 +840,7 @@ public class GameManager : MonoBehaviour
     
     private void StartEnemyCoroutines()
     {
-        //Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 1, 60, 0.1f, 15));
+        Coroutine enemyCoroutine = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 1, 60, 0.1f, 15));
         Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boid1, 1, 60, 0.1f, 50));
 
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));

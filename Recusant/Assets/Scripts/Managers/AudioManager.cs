@@ -50,13 +50,41 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        if (name.Equals("DrivingSong1"))
         {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
+            Sound s = Array.Find(sounds, sound => sound.name == name);
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not found!");
+                return;
+            }
+
+            s.source.Play();
         }
-        s.source.Play();
+        else
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == name);
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not found!");
+                return;
+            }
+
+            GameObject soundGameObject = new GameObject("Sound_" + name);
+            AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+    
+            // Set the properties of the AudioSource
+            audioSource.clip = s.clip;
+            audioSource.volume = PlayerPrefs.GetFloat("volumeSound");
+            audioSource.pitch = s.pitch;
+            audioSource.loop = s.loop;
+
+            // Play the sound
+            audioSource.Play();
+
+            // Destroy the GameObject after the sound has finished playing
+            Destroy(soundGameObject, s.clip.length);
+        }
     }
     
     public void SetMusicVolume(float volume)

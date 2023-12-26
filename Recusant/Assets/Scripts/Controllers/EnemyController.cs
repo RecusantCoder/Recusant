@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     public bool isFlipped = false;
     public bool isKnockbackActive = false;
 
-    private float despawnRadius = 25f;
+    private float despawnRadius = 10f;
     private CircleCollider2D CC2D;
     
     private Coroutine knockbackCoroutine; 

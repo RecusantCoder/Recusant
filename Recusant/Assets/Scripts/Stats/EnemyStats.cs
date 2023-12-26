@@ -162,6 +162,22 @@ public class EnemyStats : CharacterStats
         _enemyController.isProcessed = false;
         _enemyController.passedCheckpoint = false;
     }
+    
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        int roll = Random.Range(0, 2);
+        if (roll == 0)
+        {
+            Debug.Log("imapct 1");
+        }
+        else
+        {
+            Debug.Log("impact 2");
+        }
+        AudioManager.instance.Play(roll == 0 ? "Impact2" : "Impact1");
+    }
 
     
 
