@@ -26,6 +26,7 @@ public class Food : Interactable
 
     void PickUp()
     {
+        AudioManager.instance.Play("Heal");
         StartCoroutine(MoveToPlayerAndDestroy());
     }
     

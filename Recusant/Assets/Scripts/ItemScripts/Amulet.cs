@@ -26,6 +26,7 @@ public class Amulet : Interactable
 
     void PickUp()
     {
+        AudioManager.instance.Play("Suck");
         GameManager.instance.GetComponent<AchievementManager>().PowerUpFound("Amulet");
         StartCoroutine(MoveToPlayerAndDestroy());
     }
