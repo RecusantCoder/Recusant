@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,5 +18,11 @@ public class HealthBar : MonoBehaviour
         slider.maxValue = health;
         slider.value = health;
     }
-    
+
+    private void Update()
+    {
+        Vector2 newPosition = GameManager.instance.player.transform.position;
+        newPosition.y += -0.3f;
+        transform.position = newPosition;
+    }
 }

@@ -193,56 +193,110 @@ public class SectionManager : MonoBehaviour
                 SpawnBreakable(spawnedSection.transform);
                 
                 
-                // Spawn 10-20 random tilePrefabs within the area of the sectionPrefab
-                int numberOfTilePrefabs = Random.Range(10, 20);
-                // Make sure you have 9 tilePrefabs in your array
-                int squareSize = 5;
-                for (int row = 0; row < squareSize; row++)
-                {
-                    for (int col = 0; col < squareSize; col++)
-                    {
-                        int tileIndex = 4; // Default to middle tile (tilePrefabs[4])
-
-                        // Top left corner
-                        if (row == 0 && col == 0)
-                            tileIndex = 0;
-                        // Top right corner
-                        else if (row == 0 && col == squareSize - 1)
-                            tileIndex = 2;
-                        // Bottom left corner
-                        else if (row == squareSize - 1 && col == 0)
-                            tileIndex = 6;
-                        // Bottom right corner
-                        else if (row == squareSize - 1 && col == squareSize - 1)
-                            tileIndex = 8;
-                        // Top tiles
-                        else if (row == 0)
-                            tileIndex = 1;
-                        // Left tiles
-                        else if (col == 0)
-                            tileIndex = 3;
-                        // Right tiles
-                        else if (col == squareSize - 1)
-                            tileIndex = 5;
-                        // Bottom tiles
-                        else if (row == squareSize - 1)
-                            tileIndex = 7;
-
-                        GameObject spawnedTilePrefab = Instantiate(tilePrefabs[tileIndex], spawnedSection.transform);
-
-                        // Set the position of the spawned tilePrefab within the area of the sectionPrefab
-                        float offsetX = (col - (squareSize - 1) / 2f) * 0.32f;
-                        float offsetY = ((squareSize - 1) / 2f - row) * 0.32f; // Invert the row position
-                        Vector2 randomPosition = new Vector2(offsetX + 0.16f, offsetY + 0.16f);
-
-                        spawnedTilePrefab.transform.localPosition = randomPosition;
-                    }
-                }
-
+                SpawnTilePrefabs(spawnedSection);
 
             }
 
             spawn = spawnTemp;
+        }
+    }
+
+    private void SpawnTilePrefabs(GameObject spawnedSection)
+    {
+        int sectionSize = 12; // Adjust this based on your section size
+        float tileSize = 0.32f; // Adjust this based on your tile size
+
+        // Introduce some randomness in the Perlin noise parameters
+        float frequency = Random.Range(0.1f, 0.5f);
+        float amplitude = 1.0f;
+
+        for (float x = -sectionSize / 2f; x < sectionSize / 2f; x += tileSize)
+        {
+            for (float y = -sectionSize / 2f; y < sectionSize / 2f; y += tileSize)
+            {
+                // Calculate falloff based on the distance from the center to the edges
+                float falloff = CalculateFalloff(x, y, sectionSize);
+
+                // Use Perlin noise in both x and y dimensions, and apply the falloff
+                float perlinValueX = Mathf.PerlinNoise((spawnedSection.transform.position.x + x) * frequency, (spawnedSection.transform.position.y) * frequency);
+                float perlinValueY = Mathf.PerlinNoise((spawnedSection.transform.position.x) * frequency, (spawnedSection.transform.position.y + y) * frequency);
+                float perlinValue = (perlinValueX + perlinValueY) * 0.5f * amplitude * falloff;
+
+                if (perlinValue > 0.5f) // Adjust the threshold based on your preference
+                {
+                    // Spawn a random tile
+                    int tileIndex = 1;
+                    GameObject spawnedTilePrefab = Instantiate(tilePrefabs[tileIndex], spawnedSection.transform);
+
+                    // Set the position of the spawned tilePrefab within the area of the sectionPrefab
+                    Vector2 randomPosition = new Vector2(x + tileSize / 2f, y + tileSize / 2f);
+                    spawnedTilePrefab.transform.localPosition = randomPosition;
+                }
+            }
+        }
+    }
+
+    private float CalculateFalloff(float x, float y, float sectionSize)
+    {
+        // Calculate the distance from the center to the edges
+        float distanceX = Mathf.Abs(x) / (sectionSize / 2f);
+        float distanceY = Mathf.Abs(y) / (sectionSize / 2f);
+
+        // Use a smooth step function for falloff
+        float falloffX = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(1f - distanceX));
+        float falloffY = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(1f - distanceY));
+
+        // Combine falloff in x and y dimensions
+        return falloffX * falloffY;
+    }
+
+
+    private void SpawnTilesSquare(int size, GameObject spawnedSection)
+    {
+        // Spawn 10-20 random tilePrefabs within the area of the sectionPrefab
+        int numberOfTilePrefabs = Random.Range(10, 20);
+        // Make sure you have 9 tilePrefabs in your array
+        int squareSize = size;
+        for (int row = 0; row < squareSize; row++)
+        {
+            for (int col = 0; col < squareSize; col++)
+            {
+                int tileIndex = 4; // Default to middle tile (tilePrefabs[4])
+
+                // Top left corner
+                if (row == 0 && col == 0)
+                    tileIndex = 0;
+                // Top right corner
+                else if (row == 0 && col == squareSize - 1)
+                    tileIndex = 2;
+                // Bottom left corner
+                else if (row == squareSize - 1 && col == 0)
+                    tileIndex = 6;
+                // Bottom right corner
+                else if (row == squareSize - 1 && col == squareSize - 1)
+                    tileIndex = 8;
+                // Top tiles
+                else if (row == 0)
+                    tileIndex = 1;
+                // Left tiles
+                else if (col == 0)
+                    tileIndex = 3;
+                // Right tiles
+                else if (col == squareSize - 1)
+                    tileIndex = 5;
+                // Bottom tiles
+                else if (row == squareSize - 1)
+                    tileIndex = 7;
+
+                GameObject spawnedTilePrefab = Instantiate(tilePrefabs[tileIndex], spawnedSection.transform);
+
+                // Set the position of the spawned tilePrefab within the area of the sectionPrefab
+                float offsetX = (col - (squareSize - 1) / 2f) * 0.32f;
+                float offsetY = ((squareSize - 1) / 2f - row) * 0.32f; // Invert the row position
+                Vector2 randomPosition = new Vector2(offsetX + 0.16f, offsetY + 0.16f);
+
+                spawnedTilePrefab.transform.localPosition = randomPosition;
+            }
         }
     }
 }

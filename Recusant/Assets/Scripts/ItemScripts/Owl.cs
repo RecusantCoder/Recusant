@@ -28,6 +28,7 @@ public class Owl : Interactable
 
     void PickUp()
     {
+        AudioManager.instance.Play("Freeze");
         StartCoroutine(MoveToPlayerAndDestroy());
     }
     
