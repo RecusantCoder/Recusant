@@ -155,7 +155,7 @@ public class SectionManager : MonoBehaviour
     private void SpawnDecorations(Transform spawnedSection)
     {
         //Method is now a combo of spawning collidePrefabs and tilePrefabs
-        int numberOfCollidePrefabs = Random.Range(2, 6);
+        int numberOfCollidePrefabs = Random.Range(3, 13);
         for (int i = 0; i < numberOfCollidePrefabs; i++)
         {
             GameObject randomCollidePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
@@ -166,7 +166,7 @@ public class SectionManager : MonoBehaviour
             spawnedCollidePrefab.transform.localPosition = randomPosition;
         }
 
-        int numberOfTilePrefabs = Random.Range(5, 15);
+        int numberOfTilePrefabs = Random.Range(11, 31);
         for (int i = 0; i < numberOfTilePrefabs; i++)
         {
             GameObject spawnedtilePrefab = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)], spawnedSection.transform, true);
