@@ -103,10 +103,11 @@ public class SectionManager : MonoBehaviour
         }
     }
 
-    private void SpawnBreakable(Transform spawnedSection)
+    private void SpawnDecorations(Transform spawnedSection)
     {
-        // Spawn 2-5 random collidePrefabs within the area of the sectionPrefab
+        //Spawn 2-5 random collidePrefabs within the area of the sectionPrefab
         //This method was extracted, also collidePrefabs[0] is Crate
+        //Method is now a combo of breakables and tilePrebabs
         int numberOfCollidePrefabs = Random.Range(2, 6);
         for (int i = 0; i < numberOfCollidePrefabs; i++)
         {
@@ -116,6 +117,14 @@ public class SectionManager : MonoBehaviour
             // Set the position of the spawned collidePrefab within the area of the sectionPrefab
             Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
             spawnedCollidePrefab.transform.localPosition = randomPosition;
+        }
+
+        int numberOfTilePrefabs = Random.Range(5, 15);
+        for (int i = 0; i < numberOfTilePrefabs; i++)
+        {
+            GameObject spawnedtilePrefab = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)], spawnedSection.transform, true);
+            Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
+            spawnedtilePrefab.transform.localPosition = randomPosition;
         }
     }
 
@@ -190,66 +199,14 @@ public class SectionManager : MonoBehaviour
                 spawnedSection.transform.position = spawn;
                 spawnedSections.Add(spawn, spawnedSection);
                 
-                SpawnBreakable(spawnedSection.transform);
-                
-                
-                SpawnTilePrefabs(spawnedSection);
+                SpawnDecorations(spawnedSection.transform);
 
             }
 
             spawn = spawnTemp;
         }
     }
-
-    private void SpawnTilePrefabs(GameObject spawnedSection)
-    {
-        int sectionSize = 12; // Adjust this based on your section size
-        float tileSize = 0.32f; // Adjust this based on your tile size
-
-        // Introduce some randomness in the Perlin noise parameters
-        float frequency = Random.Range(0.1f, 0.5f);
-        float amplitude = 1.0f;
-
-        for (float x = -sectionSize / 2f; x < sectionSize / 2f; x += tileSize)
-        {
-            for (float y = -sectionSize / 2f; y < sectionSize / 2f; y += tileSize)
-            {
-                // Calculate falloff based on the distance from the center to the edges
-                float falloff = CalculateFalloff(x, y, sectionSize);
-
-                // Use Perlin noise in both x and y dimensions, and apply the falloff
-                float perlinValueX = Mathf.PerlinNoise((spawnedSection.transform.position.x + x) * frequency, (spawnedSection.transform.position.y) * frequency);
-                float perlinValueY = Mathf.PerlinNoise((spawnedSection.transform.position.x) * frequency, (spawnedSection.transform.position.y + y) * frequency);
-                float perlinValue = (perlinValueX + perlinValueY) * 0.5f * amplitude * falloff;
-
-                if (perlinValue > 0.5f) // Adjust the threshold based on your preference
-                {
-                    // Spawn a random tile
-                    int tileIndex = 1;
-                    GameObject spawnedTilePrefab = Instantiate(tilePrefabs[tileIndex], spawnedSection.transform);
-
-                    // Set the position of the spawned tilePrefab within the area of the sectionPrefab
-                    Vector2 randomPosition = new Vector2(x + tileSize / 2f, y + tileSize / 2f);
-                    spawnedTilePrefab.transform.localPosition = randomPosition;
-                }
-            }
-        }
-    }
-
-    private float CalculateFalloff(float x, float y, float sectionSize)
-    {
-        // Calculate the distance from the center to the edges
-        float distanceX = Mathf.Abs(x) / (sectionSize / 2f);
-        float distanceY = Mathf.Abs(y) / (sectionSize / 2f);
-
-        // Use a smooth step function for falloff
-        float falloffX = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(1f - distanceX));
-        float falloffY = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(1f - distanceY));
-
-        // Combine falloff in x and y dimensions
-        return falloffX * falloffY;
-    }
-
+    
 
     private void SpawnTilesSquare(int size, GameObject spawnedSection)
     {
