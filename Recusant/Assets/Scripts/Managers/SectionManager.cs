@@ -12,6 +12,11 @@ public class SectionManager : MonoBehaviour
     private float sectionLength = 10.24f;
     private bool startPoint = false;
     private Dictionary<Vector2, GameObject> spawnedSections = new Dictionary<Vector2, GameObject>();
+    
+    public GameObject breakablePrefab;
+    public float spawnRadius = 5f;
+    public float spawnInterval = 1f;
+    public float luck = 5.0f;
 
     enum SectionDirection { Right, TopRight, Top, TopLeft, Left, BottomLeft, Bottom, BottomRight, Centre }
 
@@ -32,6 +37,33 @@ public class SectionManager : MonoBehaviour
         SpawnSection(SectionDirection.BottomLeft);
         SpawnSection(SectionDirection.Bottom);
         SpawnSection(SectionDirection.BottomRight);
+        
+        StartCoroutine(SpawnBreakables());
+    }
+    
+    IEnumerator SpawnBreakables()
+    {
+        while (true)
+        {
+            int randomInt = Random.Range(1, 100);
+            // Check if the dice roll is less than or equal to 0.1 (10% chance)
+            if (randomInt <= luck)
+            {
+                // Calculate a random angle
+                float randomAngle = Random.Range(0f, 360f);
+                
+                // Convert polar coordinates to Cartesian coordinates
+                float spawnX = playerTransform.position.x + spawnRadius * Mathf.Cos(randomAngle * Mathf.Deg2Rad);
+                float spawnY = playerTransform.position.y + spawnRadius * Mathf.Sin(randomAngle * Mathf.Deg2Rad);
+
+                // Spawn the breakable at the calculated position
+                Instantiate(breakablePrefab, new Vector2(spawnX, spawnY), Quaternion.identity);
+                Debug.Log("Spawned Breakable! " + randomInt);
+            }
+
+            // Wait for the specified interval before spawning the next breakable
+            yield return new WaitForSeconds(spawnInterval);
+        }
     }
 
     // Update is called once per frame
@@ -105,9 +137,7 @@ public class SectionManager : MonoBehaviour
 
     private void SpawnDecorations(Transform spawnedSection)
     {
-        //Spawn 2-5 random collidePrefabs within the area of the sectionPrefab
-        //This method was extracted, also collidePrefabs[0] is Crate
-        //Method is now a combo of breakables and tilePrebabs
+        //Method is now a combo of spawning collidePrefabs and tilePrefabs
         int numberOfCollidePrefabs = Random.Range(2, 6);
         for (int i = 0; i < numberOfCollidePrefabs; i++)
         {
