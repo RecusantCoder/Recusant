@@ -16,7 +16,9 @@ public class SectionManager : MonoBehaviour
     public GameObject breakablePrefab;
     public float spawnRadius = 5f;
     public float spawnInterval = 1f;
-    public float luck = 5.0f;
+    public float luck = 10.0f;
+    public int maxBreakables = 10;
+    public List<GameObject> activeBreakables = new List<GameObject>();
 
     enum SectionDirection { Right, TopRight, Top, TopLeft, Left, BottomLeft, Bottom, BottomRight, Centre }
 
@@ -55,10 +57,25 @@ public class SectionManager : MonoBehaviour
                 // Convert polar coordinates to Cartesian coordinates
                 float spawnX = playerTransform.position.x + spawnRadius * Mathf.Cos(randomAngle * Mathf.Deg2Rad);
                 float spawnY = playerTransform.position.y + spawnRadius * Mathf.Sin(randomAngle * Mathf.Deg2Rad);
+                
+                //check for destroyed breakables
+                activeBreakables.RemoveAll(breakable => breakable == null);
 
+                if (activeBreakables.Count >= maxBreakables)
+                {
+                    // Destroy the oldest breakable
+                    GameObject oldestBreakable = activeBreakables[0];
+                    activeBreakables.RemoveAt(0);
+                    Destroy(oldestBreakable);
+                }
                 // Spawn the breakable at the calculated position
-                Instantiate(breakablePrefab, new Vector2(spawnX, spawnY), Quaternion.identity);
+                GameObject newBreakable = Instantiate(breakablePrefab, new Vector2(spawnX, spawnY), Quaternion.identity);
+
+                // Add the new breakable to the list of active breakables
+                activeBreakables.Add(newBreakable);
+                
                 Debug.Log("Spawned Breakable! " + randomInt);
+                
             }
 
             // Wait for the specified interval before spawning the next breakable
