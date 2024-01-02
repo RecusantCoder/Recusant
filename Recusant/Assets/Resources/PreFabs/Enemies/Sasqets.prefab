@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1159383075, guid: 018dd8780c211432ab831dc7ca6a0a71, type: 3}
+  m_Sprite: {fileID: 1612007003, guid: ee2bb3512496f46f0af6808cc492ae7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,6 +164,9 @@ MonoBehaviour:
   isFlipped: 0
   isKnockbackActive: 0
   isDead: 0
+  isProcessed: 0
+  processorLocation: {x: 0, y: 0}
+  passedCheckpoint: 0
 --- !u!50 &3798841951971630577
 Rigidbody2D:
   serializedVersion: 4
@@ -225,9 +228,14 @@ MonoBehaviour:
     baseValue: 0
   spikeDamage:
     baseValue: 0
+  revives:
+    baseValue: 0
+  value:
+    baseValue: 0
   orbPrefabsPaths: []
   fadeDuration: 1
   alreadyDied: 0
+  wasProcessed: 0
 --- !u!114 &1983673978173697316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,9 +369,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e907293f853349559938607edddfeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 0, z: 7}
-  WobbleAmount: {x: 0, y: 0, z: 0.6}
-  WobbleSpeed: {x: 0, y: 0, z: 0}
-  rotateTimeMax: 500
-  rotateTimeTotal: 0
-  otherWay: 0
