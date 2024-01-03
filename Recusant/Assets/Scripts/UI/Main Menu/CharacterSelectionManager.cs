@@ -25,6 +25,7 @@ public class CharacterSelectionManager : MonoBehaviour
         //Anarchist
         CreateCharacterButton("Sprites/PlayerSprites/Zeno", "Zeno", "Sprites/WeaponSprites/Grenade");
         //Nihilist
+        CreateCharacterButton("Sprites/PlayerSprites/Tesla", "Tesla", "Sprites/AchievementSprites/fulmen");
         //Traveler
         CreateCharacterButton("Sprites/PlayerSprites/Erikson", "Erikson", "Sprites/WeaponSprites/Qimmiq");
         

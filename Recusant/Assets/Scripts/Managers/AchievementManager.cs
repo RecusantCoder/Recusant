@@ -150,7 +150,7 @@ public class AchievementManager : MonoBehaviour
             UnlockAchievement("Flashbang");
         } else if (localLevelsCount == LEVEL_THRESHOLD_5)
         {
-            UnlockAchievement("Jacobi");
+            UnlockAchievement("Tesla");
         }
     }
 

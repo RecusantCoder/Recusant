@@ -99,7 +99,7 @@ public class DataManager
             new Achievement("Sprites/AchievementSprites/haurio", false, "Haurio", "Reach level 15."),
             new Achievement("Sprites/AchievementSprites/Body_Armor", false, "Body_Armor", "Reach level 30."),
             new Achievement("Sprites/AchievementSprites/flashbang", false, "Flashbang", "Reach level 60."),
-            new Achievement("Sprites/PlayerSprites/Makwa", false, "Jacobi", "Reach level 90."),
+            new Achievement("Sprites/PlayerSprites/Tesla", false, "Tesla", "Reach level 90."),
             new Achievement("Sprites/AchievementSprites/grenadeFull", false, "Grenade", "Last more than 5 minutes."),
             new Achievement("Sprites/AchievementSprites/LazerGun", false, "LazerGun", "Last more than 15 minutes."),
             new Achievement("Sprites/PlayerSprites/Zeno", false, "Zeno", "Last more than 30 minutes."),
