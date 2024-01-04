@@ -12,23 +12,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void Start()
     {
-        //Rebel
-        CreateCharacterButton("Sprites/PlayerSprites/Guevara", "Guevara", "Sprites/WeaponSprites/Molotov");
-        //Encroacher
-        CreateCharacterButton("Sprites/PlayerSprites/Bourglay", "Bourglay", "Sprites/WeaponSprites/Machete");
-        //Criminal
-        CreateCharacterButton("Sprites/PlayerSprites/Degtyarev", "Degtyarev", "Sprites/WeaponSprites/Glock");
-        //Usurper
-        CreateCharacterButton("Sprites/PlayerSprites/Baratheon", "Baratheon", "Sprites/WeaponSprites/LazerGun");
-        //Survivor
-        CreateCharacterButton("Sprites/PlayerSprites/Makwa", "Makwa", "Sprites/WeaponSprites/Mossberg");
-        //Anarchist
-        CreateCharacterButton("Sprites/PlayerSprites/Zeno", "Zeno", "Sprites/WeaponSprites/Grenade");
-        //Nihilist
-        CreateCharacterButton("Sprites/PlayerSprites/Tesla", "Tesla", "Sprites/AchievementSprites/fulmen");
-        //Traveler
-        CreateCharacterButton("Sprites/PlayerSprites/Erikson", "Erikson", "Sprites/WeaponSprites/Qimmiq");
-        
+        CheckUnlockedCharacters();
     }
 
     private void CreateCharacterButton(string imagePath, string name, string weaponImagePath)
@@ -41,6 +25,25 @@ public class CharacterSelectionManager : MonoBehaviour
         Image weaponImage = characterSelect.transform.Find("Weapon").GetComponent<Image>();
         weaponImage.sprite = Resources.Load<Sprite>(weaponImagePath);
         characterSelect.GetComponent<CharacterSelect>().playButton = playbutton;
+    }
+
+    private void CheckUnlockedCharacters()
+    {
+        List<Achievement> achievements = DataManager.Instance.LoadData<Achievement>(DataManager.DataType.Achievement);
+        foreach (var achieve in achievements)
+        {
+            if (achieve.unlocked)
+            {
+                List<Character> characters = DataManager.Instance.LoadData<Character>(DataManager.DataType.Character);
+                foreach (var character in characters)
+                {
+                    if (character.name.Equals(achieve.name) && character.unlocked)
+                    {
+                        CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath);
+                    }
+                }
+            }
+        }
     }
 }
 

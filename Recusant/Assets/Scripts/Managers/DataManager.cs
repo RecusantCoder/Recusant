@@ -116,8 +116,14 @@ public class DataManager
 
         List<Character> characters = new List<Character>
         {
-            new Character("Sprites/Degtyarev", false, "Degtyarev", "Auto aiming pistol."),
-            new Character("Sprites/Makwa", true, "Makwa", "Shotgun with aiming.")
+            new Character("Sprites/PlayerSprites/Degtyarev", false, "Degtyarev", "Auto aiming pistol.", "Sprites/WeaponSprites/Glock"),
+            new Character("Sprites/PlayerSprites/Makwa", true, "Makwa", "Shotgun with aiming.", "Sprites/WeaponSprites/Mossberg"),
+            new Character("Sprites/PlayerSprites/Bourglay", false, "Bourglay", "Machete slices sideways.", "Sprites/WeaponSprites/Machete"),
+            new Character("Sprites/PlayerSprites/Baratheon", false, "Baratheon", "Lazer pierces enemies.", "Sprites/WeaponSprites/LazerGun"),
+            new Character("Sprites/PlayerSprites/Guevara",false, "Guevara","Molotov ignites enemies", "Sprites/WeaponSprites/Molotov"),
+            new Character("Sprites/PlayerSprites/Zeno",false, "Zeno","Throws grenades backwards", "Sprites/WeaponSprites/Grenade"),
+            new Character("Sprites/PlayerSprites/Tesla",false, "Tesla","Fulmen zaps everything", "Sprites/AchievementSprites/fulmen"),
+            new Character("Sprites/PlayerSprites/Erikson",false, "Erikson","Qimmiq is good boi", "Sprites/WeaponSprites/Qimmiq")
         };
 
         List<Setting> settings = new List<Setting>

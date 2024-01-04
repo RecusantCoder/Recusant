@@ -67,6 +67,12 @@ public class AchievementManager : MonoBehaviour
         {
             achievement.unlocked = true;
             
+            //Load and Save the respective character's unlock bool
+            List<Character> characters = DataManager.Instance.LoadData<Character>(DataManager.DataType.Character);
+            Character character = characters.Find(character => character.name == achievement.name);
+            character.unlocked = true;
+            DataManager.Instance.SaveData(characters, DataManager.DataType.Character);
+            
             DataManager.Instance.SaveData(achievements, DataManager.DataType.Achievement);
             
             // Invoke the event to notify that an achievement is unlocked
@@ -205,7 +211,6 @@ public class AchievementManager : MonoBehaviour
                         if (!GameManager.instance.weaponsList.Contains(item))
                         {
                             GameManager.instance.weaponsList.Add(item);
-                            Debug.Log("purple Added " + item + " to GM Weapons List");
                         }
                     }
                 }
