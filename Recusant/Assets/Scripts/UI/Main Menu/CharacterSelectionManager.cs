@@ -29,19 +29,12 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void CheckUnlockedCharacters()
     {
-        List<Achievement> achievements = DataManager.Instance.LoadData<Achievement>(DataManager.DataType.Achievement);
-        foreach (var achieve in achievements)
+        List<Character> characters = DataManager.Instance.LoadData<Character>(DataManager.DataType.Character);
+        foreach (var character in characters)
         {
-            if (achieve.unlocked)
+            if (character.unlocked)
             {
-                List<Character> characters = DataManager.Instance.LoadData<Character>(DataManager.DataType.Character);
-                foreach (var character in characters)
-                {
-                    if (character.name.Equals(achieve.name) && character.unlocked)
-                    {
-                        CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath);
-                    }
-                }
+                CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath);
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ public class AchievementManager : MonoBehaviour
     
     
     //Thresholds for kills
-    private const int MONSTER_KILL_THRESHOLD_1 = 1;
+    private const int MONSTER_KILL_THRESHOLD_1 = 100;
     private const int MONSTER_KILL_THRESHOLD_2 = 1000;
     private const int MONSTER_KILL_THRESHOLD_3 = 10000;
     
@@ -56,6 +57,13 @@ public class AchievementManager : MonoBehaviour
         LevelBar.instance.PlayerHasLevelledUp += HandleLevelUp;
         Inventory.instance.ItemWasAdded += HandleInventoryChange;
         AddUnlockedWeaponsToGMWeaponsList();
+        //StartCoroutine(TestUnlockAchievement(5.0f, "Guevara"));
+    }
+
+    private IEnumerator TestUnlockAchievement(float delay, string name)
+    {
+        yield return new WaitForSeconds(delay);
+        UnlockAchievement(name);
     }
     
     public void UnlockAchievement(string achievementName)
@@ -70,8 +78,11 @@ public class AchievementManager : MonoBehaviour
             //Load and Save the respective character's unlock bool
             List<Character> characters = DataManager.Instance.LoadData<Character>(DataManager.DataType.Character);
             Character character = characters.Find(character => character.name == achievement.name);
-            character.unlocked = true;
-            DataManager.Instance.SaveData(characters, DataManager.DataType.Character);
+            if (character != null)
+            {
+                character.unlocked = true;
+                DataManager.Instance.SaveData(characters, DataManager.DataType.Character);
+            }
             
             DataManager.Instance.SaveData(achievements, DataManager.DataType.Achievement);
             
