@@ -74,9 +74,11 @@ public class CharacterSelect : MonoBehaviour
             {
                 if (total.value - int.Parse(priceText.text) >= 0)
                 {
+                    Debug.Log(total.value + " have total coins and " + int.Parse(priceText.text) + " price");
                     total.value -= int.Parse(priceText.text);
-                    coinDisplayText.text = (total.value - int.Parse(priceText.text)) + "";
+                    coinDisplayText.text = (total.value) + "";
                     dataManager.SaveData(loadedData, DataManager.DataType.Total);
+                   
                 }
             }
         }
