@@ -15,7 +15,16 @@ public class CharacterSelectionManager : MonoBehaviour
         CheckUnlockedCharacters();
     }
 
-    private void CreateCharacterButton(string imagePath, string name, string weaponImagePath)
+    public void ResetCharacterSelects()
+    {
+        foreach (Transform child in gridPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        CheckUnlockedCharacters();
+    }
+
+    private void CreateCharacterButton(string imagePath, string name, string weaponImagePath, bool isUnlocked)
     {
         GameObject characterSelect = Instantiate(buttonPrefab, gridPanel);
         Image image = characterSelect.transform.Find("Image").GetComponent<Image>();
@@ -24,7 +33,25 @@ public class CharacterSelectionManager : MonoBehaviour
         text.text = name;
         Image weaponImage = characterSelect.transform.Find("Weapon").GetComponent<Image>();
         weaponImage.sprite = Resources.Load<Sprite>(weaponImagePath);
-        characterSelect.GetComponent<CharacterSelect>().playButton = playbutton;
+        CharacterSelect characterSelectScript = characterSelect.GetComponent<CharacterSelect>();
+        characterSelectScript.playButton = playbutton;
+        characterSelectScript.isUnlocked = isUnlocked;
+        characterSelectScript.characterSelectionManager = this;
+
+        if (!isUnlocked)
+        {
+            if (name.Equals("Bourglay"))
+            {
+                characterSelectScript.priceText.text = "100";
+            } else if (name.Equals("Degtyarev"))
+            {
+                characterSelectScript.priceText.text = "200";
+            } else if (name.Equals("Baratheon"))
+            {
+                characterSelectScript.priceText.text = "300";
+            }
+            characterSelectScript.priceText.gameObject.SetActive(true);
+        }
     }
 
     private void CheckUnlockedCharacters()
@@ -34,7 +61,14 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             if (character.unlocked)
             {
-                CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath);
+                CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked);
+            }
+            else
+            {
+                if (character.name.Equals("Bourglay") || character.name.Equals("Degtyarev") || character.name.Equals("Baratheon"))
+                {
+                    CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked);
+                }
             }
         }
     }
