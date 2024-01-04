@@ -6,6 +6,7 @@ public class ButtonSounds : MonoBehaviour
 {
     public Button myButton;
     public bool isBackButton;
+    public bool isCustom;
     
     void Start()
     {
@@ -16,14 +17,14 @@ public class ButtonSounds : MonoBehaviour
     public void PlayButtonSound()
     {
         if (isBackButton)
-        {
+        { 
             AudioManager.instance.Play("Back");
         }
         else
-        {
+        { 
             AudioManager.instance.Play("Next");
         }
-        Debug.Log("Played button sound!");
     }
+    
     
 }

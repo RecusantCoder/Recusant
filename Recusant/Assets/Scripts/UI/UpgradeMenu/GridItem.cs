@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using TMPro;
 public class GridItem : MonoBehaviour
 {
     public Image gridItemBackground;
+    public Image imageSelect;
     
     public Upgrade upgrade;
     
@@ -14,12 +16,17 @@ public class GridItem : MonoBehaviour
     public TMP_Text selectedDescription;
 
     public MenuPanel menuPanel;
-    
+
+    private void Start()
+    {
+        Highlight(false);
+    }
+
     public void GridItemSelected()
     {
         selectedDescription.text = upgrade.description;
         selectedUpgradePrice.text = GetCurrentPrice().ToString();
-        menuPanel.chosenGridItem = gameObject;
+        menuPanel.HighlightGridItem(this);
         
         StartCoroutine(ButtonClickEffect());
     }
@@ -27,11 +34,9 @@ public class GridItem : MonoBehaviour
     private IEnumerator ButtonClickEffect()
     {
         // Change button color to a pressed state
-        gridItemBackground.color = Color.gray;
-
+        gridItemBackground.color = Color.yellow;
         // Wait for a short duration
-        yield return new WaitForSeconds(0.1f);
-
+        yield return new WaitForSeconds(0.2f);
         // Reset the button color to its original state
         gridItemBackground.color = Color.white;
     }
@@ -46,6 +51,11 @@ public class GridItem : MonoBehaviour
         selectedUpgradePrice.text = GetCurrentPrice().ToString();
         TMP_Text levelText = transform.Find("Level").GetComponent<TMP_Text>();
         levelText.text = "Level " + upgrade.rank;
+    }
+
+    public void Highlight(bool selected)
+    {
+        imageSelect.gameObject.SetActive(selected);
     }
     
 }

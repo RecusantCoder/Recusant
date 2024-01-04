@@ -116,6 +116,8 @@ public class MenuPanel : MonoBehaviour
                 mainMenuScript.LoadCoinCount();
                 LoadUpgradesAndModifyAndSave(gridItem.upgrade.name, gridItem.upgrade.rank);
                 Debug.Log("Minused " + upgradePrice + " from " + currentTotal + " and saved new price and updated the ui to reflect the new total");
+                
+                AudioManager.instance.Play("Purchase");
             }
         }
     }
@@ -149,6 +151,17 @@ public class MenuPanel : MonoBehaviour
         {
             Debug.Log("Catch: " + e);
         }
+    }
+
+    public void HighlightGridItem(GridItem gridItem)
+    {
+        if (chosenGridItem != null)
+        {
+            chosenGridItem.GetComponent<GridItem>().Highlight(false);
+        }
+        
+        chosenGridItem = gridItem.gameObject;
+        gridItem.Highlight(true);
     }
     
 }
