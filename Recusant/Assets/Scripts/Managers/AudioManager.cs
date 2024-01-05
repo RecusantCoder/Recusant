@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public float previousMusicVolume;
     public float previousSoundVolume;
 
+    public GameObject currentMusic;
+
     
     
     private void Awake()
@@ -45,7 +47,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         //Put a main theme here
-        Play("DrivingSong1");
+        //Play("DrivingSong1");
     }
 
     public void Play(string name)
@@ -71,6 +73,12 @@ public class AudioManager : MonoBehaviour
             }
 
             GameObject soundGameObject = new GameObject("Sound_" + name);
+            soundGameObject.transform.SetParent(transform);
+            if (soundGameObject.name.Contains("RecusantTheme"))
+            {
+                currentMusic = soundGameObject;
+                Debug.Log("assigned current music");
+            }
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
     
             // Set the properties of the AudioSource
@@ -90,6 +98,12 @@ public class AudioManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         Debug.Log("Music at: " + volume);
+        if (AudioManager.instance.currentMusic != null)
+        {
+            AudioManager.instance.currentMusic.GetComponent<AudioSource>().volume = volume;
+            Debug.Log("Changed recusant theme volume");
+        }
+
         foreach (var s in AudioManager.instance.sounds)
         {
             if (s.isMusic)
@@ -141,6 +155,18 @@ public class AudioManager : MonoBehaviour
         SetSoundVolume(previousSoundVolume);
         
         Debug.Log("music volume: " + previousMusicVolume + " sound volume: " + previousSoundVolume);
+        
+        // Check the current scene and play music accordingly
+        switch (scene.name)
+        {
+            case "Level1":
+                Play("RecusantTheme");
+                break;
+            default:
+                Destroy(currentMusic);
+                break;
+            // Add more cases for other scenes as needed
+        }
     }
 
 
