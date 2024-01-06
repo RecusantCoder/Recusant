@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,12 @@ public class VolumeSlider : MonoBehaviour
 
     private void Start()
     {
+        SetupSlider();
+    }
+
+    private void SetupSlider()
+    {
+        Debug.Log("Ran setup slider");
         // Try to find the AudioManager in the scene
         audioManager = FindObjectOfType<AudioManager>();
 
@@ -52,6 +59,11 @@ public class VolumeSlider : MonoBehaviour
     {
         float initialVolume = isMusicSlider ? audioManager.previousMusicVolume : audioManager.previousSoundVolume;
         slider.value = initialVolume;
+        Debug.Log("Setup volume slider to value: " + slider.value);
     }
-    
+
+    private void OnEnable()
+    {
+        SetupSlider();
+    }
 }

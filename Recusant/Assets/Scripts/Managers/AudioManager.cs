@@ -83,6 +83,10 @@ public class AudioManager : MonoBehaviour
     
             // Set the properties of the AudioSource
             audioSource.clip = s.clip;
+            if (soundGameObject.name.Contains("RecusantTheme"))
+            {
+                audioSource.volume = PlayerPrefs.GetFloat("volumeMusic");
+            }
             audioSource.volume = PlayerPrefs.GetFloat("volumeSound");
             audioSource.pitch = s.pitch;
             audioSource.loop = s.loop;
@@ -91,7 +95,10 @@ public class AudioManager : MonoBehaviour
             audioSource.Play();
 
             // Destroy the GameObject after the sound has finished playing
-            Destroy(soundGameObject, s.clip.length);
+            if (!soundGameObject.name.Contains("RecusantTheme"))
+            {
+                Destroy(soundGameObject, s.clip.length);
+            }
         }
     }
     
@@ -146,6 +153,18 @@ public class AudioManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnSceneLoaded for AudioManager");
+        
+        if (PlayerPrefs.HasKey("volumeMusic"))
+        {
+            // The "volumeMusic" key exists in PlayerPrefs
+            float existingVolume = PlayerPrefs.GetFloat("volumeMusic");
+            Debug.Log("Existing volume for 'volumeMusic': " + existingVolume);
+        }
+        else
+        {
+            // The "volumeMusic" key does not exist in PlayerPrefs
+            Debug.Log("'volumeMusic' key not found in PlayerPrefs");
+        }
         
         // Store previous volumes
         previousMusicVolume = PlayerPrefs.GetFloat("volumeMusic", 0.1f);
