@@ -85,9 +85,13 @@ public class AudioManager : MonoBehaviour
             audioSource.clip = s.clip;
             if (soundGameObject.name.Contains("RecusantTheme"))
             {
+                Debug.Log("assigned music volume to recusant theme: " + PlayerPrefs.GetFloat("volumeMusic"));
                 audioSource.volume = PlayerPrefs.GetFloat("volumeMusic");
             }
-            audioSource.volume = PlayerPrefs.GetFloat("volumeSound");
+            else
+            {
+                audioSource.volume = PlayerPrefs.GetFloat("volumeSound");
+            }
             audioSource.pitch = s.pitch;
             audioSource.loop = s.loop;
 
@@ -180,6 +184,9 @@ public class AudioManager : MonoBehaviour
         {
             case "Level1":
                 Play("RecusantTheme");
+                break;
+            case "MainMenu":
+                Play("Intro");
                 break;
             default:
                 Destroy(currentMusic);

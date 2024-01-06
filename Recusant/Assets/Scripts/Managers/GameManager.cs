@@ -255,6 +255,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded == false)
         {
+            AudioManager.instance.Play("Lose");
             gameEnded = true;
             Debug.Log("GAME OVER");
             FindGameOverScreen();
