@@ -37,6 +37,9 @@ public class EnemyController : MonoBehaviour
     public Vector2 processorLocation;
     public bool passedCheckpoint;
 
+    public bool inACluster;
+    public Vector2 clusterDestination;
+
     private void Start()
     {
         myObjectTransform = gameObject.transform;
@@ -166,6 +169,18 @@ public class EnemyController : MonoBehaviour
                     {
                         _boidMovement.goodToMove = false;
                     }
+                }
+
+                if (inACluster)
+                {
+                    // Calculate the new position using Vector2.MoveTowards
+                    Vector2 newPosition = Vector2.MoveTowards(transform.position, clusterDestination, 2 * Time.deltaTime);
+
+                    // Move the rigidbody to the new position
+                    rb.MovePosition(newPosition);
+                }
+                else
+                {
                     rb.MovePosition((Vector2)transform.position + (direction * (moveSpeed * Time.deltaTime)));
                 }
             }
