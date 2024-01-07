@@ -154,16 +154,27 @@ public class SectionManager : MonoBehaviour
 
     private void SpawnDecorations(Transform spawnedSection)
     {
-        //Method is now a combo of spawning collidePrefabs and tilePrefabs
-        int numberOfCollidePrefabs = Random.Range(3, 13);
-        for (int i = 0; i < numberOfCollidePrefabs; i++)
+        // Spawn collidePrefabs in clusters
+        int numberOfClusters = Random.Range(2, 5);
+
+        for (int cluster = 0; cluster < numberOfClusters; cluster++)
         {
-            GameObject randomCollidePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
-            GameObject spawnedCollidePrefab = Instantiate(randomCollidePrefab) as GameObject;
-            spawnedCollidePrefab.transform.SetParent(spawnedSection.transform);
-            // Set the position of the spawned collidePrefab within the area of the sectionPrefab
-            Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
-            spawnedCollidePrefab.transform.localPosition = randomPosition;
+            // Define the position of the cluster relative to the center of the section
+            Vector2 clusterOffset = new Vector2(Random.Range(-sectionLength / 2f, sectionLength / 2f), Random.Range(-sectionLength / 2f, sectionLength / 2f));
+
+            // Define the number of collidePrefabs in each cluster
+            int numberOfCollidePrefabsInCluster = Random.Range(3, 7);
+
+            for (int i = 0; i < numberOfCollidePrefabsInCluster; i++)
+            {
+                GameObject randomCollidePrefab = collidePrefabs[Random.Range(0, collidePrefabs.Length)];
+                GameObject spawnedCollidePrefab = Instantiate(randomCollidePrefab) as GameObject;
+                spawnedCollidePrefab.transform.SetParent(spawnedSection.transform);
+
+                // Set the position of the spawned collidePrefab within the cluster area
+                Vector2 randomPosition = new Vector2(Random.Range(-sectionLength / 4f, sectionLength / 4f), Random.Range(-sectionLength / 4f, sectionLength / 4f));
+                spawnedCollidePrefab.transform.localPosition = clusterOffset + randomPosition;
+            }
         }
 
         int numberOfTilePrefabs = Random.Range(11, 31);

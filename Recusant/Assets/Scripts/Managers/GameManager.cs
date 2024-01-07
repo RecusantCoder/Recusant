@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        SetupNameConversionList();
         if (instance != null && instance != this)
         {
             // Another instance of GameManager exists, destroy this one
@@ -112,6 +113,8 @@ public class GameManager : MonoBehaviour
     //Event for saving time with Achievement Manager
     public event Action OnMinutePassed;
     int lastMinuteTriggered = 0;
+    
+    public Dictionary<string, string> namesConversionList = new Dictionary<string, string>();
 
 
 
@@ -577,7 +580,7 @@ public class GameManager : MonoBehaviour
                     if (threeItems[i].levelDescriptions.Count > 0)
                     {
                         descriptionText.text = threeItems[i].levelDescriptions[weaponLevel];
-                        itemNameFieldText.text = threeItems[i].itemName;
+                        itemNameFieldText.text = namesConversionList.ContainsKey(threeItems[i].itemName) ? namesConversionList[threeItems[i].itemName] : threeItems[i].itemName;
                     }
                     else
                     {
@@ -943,6 +946,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("Catch: " + e);
         }
     }
-    
+
+    public void SetupNameConversionList()
+    {
+        namesConversionList.Add("LazerGun", "Lazer Gun");
+        namesConversionList.Add("Body_Armour", "Body Armor");
+        namesConversionList.Add("Exolegs", "Exoskeleton Legs");
+        namesConversionList.Add("Targeting_Computer", "Targeting Computer");
+    }
 
 }
