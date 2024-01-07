@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public float previousSoundVolume;
 
     public GameObject currentMusic;
+    public bool firstStart;
 
     
     
@@ -186,10 +187,14 @@ public class AudioManager : MonoBehaviour
                 Play("RecusantTheme");
                 break;
             case "MainMenu":
-                Play("Intro");
+                if (!instance.firstStart)
+                {
+                    Play("Intro");
+                    instance.firstStart = true;
+                }
+                Destroy(currentMusic);
                 break;
             default:
-                Destroy(currentMusic);
                 break;
             // Add more cases for other scenes as needed
         }

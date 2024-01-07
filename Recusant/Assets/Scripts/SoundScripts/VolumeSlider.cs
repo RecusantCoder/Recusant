@@ -57,13 +57,13 @@ public class VolumeSlider : MonoBehaviour
     
     private void SetInitialSliderValue()
     {
-        float initialVolume = isMusicSlider ? audioManager.previousMusicVolume : audioManager.previousSoundVolume;
+        float initialVolume = isMusicSlider ? PlayerPrefs.GetFloat("volumeMusic", 0.1f) : PlayerPrefs.GetFloat("volumeSound", 0.1f);
         slider.value = initialVolume;
         Debug.Log("Setup volume slider to value: " + slider.value);
     }
 
     private void OnEnable()
     {
-        SetupSlider();
+        SetInitialSliderValue();
     }
 }
