@@ -252,6 +252,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SpawnEnemiesInCircle(int numberOfObjects, GameObject objectToSpawn, float radius)
+    {
+        if (numberOfObjects <= 0)
+        {
+            Debug.LogWarning("Number of objects should be greater than 0.");
+            return;
+        }
+
+        float angleStep = 360f / numberOfObjects;
+
+        for (int i = 0; i < numberOfObjects; i++)
+        {
+            float angle = i * angleStep;
+            float radians = angle * Mathf.Deg2Rad;
+
+            float x = transform.position.x + radius * Mathf.Cos(radians);
+            float y = transform.position.y + radius * Mathf.Sin(radians);
+
+            Vector2 spawnPosition = new Vector2(x, y);
+
+            SpawnEnemy(objectToSpawn, spawnPosition);
+            //Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+        }
+    }
+
 
     //Managing UI
     public void EndGame()
@@ -847,6 +872,8 @@ public class GameManager : MonoBehaviour
     
     private void StartEnemyCoroutines()
     {
+        SpawnEnemiesInCircle(48, zombie, spawnRadiusMin);
+        
         Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 60, 0.1f, 15));
         //Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boid, 1, 60, 0.1f, 50));
 
