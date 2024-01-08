@@ -121,7 +121,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartEnemyCoroutines();
+        //This was redundant, as restart is being called on scene loaded
+        //StartEnemyCoroutines();
     }
 
     public void Restart()
@@ -247,6 +248,20 @@ public class GameManager : MonoBehaviour
             spawnedObject.SetActive(true);
             EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
             enemyStats.ReMade();
+            spawnedObject.transform.position = position;
+            
+        }
+    }
+    
+    public void SpawnBoss(GameObject prefab, Vector3 position)
+    {
+        GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
+        if (spawnedObject != null)
+        {
+            spawnedObject.SetActive(true);
+            EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
+            enemyStats.ReMade();
+            enemyStats.isBoss = true;
             spawnedObject.transform.position = position;
             
         }
@@ -872,7 +887,8 @@ public class GameManager : MonoBehaviour
     
     private void StartEnemyCoroutines()
     {
-        SpawnEnemiesInCircle(48, zombie, spawnRadiusMin);
+        //SpawnEnemiesInCircle(48, zombie, spawnRadiusMin);
+        SpawnBoss(testingWobble, player.transform.position + new Vector3(1.0f, 0.0f, 0.0f));
         
         Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 60, 0.1f, 15));
         //Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boid, 1, 60, 0.1f, 50));

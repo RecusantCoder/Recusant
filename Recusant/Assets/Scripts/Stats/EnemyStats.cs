@@ -12,6 +12,7 @@ public class EnemyStats : CharacterStats
     private EnemyController _enemyController;
     private float previousMoveSpeed;
     public bool wasProcessed;
+    public bool isBoss;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class EnemyStats : CharacterStats
         
         
         currentHealth = maxHealth;
+        
         alreadyDied = false;
         if (_enemyController != null)
         {
@@ -35,6 +37,17 @@ public class EnemyStats : CharacterStats
     private void Start()
     {
         wasProcessed = false;
+
+        if (isBoss)
+        {
+            Debug.Log("I am a boss!");
+            currentHealth *= 10;
+            gameObject.transform.localScale = new Vector3(3.0f, 3.0f, 1.0f);
+        }
+        else
+        {
+            gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
     }
     
     public override void Die()
@@ -161,6 +174,7 @@ public class EnemyStats : CharacterStats
         wasProcessed = false;
         _enemyController.isProcessed = false;
         _enemyController.passedCheckpoint = false;
+        isBoss = false;
     }
     
     public override void TakeDamage(int damage)
