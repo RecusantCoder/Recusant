@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
     //Object Pooling
     public GameObject sasquets;
     public GameObject testingWobble;
-    public GameObject iceSnake;
     public GameObject zombie;
     public GameObject mushroom;
     public GameObject turtle;
@@ -103,6 +102,8 @@ public class GameManager : MonoBehaviour
     public GameObject largePlant;
     public GameObject boid;
     public GameObject blob;
+    public GameObject shaman;
+    public GameObject spirit;
     
 
     private GameObject joystick;
