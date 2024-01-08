@@ -27,7 +27,7 @@ public class LevelBar : MonoBehaviour
     [SerializeField]
     public TMP_Text myTextElement;
 
-    private int playerLevel;
+    public int playerLevel;
     private float playerExperience;
 
     private List<float> levels;

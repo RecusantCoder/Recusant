@@ -169,6 +169,11 @@ MonoBehaviour:
   isFlipped: 0
   isKnockbackActive: 0
   isDead: 0
+  isProcessed: 0
+  processorLocation: {x: 0, y: 0}
+  passedCheckpoint: 0
+  inACluster: 0
+  clusterDestination: {x: 0, y: 0}
 --- !u!50 &1028925521625565217
 Rigidbody2D:
   serializedVersion: 4
@@ -215,9 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee34e7e1b3ce8484a92c96f5a71e4e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 500
   damage:
-    baseValue: 15
+    baseValue: 10
   armor:
     baseValue: 0
   healthRegen:
@@ -226,9 +231,19 @@ MonoBehaviour:
     baseValue: 0
   pickupRadius:
     baseValue: 0
+  weight:
+    baseValue: 0
+  spikeDamage:
+    baseValue: 0
+  revives:
+    baseValue: 0
+  value:
+    baseValue: 0
   orbPrefabsPaths: []
   fadeDuration: 1
   alreadyDied: 0
+  wasProcessed: 0
+  isBoss: 0
 --- !u!114 &2411717279696238836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +331,7 @@ MonoBehaviour:
   fireParticlePrefab: {fileID: 3369669701704144115, guid: 049b801931dee4ba3b3e8a8dd1927970, type: 3}
   slimePuddlePrefab: {fileID: 0}
   isMushroom: 0
-  isOnFire: 0
+  isBurning: 0
 --- !u!1 &8274819900324923053
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,9 +377,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e907293f853349559938607edddfeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: {x: 0, y: 0, z: 15}
-  WobbleAmount: {x: 0, y: 0, z: 0.5}
-  WobbleSpeed: {x: 0, y: 0, z: 0}
-  rotateTimeMax: 500
-  rotateTimeTotal: 0
-  otherWay: 0

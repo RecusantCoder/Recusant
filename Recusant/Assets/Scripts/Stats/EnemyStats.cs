@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyStats : CharacterStats
 {
@@ -37,17 +39,6 @@ public class EnemyStats : CharacterStats
     private void Start()
     {
         wasProcessed = false;
-
-        if (isBoss)
-        {
-            Debug.Log("I am a boss!");
-            currentHealth *= 10;
-            gameObject.transform.localScale = new Vector3(3.0f, 3.0f, 1.0f);
-        }
-        else
-        {
-            gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
     }
     
     public override void Die()
@@ -106,6 +97,12 @@ public class EnemyStats : CharacterStats
             _enemyController.isDead = true;
 
             StartCoroutine(FadeOut());
+
+            if (isBoss)
+            {
+                GameObject steelContainer = Instantiate(Resources.Load<GameObject>("PreFabs/PowerUps/SteelContainer"),
+                    transform.position, transform.rotation);
+            }
         }
     }
 
@@ -184,7 +181,19 @@ public class EnemyStats : CharacterStats
         AudioManager.instance.Play("Impact1");
     }
 
-    
+    private void OnEnable()
+    {
+        if (isBoss)
+        {
+            Debug.Log("I am a boss!");
+            currentHealth *= LevelBar.instance.playerLevel;
+            gameObject.transform.localScale = new Vector3(3.0f, 3.0f, 1.0f);
+        }
+        else
+        {
+            gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+    }
 
 
     private void Update()

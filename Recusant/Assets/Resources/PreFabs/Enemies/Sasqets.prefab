@@ -167,6 +167,8 @@ MonoBehaviour:
   isProcessed: 0
   processorLocation: {x: 0, y: 0}
   passedCheckpoint: 0
+  inACluster: 0
+  clusterDestination: {x: 0, y: 0}
 --- !u!50 &3798841951971630577
 Rigidbody2D:
   serializedVersion: 4
@@ -213,9 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee34e7e1b3ce8484a92c96f5a71e4e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 270
   damage:
-    baseValue: 5
+    baseValue: 10
   armor:
     baseValue: 0
   healthRegen:
@@ -236,6 +238,7 @@ MonoBehaviour:
   fadeDuration: 1
   alreadyDied: 0
   wasProcessed: 0
+  isBoss: 0
 --- !u!114 &1983673978173697316
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -57,6 +57,13 @@ public class GameManager : MonoBehaviour
     
     private bool yourBool;
 
+    public enum EventName
+    {
+        Cluster,
+        Boss,
+        Circle
+    }
+
     // Define a property for your boolean variable
     public bool gameEnded
     {
@@ -104,6 +111,9 @@ public class GameManager : MonoBehaviour
     public GameObject blob;
     public GameObject shaman;
     public GameObject spirit;
+    public GameObject boidNormal;
+
+    public GameObject spiritCluster;
     
 
     private GameObject joystick;
@@ -203,6 +213,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator SpawnEvent(EventName eventName, GameObject enemy, int startTimeInSeconds, int amount)
+    {
+        // Wait until the specified start time.
+        while (timer < startTimeInSeconds)
+        {
+            yield return null; // Wait for the next frame.
+        }
+        
+        if (eventName == EventName.Boss)
+        {
+            SpawnBoss(enemy, player.transform.position + new Vector3(4.0f, 0.0f, 0.0f));
+        } else if (eventName == EventName.Circle)
+        {
+            SpawnEnemiesInCircle(amount, enemy, spawnRadiusMin);
+        } else if (eventName == EventName.Cluster)
+        {
+            SpawnCluster(enemy, amount);
+        }
+    }
+
     public void SpawnEnemy(GameObject prefab)
     {
         float minDistance = spawnRadiusMin; // Minimum distance from the player
@@ -290,6 +320,25 @@ public class GameManager : MonoBehaviour
 
             SpawnEnemy(objectToSpawn, spawnPosition);
             //Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+        }
+    }
+
+    public void SpawnCluster(GameObject objectToSpawn, int numberOfObjects)
+    {
+        float angleStep = 360f / numberOfObjects;
+        float radius = spawnRadiusMin;
+        
+        for (int i = 0; i < numberOfObjects; i++)
+        {
+            float angle = i * angleStep;
+            float radians = angle * Mathf.Deg2Rad;
+
+            float x = transform.position.x + radius * Mathf.Cos(radians);
+            float y = transform.position.y + radius * Mathf.Sin(radians);
+
+            Vector2 spawnPosition = new Vector2(x, y);
+            
+            Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
         }
     }
 
@@ -889,47 +938,98 @@ public class GameManager : MonoBehaviour
     private void StartEnemyCoroutines()
     {
         //SpawnEnemiesInCircle(48, zombie, spawnRadiusMin);
-        SpawnBoss(testingWobble, player.transform.position + new Vector3(1.0f, 0.0f, 0.0f));
+        //SpawnBoss(testingWobble, player.transform.position + new Vector3(1.0f, 0.0f, 0.0f));
         
-        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 60, 0.1f, 15));
-        //Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boid, 1, 60, 0.1f, 50));
+        //minute 0
+        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 30*2, 0.1f, 15));
+        
+        //minute 1
+        Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60, 60, 0.1f, 30));
+        Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60, 60, 0.1f, 30));
+        Coroutine bossCoroutine0 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60, 1));
+        
+        //minute 2
+        Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60*2, 60, 0.5f, 150));
+        Coroutine bossCoroutine1 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60 * 2, 3));
 
-        Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60, 60, 1, 15));
-        Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60, 60, 0.1f, 30));
-        Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60, 60, 0.1f, 30));
-
-        Coroutine enemyCoroutine4 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 120, 60, 0.1f, 150));
-
+        //minute 3
         Coroutine enemyCoroutine5 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 180, 60, 0.1f, 40));
         
+        //minute 4
         Coroutine enemyCoroutine6 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 240, 60, 0.1f, 30));
         Coroutine enemyCoroutine7 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 240, 60, 0.1f, 30));
         
+        //minute 5
         Coroutine enemyCoroutine8 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 0.1f, 10));
         Coroutine enemyCoroutine9 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 0.1f, 30));
         
+        //minute 6
         Coroutine enemyCoroutine10 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 360, 60, 0.1f, 20));
         Coroutine enemyCoroutine11 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 0.1f, 20));
         
+        //minute 7
         Coroutine enemyCoroutine12 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 0.1f, 15));
         Coroutine enemyCoroutine13 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 0.1f, 160));
         Coroutine enemyCoroutine14 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 420, 60, 0.1f, 80));
         
+        //minute 8
         Coroutine enemyCoroutine15 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 0.1f, 100));
         
+        //minute 9
         Coroutine enemyCoroutine16 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 0.1f, 30));
         Coroutine enemyCoroutine17 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 540, 60, 0.1f, 30));
         
+        //minute 10
         Coroutine enemyCoroutine18 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 0.1f, 100));
         Coroutine enemyCoroutine19 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 0.1f, 10));
-
+        
+        //minute 11
         Coroutine enemyCoroutine20 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 0.1f, 300));
+        
+        //minute 12
+        
+        //minute 13
+        
+        //minute 14
+        
+        //minute 15
+        
+        //minute 16
+        
+        //minute 17
+        
+        //minute 18
+        
+        //minute 19
+        
+        //minute 20
+        
+        //minute 21
+        
+        //minute 22
+        
+        //minute 23
+        
+        //minute 24
+        
+        //minute 25
+        
+        //minute 26
+        
+        //minute 27
+        
+        //minute 28
+        
+        //minute 29
+        
+        //minute 30
+        
         
         coroutineList.Add(enemyCoroutine0);
         coroutineList.Add(enemyCoroutine1);
         coroutineList.Add(enemyCoroutine2);
         coroutineList.Add(enemyCoroutine3);
-        coroutineList.Add(enemyCoroutine4);
+        //coroutineList.Add(enemyCoroutine4);
         coroutineList.Add(enemyCoroutine5);
         coroutineList.Add(enemyCoroutine6);
         coroutineList.Add(enemyCoroutine7);
@@ -946,6 +1046,9 @@ public class GameManager : MonoBehaviour
         coroutineList.Add(enemyCoroutine18);
         coroutineList.Add(enemyCoroutine19);
         coroutineList.Add(enemyCoroutine20);
+        
+        coroutineList.Add(bossCoroutine0);
+        coroutineList.Add(bossCoroutine1);
     }
 
     private void StopEnemyCoroutines()
