@@ -6,9 +6,11 @@ using UnityEngine;
 public class Breakable : MonoBehaviour
 {
     private Animator animator;
-    public List<GameObject> equipmentPrefabs;
+    public List<GameObject> powerUpPrefabs;
+    public List<GameObject> coinPrefabs;
+    public List<GameObject> foodPrefabs;
     private bool wasDamaged;
-    private int coinChance = 50;
+    private int coinChance = 61;
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -38,14 +40,31 @@ public class Breakable : MonoBehaviour
     //equipmentPrefabs[0] is coin
     private void SpawnEquipment()
     {
-        if (UnityEngine.Random.Range(0, 100) <= coinChance)
+        int roll = UnityEngine.Random.Range(0, 100);
+        if (roll <= coinChance)
         {
-            GameObject coin = Instantiate((equipmentPrefabs[0]), transform.position, transform.rotation);
+            if (roll >= coinChance - 10)
+            {
+                //spawn 10 coin
+                GameObject coin = Instantiate((coinPrefabs[1]), transform.position, transform.rotation);
+            }
+            else if (roll >= coinChance - 1)
+            {
+                //spawn bar
+                GameObject coin = Instantiate((coinPrefabs[2]), transform.position, transform.rotation);
+            }
+            else
+            {
+                GameObject coin = Instantiate((coinPrefabs[0]), transform.position, transform.rotation);
+            }
         }
         else
         {
-            int index = UnityEngine.Random.Range(1, equipmentPrefabs.Count);
-            GameObject equipment = Instantiate((equipmentPrefabs[index]), transform.position, transform.rotation);
+            if (roll >= 99)
+            {
+                int index = UnityEngine.Random.Range(0, powerUpPrefabs.Count);
+                GameObject powerUp = Instantiate((powerUpPrefabs[index]), transform.position, transform.rotation);
+            }
         }
     }
 }

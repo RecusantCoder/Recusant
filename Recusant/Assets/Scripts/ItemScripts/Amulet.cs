@@ -79,14 +79,17 @@ public class Amulet : Interactable
 
         foreach (GameObject obj in gameObjectsWithTag)
         {
-            EnemyStats enemyStatsScript = obj.GetComponent<EnemyStats>();
-            if (enemyStatsScript != null)
+            if (obj.name.Contains("Orb"))
             {
-                enemyStatsScript.Die();
-            }
-            else
-            {
-                Debug.LogError("EnemyStats script not found on object: " + obj.name);
+                EnemyStats enemyStatsScript = obj.GetComponent<EnemyStats>();
+                if (enemyStatsScript != null)
+                {
+                    enemyStatsScript.Die();
+                }
+                else
+                {
+                    Debug.LogError("EnemyStats script not found on object: " + obj.name);
+                }
             }
         }
     }
