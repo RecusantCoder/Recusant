@@ -102,6 +102,7 @@ public class EnemyStats : CharacterStats
             {
                 GameObject steelContainer = Instantiate(Resources.Load<GameObject>("PreFabs/PowerUps/SteelContainer"),
                     transform.position, transform.rotation);
+                isBoss = false;
             }
         }
     }
@@ -171,7 +172,6 @@ public class EnemyStats : CharacterStats
         wasProcessed = false;
         _enemyController.isProcessed = false;
         _enemyController.passedCheckpoint = false;
-        isBoss = false;
     }
     
     public override void TakeDamage(int damage)

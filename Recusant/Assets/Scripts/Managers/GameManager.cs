@@ -339,6 +339,7 @@ public class GameManager : MonoBehaviour
             Vector2 spawnPosition = new Vector2(x, y);
             
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+            Debug.Log("Spawned cluster!");
         }
     }
 
@@ -944,11 +945,11 @@ public class GameManager : MonoBehaviour
         //minute 1
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60, 60, 0.1f, 30));
         Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60, 60, 0.1f, 30));
-        Coroutine eventCoroutine0 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 2, 1));
+        Coroutine eventCoroutine0 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 3, 1));
         
         //minute 2
         Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60*2, 60, 0.5f, 150));
-        Coroutine eventCoroutine1 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60 * 2, 3));
+        Coroutine eventCoroutine1 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 2, 3));
 
         //minute 3
         Coroutine enemyCoroutine4 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boidNormal, 60*3, 60, 0.1f, 40));

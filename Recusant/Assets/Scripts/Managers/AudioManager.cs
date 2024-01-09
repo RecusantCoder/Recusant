@@ -96,8 +96,16 @@ public class AudioManager : MonoBehaviour
             audioSource.pitch = s.pitch;
             audioSource.loop = s.loop;
 
-            // Play the sound
-            audioSource.Play();
+            if (FindExistingSoundInChildren(audioSource.clip.name))
+            {
+                
+            }
+            else
+            {
+                // Play the sound
+                audioSource.Play();
+            }
+            
 
             // Destroy the GameObject after the sound has finished playing
             if (!soundGameObject.name.Contains("RecusantTheme"))
@@ -200,5 +208,26 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private bool FindExistingSoundInChildren(string audioClipName)
+    {
+        int numOfSounds = 0;
+        
+        foreach (Transform child in transform)
+        {
+            AudioSource childAudioSource = child.GetComponent<AudioSource>();
+            if (childAudioSource != null && childAudioSource.clip != null && childAudioSource.clip.name == audioClipName)
+            {
+                numOfSounds++;
+                if (numOfSounds > 1)
+                {
+                    Debug.Log("childAudioSource.clip.name : " + childAudioSource.clip.name + " and audioClipName: " + audioClipName);
+                    return true;
+                }
+            }
+        }
+
+        // Return null if no existing sound is found
+        return false;
+    }
 
 }

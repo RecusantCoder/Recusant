@@ -14,26 +14,18 @@ public class ClusterMovement : MonoBehaviour
 
     public void AssignChildrenClusterDestinations()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        foreach (Transform child in transform)
         {
-            Transform child = transform.GetChild(i);
             EnemyController enemyController = child.GetComponent<EnemyController>();
             if (enemyController != null)
             {
                 enemyController.inACluster = true;
                 enemyController.clusterDestination = clusterDestination;
             }
-        }
-        
-        foreach (Transform child in transform)
-        {
-            Debug.Log("Checking child: " + child.name);
-            EnemyController enemyController = child.GetComponent<EnemyController>();
-            if (enemyController != null)
+            EnemyStats enemyStats = child.GetComponent<EnemyStats>();
+            if (enemyStats != null)
             {
-                enemyController.inACluster = true;
-                enemyController.clusterDestination = clusterDestination;
-                Debug.Log("assigned spirits!");
+                enemyStats.ReMade();
             }
         }
     }
