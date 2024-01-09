@@ -231,6 +231,8 @@ public class GameManager : MonoBehaviour
         {
             SpawnCluster(enemy, amount);
         }
+        
+        Debug.Log("Spawning at " + startTimeInSeconds);
     }
 
     public void SpawnEnemy(GameObject prefab)
@@ -945,84 +947,171 @@ public class GameManager : MonoBehaviour
         //minute 1
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60, 60, 0.1f, 30));
         Coroutine enemyCoroutine2 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60, 60, 0.1f, 30));
-        Coroutine eventCoroutine0 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 3, 1));
+        
+        Coroutine eventCoroutine0 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60, 1));
         
         //minute 2
         Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60*2, 60, 0.5f, 150));
-        Coroutine eventCoroutine1 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 2, 3));
+        
+        Coroutine eventCoroutine1 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*2, 3));
 
         //minute 3
         Coroutine enemyCoroutine4 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boidNormal, 60*3, 60, 0.1f, 40));
+        
         Coroutine eventCoroutine2 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*3, 1));
-        Coroutine eventCoroutine3 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60 * 3, 2));
+        Coroutine eventCoroutine3 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*3, 2));
         
         //minute 4
         Coroutine enemyCoroutine5 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boidNormal, 60*4, 60, 0.1f, 40));
         Coroutine enemyCoroutine6 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(spirit, 60*4, 60, 0.1f, 30));
-        Coroutine eventCoroutine4 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60 * 4, 2));
+        
+        Coroutine eventCoroutine4 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*4, 2));
         
         //minute 5
-        Coroutine enemyCoroutine7 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 300, 60, 0.1f, 10));
-        Coroutine enemyCoroutine8 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 300, 60, 0.1f, 30));
+        Coroutine enemyCoroutine7 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*5, 60, 0.1f, 10));
+        
+        Coroutine eventCoroutine5 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*5, 1));
+        Coroutine eventCoroutine6 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*5, 1));
         
         //minute 6
-        Coroutine enemyCoroutine9 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 360, 60, 0.1f, 20));
-        Coroutine enemyCoroutine10 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 360, 60, 0.1f, 20));
+        Coroutine enemyCoroutine8 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60*6, 60, 0.1f, 20));
+        Coroutine enemyCoroutine9 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*56, 60, 0.1f, 20));
+        
+        Coroutine eventCoroutine7 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*6, 2));
         
         //minute 7
-        Coroutine enemyCoroutine11 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 420, 60, 0.1f, 15));
-        Coroutine enemyCoroutine12 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 420, 60, 0.1f, 160));
-        Coroutine enemyCoroutine13 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 420, 60, 0.1f, 80));
+        Coroutine enemyCoroutine10 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60*7, 60, 0.1f, 160));
+        Coroutine enemyCoroutine11 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*7, 60, 0.1f, 80));
+        
+        Coroutine eventCoroutine8 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*7, 1));
+        Coroutine eventCoroutine9 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*7, 7));
         
         //minute 8
-        Coroutine enemyCoroutine14 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 480, 60, 0.1f, 100));
+        Coroutine enemyCoroutine12 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60*8, 60, 0.1f, 100));
+        Coroutine enemyCoroutine13 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*8, 60, 0.1f, 1));
+        
+        Coroutine eventCoroutine10 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*8, 3));
         
         //minute 9
-        Coroutine enemyCoroutine15 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 540, 60, 0.1f, 30));
-        Coroutine enemyCoroutine16 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 540, 60, 0.1f, 30));
+        Coroutine enemyCoroutine14 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60*9, 60, 0.1f, 30));
+        Coroutine enemyCoroutine15 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*9, 60, 0.1f, 30));
+        
+        Coroutine eventCoroutine11 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*9, 1));
+        Coroutine eventCoroutine12 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*9, 3));
         
         //minute 10
-        Coroutine enemyCoroutine17 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 600, 60, 0.1f, 100));
-        Coroutine enemyCoroutine18 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 600, 60, 0.1f, 10));
+        Coroutine enemyCoroutine16 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*10, 60, 0.1f, 20));
+        
+        Coroutine eventCoroutine13 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*10, 1));
+        Coroutine eventCoroutine14 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*10, 2));
         
         //minute 11
-        Coroutine enemyCoroutine19 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 660, 60, 0.1f, 300));
+        Coroutine enemyCoroutine17 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boidNormal, 60*11, 60, 0.1f, 300));
+        
+        Coroutine eventCoroutine15 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*11, 1));
+        Coroutine eventCoroutine16 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*11, 2));
         
         //minute 12
+        Coroutine enemyCoroutine18 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(shaman, 60*12, 60, 0.1f, 20));
+        Coroutine enemyCoroutine19 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(spirit, 60*12, 60, 0.1f, 20));
+        Coroutine enemyCoroutine20 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boidNormal, 60*12, 60, 0.1f, 20));
+
+        Coroutine eventCoroutine17 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*12, 1));
+        Coroutine eventCoroutine18 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*12, 2));
         
         //minute 13
+        Coroutine enemyCoroutine21 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(shaman, 60*13, 60, 0.1f, 150));
+        Coroutine enemyCoroutine22 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(spirit, 60*13, 60, 0.1f, 5020));
+        
+        Coroutine eventCoroutine19 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*13, 2));
         
         //minute 14
+        Coroutine enemyCoroutine23 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*14, 60, 0.1f, 20));
+        Coroutine enemyCoroutine24 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(shaman, 60*14, 60, 0.1f, 20));
+
+        Coroutine eventCoroutine20 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*14, 1));
         
         //minute 15
+        Coroutine enemyCoroutine25 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*15, 60, 0.1f, 100));
+        Coroutine enemyCoroutine26 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(shaman, 60*15, 60, 0.1f, 100));
+        Coroutine enemyCoroutine27 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*15, 60, 0.1f, 100));
+        
+        Coroutine eventCoroutine21 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*15, 1));
+        Coroutine eventCoroutine38 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*15, 1));
         
         //minute 16
+        Coroutine enemyCoroutine28 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*16, 60, 0.1f, 100));
+        Coroutine enemyCoroutine29 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*16, 60, 0.1f, 200));
+        
+        Coroutine eventCoroutine22 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*16, 1));
         
         //minute 17
+        Coroutine enemyCoroutine30 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*17, 60, 0.1f, 20));
         
         //minute 18
+        Coroutine enemyCoroutine31 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*18, 60, 0.1f, 60));
+        Coroutine enemyCoroutine32 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*18, 60, 0.1f, 60));
+        
+        Coroutine eventCoroutine23 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*18, 1));
         
         //minute 19
-        
+        Coroutine enemyCoroutine33 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*19, 60, 0.1f, 100));
+        Coroutine enemyCoroutine34 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*19, 60, 0.1f, 100));
+
         //minute 20
+        Coroutine enemyCoroutine35 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*20, 60, 0.1f, 100));
+        Coroutine enemyCoroutine36 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*20, 60, 0.1f, 100));
+        Coroutine enemyCoroutine37 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*20, 60, 0.1f, 100));
+        
+        Coroutine eventCoroutine24 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*20, 1));
+        Coroutine eventCoroutine25 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*20, 2));
+        Coroutine eventCoroutine26 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*20, 2));
         
         //minute 21
+        Coroutine enemyCoroutine38 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 60*21, 60, 0.1f, 300));
+        
+        Coroutine eventCoroutine27 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*21, 1));
+        Coroutine eventCoroutine28 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*21, 1));
         
         //minute 22
+        Coroutine enemyCoroutine39 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 60*22, 60, 0.1f, 200));
+        Coroutine enemyCoroutine40 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*22, 60, 0.1f, 200));
+        
+        Coroutine eventCoroutine29 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*22, 1));
         
         //minute 23
+        Coroutine enemyCoroutine41 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 60*23, 60, 0.1f, 300));
+        Coroutine enemyCoroutine42 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*23, 60, 0.1f, 300));
+
+        
+        Coroutine eventCoroutine30 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*23, 1));
         
         //minute 24
+        Coroutine enemyCoroutine43 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 60*24, 60, 0.1f, 300));
+        Coroutine enemyCoroutine44 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*24, 60, 0.1f, 300));
+
+        
+        Coroutine eventCoroutine31 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*24, 1));
         
         //minute 25
+        
+        Coroutine eventCoroutine39 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*25, 6));
         
         //minute 26
         
         //minute 27
         
+        Coroutine eventCoroutine32 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*27, 1));
+        Coroutine eventCoroutine33 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*27, 2));
+        Coroutine eventCoroutine34 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*27, 2));
+        
         //minute 28
         
         //minute 29
+        
+        Coroutine eventCoroutine35 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*29, 1));
+        Coroutine eventCoroutine36 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*29, 2));
+        Coroutine eventCoroutine37 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*29, 2));
         
         //minute 30
         

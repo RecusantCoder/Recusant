@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,5 +48,10 @@ public class ClusterMovement : MonoBehaviour
 
         // Calculate the opposite point by adding this direction to the player's position
         clusterDestination = playerPosition + (directionToPlayer * 10);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Cluster destroyed at spawning: " + transform.position + " and player at position: " + GameManager.instance.player.transform.position);
     }
 }
