@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
 
     public GameObject currentMusic;
     public bool firstStart;
+    public AudioClip[] exceptionList;
 
     
     
@@ -217,11 +218,17 @@ public class AudioManager : MonoBehaviour
             AudioSource childAudioSource = child.GetComponent<AudioSource>();
             if (childAudioSource != null && childAudioSource.clip != null && childAudioSource.clip.name == audioClipName)
             {
-                numOfSounds++;
-                if (numOfSounds > 1)
+                foreach (var clip in exceptionList)
                 {
-                    Debug.Log("childAudioSource.clip.name : " + childAudioSource.clip.name + " and audioClipName: " + audioClipName);
-                    return true;
+                    if (!audioClipName.Equals(clip.name))
+                    {
+                        numOfSounds++;
+                        if (numOfSounds > 1)
+                        {
+                            Debug.Log("childAudioSource.clip.name : " + childAudioSource.clip.name + " and audioClipName: " + audioClipName);
+                            return true;
+                        }
+                    }
                 }
             }
         }

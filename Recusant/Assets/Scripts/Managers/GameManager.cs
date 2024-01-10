@@ -286,6 +286,21 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public GameObject SpawnEnemyWithReturn(GameObject prefab, Vector3 position)
+    {
+        GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
+        if (spawnedObject != null)
+        {
+            spawnedObject.SetActive(true);
+            EnemyStats enemyStats = spawnedObject.GetComponent<EnemyStats>();
+            enemyStats.ReMade();
+            spawnedObject.transform.position = position;
+            
+        }
+
+        return spawnedObject;
+    }
+    
     public void SpawnBoss(GameObject prefab, Vector3 position)
     {
         GameObject spawnedObject = ObjectPoolManager.Instance.GetObjectFromPool(prefab);
@@ -308,7 +323,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        float angleStep = 360f / numberOfObjects;
+        float angleStep = 360f / (numberOfObjects - 1);
 
         for (int i = 0; i < numberOfObjects; i++)
         {
@@ -318,7 +333,7 @@ public class GameManager : MonoBehaviour
             float x = transform.position.x + radius * Mathf.Cos(radians);
             float y = transform.position.y + radius * Mathf.Sin(radians);
 
-            Vector2 spawnPosition = new Vector2(x, y);
+            Vector3 spawnPosition = new Vector3(x, y, GameManager.instance.player.position.z) + GameManager.instance.player.position;
 
             SpawnEnemy(objectToSpawn, spawnPosition);
             //Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
@@ -338,7 +353,7 @@ public class GameManager : MonoBehaviour
             float x = transform.position.x + radius * Mathf.Cos(radians);
             float y = transform.position.y + radius * Mathf.Sin(radians);
 
-            Vector2 spawnPosition = new Vector2(x, y);
+            Vector3 spawnPosition = new Vector3(x, y, GameManager.instance.player.position.z) + GameManager.instance.player.position;
             
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
             Debug.Log("Spawned cluster!");
@@ -940,6 +955,7 @@ public class GameManager : MonoBehaviour
     
     private void StartEnemyCoroutines()
     {
+        //Coroutine testCoroutine = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 13, 360));
         
         //minute 0
         Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 30*2, 0.1f, 15));
@@ -1094,26 +1110,35 @@ public class GameManager : MonoBehaviour
         Coroutine eventCoroutine31 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*24, 1));
         
         //minute 25
+        Coroutine enemyCoroutine45 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*25, 60, 0.1f, 100));
         
         Coroutine eventCoroutine39 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*25, 6));
         
         //minute 26
+        Coroutine enemyCoroutine46 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 60*26, 60, 0.1f, 150));
+        Coroutine enemyCoroutine47 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*26, 60, 0.1f, 150));
         
         //minute 27
+        Coroutine enemyCoroutine48 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*27, 60, 0.1f, 600));
+        Coroutine enemyCoroutine49 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*27, 60, 0.1f, 300));
         
         Coroutine eventCoroutine32 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*27, 1));
         Coroutine eventCoroutine33 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*27, 2));
         Coroutine eventCoroutine34 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*27, 2));
         
         //minute 28
-        
+        Coroutine enemyCoroutine50 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(turtle, 60*28, 60, 0.1f, 300));
+        Coroutine enemyCoroutine51 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*28, 60, 0.1f, 300));
+
         //minute 29
+        Coroutine enemyCoroutine52 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(sasquets, 60*29, 60, 0.1f, 600));
         
         Coroutine eventCoroutine35 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60*29, 1));
         Coroutine eventCoroutine36 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*29, 2));
         Coroutine eventCoroutine37 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*29, 2));
         
         //minute 30
+        //idk kill player or rescue or something
         
         
         coroutineList.Add(enemyCoroutine0);
@@ -1136,6 +1161,40 @@ public class GameManager : MonoBehaviour
         coroutineList.Add(enemyCoroutine17);
         coroutineList.Add(enemyCoroutine18);
         coroutineList.Add(enemyCoroutine19);
+        coroutineList.Add(enemyCoroutine20);
+        coroutineList.Add(enemyCoroutine21);
+        coroutineList.Add(enemyCoroutine22);
+        coroutineList.Add(enemyCoroutine23);
+        coroutineList.Add(enemyCoroutine24);
+        coroutineList.Add(enemyCoroutine25);
+        coroutineList.Add(enemyCoroutine26);
+        coroutineList.Add(enemyCoroutine27);
+        coroutineList.Add(enemyCoroutine28);
+        coroutineList.Add(enemyCoroutine29);
+        coroutineList.Add(enemyCoroutine30);
+        coroutineList.Add(enemyCoroutine31);
+        coroutineList.Add(enemyCoroutine32);
+        coroutineList.Add(enemyCoroutine33);
+        coroutineList.Add(enemyCoroutine34);
+        coroutineList.Add(enemyCoroutine35);
+        coroutineList.Add(enemyCoroutine36);
+        coroutineList.Add(enemyCoroutine37);
+        coroutineList.Add(enemyCoroutine38);
+        coroutineList.Add(enemyCoroutine39);
+        coroutineList.Add(enemyCoroutine40);
+        coroutineList.Add(enemyCoroutine41);
+        coroutineList.Add(enemyCoroutine42);
+        coroutineList.Add(enemyCoroutine43);
+        coroutineList.Add(enemyCoroutine44);
+        coroutineList.Add(enemyCoroutine45);
+        coroutineList.Add(enemyCoroutine46);
+        coroutineList.Add(enemyCoroutine47);
+        coroutineList.Add(enemyCoroutine48);
+        coroutineList.Add(enemyCoroutine49);
+        coroutineList.Add(enemyCoroutine50);
+        coroutineList.Add(enemyCoroutine51);
+        coroutineList.Add(enemyCoroutine52);
+        
         
         
         coroutineList.Add(eventCoroutine0);
@@ -1143,6 +1202,41 @@ public class GameManager : MonoBehaviour
         coroutineList.Add(eventCoroutine2);
         coroutineList.Add(eventCoroutine3);
         coroutineList.Add(eventCoroutine4);
+        coroutineList.Add(eventCoroutine5);
+        coroutineList.Add(eventCoroutine6);
+        coroutineList.Add(eventCoroutine7);
+        coroutineList.Add(eventCoroutine8);
+        coroutineList.Add(eventCoroutine9);
+        coroutineList.Add(eventCoroutine10);
+        coroutineList.Add(eventCoroutine11);
+        coroutineList.Add(eventCoroutine12);
+        coroutineList.Add(eventCoroutine13);
+        coroutineList.Add(eventCoroutine14);
+        coroutineList.Add(eventCoroutine15);
+        coroutineList.Add(eventCoroutine16);
+        coroutineList.Add(eventCoroutine17);
+        coroutineList.Add(eventCoroutine18);
+        coroutineList.Add(eventCoroutine19);
+        coroutineList.Add(eventCoroutine20);
+        coroutineList.Add(eventCoroutine21);
+        coroutineList.Add(eventCoroutine22);
+        coroutineList.Add(eventCoroutine23);
+        coroutineList.Add(eventCoroutine24);
+        coroutineList.Add(eventCoroutine25);
+        coroutineList.Add(eventCoroutine26);
+        coroutineList.Add(eventCoroutine27);
+        coroutineList.Add(eventCoroutine28);
+        coroutineList.Add(eventCoroutine29);
+        coroutineList.Add(eventCoroutine30);
+        coroutineList.Add(eventCoroutine31);
+        coroutineList.Add(eventCoroutine32);
+        coroutineList.Add(eventCoroutine33);
+        coroutineList.Add(eventCoroutine34);
+        coroutineList.Add(eventCoroutine35);
+        coroutineList.Add(eventCoroutine36);
+        coroutineList.Add(eventCoroutine37);
+        coroutineList.Add(eventCoroutine38);
+        coroutineList.Add(eventCoroutine39);
     }
 
     private void StopEnemyCoroutines()

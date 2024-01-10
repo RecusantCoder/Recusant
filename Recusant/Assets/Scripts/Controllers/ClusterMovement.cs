@@ -11,22 +11,21 @@ public class ClusterMovement : MonoBehaviour
     {
         SetOppositeDestination(GameManager.instance.player);
         AssignChildrenClusterDestinations();
+        Destroy(gameObject, 20f);
     }
 
     public void AssignChildrenClusterDestinations()
     {
         foreach (Transform child in transform)
         {
-            EnemyController enemyController = child.GetComponent<EnemyController>();
+            GameObject newChild = GameManager.instance.SpawnEnemyWithReturn(GameManager.instance.spirit, child.transform.position);
+            Destroy(child.gameObject);
+            
+            EnemyController enemyController = newChild.GetComponent<EnemyController>();
             if (enemyController != null)
             {
                 enemyController.inACluster = true;
                 enemyController.clusterDestination = clusterDestination;
-            }
-            EnemyStats enemyStats = child.GetComponent<EnemyStats>();
-            if (enemyStats != null)
-            {
-                enemyStats.ReMade();
             }
         }
     }

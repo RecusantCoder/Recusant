@@ -19,6 +19,7 @@ public class QimmiqAttack : MonoBehaviour
     private float damageTimer = 0f;
     private float damageInterval = 0.5f;
     private GameObject currentEnemy = null; // Store the current enemy.
+    public int qimmiqNumber;
 
     private void Start()
     {
@@ -74,7 +75,7 @@ public class QimmiqAttack : MonoBehaviour
         
         try
         {
-            targetTransform = FindNearestEnemy().transform;
+            targetTransform = FindNearestEnemy(qimmiqNumber*3).transform;
         }
         catch (Exception e)
         {
@@ -128,11 +129,12 @@ public class QimmiqAttack : MonoBehaviour
         }
     }
     
-    private GameObject FindNearestEnemy()
+    private GameObject FindNearestEnemy(int skipAmount)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;
+        int skipCount = 0;
 
         foreach (GameObject enemy in enemies)
         {
@@ -144,8 +146,15 @@ public class QimmiqAttack : MonoBehaviour
                 {
                     if (enemyCollider.isActiveAndEnabled)
                     {
-                        nearestEnemy = enemy;
-                        nearestDistance = distance;
+                        if (skipAmount == skipCount)
+                        {
+                            nearestEnemy = enemy;
+                            nearestDistance = distance;
+                        }
+                        else
+                        {
+                            skipCount++;
+                        }
                     }
                 }
             }

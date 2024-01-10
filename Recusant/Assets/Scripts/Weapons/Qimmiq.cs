@@ -30,6 +30,7 @@ public class Qimmiq : Weapon
             qimmiqAttack.transform.position = firePoint.position;
             lastShotTime = Time.time;
             AudioManager.instance.Play("SingleBark");
+            qAScript.qimmiqNumber = numberOfQimmiqSpawned;
             numberOfQimmiqSpawned++;
         }
     }
