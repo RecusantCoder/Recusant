@@ -7,10 +7,12 @@ public class SteelContainer : Interactable
     public string thisName;
     private GameObject _player;
     private bool isPickedUp = false;
+    public GameObject indicator;
 
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        CreateIndicator();
     }
 
     public override void Interact()
@@ -45,7 +47,16 @@ public class SteelContainer : Interactable
         
         GameManager.instance.ShowSteelContainerScreen();
         
+        Destroy(indicator);
+        
         Destroy(gameObject);
     }
 
+    public void CreateIndicator()
+    {
+        Canvas canvas = FindObjectOfType<Canvas>();
+        GameObject myIndicator = Instantiate(indicator, canvas.transform, false);
+        myIndicator.transform.localPosition = Vector3.zero;
+        myIndicator.GetComponent<Indicator>().target = transform;
+    }
 }
