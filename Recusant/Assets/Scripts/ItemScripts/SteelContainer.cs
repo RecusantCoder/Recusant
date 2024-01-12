@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,8 +47,6 @@ public class SteelContainer : Interactable
         //Call to open UI for random item from steel container
         
         GameManager.instance.ShowSteelContainerScreen();
-        
-        Destroy(indicator);
         
         Destroy(gameObject);
     }

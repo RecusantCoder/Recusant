@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     public List<Item> evolutionWeaponsList;
     public Dictionary<string, int> weaponLevelCount;
     public List<Item> restrictedList;
-    public List<GameObject> disabledObjects;
+    public List<GameObject> disabledObjects = new List<GameObject>();
 
     private GameObject levelUpScreen;
     public LevelBar levelBar; //event from LevelBar
@@ -135,10 +135,11 @@ public class GameManager : MonoBehaviour
         //This was redundant, as restart is being called on scene loaded
         //StartEnemyCoroutines();
     }
+    
 
     public void Restart()
     {
-        disabledObjects = new List<GameObject>();
+        //disabledObjects = new List<GameObject>();
         ResumeGame();
 
         timer = 0.0f;
@@ -161,6 +162,7 @@ public class GameManager : MonoBehaviour
         
         StopEnemyCoroutines();
         StartEnemyCoroutines();
+        
     }
 
     // Update is called once per frame
@@ -470,9 +472,9 @@ public class GameManager : MonoBehaviour
     
     public void ResumeGame()
     {
-        TargetAllByTag(true, "UIEffects");
         GameManager.instance.isPaused = false;
         Time.timeScale = 1;
+        TargetAllByTag(true, "UIEffects");
     }
     
     public bool IsGamePaused()
@@ -484,11 +486,11 @@ public class GameManager : MonoBehaviour
     {
         if (active)
         {
-            foreach (var disabledObj in disabledObjects)
+            foreach (var disabledObj in instance.disabledObjects)
             {
                 disabledObj.SetActive(true);
             }
-            disabledObjects.Clear();
+            instance.disabledObjects.Clear();
         }
         else
         {
@@ -497,7 +499,7 @@ public class GameManager : MonoBehaviour
             {
                 if (obj.CompareTag(tag))
                 {
-                    disabledObjects.Add(obj);
+                    instance.disabledObjects.Add(obj);
                     obj.SetActive(false);
                 }
             }
@@ -565,7 +567,7 @@ public class GameManager : MonoBehaviour
         foreach (Item weapon in shuffledWeapons)
         {
             // Check if the weapon's itemName is not in weaponLevelCount or its value is not 10
-            if (!weaponLevelCount.ContainsKey(weapon.itemName) || weaponLevelCount[weapon.itemName] != 10)
+            if (!weaponLevelCount.ContainsKey(weapon.itemName) || weaponLevelCount[weapon.itemName] >= 10)
             {
                 randomWeapons.Add(weapon);
                 count++;
