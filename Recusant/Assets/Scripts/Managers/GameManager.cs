@@ -970,7 +970,7 @@ public class GameManager : MonoBehaviour
         //Coroutine testCoroutine = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 13, 360));
         
         //minute 0
-        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 61, 30*2, 0.1f, 15));
+        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 30*2, 0.1f, 15));
         
         //minute 1
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60, 60, 0.1f, 30));

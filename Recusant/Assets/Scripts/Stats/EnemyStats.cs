@@ -186,7 +186,7 @@ public class EnemyStats : CharacterStats
         if (isBoss)
         {
             Debug.Log("I am a boss!");
-            currentHealth *= LevelBar.instance.playerLevel;
+            currentHealth = 50 * LevelBar.instance.playerLevel;
             gameObject.transform.localScale = new Vector3(3.0f, 3.0f, 1.0f);
         }
         else

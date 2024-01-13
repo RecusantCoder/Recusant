@@ -12,11 +12,13 @@ public class UISteelContainer : MonoBehaviour
     public void EnableCloseButton()
     {
         closeButton.gameObject.SetActive(true);
+        openButton.gameObject.SetActive(false);
     }
 
     public void DisableCloseButton()
     {
         closeButton.gameObject.SetActive(false);
+        openButton.gameObject.SetActive(true);
     }
 
     private void OnEnable()

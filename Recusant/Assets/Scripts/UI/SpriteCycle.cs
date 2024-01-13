@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class SpriteCycle : MonoBehaviour
 {
@@ -135,10 +136,39 @@ public class SpriteCycle : MonoBehaviour
         }
         else
         {
-            int rand = Random.Range(0, Inventory.instance.items.Count-1);
-            Item tempItem = Inventory.instance.items[rand];
-            image.sprite = tempItem.icon;
-            Inventory.instance.Add(tempItem, false);
+            //Get all weapons in the inventory that are not evolutions under level 10
+            List<string> nonEvolutionWeaponsUnder10 = new List<string>();
+            foreach (var weaponLevelPair in GameManager.instance.weaponLevelCount)
+            {
+                bool isAnEvolution = false;
+                foreach (var evolution in GameManager.instance.evolutionWeaponsList)
+                {
+                    if (evolution.itemName == weaponLevelPair.Key)
+                    {
+                        isAnEvolution = true;
+                    }
+                }
+                
+                if (weaponLevelPair.Value <= 9 && !isAnEvolution)
+                {
+                    nonEvolutionWeaponsUnder10.Add(weaponLevelPair.Key);
+                }
+            }
+
+            if (nonEvolutionWeaponsUnder10.Count >= 1)
+            {
+                int rand = Random.Range(0, nonEvolutionWeaponsUnder10.Count-1); 
+                string newWeaponName = nonEvolutionWeaponsUnder10[rand];
+                Item tempItem = Inventory.instance.items.Find(item => item.itemName == newWeaponName);
+                image.sprite = tempItem.icon;
+                Inventory.instance.Add(tempItem, false);
+            }
+            else
+            {
+                image.sprite = Resources.Load<Sprite>("Sprites/UpgradeSprites/100coin");
+                CoinCounter.instance.CoinsFound(100);
+            }
+            
         }
 
         uiSteelContainer.EnableCloseButton();
