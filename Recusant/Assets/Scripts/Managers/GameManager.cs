@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
         weaponLevelCount = new Dictionary<string, int>();
         FindLevelUpScreen();
         LevelBar.OnLevelUp += LevelUpHandler;
+        Debug.Log("Subbed to LevelUp Handler");
         
         FindGameOverScreen();
         FindGamePauseScreen();
@@ -563,19 +564,26 @@ public class GameManager : MonoBehaviour
             shuffledWeapons = weaponsList.OrderBy(item => Random.value).ToList();
         }
         
-
+        Debug.Log("Weapon adding started.");
+        
+        // CHANGING THIS: Check if the weapon's itemName is not in weaponLevelCount or its value is not 10
+        // This should now add weapons that are under level 10, has to check if they are in the weaponLevelCount
+        // before checking level or it will give error, also will add weapons not discovered yet as choices
         foreach (Item weapon in shuffledWeapons)
         {
-            // Check if the weapon's itemName is not in weaponLevelCount or its value is not 10
-            if (!weaponLevelCount.ContainsKey(weapon.itemName) || weaponLevelCount[weapon.itemName] >= 10)
+            if ((weaponLevelCount.ContainsKey(weapon.itemName) && weaponLevelCount[weapon.itemName] <= 9) || !weaponLevelCount.ContainsKey(weapon.itemName))
             {
                 randomWeapons.Add(weapon);
                 count++;
+                
+                Debug.Log("Weapon added to random weapons: " + weapon.itemName);
 
                 if (count >= 3)
                 {
+                    Debug.Log("Weapon adding ended.");
                     break;
                 }
+                
             }
         }
 
@@ -626,6 +634,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelUp()
     {
+        Debug.Log("Calling FindLevelUpScreen ");
         FindLevelUpScreen();
         levelUpScreen.SetActive(true);
 
@@ -640,6 +649,7 @@ public class GameManager : MonoBehaviour
         // Instantiate the LevelSlot prefab as a child of the LevelSlotParent
         GameObject levelSlotPrefab = Resources.Load<GameObject>("PreFabs/UI/LevelSlot");
 
+        Debug.Log("Calling GenerateUniqueItemList ");
         List<Item> threeItems = GenerateUniqueItemList();
         
         
@@ -960,7 +970,7 @@ public class GameManager : MonoBehaviour
         //Coroutine testCoroutine = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 13, 360));
         
         //minute 0
-        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 1, 30*2, 0.1f, 15));
+        Coroutine enemyCoroutine0 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 61, 30*2, 0.1f, 15));
         
         //minute 1
         Coroutine enemyCoroutine1 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60, 60, 0.1f, 30));
