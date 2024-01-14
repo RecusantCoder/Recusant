@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     private float moveSpeedMemory = 0;
     public bool isDead;
     
-    private bool isTouchingPlayer = false;
+    public bool isTouchingPlayer = false;
     private float damageTimer = 0f;
     private float damageInterval = 0.1f;
     

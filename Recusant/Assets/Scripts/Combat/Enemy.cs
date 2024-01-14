@@ -19,10 +19,12 @@ public class Enemy : Interactable
         base.Interact();
         // Attack the enemy
 
+        /* Commented out as enemies no longer attack with interact, but with collisions
         CharacterCombat playerCombat = _playerManager.player.GetComponent<CharacterCombat>();
         if (playerCombat != null)
         {
             playerCombat.Attack(myStats);
         }
+        */
     }
 }

@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        //disabledObjects = new List<GameObject>();
+        disabledObjects = new List<GameObject>();
         ResumeGame();
 
         timer = 0.0f;

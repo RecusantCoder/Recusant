@@ -126,6 +126,10 @@ public class EnemyStats : CharacterStats
 
         spriteRenderer.color = endColor; // Ensure the final color is set correctly
         _enemyController.SpecialActionOnDeath();
+        if (_enemyController.isTouchingPlayer)
+        {
+            _enemyController.isTouchingPlayer = false;
+        }
         FindAndDestroyAttachedStatusEffects();
         ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
     }

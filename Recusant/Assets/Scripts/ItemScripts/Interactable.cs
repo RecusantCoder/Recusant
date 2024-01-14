@@ -17,7 +17,8 @@ public class Interactable : MonoBehaviour
 
     private void Start()
     {
-        pickupRadius = PlayerManager.instance.player.GetComponent<PlayerStats>().pickupRadius.GetValue();
+        //commented out as it is assigned in the update method
+        //pickupRadius = PlayerManager.instance.player.GetComponent<PlayerStats>().pickupRadius.GetValue();
     }
 
     public virtual void Interact()
