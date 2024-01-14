@@ -158,12 +158,12 @@ public class SpriteCycle : MonoBehaviour
             if (nonEvolutionWeaponsUnder10.Count >= 1)
             {
                 int rand = Random.Range(0, nonEvolutionWeaponsUnder10.Count-1); 
-                string newWeaponName = nonEvolutionWeaponsUnder10[rand]; Debug.Log("33newWeaponName: " + newWeaponName);
-                Item tempItem = Inventory.instance.items.Find(item => item.itemName == newWeaponName); Debug.Log("33tempItem: " + tempItem.itemName);
+                string newWeaponName = nonEvolutionWeaponsUnder10[rand]; Debug.Log("newWeaponName: " + newWeaponName);
+                Item tempItem = Inventory.instance.items.Find(item => item.itemName == newWeaponName); Debug.Log("tempItem: " + tempItem.itemName);
                 image.sprite = tempItem.icon;
                 if (tempItem == null)
                 {
-                    Debug.Log("33tempitem is null 33 ");
+                    Debug.Log("tempitem is null");
                 }
                 Inventory.instance.Add(tempItem, false);
             }

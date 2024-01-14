@@ -18,7 +18,13 @@ public class MainMenu : MonoBehaviour
     
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (ChoiceManager.instance.chosenMapName != null)
+        {
+            if (ChoiceManager.instance.chosenMapName == ChoiceManager.MapNames.RedForest)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
     }
 
     public void QuitGame()

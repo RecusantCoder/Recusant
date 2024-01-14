@@ -11,6 +11,12 @@ public class ChoiceManager : MonoBehaviour
     //This variable should be moved to a proper instanced and non destroyable
     public string chosenName;
     public string chosenWeapon;
+    public MapNames chosenMapName;
+
+    public enum MapNames
+    {
+        RedForest
+    }
     
     
     // Start is called before the first frame update
