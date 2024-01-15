@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
         {
             if (ChoiceManager.instance.chosenMapName == ChoiceManager.MapNames.RedForest)
             {
+                Debug.Log(ChoiceManager.instance.chosenMapName + " yeet");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
