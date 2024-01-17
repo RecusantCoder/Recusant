@@ -20,11 +20,14 @@ public class CharacterSelect : MonoBehaviour
     
     public bool isUnlocked;
 
+    public Image imageSelect;
+
     private void Start()
     {
         GameObject coinDisplay = GameObject.Find("CoinDisplay");
         Transform amountTransform = coinDisplay.transform.Find("Amount");
         coinDisplayText = amountTransform.GetComponent<TMP_Text>();
+        Highlight(false);
     }
 
     public void SetCharacter()
@@ -34,6 +37,7 @@ public class CharacterSelect : MonoBehaviour
             Debug.Log(nameText.text + " has been chosen with " + weaponImage.sprite.name);
             ChoiceManager.instance.chosenName = nameText.text;
             ChoiceManager.instance.chosenWeapon = weaponImage.sprite.name;
+            characterSelectionManager.HighlightGridItem(this);
         
             playButton.SetActive(true);
         }
@@ -90,5 +94,10 @@ public class CharacterSelect : MonoBehaviour
         Debug.Log("Purchased and saved character unlock");
         HidePurchaseBackground();
         characterSelectionManager.ResetCharacterSelects();
+    }
+    
+    public void Highlight(bool selected)
+    {
+        imageSelect.gameObject.SetActive(selected);
     }
 }

@@ -9,6 +9,7 @@ public class CharacterSelectionManager : MonoBehaviour
     public GameObject buttonPrefab;
     public Transform gridPanel;
     [SerializeField] public GameObject playbutton;
+    public GameObject chosenCharacterSelect;
 
     void Start()
     {
@@ -71,6 +72,17 @@ public class CharacterSelectionManager : MonoBehaviour
                 }
             }
         }
+    }
+    
+    public void HighlightGridItem(CharacterSelect characterSelect)
+    {
+        if (chosenCharacterSelect != null)
+        {
+            chosenCharacterSelect.GetComponent<CharacterSelect>().Highlight(false);
+        }
+        
+        chosenCharacterSelect = characterSelect.gameObject;
+        characterSelect.Highlight(true);
     }
 }
 
