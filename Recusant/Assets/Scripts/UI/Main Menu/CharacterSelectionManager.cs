@@ -57,21 +57,25 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void CheckUnlockedCharacters()
     {
+        int count = 0;
         List<Character> characters = DataManager.Instance.LoadData<Character>(DataManager.DataType.Character);
         foreach (var character in characters)
         {
             if (character.unlocked)
             {
+                count++;
                 CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked);
             }
             else
             {
                 if (character.name.Equals("Bourglay") || character.name.Equals("Degtyarev") || character.name.Equals("Baratheon"))
                 {
+                    count++;
                     CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked);
                 }
             }
         }
+        AdjustContentWidth(count);
     }
     
     public void HighlightGridItem(CharacterSelect characterSelect)
@@ -83,6 +87,15 @@ public class CharacterSelectionManager : MonoBehaviour
         
         chosenCharacterSelect = characterSelect.gameObject;
         characterSelect.Highlight(true);
+    }
+    
+    void AdjustContentWidth(int numOfGridCharacters)
+    {
+        RectTransform content = gridPanel.GetComponent<RectTransform>();
+        Vector2 sizeDelta = content.sizeDelta;
+        sizeDelta.x = numOfGridCharacters * 600;
+        Debug.Log("sizedelta x: " + sizeDelta.x);
+        content.sizeDelta = sizeDelta;
     }
 }
 

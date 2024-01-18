@@ -997,9 +997,9 @@ public class GameManager : MonoBehaviour
         
         //minute 5
         Coroutine enemyCoroutine7 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*5, 60, 0.1f, 10));
-        
-        Coroutine eventCoroutine5 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*5, 1));
-        Coroutine eventCoroutine6 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*5, 1));
+
+        Coroutine eventCoroutine5 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 30, 1));
+        Coroutine eventCoroutine6 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 30, 1));
         
         //minute 6
         Coroutine enemyCoroutine8 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60*6, 60, 0.1f, 20));

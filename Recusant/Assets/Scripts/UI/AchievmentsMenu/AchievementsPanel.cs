@@ -49,7 +49,7 @@ public class AchievementsPanel : MonoBehaviour
     {
         RectTransform content = gridContainer.GetComponent<RectTransform>();
         Vector2 sizeDelta = content.sizeDelta;
-        sizeDelta.y = numOfGridItems * 100;
+        sizeDelta.y = numOfGridItems * 200;
         Debug.Log("sizedelta y: " + sizeDelta.y);
         content.sizeDelta = sizeDelta;
     }
