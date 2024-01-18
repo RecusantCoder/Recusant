@@ -134,18 +134,18 @@ public class DataManager
 
         List<Total> totals = new List<Total>
         {
-            new Total("coinsTotal", 500),
+            new Total("coinsTotal", 10000),
             new Total("monstersKilled", 0),
             new Total("timePlayedInMinutes", 0)
         };
 
         List<Upgrade> upgrades = new List<Upgrade>
         {
-            new Upgrade("Sprites/UpgradeSprites/Body_Armor", "Armor", "Armor up by 2 per lvl", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/coin", "Value", "Coin value up by 10% per lvl.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/computer_chip", "Damage", "DMG up by 5 per lvl.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/Exolegs", "Speed", "Speed up by 20% per lvl.", new int[] { 2, 4, 6, 8, 10 }, 1),
-            new Upgrade("Sprites/UpgradeSprites/haurio", "Attraction", "Pickup Radius up by 20% per lvl", new int[] { 2, 4, 6, 8, 10 }, 1)
+            new Upgrade("Sprites/UpgradeSprites/Body_Armor", "Armor", "Armor up by 4% per level", 1, 5, 500),
+            new Upgrade("Sprites/UpgradeSprites/coin", "Value", "Coin value up by 10% per lvl.",  1, 5, 1000),
+            new Upgrade("Sprites/UpgradeSprites/computer_chip", "Damage", "DMG up by 5 per lvl.", 1,5, 200),
+            new Upgrade("Sprites/UpgradeSprites/Exolegs", "Speed", "Speed up by 20% per lvl.", 1,5, 300),
+            new Upgrade("Sprites/UpgradeSprites/haurio", "Attraction", "Pickup Radius up by 20% per lvl", 1,5, 300)
         };
         
         SaveData(achievements, DataType.Achievement);

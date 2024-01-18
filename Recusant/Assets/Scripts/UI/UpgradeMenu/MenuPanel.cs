@@ -82,8 +82,6 @@ public class MenuPanel : MonoBehaviour
         image.sprite = Resources.Load<Sprite>(imagePath);
         TMP_Text text = newGridItem.transform.Find("Name").GetComponent<TMP_Text>();
         text.text = name;
-        TMP_Text levelText = newGridItem.transform.Find("Level").GetComponent<TMP_Text>();
-        levelText.text = "Level " + currentUpgrade.rank;
         
         GridItem gridItemScript = newGridItem.GetComponent<GridItem>();
         gridItemScript.upgrade = currentUpgrade;
@@ -91,6 +89,7 @@ public class MenuPanel : MonoBehaviour
         gridItemScript.selectedUpgradePrice = selectedUpgradePrice;
         gridItemScript.menuPanel = gameObject.GetComponent<MenuPanel>();
         gridItemScript.GridItemSelected();
+        gridItemScript.UpdateGridItemUI();
     }
     
     public void BuyUpgrade()
@@ -102,7 +101,7 @@ public class MenuPanel : MonoBehaviour
         int upgradePrice = gridItem.GetCurrentPrice();
         if (currentTotal - upgradePrice >= 0)
         {
-            if (gridItem.upgrade.rank != gridItem.upgrade.prices.Length)
+            if (gridItem.upgrade.rank <= gridItem.upgrade.totalRanks)
             {
                 Debug.Log("old upgrade rank!: " + gridItem.upgrade.rank);
                 gridItem.upgrade.rank++;
@@ -119,6 +118,7 @@ public class MenuPanel : MonoBehaviour
                 
                 AudioManager.instance.Play("Purchase");
             }
+            
         }
     }
 

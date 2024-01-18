@@ -43,14 +43,29 @@ public class GridItem : MonoBehaviour
 
     public int GetCurrentPrice()
     {
-        return upgrade.prices[upgrade.rank - 1];
+        Debug.Log("GetCurrentPrice thinks upgrade rank is: " + upgrade.rank);
+        if (upgrade.rank > upgrade.totalRanks)
+        {
+            return 0;
+        }
+        else
+        {
+            return upgrade.prices[upgrade.rank - 1];
+        }
     }
 
     public void UpdateGridItemUI()
     {
         selectedUpgradePrice.text = GetCurrentPrice().ToString();
         TMP_Text levelText = transform.Find("Level").GetComponent<TMP_Text>();
-        levelText.text = "Level " + upgrade.rank;
+        if (upgrade.rank > upgrade.totalRanks)
+        {
+            levelText.text = "Max Level";
+        }
+        else
+        {
+            levelText.text = "Level " + upgrade.rank;
+        }
     }
 
     public void Highlight(bool selected)

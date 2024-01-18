@@ -998,8 +998,8 @@ public class GameManager : MonoBehaviour
         //minute 5
         Coroutine enemyCoroutine7 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*5, 60, 0.1f, 10));
 
-        Coroutine eventCoroutine5 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 30, 1));
-        Coroutine eventCoroutine6 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 30, 1));
+        Coroutine eventCoroutine5 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*5, 90));
+        Coroutine eventCoroutine6 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*5, 1));
         
         //minute 6
         Coroutine enemyCoroutine8 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(zombie, 60*6, 60, 0.1f, 20));
@@ -1031,7 +1031,7 @@ public class GameManager : MonoBehaviour
         Coroutine enemyCoroutine16 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*10, 60, 0.1f, 20));
         
         Coroutine eventCoroutine13 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*10, 1));
-        Coroutine eventCoroutine14 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*10, 2));
+        Coroutine eventCoroutine14 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*10, 90));
         
         //minute 11
         Coroutine enemyCoroutine17 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(boidNormal, 60*11, 60, 0.1f, 300));
@@ -1065,7 +1065,7 @@ public class GameManager : MonoBehaviour
         Coroutine enemyCoroutine27 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(mushroom, 60*15, 60, 0.1f, 100));
         
         Coroutine eventCoroutine21 = StartCoroutine(SpawnEvent(EventName.Boss, testingWobble, 60*15, 1));
-        Coroutine eventCoroutine38 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*15, 1));
+        Coroutine eventCoroutine38 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*15, 90));
         
         //minute 16
         Coroutine enemyCoroutine28 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*16, 60, 0.1f, 100));
@@ -1124,7 +1124,7 @@ public class GameManager : MonoBehaviour
         //minute 25
         Coroutine enemyCoroutine45 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(testingWobble, 60*25, 60, 0.1f, 100));
         
-        Coroutine eventCoroutine39 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*25, 6));
+        Coroutine eventCoroutine39 = StartCoroutine(SpawnEvent(EventName.Circle, smallplant, 60*25, 90));
         
         //minute 26
         Coroutine enemyCoroutine46 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(smallplant, 60*26, 60, 0.1f, 150));
