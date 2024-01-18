@@ -19,7 +19,14 @@ public class LevelSelectGridItem : MonoBehaviour
 
     private void Start()
     {
-        Highlight(false);
+        if (nameText.text.Equals("Red Forest"))
+        {
+            Highlight(true);
+        }
+        else
+        {
+            Highlight(false);
+        }
     }
 
     public void LevelSelectGridItemSelected()
@@ -29,6 +36,7 @@ public class LevelSelectGridItem : MonoBehaviour
         {
             ChoiceManager.instance.chosenMapName = ChoiceManager.MapNames.RedForest;
         }
+        Debug.Log(nameText.text + " have been selected.");
     }
 
     public void SetupLevelSelectGridItem(string name, string description, string imagePath, GameObject passedLevelSelectionMenu)

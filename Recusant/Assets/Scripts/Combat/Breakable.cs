@@ -43,15 +43,15 @@ public class Breakable : MonoBehaviour
         int roll = UnityEngine.Random.Range(0, 100);
         if (roll <= coinChance)
         {
-            if (roll >= coinChance - 10)
-            {
-                //spawn 10 coin
-                GameObject coin = Instantiate((coinPrefabs[1]), transform.position, transform.rotation);
-            }
-            else if (roll >= coinChance - 1)
+            if (roll >= coinChance - 1)
             {
                 //spawn bar
                 GameObject coin = Instantiate((coinPrefabs[2]), transform.position, transform.rotation);
+            } 
+            else if (roll >= coinChance - 10)
+            {
+                //spawn 10 coin
+                GameObject coin = Instantiate((coinPrefabs[1]), transform.position, transform.rotation);
             }
             else
             {
@@ -60,7 +60,11 @@ public class Breakable : MonoBehaviour
         }
         else
         {
-            if (roll >= 99)
+            if (roll >= coinChance && roll <= coinChance + 12)
+            {
+                GameObject food = Instantiate(foodPrefabs[0], transform.position, transform.rotation);
+            } 
+            else if (roll >= 98)
             {
                 int index = UnityEngine.Random.Range(0, powerUpPrefabs.Count);
                 GameObject powerUp = Instantiate((powerUpPrefabs[index]), transform.position, transform.rotation);
