@@ -12,7 +12,7 @@ public class Grenade : Weapon
     private int grenadeRadius = 1;
     
     
-    public float groupDelay = 5.0f;
+    public float groupDelay = 3.0f;
     public float shotDelay = 0.1f;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
