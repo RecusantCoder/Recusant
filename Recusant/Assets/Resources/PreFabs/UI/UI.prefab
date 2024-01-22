@@ -102326,6 +102326,7 @@ GameObject:
   - component: {fileID: 7627049152385331399}
   - component: {fileID: 4200572475217726604}
   - component: {fileID: 5502384036007408635}
+  - component: {fileID: 7516239273075371448}
   m_Layer: 5
   m_Name: SteelContainerScreen
   m_TagString: LevelUpScreen
@@ -102418,6 +102419,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openButton: {fileID: 2339574622595524872}
   closeButton: {fileID: 8366875061683473932}
+--- !u!114 &7516239273075371448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773093544641855240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984a2c0bd5dcc40e7a7ed45521359890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystems:
+  - {fileID: 1291129085494168401}
+  - {fileID: 6338492378943001980}
+  - {fileID: 5279615600776440084}
+  - {fileID: 7670290175816288205}
+  - {fileID: 6545785870571956263}
+  - {fileID: 3596128219821050956}
+  - {fileID: 5127530970215658847}
+  - {fileID: 1927445795212571643}
+  - {fileID: 5578211454665262114}
+  - {fileID: 1751047893388572492}
+  - {fileID: 246989222419268741}
+  - {fileID: 5761231324105571279}
+  - {fileID: 5635474689807066126}
+  - {fileID: 8944046561459154281}
+  - {fileID: 5030459471042812616}
+  - {fileID: 5827452367216732271}
+  - {fileID: 2618391999556128306}
+  - {fileID: 3513080869903090359}
+  - {fileID: 4056835557768811996}
 --- !u!1 &7779741995664823348
 GameObject:
   m_ObjectHideFlags: 0
@@ -112811,6 +112844,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7516239273075371448}
+        m_TargetAssemblyTypeName: ParticleManager, Assembly-CSharp
+        m_MethodName: StartParticles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9152799735313457328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113255,6 +113300,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7516239273075371448}
+        m_TargetAssemblyTypeName: ParticleManager, Assembly-CSharp
+        m_MethodName: StopParticles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4865157534197120169}
         m_TargetAssemblyTypeName: AnimationTrigger, Assembly-CSharp
         m_MethodName: SetAnimationBackToImage
@@ -113279,9 +113336,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1268661506836324995, guid: 20ffd24582db24cedb24423f4ed50354, type: 3}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: HideSteelContainerScreen
+      - m_Target: {fileID: 4857424091940866987}
+        m_TargetAssemblyTypeName: SpriteCycle, Assembly-CSharp
+        m_MethodName: ZeroImageAlpha
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -113291,9 +113348,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4857424091940866987}
-        m_TargetAssemblyTypeName: SpriteCycle, Assembly-CSharp
-        m_MethodName: ZeroImageAlpha
+      - m_Target: {fileID: 1268661506836324995, guid: 20ffd24582db24cedb24423f4ed50354, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: HideSteelContainerScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
