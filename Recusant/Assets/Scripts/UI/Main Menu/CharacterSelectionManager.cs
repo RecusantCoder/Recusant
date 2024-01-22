@@ -25,13 +25,16 @@ public class CharacterSelectionManager : MonoBehaviour
         CheckUnlockedCharacters();
     }
 
-    private void CreateCharacterButton(string imagePath, string name, string weaponImagePath, bool isUnlocked)
+    private void CreateCharacterButton(string imagePath, string name, string weaponImagePath, bool isUnlocked, Character character)
     {
         GameObject characterSelect = Instantiate(buttonPrefab, gridPanel);
         Image image = characterSelect.transform.Find("Image").GetComponent<Image>();
         image.sprite = Resources.Load<Sprite>(imagePath);
         TMP_Text text = characterSelect.transform.Find("Name").GetComponent<TMP_Text>();
         text.text = name;
+        TMP_Text descriptionText = characterSelect.transform.Find("Description").GetComponent<TMP_Text>();
+        descriptionText.text = character.description;
+        
         Image weaponImage = characterSelect.transform.Find("Weapon").GetComponent<Image>();
         weaponImage.sprite = Resources.Load<Sprite>(weaponImagePath);
         CharacterSelect characterSelectScript = characterSelect.GetComponent<CharacterSelect>();
@@ -64,14 +67,14 @@ public class CharacterSelectionManager : MonoBehaviour
             if (character.unlocked)
             {
                 count++;
-                CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked);
+                CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked, character);
             }
             else
             {
                 if (character.name.Equals("Bourglay") || character.name.Equals("Degtyarev") || character.name.Equals("Baratheon"))
                 {
                     count++;
-                    CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked);
+                    CreateCharacterButton(character.imagePath, character.name, character.weaponImagePath, character.unlocked, character);
                 }
             }
         }
