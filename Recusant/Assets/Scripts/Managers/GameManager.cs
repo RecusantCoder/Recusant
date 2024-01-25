@@ -979,7 +979,7 @@ public class GameManager : MonoBehaviour
         Coroutine eventCoroutine0 = StartCoroutine(SpawnEvent(EventName.Boss, zombie, 60, 1));
         
         //minute 2
-        Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60*2, 60, 0.5f, 150));
+        Coroutine enemyCoroutine3 = StartCoroutine(SpawnEnemyStartingAtTimeForDurationAtIntervalsAndAmounts(blob, 60*2, 60, 0.1f, 150));
         
         Coroutine eventCoroutine1 = StartCoroutine(SpawnEvent(EventName.Cluster, spiritCluster, 60*2, 3));
 
