@@ -45,7 +45,7 @@ public class SteelContainer : Interactable
         AudioManager.instance.Play("pickup");
 
         //Call to open UI for random item from steel container
-        
+        GameManager.instance.pickedUpSteelContainer = true;
         GameManager.instance.ShowSteelContainerScreen();
         
         Destroy(gameObject);

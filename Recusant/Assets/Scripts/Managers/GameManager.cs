@@ -126,6 +126,9 @@ public class GameManager : MonoBehaviour
     int lastMinuteTriggered = 0;
     
     public Dictionary<string, string> namesConversionList = new Dictionary<string, string>();
+    
+    //tracking if steel container is picked up
+    public bool pickedUpSteelContainer;
 
 
 

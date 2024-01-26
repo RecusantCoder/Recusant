@@ -99,12 +99,13 @@ public class AudioManager : MonoBehaviour
 
             if (FindExistingSoundInChildren(audioSource.clip.name))
             {
-                
+                Debug.Log("audiosource clip name: " + audioSource.clip.name + "  already playing");
             }
             else
             {
                 // Play the sound
                 audioSource.Play();
+                Debug.Log("Playing: " + audioSource.clip.name + " at volume: " + audioSource.volume);
             }
             
 
@@ -112,6 +113,23 @@ public class AudioManager : MonoBehaviour
             if (!soundGameObject.name.Contains("RecusantTheme"))
             {
                 Destroy(soundGameObject, s.clip.length);
+            }
+        }
+    }
+
+    public void PauseCurrentMusic(bool pause)
+    {
+        if (instance.currentMusic != null)
+        {
+            if (pause)
+            {
+                Debug.Log("pausing current music");
+                instance.currentMusic.GetComponent<AudioSource>().Pause();
+            }
+            else
+            {
+                Debug.Log("resuming current music");
+                instance.currentMusic.GetComponent<AudioSource>().UnPause();
             }
         }
     }
@@ -220,21 +238,37 @@ public class AudioManager : MonoBehaviour
             {
                 foreach (var clip in exceptionList)
                 {
-                    if (!audioClipName.Equals(clip.name))
+                    Debug.Log("Playing exceptionList names: " + clip.name);
+                    if (audioClipName.Equals(clip.name))
                     {
-                        numOfSounds++;
-                        if (numOfSounds > 1)
-                        {
-                            Debug.Log("childAudioSource.clip.name : " + childAudioSource.clip.name + " and audioClipName: " + audioClipName);
-                            return true;
-                        }
+                        return false;
                     }
+                }
+                
+                numOfSounds++;
+                if (numOfSounds > 1)
+                {
+                    Debug.Log("childAudioSource.clip.name : " + childAudioSource.clip.name + " and audioClipName: " + audioClipName);
+                    return true;
                 }
             }
         }
 
         // Return null if no existing sound is found
         return false;
+    }
+
+    public void DestroySound(string soundName)
+    {
+        foreach (Transform child in transform)
+        {
+            AudioSource childAudioSource = child.GetComponent<AudioSource>();
+            if (childAudioSource != null && childAudioSource.clip != null && childAudioSource.clip.name == soundName)
+            {
+                Destroy(childAudioSource);
+                Debug.Log("Destroyed: " + soundName);
+            }
+        }
     }
 
 }

@@ -87,7 +87,6 @@ public class SpriteCycle : MonoBehaviour
         while (elapsedTime < totalDuration && count < 20)
         {
             image.sprite = sprites[currentIndex];
-            Debug.Log("Displaying sprite number: " +  count);
             
             // Calculate the time elapsed since the coroutine started
             elapsedTime = Time.realtimeSinceStartup - startTime;
