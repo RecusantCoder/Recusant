@@ -29,9 +29,11 @@ public class AchievementDisplay : MonoBehaviour
     public Image image;
     public float slideSpeed = 100f;
     public float displayDuration = 2f;
+    public List<Achievement> achievementQueue = new List<Achievement>();
     
     private RectTransform rectTransform;
     private Vector3 originalPosition;
+    public bool coroutineRunning = false;
 
     private void Start()
     {
@@ -41,6 +43,25 @@ public class AchievementDisplay : MonoBehaviour
         Invoke(nameof(SubscribeToEvents), 1f);
     }
 
+    private void Update()
+    {
+        if (!coroutineRunning)
+        {
+            if (achievementQueue.Count > 0)
+            {
+                Achievement nextAchievement = achievementQueue[0];
+        
+                achievementText.text = "Unlocked: " + nextAchievement.name;
+                achievementDesc.text = nextAchievement.description;
+                image.sprite = Resources.Load<Sprite>(nextAchievement.imagePath);
+                StartCoroutine("SlideInAndOut");
+        
+                // Remove the displayed achievement from the queue
+                achievementQueue.RemoveAt(0);
+            }
+        }
+    }
+
     private void SubscribeToEvents()
     {
         GameManager.instance.GetComponent<AchievementManager>().OnAchievementUnlocked += DisplayAchievement;
@@ -48,15 +69,13 @@ public class AchievementDisplay : MonoBehaviour
 
     private void DisplayAchievement(Achievement achievement)
     {
-        Debug.Log("Achievement Unlocked: " + achievement.name);
-        achievementText.text = "Unlocked: " + achievement.name;
-        achievementDesc.text = achievement.description;
-        image.sprite = Resources.Load<Sprite>(achievement.imagePath);
-        StartCoroutine("SlideInAndOut");
+        Debug.Log("Achievement added to queue: " + achievement.name);
+        achievementQueue.Add(achievement);
     }
     
     private IEnumerator SlideInAndOut()
     {
+        coroutineRunning = true;
         // Slide in
         float timer = 0f;
         while (timer < displayDuration)
@@ -80,6 +99,7 @@ public class AchievementDisplay : MonoBehaviour
 
         // Reset position
         rectTransform.anchoredPosition = originalPosition;
+        coroutineRunning = false;
     }
 
     private void OnDestroy()

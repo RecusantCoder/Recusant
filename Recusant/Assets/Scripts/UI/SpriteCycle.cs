@@ -148,9 +148,10 @@ public class SpriteCycle : MonoBehaviour
                     }
                 }
                 
-                if (weaponLevelPair.Value <= 9 && !isAnEvolution)
+                if (weaponLevelPair.Value <= 9 && !isAnEvolution && weaponLevelPair.Value >= 1)
                 {
                     nonEvolutionWeaponsUnder10.Add(weaponLevelPair.Key);
+                    Debug.Log("added to nonevowepunder10list: " + weaponLevelPair);
                 }
             }
 
@@ -158,7 +159,13 @@ public class SpriteCycle : MonoBehaviour
             {
                 int rand = Random.Range(0, nonEvolutionWeaponsUnder10.Count-1); 
                 string newWeaponName = nonEvolutionWeaponsUnder10[rand]; Debug.Log("newWeaponName: " + newWeaponName);
-                Item tempItem = Inventory.instance.items.Find(item => item.itemName == newWeaponName); Debug.Log("tempItem: " + tempItem.itemName);
+                Debug.Log("Start of weaponlevelcount");
+                foreach (var i in GameManager.instance.weaponLevelCount)
+                {
+                    Debug.Log("key: " + i.Key + " value: " + i.Value);
+                }
+                Debug.Log("End of weaponlevelcount");
+                Item tempItem = Inventory.instance.items.Find(item => item.itemName == newWeaponName); Debug.Log("tempItem: " + tempItem.itemName); //this line 162
                 image.sprite = tempItem.icon;
                 if (tempItem == null)
                 {
