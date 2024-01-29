@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
     
     //tracking if steel container is picked up
     public bool pickedUpSteelContainer;
+    public List<GameObject> findableObjects = new List<GameObject>();
 
 
 
@@ -167,6 +168,7 @@ public class GameManager : MonoBehaviour
         StopEnemyCoroutines();
         StartEnemyCoroutines();
         
+        SpawnFindableItem(findableObjects[0]);
     }
 
     // Update is called once per frame
@@ -1303,6 +1305,13 @@ public class GameManager : MonoBehaviour
         namesConversionList.Add("Body_Armour", "Body Armor");
         namesConversionList.Add("Exolegs", "Exoskeleton Legs");
         namesConversionList.Add("Targeting_Computer", "Targeting Computer");
+    }
+
+    public void SpawnFindableItem(GameObject pickup)
+    {
+        GameObject spawnedItem = Instantiate(pickup);
+        spawnedItem.transform.position = player.transform.position + new Vector3(500.0f, 0.0f, 0.0f);
+        Debug.Log("Spawned pickup: " + pickup.name);
     }
 
 }
