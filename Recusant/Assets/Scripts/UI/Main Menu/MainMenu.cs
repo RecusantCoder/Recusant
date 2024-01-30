@@ -54,5 +54,9 @@ public class MainMenu : MonoBehaviour
         localCoinCount -= value;
         coinDisplayText.text = localCoinCount + "";
     }
-    
+
+    private void OnEnable()
+    {
+        LoadCoinCount();
+    }
 }

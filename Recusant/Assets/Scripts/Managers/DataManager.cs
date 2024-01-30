@@ -155,4 +155,27 @@ public class DataManager
         SaveData(upgrades, DataType.Upgrade);
     }
     
+    public void DeleteAllData()
+    {
+        DeleteData(DataType.Achievement);
+        DeleteData(DataType.Character);
+        DeleteData(DataType.Setting);
+        DeleteData(DataType.Total);
+        DeleteData(DataType.Upgrade);
+    }
+
+    private void DeleteData(DataType dataType)
+    {
+        string path = GetPath(dataType);
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log($"Deleted {dataType.ToString()} data.");
+        }
+        else
+        {
+            Debug.Log($"No {dataType.ToString()} data file found.");
+        }
+    }
+    
 }

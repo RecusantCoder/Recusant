@@ -13,4 +13,9 @@ public class OptionsMenu : MonoBehaviour
     {
         Debug.Log("Sound Vol: " + volume);
     }
+
+    public void ResetGame()
+    {
+        DataManager.Instance.DeleteAllData();
+    }
 }
