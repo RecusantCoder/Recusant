@@ -6,6 +6,7 @@ using UnityEngine;
 public class ParticleManager : MonoBehaviour
 {
     public List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+    public List<ParticleSystem> stubbornParticleSystems = new List<ParticleSystem>();
     
 
     private void OnEnable()
@@ -38,6 +39,16 @@ public class ParticleManager : MonoBehaviour
                 ps.Play();
             }
         }
+        
+        foreach (ParticleSystem sps in stubbornParticleSystems)
+        {
+            if (!sps.isPlaying)
+            {
+                sps.Play();
+            }
+        }
+        
+        
     }
 
     // Method to stop all particle systems in the list
@@ -51,6 +62,15 @@ public class ParticleManager : MonoBehaviour
             {
                 ps.Stop();
                 Debug.Log("stopped particle system " + ps.name);
+            }
+        }
+        
+        foreach (ParticleSystem sps in stubbornParticleSystems)
+        {
+            if (sps.isPlaying)
+            {
+                sps.Stop();
+                Debug.Log("stopped stubborn particle system " + sps.name);
             }
         }
     }
